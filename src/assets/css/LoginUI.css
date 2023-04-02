@@ -1,3 +1,4 @@
+
   .modal{
 	justify-content : center;
 
@@ -39,8 +40,8 @@
         border: none;
     }
     .login-button{
-            padding-top: 25px;
-            padding-bottom : 25px;
+         padding-top: 25px;
+         padding-bottom : 25px;
 
     }
     .loginIcons{

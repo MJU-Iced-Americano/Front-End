@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import StaticExample from "./login/StaticExample";
+import ToLoginModal from "./login/ToLoginModal.js";
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MainLoginPage from "./login/MainLoginPage";

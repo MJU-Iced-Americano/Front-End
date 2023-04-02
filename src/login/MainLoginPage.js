@@ -8,8 +8,8 @@ export default function MainLoginPage() {
         movePage('/user/Name');
     }
 
-    function goPopup(){
-        movePage('/user/Popup');
+    function goToLoginModal(){
+        movePage('/user/ToLoginModal');
     }
     return (
 
@@ -17,7 +17,7 @@ export default function MainLoginPage() {
             홈 입니다.
             첫 페이지
             <button onClick={goName}>네임으로이동</button>
-            <button onClick={goPopup}>팝업으로이동</button>
+            <button onClick={goToLoginModal}>팝업으로이동</button>
         </div>
     );
 }

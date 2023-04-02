@@ -10,7 +10,7 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 
 
 
-function StaticExample() {
+function ToLoginModal() {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -25,7 +25,6 @@ function StaticExample() {
             <Modal className="modal" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                 </Modal.Header>
-
                 <Modal.Body className="contents">
                     <div>
                        <div className="personIcon"><BsFillPersonFill size="100"/></div>
@@ -33,23 +32,20 @@ function StaticExample() {
                         </div>
                         <div className="second-input">
                         <input type="password" placeholder="PW" className="name"/>
-                        </div>
+                    </div>
                     <div className="login-button">
-                    <button>Login</button>
-                    <div>login with</div>
-                    <div className="loginIcons">
-                    <div><FcGoogle size = "25"/></div>
-                    <div><GoMarkGithub size = "25"/></div>
-                    <div><RiKakaoTalkFill size = "25"/></div>
+                        <button>Login</button>
+                        <div>login with</div>
+                        <div className="loginIcons">
+                        <div><FcGoogle size = "25"/></div>
+                        <div><GoMarkGithub size = "25"/></div>
+                        <div><RiKakaoTalkFill size = "25"/></div>
                     </div>
                     </div>
-
-
                 </Modal.Body>
-
             </Modal>
         </>
     );
 }
 
-export default StaticExample;
+export default ToLoginModal;
