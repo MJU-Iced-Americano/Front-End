@@ -1,5 +1,6 @@
-
+//import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+//import ModalBasic from '../src/common/ModalBasic';
 
 export default function MainLoginPage() {
     const movePage = useNavigate();

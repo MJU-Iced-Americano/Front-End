@@ -1,0 +1,49 @@
+  .modal{
+	justify-content : center;
+
+  }
+  .contents{
+	justify-content : center;
+	margin : auto;
+	text-align: center;
+
+
+  }
+  .personIcon{
+  	margin : auto;
+  	padding: 30px;
+  }
+  input{
+      width: 300px;
+      height: 40px;
+      border-radius: 60px;
+      border: 2px solid black;
+      background-color: #fff;
+
+  }
+    .name{
+        padding-left: 30px;
+        font-size: 15px;
+    }
+    .second-input{
+        padding-top: 20px;
+    }
+
+    button{
+        width: 300px;
+        height: 30px;
+        border-radius: 60px;
+        background-color: #b103fc;
+        color: white;
+        font-size: 15px;
+        border: none;
+    }
+    .login-button{
+            padding-top: 25px;
+            padding-bottom : 25px;
+
+    }
+    .loginIcons{
+        display : flex;
+	    justify-content : space-around;
+    }

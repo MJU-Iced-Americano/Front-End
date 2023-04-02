@@ -1,6 +1,13 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React, { useState } from 'react';
+import './../assets/css/LoginUI.css';
+import { BsFillPersonFill } from "react-icons/bs";
+import { GoMarkGithub } from "react-icons/go";
+import { FcGoogle } from "react-icons/fc";
+import { RiKakaoTalkFill } from "react-icons/ri";
+
+
 
 
 function StaticExample() {
@@ -15,19 +22,31 @@ function StaticExample() {
                 Login
             </Button>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal className="modal" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
+
+                <Modal.Body className="contents">
+                    <div>
+                       <div className="personIcon"><BsFillPersonFill size="100"/></div>
+                        <input className="name" type="text" placeholder="ID" />
+                        </div>
+                        <div className="second-input">
+                        <input type="password" placeholder="PW" className="name"/>
+                        </div>
+                    <div className="login-button">
+                    <button>Login</button>
+                    <div>login with</div>
+                    <div className="loginIcons">
+                    <div><FcGoogle size = "25"/></div>
+                    <div><GoMarkGithub size = "25"/></div>
+                    <div><RiKakaoTalkFill size = "25"/></div>
+                    </div>
+                    </div>
+
+
+                </Modal.Body>
+
             </Modal>
         </>
     );
