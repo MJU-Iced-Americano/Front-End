@@ -13,11 +13,11 @@ const Header = ()=> {
                 <a href="/"><img src={Socoa} alt='logo image' className="SocoaLogo"/></a>
                 <div className="category-menu">
                     <div className="hotNavBtn">
-                        <a href="/" className="btnMainItem">회사소개 </a>
+                        <a href="/Information" className="btnMainItem">회사소개 </a>
                         <div className="btnSubItem">
-                            <a className="navbar-item" href="/">비전 및 목표</a>
-                            <a className="navbar-item" href="/">회사 연혁</a>
-                            <a className="navbar-item" href="/">강사진 소개</a>
+                            <a className="navbar-item" href="/Information">비전 및 목표</a>
+                            <a className="navbar-item" href="/Information">회사 연혁</a>
+                            <a className="navbar-item" href="/Information">강사진 소개</a>
                         </div>
 
                     </div>
@@ -36,8 +36,8 @@ const Header = ()=> {
                 </div>
             </div>
             <div className="loginSect">
-                <div className="loginBtn"> <a href="/"> Login </a></div>
-                <a href="/"> <AiOutlineUser className="userBtn"/> </a>
+                <div className="loginBtn"> <a href="/user/ToLoginModal"> Login </a></div>
+                <a href="/user/name"> <AiOutlineUser className="userBtn"/> </a>
                 <a href="/"><RiShoppingCartLine className="cartBtn"/> </a>
             </div>
         </header>
