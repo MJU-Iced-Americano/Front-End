@@ -1,0 +1,32 @@
+.footer{
+    height: 232px;
+    margin-top: auto;
+    background-color: #6667ab;
+    align-items: center;
+    display: flex;
+    padding-left: 5em;
+    padding-right: 5em;
+}
+.logoBG{
+    height: 40px;
+    width: 120px;
+    border-radius: 20px;
+    background-color: #f1f0ec;
+    /*display: flex;*/
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.textField{
+    color: #f1f0ec;
+    text-align: left;
+}
+.socoaLogoF{
+    width:80px;
+}
+.footerAreaLeft{
+
+}
+.footerAreaRight{
+
+}

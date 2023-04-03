@@ -1,0 +1,14 @@
+.bannerPart{
+    width: 100%;
+    /*justify-content: center;*/
+    /*flex-direction: row;*/
+    /*display: inline-flex;*/
+}
+.bannerImg{
+    height: 210px;
+    width: 100%;
+}
+.slick-slide button{
+    background-color: red;
+    color: red;
+}
