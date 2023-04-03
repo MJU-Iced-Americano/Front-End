@@ -4,7 +4,7 @@ export default function Name() {
     const movePage = useNavigate();
 
     function gohome(){
-        movePage('/user/Main');
+        movePage('/Main');
     }
     return (
         <div className="Name">

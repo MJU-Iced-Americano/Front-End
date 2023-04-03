@@ -1,13 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import '../assets/css/LoginUI.css';
 import React, { useState } from 'react';
-import './../assets/css/LoginUI.css';
 import { BsFillPersonFill } from "react-icons/bs";
 import { GoMarkGithub } from "react-icons/go";
 import { FcGoogle } from "react-icons/fc";
 import { RiKakaoTalkFill } from "react-icons/ri";
-
-
 
 
 function ToLoginModal() {
