@@ -24,11 +24,13 @@ const MainPage=() => {
                 </div>
                 <BannerSlider className="eventBannerBox"></BannerSlider>
                 <div className="lectureRecommendBox">
-                    <LectureSlider/>
+                    <LectureSlider name="Best 강의 👍"/>
+                    <LectureSlider name="New 강의 🎉"/>
+                    <LectureSlider name="Trending 강의 🔥"/>
                 </div>
-                <div className="lectureRecommendBox">
-                    <LectureSlider/>
-                </div>
+                {/*<div className="lectureRecommendBox">*/}
+                {/*    <LectureSlider/>*/}
+                {/*</div>*/}
             </div>
             <Footer/>
         </div>

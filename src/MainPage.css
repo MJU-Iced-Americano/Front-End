@@ -47,6 +47,6 @@
 }
 .lectureRecommendBox{
     margin-top: 20px;
-    height: 600px;
+    height: 100%;
     border: 1px dashed green;
 }
