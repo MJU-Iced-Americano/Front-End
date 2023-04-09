@@ -1,33 +1,25 @@
+import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-
-import Name from "./login/signUp/Name";
-import Main from "./MainTest";
-import ToLoginModal from "./login/ToLoginModal.js";
-
 
 function App() {
-    const [modalOpen, setModalOpen] = useState(false);
-    const closeModal = () => {
-        setModalOpen(false);
-    };
-    const showModal = () => {
-        setModalOpen(true);
-    };
-
   return (
-      <div className={"App"}>
-      <BrowserRouter>
-          <Routes>
-              <Route path={""} element={<Main />}></Route>
-              <Route path={"/Name"} element={<Name />}></Route>
-              <Route path={"/Main"} element={<Main />}></Route>
-              <Route path={"/ToLoginModal"} element={<ToLoginModal />}></Route>
-          </Routes>
-          </BrowserRouter>
-
-      </div>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 }
+
 export default App;
