@@ -1,10 +1,11 @@
 import './Info.css';
 import Header from '../component/Header/Header';
 import Footer from "../component/Footer/Footer";
+import NaverMap from "./NaverMap";
 import image from '../company.JPG'
 import partner from'../partner.JPG'
 import partner2 from'../partner2.jpg'
-import {useState} from "react";
+import {useState, useEffect, useRef} from "react";
 
 function Info() {
     const [isListHover, setIsListHover] = useState(false);
@@ -24,6 +25,9 @@ function Info() {
                     <h1>회사 연혁</h1>
                     <br></br>
                     <h1>회사 위치</h1>
+                    <br></br>
+                    <h1>지도</h1>
+                    <NaverMap />
                     <br></br>
                     <h1>협력사</h1>
                     <div class={"Partner"}>
