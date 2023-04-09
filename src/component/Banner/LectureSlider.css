@@ -1,0 +1,15 @@
+/*.lectureTile{*/
+/*    height: 400px;*/
+/*    width: 400px;*/
+/*    background-color: grey;*/
+/*    border: 2px solid red;*/
+/*    margin-right: 10px;*/
+/*}*/
+
+.slick-slide .lectureTile{
+    height: 400px;
+    width: 400px;
+    background-color: #d9d9d9;
+    border: 2px dashed green;
+    margin-right: 10px;
+}
