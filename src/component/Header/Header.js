@@ -25,9 +25,9 @@ const Header = ()=> {
                         <a href="/" className="btnMainItem"> 강의목록 </a>
                     </div>
                     <div className="hotNavBtn">
-                        <a href="/" className="btnMainItem"> 커뮤니티 </a>
+                        <a href="/FAQPage" className="btnMainItem"> 커뮤니티 </a>
                         <div className="btnSubItem">
-                            <a className="navbar-item" href="/">자주 묻는 질문</a>
+                            <a className="navbar-item" href="/FAQPage">자주 묻는 질문</a>
                             <a className="navbar-item" href="/">질문 & 답변</a>
                         </div>
                     </div>
