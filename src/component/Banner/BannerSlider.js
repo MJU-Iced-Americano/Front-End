@@ -15,11 +15,19 @@ const BannerSlider =()=>{
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
+        centerPadding: '0px',
         autoplay: true,
         speed: 2000,
         autoplaySpeed: 10000,
         cssEase: "linear",
+        prevArrow: (
+            <button/>
+        ),
+        nextArrow: (
+            <button/>
+        )
     };
+
 
     return(
         <div className="bannerPart">

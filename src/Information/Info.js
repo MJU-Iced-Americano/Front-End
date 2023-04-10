@@ -4,7 +4,7 @@ import Footer from "../component/Footer/Footer";
 import NaverMap from "./NaverMap";
 import image from '../company.JPG'
 import partner from'../partner.JPG'
-import partner2 from'../partner2.jpg'
+import partner2 from'../partner2.JPG'
 import {useState, useEffect, useRef} from "react";
 
 function Info() {
@@ -26,12 +26,11 @@ function Info() {
                     <br></br>
                     <h1>회사 위치</h1>
                     <br></br>
-                    <h1>지도</h1>
                     <NaverMap />
                     <br></br>
                     <h1>협력사</h1>
                     <div class={"Partner"}>
-                        <a href="https://google.com">
+                        <a href="/QnA/Question">
                             <img onMouseOver={() => setIsListHover(true)}
                                  onMouseOut={() => setIsListHover(false)}
                                  src={isListHover ? partner2 : partner}

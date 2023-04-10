@@ -1,55 +1,75 @@
 import React from "react";
 import Slider from "react-slick";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import './slick.css';
+import './slick-theme.css';
 import './LectureSlider.css';
+import lecture01 from '../../data/lecture01.png';
+import lecture02 from '../../data/lecture02.png';
+import lecture03 from '../../data/lecture03.png';
+import lecture04 from '../../data/lecture04.png';
+import lecture05 from '../../data/lecture05.png';
+import styled from "styled-components";
+import { AiOutlineDoubleRight } from "react-icons/ai";
+import { AiOutlineDoubleLeft } from "react-icons/ai";
 
-const LectureSlider=()=> {
+const LectureSlider=(props)=> {
+    const Image = styled.img`
+      width: inherit;
+      height: inherit;
+    `;
+
     const settings = {
-        slide: 'div',
-        dots: true,
-        infinite: false,
+        // slide: 'div',
+        dots: false,
+        infinite: true,
+        speed : 500,
         slidesToShow: 3,
-        slidesToScroll: 3,
-        speed: 500,
-        responsive: [
-            {
-                breakpoint: 1440,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 800,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    initialSlide: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
+        slidesToScroll: 1,
+        arrow:true,
+        nextArrow: (
+            <button type="button" className="slick-next">
+                <AiOutlineDoubleRight/>
+            </button>
+        ),
+        prevArrow:(
+            <button type="button" className="slick-next">
+                <AiOutlineDoubleLeft/>
+            </button>
+        )
+        // prevArrow: (
+        //     <Prev>
+        //         <AiOutlineDoubleRight className="arrowLogo"/>
+        //     </Prev>
+        // )
     };
 
     return(
         <div className="lecturePart">
-            <h2>BEST 강의</h2>
+            <h2>{props.name}</h2>
             <Slider {...settings}>
-                <div className="lectureTile"></div>
-                <div className="lectureTile"></div>
-                <div className="lectureTile"></div>
-                <div className="lectureTile"></div>
-                <div className="lectureTile"></div>
-                <div className="lectureTile"></div>
+                {/*<a href='/'><img src={lecture01} alt='promote' className="lectureImg"/></a>*/}
+                {/*<a href='/'><img src={lecture02} alt='promote' className="lectureImg"/></a>*/}
+                {/*<a href='/'><img src={lecture03} alt='promote' className="lectureImg"/></a>*/}
+                {/*<a href='/'><img src={lecture04} alt='promote' className="lectureImg"/></a>*/}
+                {/*<a href='/'><img src={lecture05} alt='promote' className="lectureImg"/></a>*/}
+                <div className="lecture-Tile">
+                    <a href='/'><Image src={lecture01} className="lectureImg"/></a>
+                    <div className="lecture-hovered">
+                        <h1>5일안에 Python 부수기</h1>
+                    </div>
+                </div>
+                <div>
+                    <a href='/'><Image src={lecture02} className="lectureImg"/></a>
+                </div>
+                <div>
+                    <a href='/'><Image src={lecture03} className="lectureImg"/></a>
+                </div>
+                <div>
+                    <a href='/'><Image src={lecture04} className="lectureImg"/></a>
+                </div>
+                <div>
+                    <a href='/'><Image src={lecture05} className="lectureImg"/></a>
+                </div>
             </Slider>
         </div>
     )

@@ -1,0 +1,24 @@
+.imagefile {
+  background-color: white;
+  width: 80%;
+  margin: 10px auto;
+  height: 200px;
+  padding: 10px;
+  border: 1px solid #6667ab;
+
+}
+
+.image {
+}
+
+.QnAImg {
+  margin: 0 auto;
+  width: 800px;
+  height: 180px;
+  float: left;
+
+}
+
+input {
+  padding: 4px 4px 4px 10px;
+}
