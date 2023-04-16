@@ -4,7 +4,7 @@ import Footer from "../component/Footer/Footer";
 import NaverMap from "./NaverMap";
 import image from '../company.JPG'
 import partner from'../partner.JPG'
-import partner2 from'../partner2.JPG'
+import partner2 from '../partner2.JPG'
 import {useState, useEffect, useRef} from "react";
 
 function Info() {
