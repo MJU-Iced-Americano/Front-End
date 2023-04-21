@@ -1,0 +1,10 @@
+.bannerPart{
+    width: 100%;
+    /*justify-content: center;*/
+    /*flex-direction: row;*/
+    /*display: inline-flex;*/
+}
+.bannerImg{
+    height: 100%;
+    width: 100%;
+}

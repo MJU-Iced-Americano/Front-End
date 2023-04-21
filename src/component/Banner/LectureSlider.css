@@ -1,0 +1,65 @@
+/*.lectureTile{*/
+/*    height: 400px;*/
+/*    width: 400px;*/
+/*    background-color: grey;*/
+/*    border: 2px solid red;*/
+/*    margin-right: 10px;*/
+/*}*/
+.lecture-Tile{
+    width: inherit;
+    height: inherit;
+    position: relative;
+}
+.lecture-Tile:hover > .lecture-hovered{
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    z-index: 100;
+    bottom: 0;
+    left: 0;
+    width: inherit;
+    height: 30%;
+    display: block;
+
+}
+.lecture-hovered{
+    display: none;
+    background-color: grey;
+    position: absolute;
+    z-index: 100;
+    bottom: 0;
+    left: 0;
+    width: auto;
+}
+.slick-slide .lectureTile{
+    height: 400px;
+    width: 400px;
+    background-color: #d9d9d9;
+    border: 2px dashed green;
+    margin-right: 10px;
+}
+a{
+    height: inherit;
+    width: inherit;
+}
+.lectureImg{
+    top: 0;
+    height: inherit;
+    width: inherit;
+}
+
+.lecturePart{
+    height: 100%;
+    padding-left: 5em;
+    padding-right: 5em;
+}
+
+.slick-arrow{
+    z-index: 3;
+    width: 64px;
+    height: 64px;
+    /*background-color: blue;*/
+}
+
+.slick-list{
+    /*z-index: 1;*/
+}

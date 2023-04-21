@@ -1,0 +1,23 @@
+.Text {
+
+  display: flex;
+  flex-direction: column;
+  height: 40%;
+
+}
+
+.title {
+  width: 80%;
+  margin: 10px auto;
+  padding: 2em;
+}
+
+
+.text {
+  width: 80%;
+  margin: 10px auto;
+  padding: 2em;
+  height: 400px;
+}
+
+

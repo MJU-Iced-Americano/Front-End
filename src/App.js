@@ -1,23 +1,37 @@
 import logo from './logo.svg';
 import './App.css';
+import MainPage from "./MainPage";
+import Information from "./Information/Info";
+import FAQPage from "./FAQ/FAQPage";
+import RegularFAQ from "./FAQ/RegularFAQ";
+import EduFAQ from "./FAQ/EduFAQ";
+import Name from "./Login/SignUp/Name";
+import Main from "./Login/MainLoginPage";
+import Question from "./Question/Question";
+import ToLoginModal from "./Login/ToLoginModal";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import React from "react";
+
+//<Route path="/FAQPage" element={<FAQPage />}></Route>
+//<Route path="/RegularFAQ" element={<RegularFAQ />}></Route>
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainPage/>}/>
+          <Route path="/Information" element={<Information/>}/>
+            <Route path={"/user/Name"} element={<Name />}></Route>
+            <Route path={"/user/Main"} element={<Main />}></Route>
+            <Route path={"/QnA/Question"} element={<Question />}></Route>
+            <Route path={"/user/ToLoginModal"} element={<ToLoginModal />}></Route>
+            <Route path="/FAQPage" element={<FAQPage />}></Route>
+            <Route path="/RegularFAQ" element={<RegularFAQ />}></Route>
+            <Route path="/EduFAQ" element={<EduFAQ />}></Route>
+
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
