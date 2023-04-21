@@ -1,10 +1,10 @@
-import './Info.css';
-import Header from '../component/Header/Header';
-import Footer from "../component/Footer/Footer";
+import './styles/Info.css';
+import Header from '../components/Header/Header';
+import Footer from "../components/Footer/Footer";
 import NaverMap from "./NaverMap";
-import image from '../company.JPG'
-import partner from'../partner.JPG'
-import partner2 from '../partner2.JPG'
+import image from '../assets/information/company.JPG'
+import partner from '../assets/information/partner.JPG'
+import partner2 from '../assets/information/partner2.JPG'
 import {useState, useEffect, useRef} from "react";
 
 function Info() {

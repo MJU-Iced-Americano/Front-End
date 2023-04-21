@@ -2,11 +2,11 @@ import React from "react";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Banner1 from '../../data/banner1.png';
-import Banner2 from '../../data/banner2.png';
-import Banner3 from '../../data/banner3.png';
-import Banner4 from '../../data/banner4.png';
-import './BannerSlider.css';
+import Banner1 from '../../assets/Banner/banner1.png';
+import Banner2 from '../../assets/Banner/banner2.png';
+import Banner3 from '../../assets/Banner/banner3.png';
+import Banner4 from '../../assets/Banner/banner4.png';
+import './styles/BannerSlider.css';
 
 const BannerSlider =()=>{
     const settings = {

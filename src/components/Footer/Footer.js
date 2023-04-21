@@ -1,4 +1,4 @@
-import './footer.css';
+import '../../styles/Footer/footer.css';
 import SocoaF from '../socoa-ver2.png';
 
 const Footer =() => {

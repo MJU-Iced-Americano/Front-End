@@ -1,8 +1,8 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
-import './../FAQ/FAQPage.css';
-import Header from '../component/Header/Header';
-import Footer from "../component/Footer/Footer";
+import './styles/FAQPage.css';
+import Header from '../components/Header/Header';
+import Footer from "../components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
 
 

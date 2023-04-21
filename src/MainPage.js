@@ -1,7 +1,7 @@
-import Header from "./component/Header/Header";
-import Footer from "./component/Footer/Footer";
-import BannerSlider from "./component/Banner/BannerSlider";
-import LectureSlider from "./component/Banner/LectureSlider";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import BannerSlider from "./components/Banner/BannerSlider";
+import LectureSlider from "./components/Banner/LectureSlider";
 import './MainPage.css';
 
 const MainPage=() => {

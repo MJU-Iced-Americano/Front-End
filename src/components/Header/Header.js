@@ -1,4 +1,4 @@
-import './Header.css';
+import '../../styles/Header/Header.css';
 import {IoMdMenu} from 'react-icons/io';
 import {AiOutlineUser} from 'react-icons/ai';
 import {RiShoppingCartLine} from 'react-icons/ri';
