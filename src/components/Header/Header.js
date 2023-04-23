@@ -2,7 +2,7 @@ import '../../styles/Header/Header.css';
 import {IoMdMenu} from 'react-icons/io';
 import {AiOutlineUser} from 'react-icons/ai';
 import {RiShoppingCartLine} from 'react-icons/ri';
-import Socoa from '../socoa-ver2.png';
+import Socoa from '../../assets/Footer/socoa-ver2.png';
 
 
 const Header = ()=> {
@@ -28,7 +28,7 @@ const Header = ()=> {
                         <a href="/FAQPage" className="btnMainItem"> 커뮤니티 </a>
                         <div className="btnSubItem">
                             <a className="navbar-item" href="/FAQPage">자주 묻는 질문</a>
-                            <a className="navbar-item" href="/">질문 & 답변</a>
+                            <a className="navbar-item" href="/QnAPage">질문 & 답변</a>
                         </div>
                     </div>
 

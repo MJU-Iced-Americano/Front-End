@@ -1,0 +1,68 @@
+.whole {
+    margin-left : 80px;
+    margin-right : 80px;
+}
+
+.QnAName {
+    padding-top: 200px;
+    text-align: left;
+    padding-left: 40px;
+    padding-bottom: 10px;
+}
+
+.search_wrapperQnA {
+    padding: 10px 70px;
+    border-top: 1px solid #6667AB;
+    border-bottom: 1px solid #6667AB;
+}
+
+.search_bar {
+    width : 60%;
+    height : 60px;
+    font-size: 16px;
+    border-radius : 30px;
+    border-color : #6667AB;
+    padding : 0px 0px 0px 20px;
+    box-shadow: 5px 5px 5px grey;
+}
+
+.writebutton{
+    width: 20%;
+    height: 60px;
+    border-radius: 30px;
+    background-color: #6667ab;
+    margin-left: 50px;
+    color: white;
+    font-size: 20px;
+    border: none;
+}
+
+.QnAList{
+    padding-bottom: 10px;
+}
+
+.QnAGoDetail{
+    height: 150px;
+    border-bottom: 1px solid #6667AB;
+    padding: 10px;
+    text-align: left;
+}
+
+.DetailNamePreview{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.DetailcontentPreview{
+    height: 55px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+
+.QnADetailDate{
+    text-align: right;
+    padding-right: 30px;
+
+}
