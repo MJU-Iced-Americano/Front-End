@@ -1,5 +1,5 @@
 import '../../styles/Footer/footer.css';
-import SocoaF from '../socoa-ver2.png';
+import SocoaF from '../../assets/Footer/socoa-ver2.png';
 
 const Footer =() => {
     return (

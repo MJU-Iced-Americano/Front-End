@@ -49,9 +49,10 @@ a{
     flex-direction: column;
 }
 .btnMainItem{
-
+    text-decoration: none;
     font-size: 1.5em;
     font-weight: bold;
+    color: black;
 }
 .btnMainItem:hover{
     color: #6667ab;
