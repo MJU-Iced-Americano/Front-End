@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import MainPage from "./MainPage";
 import Information from "./Information/Info";
@@ -9,6 +9,7 @@ import Name from "./Login/SignUp/Name";
 import Main from "./Login/MainLoginPage";
 import Question from "./Question/Question";
 import ToLoginModal from "./Login/ToLoginModal";
+import CourseList from "./courselist-page/CourseListPage";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import React from "react";
 
@@ -29,7 +30,7 @@ function App() {
             <Route path="/FAQPage" element={<FAQPage />}></Route>
             <Route path="/RegularFAQ" element={<RegularFAQ />}></Route>
             <Route path="/EduFAQ" element={<EduFAQ />}></Route>
-
+          <Route path="/courseList" element={<CourseList/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

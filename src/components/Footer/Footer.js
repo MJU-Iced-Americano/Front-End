@@ -1,5 +1,5 @@
 import '../../styles/Footer/footer.css';
-import SocoaF from '../socoa-ver2.png';
+import SocoaF from '../../assets/Footer/socoa-ver2.png';
 
 const Footer =() => {
     return (
@@ -17,7 +17,6 @@ const Footer =() => {
                     왜 안될까요? 모르겠습니다 다시 한번 해보세요
                     왜 안될까요? 모르겠습니다 다시 한번 해보세요
                 </div>
-
             </div>
         </footer>
     )

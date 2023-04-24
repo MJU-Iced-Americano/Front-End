@@ -2,7 +2,8 @@ import '../../styles/Header/Header.css';
 import {IoMdMenu} from 'react-icons/io';
 import {AiOutlineUser} from 'react-icons/ai';
 import {RiShoppingCartLine} from 'react-icons/ri';
-import Socoa from '../socoa-ver2.png';
+// import Socoa from 'src/assets/Footer/socoa-ver2.png';
+import Socoa from '../../assets/Footer/socoa-ver2.png';
 
 
 const Header = ()=> {
@@ -19,10 +20,9 @@ const Header = ()=> {
                             <a className="navbar-item" href="/Information">회사 연혁</a>
                             <a className="navbar-item" href="/Information">강사진 소개</a>
                         </div>
-
                     </div>
                     <div className="hotNavBtn">
-                        <a href="/" className="btnMainItem"> 강의목록 </a>
+                        <a href="/courseList" className="btnMainItem"> 강의목록 </a>
                     </div>
                     <div className="hotNavBtn">
                         <a href="/FAQPage" className="btnMainItem"> 커뮤니티 </a>
@@ -31,8 +31,6 @@ const Header = ()=> {
                             <a className="navbar-item" href="/">질문 & 답변</a>
                         </div>
                     </div>
-
-
                 </div>
             </div>
             <div className="loginSect">

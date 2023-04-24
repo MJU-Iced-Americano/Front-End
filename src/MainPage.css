@@ -40,6 +40,7 @@
     background-color: rgb(102, 103, 171, 0.4);
     border-radius: 15px;
     padding : 0.3em 0.7em;
+    text-decoration: none;
 }
 .eventBannerBox{
     height: 215px;
@@ -47,6 +48,6 @@
 }
 .lectureRecommendBox{
     margin-top: 20px;
-    height: 600px;
-    border: 1px dashed green;
+    /*height: 600px;*/
+    border: 1px dashed orange;
 }
