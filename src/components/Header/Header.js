@@ -19,10 +19,9 @@ const Header = ()=> {
                             <a className="navbar-item" href="/Information">회사 연혁</a>
                             <a className="navbar-item" href="/Information">강사진 소개</a>
                         </div>
-
                     </div>
                     <div className="hotNavBtn">
-                        <a href="/" className="btnMainItem"> 강의목록 </a>
+                        <a href="/courseList" className="btnMainItem"> 강의목록 </a>
                     </div>
                     <div className="hotNavBtn">
                         <a href="/FAQPage" className="btnMainItem"> 커뮤니티 </a>
