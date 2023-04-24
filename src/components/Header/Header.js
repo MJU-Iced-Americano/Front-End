@@ -11,7 +11,7 @@ const Header = ()=> {
         <header className="header">
             <div className="iconSect">
                 <a href="/"> <IoMdMenu className="menuBtn"/> </a>
-                <a href="/"><img src={Socoa} alt='logo image' className="SocoaLogo"/></a>
+                <a href="/"><img src={Socoa} alt='imagef' className="SocoaLogo"/></a>
                 <div className="category-menu">
                     <div className="hotNavBtn">
                         <a href="/Information" className="btnMainItem">회사소개 </a>

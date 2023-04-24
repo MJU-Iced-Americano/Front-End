@@ -9,9 +9,9 @@
     font-size: 16px;
     border-radius : 30px;
     border-color : #6667AB;
-    padding : 0px 0px 0px 20px;
+    padding : 0 0 0 20px;
     box-shadow: 5px 5px 5px grey;
-    font-color : red;
+    /*font-color : red;*/
     display: flex;
 }
 .course_search_bar:focus{
@@ -128,7 +128,7 @@
 }
 .search-tag-box {
     background-color: rgba(102,103,171,0.4);
-    padding: 5px;
+    /*padding: 5px;*/
     border-radius: 15px;
     font-size: 28px;
     margin : 10px;
