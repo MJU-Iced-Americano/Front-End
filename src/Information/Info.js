@@ -1,7 +1,7 @@
 import './styles/Info.css';
 import Header from '../components/Header/Header';
 import Footer from "../components/Footer/Footer";
-import NaverMap from "./NaverMap";
+import NaverMap from "./components/NaverMap";
 import image from '../assets/information/company.JPG'
 import partner from '../assets/information/partner.JPG'
 import partner2 from '../assets/information/partner2.JPG'
@@ -30,7 +30,7 @@ function Info() {
                     <br></br>
                     <h1>협력사</h1>
                     <div class={"Partner"}>
-                        <a href="/QnA/Question">
+                        <a href="/">
                             <img onMouseOver={() => setIsListHover(true)}
                                  onMouseOut={() => setIsListHover(false)}
                                  src={isListHover ? partner2 : partner}

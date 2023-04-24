@@ -39,6 +39,8 @@
 
 .QnAList{
     padding-bottom: 10px;
+    height: 800px;
+    overflow: auto;
 }
 
 .QnAGoDetail{
@@ -58,7 +60,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-
+    width: 80%;
 }
 
 .QnADetailDate{

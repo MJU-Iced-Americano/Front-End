@@ -1,8 +1,8 @@
 import './Question.css';
-import Header from '../components/Header/Header';
-import Footer from "../components/Footer/Footer";
-import TextArea from"./TextArea"
-import ImageArea from"./ImageArea"
+import Header from '../../components/Header/Header';
+import Footer from "../../components/Footer/Footer";
+import TextArea from "./TextArea"
+import ImageArea from "./ImageArea"
 import {useState, useEffect, useRef} from "react";
 
 function Question() {
