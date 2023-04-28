@@ -10,6 +10,7 @@ import Main from "./Login/MainLoginPage";
 import Question from "./QnA/Question/Question";
 import ToLoginModal from "./Login/ToLoginModal";
 import CourseList from "./courselist-page/CourseListPage";
+import InfoTeacher from "./InfoTeacher/InfoTeacher";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import React from "react";
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/EduFAQ" element={<EduFAQ />}></Route>
           <Route path="/QnAPage" element={<QnAPage />}></Route>
           <Route path="/courseList" element={<CourseList/>}></Route>
+          <Route path="/InfoTeacher" element={<InfoTeacher/>}></Route>
 
         </Routes>
       </BrowserRouter>

@@ -1,0 +1,66 @@
+.whole {
+    padding-top: 4.2em;
+    margin-left : 80px;
+    margin-right : 80px;
+}
+
+#head {
+    padding-top: 100px;
+    text-align: left;
+}
+
+#line{
+    height: 3px;
+    background-color : black;
+}
+
+.imgDiv{
+    padding: 10px;
+    width: 300px;
+    overflow: hidden;
+}
+
+.imgDiv img{
+    padding: 5px;
+    width: 100%;
+}
+
+.horizon{
+    display: flex;
+}
+
+.profile{
+    width: 25%;
+    flex-direction: column;
+}
+
+.careerAndNotice{
+    width: 40%;
+    flex-direction: column;
+    text-align: left;
+}
+
+.notice{
+    background-color:#D9D9D9;
+}
+
+.notice *{
+    padding: 10px;
+}
+
+.notice ul{
+    padding-left: 0px;
+    list-style-type : none
+}
+
+.lecture-Tile-lists{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.lectureScroll{
+    width:500px;
+    height:500px;
+    overflow-x: hidden;
+}
