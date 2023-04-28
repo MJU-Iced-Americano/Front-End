@@ -14,8 +14,6 @@ import InfoTeacher from "./InfoTeacher/InfoTeacher";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import React from "react";
 
-//<Route path="/FAQPage" element={<FAQPage />}></Route>
-//<Route path="/RegularFAQ" element={<RegularFAQ />}></Route>
 
 function App() {
   return (
@@ -24,17 +22,20 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage/>}/>
           <Route path="/Information" element={<Information/>}/>
-          <Route path={"/user/Name"} element={<Name />}></Route>
-          <Route path={"/user/Main"} element={<Main />}></Route>
-          <Route path={"/QnAPage/Question"} element={<Question />}></Route>
-          <Route path={"/user/ToLoginModal"} element={<ToLoginModal />}></Route>
+          <Route path="/user/Name" element={<Name />}></Route>
+          <Route path="/user/Main" element={<Main />}></Route>
+          <Route path="/QnAPage/Question" element={<Question />}></Route>
+          <Route path="/user/ToLoginModal" element={<ToLoginModal />}></Route>
           <Route path="/FAQPage" element={<FAQPage />}></Route>
           <Route path="/RegularFAQ" element={<RegularFAQ />}></Route>
           <Route path="/EduFAQ" element={<EduFAQ />}></Route>
           <Route path="/QnAPage" element={<QnAPage />}></Route>
           <Route path="/courseList" element={<CourseList/>}></Route>
+<<<<<<< HEAD
           <Route path="/InfoTeacher" element={<InfoTeacher/>}></Route>
 
+=======
+>>>>>>> ab5f463b30c47c1e0af16932ebca6d6a7d8538a1
         </Routes>
       </BrowserRouter>
     </div>

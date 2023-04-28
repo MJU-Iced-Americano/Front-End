@@ -30,8 +30,6 @@ const Header = ()=> {
                             <a className="navbar-item" href="/QnAPage">질문 & 답변</a>
                         </div>
                     </div>
-
-
                 </div>
             </div>
             <div className="loginSect">

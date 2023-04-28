@@ -1,13 +1,11 @@
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
 import BannerSlider from "./components/Banner/BannerSlider";
 import LectureSlider from "./components/Banner/LectureSlider";
 import './MainPage.css';
+import Body from "./components/Body/Body";
 
 const MainPage=() => {
-    return(
-        <div className="root">
-            <Header/>
+    const MainPageContent=()=>{
+        return(
             <div className="contentBox">
                 <div className="searchArea">
                     <div className="searchField">
@@ -15,7 +13,7 @@ const MainPage=() => {
                     </div>
                     <div className="searchTag">
                         <div className="searchTagSmall">
-                            <a href='/'>#k8s</a>
+                            <a href="/">#k8s</a>
                             <a href='/'>#spring</a>
                             <a href='/'>#java</a>
                             <a href='/'>#chatGPT</a>
@@ -28,12 +26,14 @@ const MainPage=() => {
                     <LectureSlider name="New 강의 🎉"/>
                     <LectureSlider name="Trending 강의 🔥"/>
                 </div>
-                {/*<div className="lectureRecommendBox">*/}
-                {/*    <LectureSlider/>*/}
-                {/*</div>*/}
             </div>
-            <Footer/>
-        </div>
+        );
+    }
+
+    return(
+            <Body>
+                <MainPageContent/>
+            </Body>
     )
 }
 
