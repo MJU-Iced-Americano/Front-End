@@ -31,11 +31,8 @@ function App() {
           <Route path="/EduFAQ" element={<EduFAQ />}></Route>
           <Route path="/QnAPage" element={<QnAPage />}></Route>
           <Route path="/courseList" element={<CourseList/>}></Route>
-<<<<<<< HEAD
           <Route path="/InfoTeacher" element={<InfoTeacher/>}></Route>
 
-=======
->>>>>>> ab5f463b30c47c1e0af16932ebca6d6a7d8538a1
         </Routes>
       </BrowserRouter>
     </div>
