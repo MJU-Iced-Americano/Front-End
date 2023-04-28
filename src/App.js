@@ -13,8 +13,6 @@ import CourseList from "./courselist-page/CourseListPage";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import React from "react";
 
-//<Route path="/FAQPage" element={<FAQPage />}></Route>
-//<Route path="/RegularFAQ" element={<RegularFAQ />}></Route>
 
 function App() {
   return (
@@ -23,16 +21,15 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage/>}/>
           <Route path="/Information" element={<Information/>}/>
-          <Route path={"/user/Name"} element={<Name />}></Route>
-          <Route path={"/user/Main"} element={<Main />}></Route>
-          <Route path={"/QnAPage/Question"} element={<Question />}></Route>
-          <Route path={"/user/ToLoginModal"} element={<ToLoginModal />}></Route>
+          <Route path="/user/Name" element={<Name />}></Route>
+          <Route path="/user/Main" element={<Main />}></Route>
+          <Route path="/QnAPage/Question" element={<Question />}></Route>
+          <Route path="/user/ToLoginModal" element={<ToLoginModal />}></Route>
           <Route path="/FAQPage" element={<FAQPage />}></Route>
           <Route path="/RegularFAQ" element={<RegularFAQ />}></Route>
           <Route path="/EduFAQ" element={<EduFAQ />}></Route>
           <Route path="/QnAPage" element={<QnAPage />}></Route>
           <Route path="/courseList" element={<CourseList/>}></Route>
-
         </Routes>
       </BrowserRouter>
     </div>

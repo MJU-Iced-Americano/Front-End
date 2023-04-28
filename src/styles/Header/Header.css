@@ -151,3 +151,20 @@ a{
     from{transform: rotate(0deg)}
     to{transform: rotate(180deg)}
 }
+@media (max-width : 1000px) {
+    .hotNavBtn:first-child{
+        display: none;
+    }
+}
+
+@media (max-width: 850px) {
+    .hotNavBtn:nth-child(2){
+        display: none;
+    }
+}
+
+@media (max-width: 750px) {
+    .hotNavBtn:nth-child(3){
+        display: none;
+    }
+}
