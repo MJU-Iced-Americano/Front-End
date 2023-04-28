@@ -5,12 +5,8 @@ import Footer from "../components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import QnAPreview from "./components/QnAPreview";
 
-
-
-
 function QnAPage(){
     const navigate = useNavigate();
-
 
     const navigateToWrite = () => {
         navigate("/QnAPage/Question");
@@ -25,7 +21,6 @@ function QnAPage(){
                 </div>
                 <div className="search_wrapperQnA">
                     <input className="search_bar" type="text" placeholder = "게시물 제목을 검색해보세요"></input>
-                    <button className="writebutton" onClick={navigateToWrite}>글쓰기</button>
                 </div>
                 <div className="QnAList">
                     <QnAPreview />
@@ -36,6 +31,7 @@ function QnAPage(){
                     <QnAPreview />
                     <QnAPreview />
                 </div>
+                <button className="writebutton" onClick={navigateToWrite}>글쓰기</button>
             </div>
             <Footer/>
         </div>

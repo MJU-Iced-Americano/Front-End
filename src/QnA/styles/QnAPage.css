@@ -35,12 +35,14 @@
     color: white;
     font-size: 20px;
     border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 5px grey;
 }
 
 .QnAList{
     padding-bottom: 10px;
-    height: 800px;
-    overflow: auto;
+    height: 1050px;
 }
 
 .QnAGoDetail{

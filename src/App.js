@@ -11,6 +11,7 @@ import Question from "./QnA/Question/Question";
 import ToLoginModal from "./Login/ToLoginModal";
 import CourseList from "./courselist-page/CourseListPage";
 import InfoTeacher from "./InfoTeacher/InfoTeacher";
+import QnADetailPage from "./QnA/QnADetailPage";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import React from "react";
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/QnAPage" element={<QnAPage />}></Route>
           <Route path="/courseList" element={<CourseList/>}></Route>
           <Route path="/InfoTeacher" element={<InfoTeacher/>}></Route>
+          <Route path="/QnAPage/QnADetailPage" element={<QnADetailPage />}></Route>
 
         </Routes>
       </BrowserRouter>
