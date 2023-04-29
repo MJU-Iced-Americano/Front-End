@@ -1,18 +1,15 @@
 import './Question.css';
-import Header from '../../components/Header/Header';
-import Footer from "../../components/Footer/Footer";
 import TextArea from "./TextArea"
 import ImageArea from "./ImageArea"
-import {useState, useEffect, useRef} from "react";
+import {useState} from "react";
+import Body from "../../components/Body/Body";
 
 function Question() {
 
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
-
-    return (
-        <div className={"Information"}>
-            <Header />
+    const QuestionContent=()=> {
+        return(
             <section>
                 <TextArea class={"container"}>
                     setTitle={setTitle}
@@ -24,7 +21,13 @@ function Question() {
                 <button>최소</button>
                 <button>등록</button>
             </section>
-            <Footer />
+        );
+    }
+    return (
+        <div className={"Information"}>
+            <Body>
+                <QuestionContent/>
+            </Body>
         </div>
     );
 }

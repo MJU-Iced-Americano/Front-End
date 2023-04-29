@@ -1,9 +1,8 @@
 import React from 'react';
 import './styles/QnAPage.css';
-import Header from '../components/Header/Header';
-import Footer from "../components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import QnAPreview from "./components/QnAPreview";
+import Body from "../components/Body/Body";
 
 function QnAPage(){
     const navigate = useNavigate();
@@ -12,9 +11,8 @@ function QnAPage(){
         navigate("/QnAPage/Question");
     };
 
-    return (
-        <div>
-            <Header />
+    const QnAPageContent=()=>{
+        return(
             <div className="whole">
                 <div className="QnAName">
                     <h1>질문 & 답변</h1>
@@ -33,8 +31,13 @@ function QnAPage(){
                 </div>
                 <button className="writebutton" onClick={navigateToWrite}>글쓰기</button>
             </div>
-            <Footer/>
-        </div>
+        );
+    }
+
+    return (
+        <Body>
+            <QnAPageContent/>
+        </Body>
     );
 }
 

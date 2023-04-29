@@ -1,5 +1,3 @@
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
 import './styles/CourseListPage.css';
 import SearchResultText from './CourseSearchResult';
 import ClickedBox from './CourseClickedBox';
@@ -7,6 +5,7 @@ import React, {useState} from "react";
 import {BsSliders} from "react-icons/bs";
 import { FaAngleDown } from "react-icons/fa";
 import lecture01 from "../assets/Banner/lecture01.png";
+import Body from "../components/Body/Body";
 
 const CourseListPage =()=> {
     // const[inputs, setInputs] = useState("");
@@ -36,9 +35,8 @@ const CourseListPage =()=> {
         );
     }
 
-    return(
-        <div>
-            <Header/>
+    const CourseListPageContent=()=> {
+        return(
             <div className="course-content">
                 <div className="search-course-bar">
                     <input className="course_search_bar" type="text" placeholder = "듣고 싶은 강의가 무엇인가요?"
@@ -152,9 +150,13 @@ const CourseListPage =()=> {
                     </div>
                 </div>
             </div>
-            <Footer/>
-        </div>
+        );
+    }
 
+    return(
+        <Body>
+            <CourseListPageContent/>
+        </Body>
     )
 }
 

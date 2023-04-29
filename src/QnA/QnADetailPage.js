@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import './styles/QnADetailPage.css';
-import Header from '../components/Header/Header';
-import Footer from "../components/Footer/Footer";
 import image from "../assets/Footer/socoa-ver2.png"
 import good from "../assets/QnA/Good.png"
+import Body from "../components/Body/Body";
 
 function QnAPage({title, date, imageURL, content, chat}){
 
@@ -26,9 +25,8 @@ function QnAPage({title, date, imageURL, content, chat}){
         setText(event.target.value);
     };
 
-    return (
-        <div>
-            <Header />
+    const QnADetailPageContent=()=> {
+        return(
             <div className="Detailframe">
                 <div className="DetailMain">
                     <div className="DetailHeader">
@@ -64,8 +62,13 @@ function QnAPage({title, date, imageURL, content, chat}){
                     </div>
                 </div>
             </div>
-            <Footer/>
-        </div>
+        );
+    }
+
+    return (
+        <Body>
+            <QnADetailPageContent/>
+        </Body>
     );
 }
 
