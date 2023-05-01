@@ -1,0 +1,51 @@
+.whole{
+    padding-top: 4.2em;
+    margin-left : 80px;
+    margin-right : 80px;
+}
+#head{
+    margin: 10px;
+    padding-top: 100px;
+    text-align: left;
+}
+.imgDiv{
+    margin-left: 30px;
+    padding: 10px;
+    width: 150px;
+    display: block;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-top: 1px solid black;
+    border-collapse: collapse;
+}
+.basketTable tr {
+    border-bottom: 1px solid black ;
+}
+#payment{
+    height: 150px;
+    display: flex;
+    justify-content:right;
+    align-items: center;
+}
+
+.paymentBtn{
+    margin-left: 10px;
+    background-color: #6667ab;
+    /*width: 6.25em;*/
+    /*height: 2.5em;*/
+
+    width: 150px;
+    height: 60px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Inter, sans-serif;
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #ffffff;
+}
