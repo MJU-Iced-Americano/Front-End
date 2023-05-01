@@ -4,7 +4,7 @@
 }
 
 .QnAName {
-    padding-top: 200px;
+    /*padding-top: 200px;*/
     text-align: left;
     padding-left: 40px;
     padding-bottom: 10px;
@@ -35,12 +35,14 @@
     color: white;
     font-size: 20px;
     border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 5px grey;
 }
 
 .QnAList{
     padding-bottom: 10px;
-    height: 800px;
-    overflow: auto;
+    height: 1050px;
 }
 
 .QnAGoDetail{
