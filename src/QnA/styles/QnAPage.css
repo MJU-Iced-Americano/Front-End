@@ -4,7 +4,6 @@
 }
 
 .QnAName {
-    padding-top: 200px;
     text-align: left;
     padding-left: 40px;
     padding-bottom: 10px;
@@ -68,5 +67,30 @@
 .QnADetailDate{
     text-align: right;
     padding-right: 30px;
+}
 
+.PageNavigation{
+    padding-top: 10px;
+}
+.PageMove{
+    margin: 3px;
+    background-color: white;
+    color: #6667ab;
+    font-weight: bold;
+    border: 0;
+}
+
+.PageButton{
+    margin: 3px;
+    background-color: white;
+    color: #6667ab;
+    border: 0;
+}
+
+.activePage{
+    margin: 3px;
+    background-color: #6667ab;
+    color: white;
+    font-weight: bold;
+    border: 0;
 }

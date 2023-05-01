@@ -5,12 +5,10 @@ import partner from '../assets/information/partner.JPG'
 import partner2 from '../assets/information/partner2.JPG'
 import {useState} from "react";
 import Body from "../components/Body/Body";
+import CopInfo from "./CopInfo";
 
 function Info() {
     const [isListHover, setIsListHover] = useState(false);
-    const [isListHover2, setIsListHover2] = useState(false);
-    const [isListHover3, setIsListHover3] = useState(false);
-    const [isListHover4, setIsListHover4] = useState(false);
 
     const InfoContent=()=> {
         return(
@@ -37,30 +35,7 @@ function Info() {
                     <br></br>
                     <h1>협력사</h1>
                     <div className={"Partner"}>
-                        <a href="/">
-                            <img onMouseOver={() => setIsListHover(true)}
-                                 onMouseOut={() => setIsListHover(false)}
-                                 src={isListHover ? partner2 : partner}
-                                 alt=""/>
-                        </a>
-                        <a href="https://www.naver.com/">
-                            <img onMouseOver={() => setIsListHover2(true)}
-                                 onMouseOut={() => setIsListHover2(false)}
-                                 src={isListHover2 ? partner2 : partner}
-                                 alt=""/>
-                        </a>
-                        <a href="https://home.mju.ac.kr/user/index.action">
-                            <img onMouseOver={() => setIsListHover3(true)}
-                                 onMouseOut={() => setIsListHover3(false)}
-                                 src={isListHover3 ? partner2 : partner}
-                                 alt=""/>
-                        </a>
-                        <a href="https://www.youtube.com/">
-                            <img onMouseOver={() => setIsListHover4(true)}
-                                 onMouseOut={() => setIsListHover4(false)}
-                                 src={isListHover4 ? partner2 : partner}
-                                 alt=""/>
-                        </a>
+                        <CopInfo />
                     </div>
                 </div>
             </section>
