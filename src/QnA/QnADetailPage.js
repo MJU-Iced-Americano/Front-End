@@ -1,14 +1,29 @@
 import React, {useState} from 'react';
 import './styles/QnADetailPage.css';
+import Header from '../components/Header/Header';
+import Footer from "../components/Footer/Footer";
 import image from "../assets/Footer/socoa-ver2.png"
 import good from "../assets/QnA/Good.png"
-import Body from "../components/Body/Body";
+import axios from "axios";
 
 function QnAPage({title, date, imageURL, content, chat}){
 
+    const [qna, setQnA] = useState(null);
     const [count, setCount] = useState(0);
     const [text, setText] = useState('');
     const [chats, setChats] = useState([]);
+
+    const fetchqna = async () => {
+        try {
+            setQnA(null);
+            
+            const qna = await axios.get(
+                `http://52.78.47.54:8080/show/1` //나중에 1이 아니라 다른거에도 적용하게
+        );
+        }catch (e) {
+
+        }
+    }
 
     const Good = () => {
         setCount(count + 1);
@@ -25,8 +40,9 @@ function QnAPage({title, date, imageURL, content, chat}){
         setText(event.target.value);
     };
 
-    const QnADetailPageContent=()=> {
-        return(
+    return (
+        <div>
+            <Header />
             <div className="Detailframe">
                 <div className="DetailMain">
                     <div className="DetailHeader">
@@ -62,13 +78,8 @@ function QnAPage({title, date, imageURL, content, chat}){
                     </div>
                 </div>
             </div>
-        );
-    }
-
-    return (
-        <Body>
-            <QnADetailPageContent/>
-        </Body>
+            <Footer/>
+        </div>
     );
 }
 

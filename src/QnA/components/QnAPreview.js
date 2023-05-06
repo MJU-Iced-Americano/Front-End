@@ -6,7 +6,7 @@ function QnAPreview() {
     const navigate = useNavigate();
 
     const navigateToQnADetail = () => {
-        navigate("/RegularFAQ");
+        navigate("/QnAPage/QnADetailPage");
     };
 
     return(

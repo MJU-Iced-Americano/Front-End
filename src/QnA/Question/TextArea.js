@@ -9,7 +9,7 @@ const TextArea = (setTitle, setContent, title, content) => {
                 //onChange={(e) => {
                 //    setTitle(e.target.value)
                 //}}
-                className="title"
+                className="QuestionTitle"
                 placeholder="제목을 입력해주세요"
                 value={title}
             />
@@ -19,7 +19,7 @@ const TextArea = (setTitle, setContent, title, content) => {
                 //    setContent(e.target.value)
                 //}}
                 cols="30"
-                className="text"
+                className="QuestionText"
                 placeholder="내용을 입력해주세요"
                 value={content}
             />
