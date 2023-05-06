@@ -11,19 +11,21 @@ function CopInfo() {
 
     useEffect(() => {
 
-        axios.get(`http://localhost:8000/company-service/company/get`)
+        axios.get(`/company-service/company/get`)
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
+                console.log(response.data)
                 const data = response.data;
                 const objects = [];
 
                 // 데이터에서 객체를 추출하여 배열에 추가
-                for (let i = 0; i < data.length; i++) {
+                for (let i = 0; i < data.list.length; i++) {
                     const obj = {
-                        id: data[i].id,
-                        CoCompany_name: data[i].CoCompany_name,
-                        CoCompany_url: data[i].CoCompany_url
+                        id: data.list[i].id,
+                        CoCompany_name: data.list[i].coCompany_name,
+                        CoCompany_url: data.list[i].coCompany_url
                     };
+                    console.log(obj)
                     objects.push(obj);
                 }
                 setData(objects);
@@ -40,8 +42,6 @@ function CopInfo() {
             {data.map((item) => (
                 <a key={item.id} href={item.CoCompany_url}>
                     <img
-                        onMouseOver={() => setIsListHover(true)}
-                        onMouseOut={() => setIsListHover(false)}
                         src={isListHover ? partner2 : partner}
                         alt=""
                     />

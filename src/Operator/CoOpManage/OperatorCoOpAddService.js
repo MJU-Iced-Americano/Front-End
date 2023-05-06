@@ -2,15 +2,19 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
 
-const OperatorCoOpAddService=(co_company_name,co_company_url)=>{
+function OperatorCoOpAddService({co_company_name,co_company_url}) {
+
+    const [error, setError] = useState(null);
+    console.log(co_company_name);
 
     useEffect(()=>{
+
         const postCoOp = async () => {
             try{
-
-                const response = await axios.post('http://13.124.61.210:8761/company-service/company/register', {
-                    co_company_name: co_company_name,
-                    co_company_url: co_company_url
+                setError(null);
+                const response = await axios.post('/company-service/company/register', {
+                    CoCompany_name: co_company_name,
+                    CoCompany_url: co_company_url
                 });
                 console.log(response);
             }catch(e){
