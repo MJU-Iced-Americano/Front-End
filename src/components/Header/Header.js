@@ -34,8 +34,8 @@ const Header = ()=> {
             </div>
             <div className="loginSect">
                 <div className="loginBtn"> <a href="/user/ToLoginModal"> Login </a></div>
-                <a href="/user/name"> <AiOutlineUser className="userBtn"/> </a>
-                <a href="/MyBasket"><RiShoppingCartLine className="cartBtn"/> </a>
+                <a href="/OperatorPage"> <AiOutlineUser className="userBtn"/> </a>
+                <a href="/"><RiShoppingCartLine className="cartBtn"/> </a>
             </div>
         </header>
     )

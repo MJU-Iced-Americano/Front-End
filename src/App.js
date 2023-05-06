@@ -14,6 +14,13 @@ import Course from "./Course/CourseMainPage";
 import InfoTeacher from "./InfoTeacher/InfoTeacher";
 import MyBasket from "./MyBasket/MyBasket";
 import QnADetailPage from "./QnA/QnADetailPage";
+import OperatorPage from "./Operator/OperatorMain";
+import CoOpManagePage from "./Operator/CoOpManage/OperatorCoOp";
+import CoOpAddPage from "./Operator/CoOpManage/OperatorCoOpAdd";
+import CoOpModifyPage from "./Operator/CoOpManage/OperatorCoOpModify";
+import CoOpDeletePage from "./Operator/CoOpManage/OperatorCoOpDelete";
+import QnAManagePage from "./Operator/QnAManage/OperatorQnA";
+import QnADeletePage from "./Operator/QnAManage/OperatorQnADelete";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import React from "react";
 import axios from 'axios';
@@ -38,6 +45,13 @@ function App() {
           <Route path="/InfoTeacher" element={<InfoTeacher/>}></Route>
           <Route path="/MyBasket" element={<MyBasket/>}></Route>
           <Route path="/QnAPage/QnADetailPage" element={<QnADetailPage />}></Route>
+          <Route path="/OperatorPage" element={<OperatorPage />}></Route>
+          <Route path="/OperatorPage/CoOpManage" element={<CoOpManagePage />}></Route>
+          <Route path="/OperatorPage/CoOpManage/Add" element={<CoOpAddPage />}></Route>
+          <Route path="/OperatorPage/CoOpManage/Modify" element={<CoOpModifyPage />}></Route>
+          <Route path="/OperatorPage/CoOpManage/Delete" element={<CoOpDeletePage />}></Route>
+          <Route path="/OperatorPage/QnAManage" element={<QnAManagePage />}></Route>
+          <Route path="/OperatorPage/QnAManage/Delete" element={<QnADeletePage />}></Route>
 
           <Route path="/Course" element={<Course/>}></Route>
 
