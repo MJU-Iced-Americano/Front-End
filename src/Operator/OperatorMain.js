@@ -11,10 +11,19 @@ const OperatorMain=()=>{
             navigate("/OperatorPage/CoOpManage");
         };
 
+        const handleFAQPage = () => {
+            navigate("/OperatorPage/CoOpManage");
+        };
+
+        const handleQnAPage = () => {
+            navigate("/OperatorPage/QnAManage");
+        };
+
         return (
             <div className="Operatormain">
-            <button className="Operatorbutton" onClick={handleCoOpPage}>회사 협력사</button>
-            <button className="Operatorbutton">FAQ</button>
+                <button className="Operatorbutton" onClick={handleCoOpPage}>회사 협력사</button>
+                <button className="Operatorbutton" onClick={handleFAQPage}>FAQ</button>
+                <button className="Operatorbutton" onClick={handleQnAPage}>QnA</button>
             </div>
         );
     }

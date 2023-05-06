@@ -8,7 +8,7 @@ const OperatorCoOpAddService=(co_company_name,co_company_url)=>{
         const postCoOp = async () => {
             try{
 
-                const response = await axios.post('http://localhost:8080/customer/custinfo/enrollment', {
+                const response = await axios.post('http://13.124.61.210:8761/company-service/company/register', {
                     co_company_name: co_company_name,
                     co_company_url: co_company_url
                 });
