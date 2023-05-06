@@ -10,11 +10,13 @@ import Main from "./Login/MainLoginPage";
 import Question from "./QnA/Question/Question";
 import ToLoginModal from "./Login/ToLoginModal";
 import CourseList from "./courselist-page/CourseListPage";
+import Course from "./Course/CourseMainPage";
 import InfoTeacher from "./InfoTeacher/InfoTeacher";
 import MyBasket from "./MyBasket/MyBasket";
 import QnADetailPage from "./QnA/QnADetailPage";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import React from "react";
+import axios from 'axios';
 
 
 function App() {
@@ -37,6 +39,7 @@ function App() {
           <Route path="/MyBasket" element={<MyBasket/>}></Route>
           <Route path="/QnAPage/QnADetailPage" element={<QnADetailPage />}></Route>
 
+          <Route path="/Course" element={<Course/>}></Route>
 
         </Routes>
       </BrowserRouter>

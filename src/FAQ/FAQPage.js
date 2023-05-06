@@ -33,7 +33,7 @@ function FAQPage(){
             </div>
             <div>
             <Accordion className = "accWhole" defaultActiveKey="0" flush>
-              <Accordion.Item className="item">
+              <Accordion.Item className="item" eventKey="0">
                 <Accordion.Header className="question">Q1. 동영상이 재생이 안됩니다. </Accordion.Header>
                 <Accordion.Body>
                   다시 한번 시도해보세요.

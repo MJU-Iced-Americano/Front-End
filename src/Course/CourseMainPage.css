@@ -1,0 +1,254 @@
+.whole {
+    margin-bottom: 80px;
+
+}
+.anchors {
+    /*padding-top: 70px;*/
+
+}
+.nav{
+    /*padding-top: 70px;*/
+
+}
+.for_anchor {
+    display: block;
+    height: 40px; /*고정메뉴 높이*/
+    /*margin-top: -10px; !*고정메뉴 높이*!*/
+    visibility: hidden;
+}
+.course_category {
+    text-align: left;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 굴림체;
+    padding: 20px;
+    margin-top: 80px;
+}
+
+
+.description_wrapper {
+    /*margin-top : 50px;*/
+    /*padding : 70px;*/
+    /*padding-top: 70px;*/
+    width: 100%;
+    margin : 0 auto;
+
+}
+.description_detail {
+    width: 80%;
+    font-size: 20px;
+    margin: auto;
+
+
+}
+
+
+.box_wrapper {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.review_wrapper {
+    /*height : 50px;*/
+    /*padding : 70px;*/
+    /*flex-flow: column;*/
+    margin : 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+
+
+
+
+}
+.mainbox1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    height: 300px;
+    padding: 20px;
+    border: 1px solid;
+    flex: 1;
+    width: 40%;
+
+}
+.cocoa_whole {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 300px;
+}
+
+
+.sub{
+    font-size: 16px;
+
+}
+.icon_main1 {
+    width: 45px;
+    height: 45px;
+}
+
+
+.mainbox2 {
+    border-radius: 10px;
+    /*height: 400px;*/
+    padding: 20px;
+    border: 1px solid;
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+    /*상하 여백은 없고 좌우 여백만 자동으로 같은 너비로 지정됨. */
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+
+
+}
+
+
+.total_cocoa {
+    justify-content: center;
+    /*align-items: center;*/
+
+    display: flex;
+    flex-direction: row;
+}
+.cocoa_review_num {
+    width: 100px;
+}
+.icon_main2 {
+    width: 20px;
+    height: 20px;
+}
+
+
+
+.cocoa_length {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    border: 1px solid;
+    width : 400px;
+    height: 30px;
+}
+
+
+.review_list {
+    font-size: 20px;
+    border-radius: 10px;
+    /*width: 1000px;*/
+    width: 100%;
+
+    /*height: 400px;*/
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border: 1px solid;
+
+
+    /*상하 여백은 없고 좌우 여백만 자동으로 같은 너비로 지정됨. */
+    /*margin : 0 auto;*/
+    /*margin-right: 80px;*/
+
+
+}
+.sections {
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+}
+.profile {
+    width: 35px;
+    height: 35px;
+}
+.user_name {
+    /*padding-left: 30px;*/
+    font-size: 17px;
+}
+
+.section2 {
+    width: 15%;
+}
+.review_detail {
+    /*text-align: left;*/
+    width: 70%;
+
+
+}
+.review_listITem {
+    /*height: 90px;*/
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+    border-bottom: 1px solid;
+
+
+
+}
+/*curriculum*/
+.curriculum_wrapper {
+    /*width: 1000px !important;*/
+    width: 100%;
+    margin : 0 auto;
+
+
+}
+.accWhole .item {
+    padding: 5px 5px 5px 10px;
+}
+.accWhole{
+    text-align: left !important;
+
+}
+
+.accordion {
+
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 0px 30px 0px 30px !important;
+}
+
+.accWhole .accordion-header button{
+    font-size : 17px;
+    font-weight: bold !important;
+    /*background-color: rgba(102, 103, 171, 0.4);*/
+
+}
+.accordion-body {
+    /*background-color: rgba(102, 103, 171, 0.4);*/
+
+}
+
+
+.accWhole .accordion-item {
+    font-size : 17px;
+    /*padding: 30px 20px 20px 10px;*/
+}
+
+.input_wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.input_css {
+    width: 80%;
+    font-size: 18px;
+    border-radius: 10px;
+}
+.create-button {
+    width: 70px;
+    height: 40px;
+    margin-left: 1rem;
+    background-color: rgba(102, 103, 171, 0.6);
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+.create-button:hover {
+    background-color: rgba(102, 103, 171, 0.9);
+}

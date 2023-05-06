@@ -45,9 +45,11 @@
 
 }
 .accWhole .accordion-header button{
-    font-size : 17px;
+    font-size : 20px;
+    font-weight: normal;
 
 }
+
 
 .item {
     font-size : 17px;
