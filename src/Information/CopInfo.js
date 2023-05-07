@@ -1,12 +1,10 @@
 import axios from 'axios';
 import {useState, useEffect, useRef} from "react";
 import partner from '../assets/information/partner.JPG'
-import partner2 from '../assets/information/partner2.JPG'
+import "./styles/Info.css"
 
 function CopInfo() {
-    const [isListHover, setIsListHover] = useState(false);
 
-    const [cop, setCop] = useState(null);
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -40,12 +38,15 @@ function CopInfo() {
     return (
         <div>
             {data.map((item) => (
-                <a key={item.id} href={item.CoCompany_url}>
-                    <img
-                        src={isListHover ? partner2 : partner}
-                        alt=""
-                    />
-                </a>
+                <div className="CoOp">
+                    <a key={item.id} href={item.CoCompany_url}>
+                        <img
+                            src={partner}
+                            alt=""
+                        />
+                        <h5>{item.CoCompany_name}</h5>
+                    </a>
+                </div>
             ))}
         </div>
     );

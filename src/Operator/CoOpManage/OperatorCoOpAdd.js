@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { useNavigate } from "react-router-dom";
+import "./styles/OperatorCoOp.css"
 import Body from "../../components/Body/Body";
 import OperatorcoOpAddService from "./OperatorCoOpAddService"
 
@@ -23,15 +23,22 @@ const OperatorCoOpAdd=()=>{
             })
         }
 
+        function btnTextChanger(){
+            if (doEnroll) {
+                return "확인";
+            }
+            else return "등록하기";
+        }
+
         return (
             <div className="CoOpManage">
                 <h1>회사 협력사 추가 페이지입니다.</h1>
                 <div>
-                    <input name="co_company_name" placeholder="협력사 기업명을 적으시오" onChange={onChange} value={co_company_name} className="inputStyle" type='text'/>
-                    <input name="co_company_url" placeholder="협력사 페이지 URL을 적으시오" onChange={onChange} value={co_company_url} className="inputStyle" type='text'/>
+                    <input name="co_company_name" placeholder="협력사 기업명을 적으시오" onChange={onChange} value={co_company_name} className="inputCoOpInfo" type='text'/>
+                    <input name="co_company_url" placeholder="협력사 페이지 URL을 적으시오" onChange={onChange} value={co_company_url} className="inputCoOpInfo" type='text'/>
                 </div>
                 <div>
-                    <button onClick={()=> setDoEnroll(!doEnroll)}>등록하기</button>
+                    <button className="inCoOpButton"onClick={()=> setDoEnroll(!doEnroll)}>{btnTextChanger()}</button>
                     {doEnroll===true?<OperatorcoOpAddService co_company_name={co_company_name} co_company_url={co_company_url} />:<p></p>}
                 </div>
             </div>

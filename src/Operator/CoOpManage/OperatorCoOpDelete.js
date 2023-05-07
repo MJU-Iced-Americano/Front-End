@@ -13,14 +13,21 @@ const OperatorCoOpDelete=()=>{
             setCompanyIndex(e.target.value);
         }
 
+        function btnTextChanger(){
+            if (doEnroll) {
+                return "확인";
+            }
+            else return "삭제하기";
+        }
+
         return (
             <div className="CoOpManage">
                 <h1>회사 협력사 삭제 페이지입니다.</h1>
                 <div>
-                    <input placeholder="Company index를 적으시오" onChange={onChange} value={companyIndex} className="inputStyle" type='number'/>
+                    <input placeholder="Company index를 적으시오" onChange={onChange} value={companyIndex} className="inputCoOpInfo" type='number'/>
                 </div>
                 <div>
-                    <button onClick={()=> {setDoEnroll(!doEnroll);}}>삭제하기</button>
+                    <button className="inCoOpButton" onClick={()=> {setDoEnroll(!doEnroll);}}>{btnTextChanger()}</button>
                     {doEnroll===true?<OperatorCoOpDeleteService companyIndex={companyIndex} />:<p></p>}
                 </div>
             </div>

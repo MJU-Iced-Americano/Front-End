@@ -4,6 +4,7 @@ import Header from '../components/Header/Header';
 import Footer from "../components/Footer/Footer";
 import image from "../assets/Footer/socoa-ver2.png"
 import good from "../assets/QnA/Good.png"
+import nogood from "../assets/QnA/NoGood.png"
 import axios from "axios";
 
 function QnAPage({title, date, imageURL, content, chat}){
@@ -12,6 +13,8 @@ function QnAPage({title, date, imageURL, content, chat}){
     const [count, setCount] = useState(0);
     const [text, setText] = useState('');
     const [chats, setChats] = useState([]);
+    const [goods, setGoods] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
 
     const fetchqna = async () => {
         try {
@@ -26,7 +29,12 @@ function QnAPage({title, date, imageURL, content, chat}){
     }
 
     const Good = () => {
+        if(isClicked){
+            return;
+        }
+        setIsClicked(true);
         setCount(count + 1);
+        setGoods(true);
     };
 
     const ChatRegister = () => {
@@ -53,7 +61,7 @@ function QnAPage({title, date, imageURL, content, chat}){
                         {imageURL && <img src={imageURL} alt="post"/>}
                         {image && <img src={image} className="DetailImg" alt="post"/>}
                         <p className="Detailtext">{content}내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
-                        <button className="GoodButton" onClick={Good}><img src={good} /></button>
+                        <button className="GoodButton" onClick={Good} disabled={isClicked}>{goods===true?<img src={good}/>:<img src={nogood} />}</button>
                         <p className="LikeCount">{count} Likes</p>
                     </div>
                 </div>
