@@ -37,6 +37,19 @@
     border: none;
 }
 
+.GoodButton *:hover{
+    cursor: pointer;
+}
+
+.ReportButton{
+    background-color: white;
+    border: 0;
+}
+
+.ReportImg{
+    width: 50px;
+}
+
 .LikeCount{
     color: #6667AB;
     font-weight: bold;
@@ -65,4 +78,24 @@
 
 .Chatpart{
     border-bottom: 2px solid #6667AB;
+    display: flex;
+    padding: 5px;
+}
+
+.ChatChat{
+    text-align: left;
+    width: 90%;
+}
+.ChatGood{
+    text-align: right;
+    align-items: center;
+    justify-content: center;
+}
+.Chatgood{
+    height: 30px;
+    align-items: center;
+    flex-direction: row;
+}
+.ChatReport{
+    height: 30px;
 }

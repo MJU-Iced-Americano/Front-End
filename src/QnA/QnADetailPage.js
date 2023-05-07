@@ -5,6 +5,7 @@ import Footer from "../components/Footer/Footer";
 import image from "../assets/Footer/socoa-ver2.png"
 import good from "../assets/QnA/Good.png"
 import nogood from "../assets/QnA/NoGood.png"
+import report from "../assets/QnA/Report.png"
 import axios from "axios";
 
 function QnAPage({title, date, imageURL, content, chat}){
@@ -15,6 +16,8 @@ function QnAPage({title, date, imageURL, content, chat}){
     const [chats, setChats] = useState([]);
     const [goods, setGoods] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
+    const [goodChat, setGoodChat] = useState(false);
+    const [isClickedChat, setIsClickedChat] = useState(false);
 
     const fetchqna = async () => {
         try {
@@ -27,6 +30,14 @@ function QnAPage({title, date, imageURL, content, chat}){
 
         }
     }
+
+    const GoodChat = () => {
+        if(isClickedChat){
+            return;
+        }
+        setIsClickedChat(true);
+        setGoodChat(true);
+    };
 
     const Good = () => {
         if(isClicked){
@@ -63,6 +74,7 @@ function QnAPage({title, date, imageURL, content, chat}){
                         <p className="Detailtext">{content}내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
                         <button className="GoodButton" onClick={Good} disabled={isClicked}>{goods===true?<img src={good}/>:<img src={nogood} />}</button>
                         <p className="LikeCount">{count} Likes</p>
+                        <button className="ReportButton"><img className="ReportImg"src={report}/></button>
                     </div>
                 </div>
                 <div className="DetailChat">
@@ -79,8 +91,14 @@ function QnAPage({title, date, imageURL, content, chat}){
                     <div className="Chat">
                         {chats.map((chat, index) => (
                             <div key={index} className="Chatpart">
-                                <h5>이름</h5>
-                                <p>{chat}</p>
+                                <div className="ChatChat">
+                                    <h5>이름</h5>
+                                    <p>{chat}</p>
+                                </div>
+                                <div className="ChatGood">
+                                    <button className="GoodButton" onClick={GoodChat} disabled={isClickedChat}>{goodChat===true?<img className="Chatgood" src={good}/>:<img className="Chatgood" src={nogood} />}</button>
+                                    <button className="ReportButton"><img className="ChatReport"src={report}/></button>
+                                </div>
                             </div>
                         ))}
                     </div>
