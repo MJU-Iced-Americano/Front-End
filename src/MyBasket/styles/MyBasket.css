@@ -5,7 +5,6 @@
 }
 #head{
     margin: 10px;
-    padding-top: 100px;
     text-align: left;
 }
 .imgDiv{
@@ -32,6 +31,25 @@ table {
 }
 
 .paymentBtn{
+    margin-left: 10px;
+    background-color: #6667ab;
+    /*width: 6.25em;*/
+    /*height: 2.5em;*/
+
+    width: 150px;
+    height: 60px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Inter, sans-serif;
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.deleteBtn{
     margin-left: 10px;
     background-color: #6667ab;
     /*width: 6.25em;*/
