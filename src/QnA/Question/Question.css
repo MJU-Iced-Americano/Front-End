@@ -5,6 +5,13 @@ section {
 
 }
 
-button {
-
+.maincancelbutton {
+  background-color: rgba(102, 103, 171, 0.5);
+  color: white;
+  font-weight: bold;
+  margin: 5px;
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #6667ab;
 }

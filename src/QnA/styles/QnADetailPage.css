@@ -40,7 +40,9 @@
 .GoodButton *:hover{
     cursor: pointer;
 }
-
+.DetailGood{
+    width: 80px;
+}
 .ReportButton{
     background-color: white;
     border: 0;
@@ -53,6 +55,10 @@
 .LikeCount{
     color: #6667AB;
     font-weight: bold;
+}
+
+.ReportDiv{
+    text-align: right;
 }
 
 .DetailChat{
@@ -70,14 +76,19 @@
     color: white;
     font-weight: bold;
     height: 40px;
+    width: 10%;
+    font-size: 1vw;
 }
 .ChatMain{
     border-bottom: 2px solid #6667AB;
     padding-bottom: 30px;
 }
 
+.ChatContent{
+    border-bottom: 1px solid #6667AB;
+}
 .Chatpart{
-    border-bottom: 2px solid #6667AB;
+    border-bottom: 1px solid #6667AB;
     display: flex;
     padding: 5px;
 }
@@ -90,6 +101,7 @@
     text-align: right;
     align-items: center;
     justify-content: center;
+    padding-left: 20px;
 }
 .Chatgood{
     height: 30px;
@@ -98,4 +110,35 @@
 }
 .ChatReport{
     height: 30px;
+}
+
+.ChatIconButton{
+    background-color: white;
+    border: 0;
+}
+.ChatIcon{
+    height: 30px;
+}
+
+.PlusChatDiv{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.ChatChatting{
+    width: 70%;
+    border-radius: 0;
+    height: 40px;
+    border: 1px solid black;
+}
+
+.ChatRegisterChat{
+    background-color: #6667AB;
+    color: white;
+    font-weight: bold;
+    height: 40px;
+    width: 5%;
+    font-size: 0.7vw;
+    border: 0;
 }

@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import './styles/QnAPage.css';
-import Header from '../components/Header/Header';
-import Footer from "../components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import QnAPreview from "./components/QnAPreview";
 import Body from "../components/Body/Body";

@@ -6,6 +6,7 @@ import image from "../assets/Footer/socoa-ver2.png"
 import good from "../assets/QnA/Good.png"
 import nogood from "../assets/QnA/NoGood.png"
 import report from "../assets/QnA/Report.png"
+import chatIcon from "../assets/QnA/ChatIcon.png"
 import axios from "axios";
 
 function QnAPage({title, date, imageURL, content, chat}){
@@ -16,8 +17,10 @@ function QnAPage({title, date, imageURL, content, chat}){
     const [chats, setChats] = useState([]);
     const [goods, setGoods] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
-    const [goodChat, setGoodChat] = useState(false);
-    const [isClickedChat, setIsClickedChat] = useState(false);
+    const [goodChats, setGoodChats] = useState([]);
+    const [reportChats, setReportChats] = useState([]);
+    const [isChatVisible, setIsChatVisible] = useState(false);
+    const [textChat, setTextChat] = useState('');
 
     const fetchqna = async () => {
         try {
@@ -31,12 +34,38 @@ function QnAPage({title, date, imageURL, content, chat}){
         }
     }
 
-    const GoodChat = () => {
-        if(isClickedChat){
+    const GoodChats = (chatIndex) => {
+        GoodChat(chatIndex);
+    }
+    const ReportChats = (chatIndex) => {
+        ReportChat(chatIndex);
+    }
+    const PlusChats = (chatIndex) => {
+        PlusChat(chatIndex);
+        setIsChatVisible(!isChatVisible);
+    }
+
+
+    const GoodChat = (chatIndex) => {
+        if( goodChats[chatIndex]){
+            console.log("return");
             return;
         }
-        setIsClickedChat(true);
-        setGoodChat(true);
+        goodChats[chatIndex] = true;
+        setGoodChats([...goodChats]);
+    };
+
+    const ReportChat = (chatIndex) => {
+        if( reportChats[chatIndex]){
+            console.log("return");
+            return;
+        }
+        reportChats[chatIndex] = true;
+        setReportChats([...reportChats]);
+    };
+
+    const PlusChat = (chatIndex) => {
+
     };
 
     const Good = () => {
@@ -51,12 +80,25 @@ function QnAPage({title, date, imageURL, content, chat}){
     const ChatRegister = () => {
         if (text.trim() !== '') {
             setChats([...chats, text]);
+            setGoodChats([...goodChats, false]);
             setText('');
         }
     };
 
+    const ChatChatRegister = () => {
+        // if (text.trim() !== '') {
+        //     setChats([...chats, text]);
+        //     setGoodChats([...goodChats, false]);
+        //     setText('');
+        // }
+    };
+
     const handleChange = (event) => {
         setText(event.target.value);
+    };
+
+    const handleChatChange = (event) => {
+        setTextChat(event.target.value);
     };
 
     return (
@@ -72,9 +114,11 @@ function QnAPage({title, date, imageURL, content, chat}){
                         {imageURL && <img src={imageURL} alt="post"/>}
                         {image && <img src={image} className="DetailImg" alt="post"/>}
                         <p className="Detailtext">{content}내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
-                        <button className="GoodButton" onClick={Good} disabled={isClicked}>{goods===true?<img src={good}/>:<img src={nogood} />}</button>
+                        <button className="GoodButton" onClick={Good} disabled={isClicked}>{goods===true?<img className="DetailGood" src={good}/>:<img className="DetailGood" src={nogood} />}</button>
                         <p className="LikeCount">{count} Likes</p>
-                        <button className="ReportButton"><img className="ReportImg"src={report}/></button>
+                        <div className="ReportDiv">
+                            <button className="ReportButton"><img className="ReportImg"src={report}/></button>
+                        </div>
                     </div>
                 </div>
                 <div className="DetailChat">
@@ -90,16 +134,37 @@ function QnAPage({title, date, imageURL, content, chat}){
                     </div>
                     <div className="Chat">
                         {chats.map((chat, index) => (
-                            <div key={index} className="Chatpart">
-                                <div className="ChatChat">
-                                    <h5>이름</h5>
-                                    <p>{chat}</p>
+                            <div key={index} className="ChatContent">
+                                <div className="Chatpart">
+                                    <div className="ChatChat">
+                                        <h5>이름</h5>
+                                        <p>{chat}</p>
+                                    </div>
+                                    <div className="ChatGood">
+                                        <button className="ChatIconButton" onClick={() => PlusChats(index)}><img className="ChatIcon"src={chatIcon}/></button>
+
+                                        <button
+                                            className="GoodButton"
+                                            onClick={() => GoodChats(index)}
+                                            disabled={goodChats[index]}
+                                        >
+                                            {goodChats[index] === true ? <img className="Chatgood" src={good}/> : <img className="Chatgood" src={nogood}/>}
+                                        </button>
+                                        <button className="ReportButton"  onClick={() => ReportChats(index)}><img className="ChatReport"src={report}/></button>
+                                    </div>
                                 </div>
-                                <div className="ChatGood">
-                                    <button className="GoodButton" onClick={GoodChat} disabled={isClickedChat}>{goodChat===true?<img className="Chatgood" src={good}/>:<img className="Chatgood" src={nogood} />}</button>
-                                    <button className="ReportButton"><img className="ChatReport"src={report}/></button>
+                                <div className="PlusChatDiv" style={{ display: isChatVisible ? "block" : "none" }}>
+                                        <h5>대댓글</h5>
+                                        <input
+                                            onChange={handleChatChange}
+                                            className="ChatChatting"
+                                            placeholder="내용을 입력해주세요"
+                                            value={textChat}
+                                        />
+                                        <button onClick={ChatChatRegister} className="ChatRegisterChat">등록하기</button>
                                 </div>
                             </div>
+
                         ))}
                     </div>
                 </div>

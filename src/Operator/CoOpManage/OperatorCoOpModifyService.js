@@ -5,7 +5,6 @@ import axios from "axios";
 function OperatorCoOpModifyService({companyIndex, companyName, companyURL}) {
 
     const [error, setError] = useState(null);
-    console.log(companyIndex);
 
     useEffect(()=>{
 

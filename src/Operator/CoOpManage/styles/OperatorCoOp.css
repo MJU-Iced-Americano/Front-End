@@ -25,3 +25,16 @@
     font-weight: bold;
     border: 2px solid #6667ab;
 }
+
+.CoOpShow{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.CoOpShowTable{
+    border: 1px solid #6667ab;
+    width: 50%;
+    margin: auto;
+}
+

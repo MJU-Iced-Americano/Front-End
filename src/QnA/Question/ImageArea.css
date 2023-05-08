@@ -28,20 +28,27 @@
   float: right;
 }
 
-.ImageName{
+.ImageNames{
   text-align: left;
   background-color: #dcdcdc;
   width: 80%;
   float: left;
   height: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  display: flex;
 }
 
+.ImageName {
+  margin: 5px;
+}
 .mainbutton{
   background-color: #6667ab;
   color: white;
   font-weight: bold;
   margin: 5px;
   width: 200px;
-  height: 40px;
+  height: 50px;
   border-radius: 10px;
+  border: 1px solid #6667ab;
 }

@@ -1,29 +1,21 @@
 import './TestArea.css';
+import {useRef, useState} from "react";
+import QuillEditor from "../components/QuillEditor"
 
 
 const TextArea = (setTitle, setContent, title, content) => {
+    const [htmlContent, setHtmlContent] = useState("");
+    const quillRef = useRef();
 
     return (
         <div className={"Text"}>
             <input
-                //onChange={(e) => {
-                //    setTitle(e.target.value)
-                //}}
                 className="QuestionTitle"
                 placeholder="제목을 입력해주세요"
                 value={title}
             />
-
-            <textarea
-                //onChange={(e) => {
-                //    setContent(e.target.value)
-                //}}
-                cols="30"
-                className="QuestionText"
-                placeholder="내용을 입력해주세요"
-                value={content}
-            />
+            <QuillEditor  className="QuestionText" quillRef={quillRef} htmlContent={htmlContent} setHtmlContent={setHtmlContent} />
         </div>
     )
 }
-export default TextArea
+export default TextArea;
