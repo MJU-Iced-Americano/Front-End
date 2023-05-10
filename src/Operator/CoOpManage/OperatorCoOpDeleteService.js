@@ -7,6 +7,7 @@ function OperatorCoOpDeleteService({companyIndex}) {
     const [error, setError] = useState(null);
     console.log(companyIndex);
 
+
     useEffect(()=>{
 
         const fetchCoOp = async () => {

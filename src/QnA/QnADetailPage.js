@@ -40,10 +40,6 @@ function QnAPage({title, date, imageURL, content, chat}){
     const ReportChats = (chatIndex) => {
         ReportChat(chatIndex);
     }
-    const PlusChats = (chatIndex) => {
-        PlusChat(chatIndex);
-        setIsChatVisible(!isChatVisible);
-    }
 
 
     const GoodChat = (chatIndex) => {
@@ -62,10 +58,6 @@ function QnAPage({title, date, imageURL, content, chat}){
         }
         reportChats[chatIndex] = true;
         setReportChats([...reportChats]);
-    };
-
-    const PlusChat = (chatIndex) => {
-
     };
 
     const Good = () => {
@@ -141,8 +133,6 @@ function QnAPage({title, date, imageURL, content, chat}){
                                         <p>{chat}</p>
                                     </div>
                                     <div className="ChatGood">
-                                        <button className="ChatIconButton" onClick={() => PlusChats(index)}><img className="ChatIcon"src={chatIcon}/></button>
-
                                         <button
                                             className="GoodButton"
                                             onClick={() => GoodChats(index)}
