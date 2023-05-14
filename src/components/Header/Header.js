@@ -17,7 +17,7 @@ const Header = ()=> {
                         <div className="btnSubItem">
                             <a className="navbar-item" href="/Information">비전 및 목표</a>
                             <a className="navbar-item" href="/Information">회사 연혁</a>
-                            <a className="navbar-item" href="/InfoTeacher">강사진 소개</a>
+                            <a className="navbar-item" href="/InfoTeacherList">강사진 소개</a>
                         </div>
                     </div>
                     <div className="hotNavBtn">

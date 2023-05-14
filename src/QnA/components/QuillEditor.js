@@ -10,7 +10,7 @@ const QuillEditor = memo(({ quillRef, htmlContent, setHtmlContent }) => {
             toolbar: { // 툴바에 넣을 기능들을 순서대로 나열하면 된다.
                 container: [
                     ["bold", "italic", "underline", "strike", "blockquote"],
-                    [{ size: ["small", false, "large", "huge"] }, { color: [] }],
+                    [{ size: ["small", false, "large", "huge"] }],
                     [
                         { list: "ordered" },
                         { list: "bullet" },
@@ -18,7 +18,7 @@ const QuillEditor = memo(({ quillRef, htmlContent, setHtmlContent }) => {
                         { indent: "+1" },
                         { align: [] },
                     ],
-                    ["image", "video"],
+                    ["image"],
                 ],
 
             },
@@ -32,13 +32,11 @@ const QuillEditor = memo(({ quillRef, htmlContent, setHtmlContent }) => {
         "strike",
         "blockquote",
         "size",
-        "color",
         "list",
         "bullet",
         "indent",
         "align",
-        "image",
-        "video"
+        "image"
     ], []);
 
     const editorStyles = useMemo(() => ({

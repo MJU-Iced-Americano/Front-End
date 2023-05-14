@@ -11,7 +11,7 @@ function OperatorCoOpModifyService({companyIndex, companyName, companyURL}) {
         const postCoOp = async () => {
             try{
                 setError(null);
-                const response = await axios.delete(`/company-service/company/modify/${companyIndex}`,{
+                const response = await axios.post(`/company-service/company/modify/${companyIndex}`,{
                     company_index: companyIndex,
                     CoCompany_name: companyName,
                     CoCompany_url: companyURL

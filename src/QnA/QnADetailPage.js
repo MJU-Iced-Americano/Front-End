@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './styles/QnADetailPage.css';
 import Header from '../components/Header/Header';
 import Footer from "../components/Footer/Footer";
@@ -6,11 +6,32 @@ import image from "../assets/Footer/socoa-ver2.png"
 import good from "../assets/QnA/Good.png"
 import nogood from "../assets/QnA/NoGood.png"
 import report from "../assets/QnA/Report.png"
-import chatIcon from "../assets/QnA/ChatIcon.png"
 import axios from "axios";
+import ModalButton from "./components/ModalButton"
+import ModalChatButton from "./components/ModalChatButton";
+import {useParams} from "react-router-dom";
 
-function QnAPage({title, date, imageURL, content, chat}){
+function QnADetailPage({title, date, imageURL, content, chat}){
 
+    //db연결/////////////////////////////////////
+    const {index} = useParams();
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+
+        axios.get(`/board-service/question/show/${index}`)
+            .then(response => {
+                // response.data는 가져온 데이터를 의미합니다.
+                console.log(response.data)
+                const data = response.data;
+
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
+
+    ////////////////////////////////////////////////////////
     const [qna, setQnA] = useState(null);
     const [count, setCount] = useState(0);
     const [text, setText] = useState('');
@@ -19,19 +40,10 @@ function QnAPage({title, date, imageURL, content, chat}){
     const [isClicked, setIsClicked] = useState(false);
     const [goodChats, setGoodChats] = useState([]);
     const [reportChats, setReportChats] = useState([]);
-    const [isChatVisible, setIsChatVisible] = useState(false);
-    const [textChat, setTextChat] = useState('');
+    const [showModal, setShowModal] = useState(false);
 
-    const fetchqna = async () => {
-        try {
-            setQnA(null);
-            
-            const qna = await axios.get(
-                `http://52.78.47.54:8080/show/1` //나중에 1이 아니라 다른거에도 적용하게
-        );
-        }catch (e) {
-
-        }
+    const handleClose = () => {
+        setShowModal(false);
     }
 
     const GoodChats = (chatIndex) => {
@@ -77,21 +89,10 @@ function QnAPage({title, date, imageURL, content, chat}){
         }
     };
 
-    const ChatChatRegister = () => {
-        // if (text.trim() !== '') {
-        //     setChats([...chats, text]);
-        //     setGoodChats([...goodChats, false]);
-        //     setText('');
-        // }
-    };
-
     const handleChange = (event) => {
         setText(event.target.value);
     };
 
-    const handleChatChange = (event) => {
-        setTextChat(event.target.value);
-    };
 
     return (
         <div>
@@ -99,18 +100,17 @@ function QnAPage({title, date, imageURL, content, chat}){
             <div className="Detailframe">
                 <div className="DetailMain">
                     <div className="DetailHeader">
-                        <h1 className="DetailName">{title}제목</h1>
-                        <p className="DetailInfo">{date}관리자, 등록날, 조회수</p>
+                        <h1 className="DetailName">[{data.question_type}]{data.question_title}제목</h1>
+                        <p className="DetailInfo">{data.created_at}관리자, 등록날, 조회수</p>
                     </div>
                     <div className="DetailContent">
-                        {imageURL && <img src={imageURL} alt="post"/>}
-                        {image && <img src={image} className="DetailImg" alt="post"/>}
-                        <p className="Detailtext">{content}내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                        {/*{imageURL && <img src={imageURL} alt="post"/>}*/}
+                        {/*{image && <img src={image} className="DetailImg" alt="post"/>}*/}
+                        <p className="Detailtext">{data.question_content}내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
                         <button className="GoodButton" onClick={Good} disabled={isClicked}>{goods===true?<img className="DetailGood" src={good}/>:<img className="DetailGood" src={nogood} />}</button>
-                        <p className="LikeCount">{count} Likes</p>
-                        <div className="ReportDiv">
-                            <button className="ReportButton"><img className="ReportImg"src={report}/></button>
-                        </div>
+                        {/*여기 좋아요 부분 바꿔야함*/}
+                        <p className="LikeCount">{data.likes} Likes</p>
+                        <ModalButton className="ReportModal"/>
                     </div>
                 </div>
                 <div className="DetailChat">
@@ -124,6 +124,7 @@ function QnAPage({title, date, imageURL, content, chat}){
                         />
                         <button onClick={ChatRegister} className="RegisterChat">등록하기</button>
                     </div>
+                    {/*여기부터 다시 하기 => 채팅불러오고 등록하는 부분*/}
                     <div className="Chat">
                         {chats.map((chat, index) => (
                             <div key={index} className="ChatContent">
@@ -140,18 +141,9 @@ function QnAPage({title, date, imageURL, content, chat}){
                                         >
                                             {goodChats[index] === true ? <img className="Chatgood" src={good}/> : <img className="Chatgood" src={nogood}/>}
                                         </button>
-                                        <button className="ReportButton"  onClick={() => ReportChats(index)}><img className="ChatReport"src={report}/></button>
+                                        <ModalChatButton index={index}/>
+                                        {/*<button className="ReportButton"  onClick={() => ReportChats(index)}><img className="ChatReport"src={report}/></button>*/}
                                     </div>
-                                </div>
-                                <div className="PlusChatDiv" style={{ display: isChatVisible ? "block" : "none" }}>
-                                        <h5>대댓글</h5>
-                                        <input
-                                            onChange={handleChatChange}
-                                            className="ChatChatting"
-                                            placeholder="내용을 입력해주세요"
-                                            value={textChat}
-                                        />
-                                        <button onClick={ChatChatRegister} className="ChatRegisterChat">등록하기</button>
                                 </div>
                             </div>
 
@@ -164,5 +156,5 @@ function QnAPage({title, date, imageURL, content, chat}){
     );
 }
 
-export default QnAPage;
+export default QnADetailPage;
 

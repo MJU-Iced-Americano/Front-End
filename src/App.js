@@ -11,6 +11,7 @@ import Question from "./QnA/Question/Question";
 import ToLoginModal from "./Login/ToLoginModal";
 import CourseList from "./courselist-page/CourseListPage";
 import InfoTeacher from "./InfoTeacher/InfoTeacher";
+import InfoTeacherList from "./InfoTeacher/InfoTeacherList";
 import MyBasket from "./MyBasket/MyBasket";
 import QnADetailPage from "./QnA/QnADetailPage";
 import OperatorPage from "./Operator/OperatorMain";
@@ -41,6 +42,7 @@ function App() {
           <Route path="/QnAPage" element={<QnAPage />}></Route>
           <Route path="/courseList" element={<CourseList/>}></Route>
           <Route path="/InfoTeacher" element={<InfoTeacher/>}></Route>
+          <Route path="/InfoTeacherList" element={<InfoTeacherList />}></Route>
           <Route path="/MyBasket" element={<MyBasket/>}></Route>
           <Route path="/QnAPage/QnADetailPage" element={<QnADetailPage />}></Route>
           <Route path="/OperatorPage" element={<OperatorPage />}></Route>
