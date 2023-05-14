@@ -2,23 +2,40 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
 
-function OperatorCoOpAddService({co_company_name,co_company_url}) {
+function OperatorCoOpAddService({co_company_name,coCompany_photo_url,co_company_url}) {
 
+    const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
-    console.log(co_company_name);
+
 
     useEffect(()=>{
+        const formData = new FormData();  // formData 생성
+
+        console.log(co_company_name);
+        console.log(co_company_url);
+        formData.append('CoCompany_name', co_company_name);
+        formData.append('CoCompany_url', co_company_url);
+        formData.append('image', new Blob([JSON.stringify(coCompany_photo_url)], { type: "application/json" }));
+
+        for (let key of formData.keys()) {
+            console.log(key, ":", formData.get(key));
+        }
 
         const postCoOp = async () => {
             try{
                 setError(null);
-                const response = await axios.post('/company-service/company/register', {
-                    CoCompany_name: co_company_name,
-                    CoCompany_url: co_company_url
-                });
+                const config = {
+                    headers: {
+                        "content-type": "multipart/form-data"
+                    }
+                };
+                const response = await axios.post('/company-service/company/register', formData, config);
                 console.log(response);
+                setMessage(response.data.message);
+
             }catch(e){
                 console.log(e.response.data);
+                setMessage(e.response.data.message);
             }
         };
         postCoOp();
@@ -27,7 +44,7 @@ function OperatorCoOpAddService({co_company_name,co_company_url}) {
 
     return(
         <div>
-            <p>등록이 완료되었습니다</p>
+            <p>{message}</p>
         </div>
     );
 }

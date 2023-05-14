@@ -17,16 +17,23 @@ section {
   background-color: #f1f0ec;
 }
 
-.Partner{
-
+.CoOpContent{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
+
 .CoOp{
-  width: 30%;
+  width: 200px;
   position:relative;
+
 }
 
 .CoOp img{
-  width: 100%;
+  width: 200px;
+  height: 200px;
   margin-top: 20px;
 }
 

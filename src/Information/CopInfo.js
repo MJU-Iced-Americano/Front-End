@@ -21,6 +21,7 @@ function CopInfo() {
                     const obj = {
                         id: data.list[i].id,
                         CoCompany_name: data.list[i].coCompany_name,
+                        CoCompany_photo: data.list[i].coCompany_photo_url,
                         CoCompany_url: data.list[i].coCompany_url
                     };
                     console.log(obj)
@@ -36,17 +37,18 @@ function CopInfo() {
     }, []);
 
     return (
-        <div>
+        <div className="CoOpContent">
             {data.map((item) => (
-                <div className="CoOp">
-                    <a key={item.id} href={item.CoCompany_url}>
-                        <img
-                            src={partner}
-                            alt=""
-                        />
-                        <h5>{item.CoCompany_name}</h5>
-                    </a>
-                </div>
+                    <div className="CoOp">
+                        <a key={item.id} href={item.CoCompany_url}>
+                            <img
+                                src={item.CoCompany_photo}
+                                className="CoOpImg"
+                                alt=""
+                            />
+                            <h5>{item.CoCompany_name}</h5>
+                        </a>
+                    </div>
             ))}
         </div>
     );
