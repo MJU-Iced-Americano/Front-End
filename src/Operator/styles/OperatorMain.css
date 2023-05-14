@@ -1,0 +1,13 @@
+.Operatormain{
+    min-height: 550px;
+    padding: 50px;
+}
+
+.Operatorbutton{
+    background-color: #6667ab;
+    color: white;
+    margin: 50px;
+    width: 150px;
+    height: 100px;
+    font-weight: bold;
+}

@@ -29,23 +29,23 @@ const InfoTeacher=() => {
                     <div className="careerAndNotice">
                         <div className="career">
                             <div>
-                            <h3>학력 및 경력</h3>
-                            <ul className="careerScroll">
-                                <li>HTML</li>
-                                <li>CSS</li>
-                                <li>JAVASCRIPT</li>
-                                <li>JAVA</li>
-                                <li>JSP</li>
-                                <li>ORACLE</li>
-                                <li>JAVASCRIPT</li>
-                                <li>JAVA</li>
-                                <li>JSP</li>
-                                <li>ORACLE</li>
-                                <li>JAVASCRIPT</li>
-                                <li>JAVA</li>
-                                <li>JSP</li>
-                                <li>ORACLE</li>
-                            </ul>
+                                <h3>학력 및 경력</h3>
+                                <ul className="careerScroll">
+                                    <li>HTML</li>
+                                    <li>CSS</li>
+                                    <li>JAVASCRIPT</li>
+                                    <li>JAVA</li>
+                                    <li>JSP</li>
+                                    <li>ORACLE</li>
+                                    <li>JAVASCRIPT</li>
+                                    <li>JAVA</li>
+                                    <li>JSP</li>
+                                    <li>ORACLE</li>
+                                    <li>JAVASCRIPT</li>
+                                    <li>JAVA</li>
+                                    <li>JSP</li>
+                                    <li>ORACLE</li>
+                                </ul>
                             </div>
                             <div className="imgDiv">
                                 <img src={Class}/>

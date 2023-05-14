@@ -1,21 +1,54 @@
-import './Info.css';
 import axios from 'axios';
 import {useState, useEffect, useRef} from "react";
+import partner from '../assets/information/partner.JPG'
+import "./styles/Info.css"
 
-function CopInfo(index) {
-    const [cop, setCop] = useState(null);
+function CopInfo() {
+
+    const [data, setData] = useState([]);
 
     useEffect(() => {
-        const fetchCop = async () => {
-            const insurance = await axios.get(
-                `http://localhost:8080/insurance/insinfo/${index}`
-            );
-        };
-        fetchCop();
+
+        axios.get(`/company-service/company/get`)
+            .then(response => {
+                // response.data는 가져온 데이터를 의미합니다.
+                console.log(response.data)
+                const data = response.data;
+                const objects = [];
+
+                // 데이터에서 객체를 추출하여 배열에 추가
+                for (let i = 0; i < data.list.length; i++) {
+                    const obj = {
+                        id: data.list[i].id,
+                        CoCompany_name: data.list[i].coCompany_name,
+                        CoCompany_url: data.list[i].coCompany_url
+                    };
+                    console.log(obj)
+                    objects.push(obj);
+                }
+                setData(objects);
+                // 배열에 저장된 객체를 출력
+                console.log(objects);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }, []);
 
     return (
-      <h6>gd</h6>
+        <div>
+            {data.map((item) => (
+                <div className="CoOp">
+                    <a key={item.id} href={item.CoCompany_url}>
+                        <img
+                            src={partner}
+                            alt=""
+                        />
+                        <h5>{item.CoCompany_name}</h5>
+                    </a>
+                </div>
+            ))}
+        </div>
     );
 }
 

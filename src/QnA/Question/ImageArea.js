@@ -1,36 +1,26 @@
 import './ImageArea.css';
-import {useState} from "react";
+import { useState } from 'react';
 
 const ImageArea = () => {
+    const [selectedFiles, setSelectedFiles] = useState([]);
 
-    const [imageSrc, setImageSrc]: any = useState(null);
-
-    const onUpload = (e: any) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-
-        return new Promise((resolve) => {
-            reader.onload = () => {
-                setImageSrc(reader.result || null); // 파일의 컨텐츠
-                resolve();
-            };
-        });
-    }
+    const handleFileSelect = (event) => {
+        setSelectedFiles([...selectedFiles, ...event.target.files]);
+    };
 
     return (
-        <div className={"imagefile"}>
-            <input
-                accept="image/*"
-                multiple type="file"
-                onChange={e => onUpload(e)}
-            />
-            <img className = {"QnAImg"}
-                 width={'100%'}
-                 src={imageSrc}
-            />
-
+        <div className="imagefile">
+            <input className="inputImg" id="imageUpload" type="file" multiple onChange={handleFileSelect} />
+            <button className="inputImgButton" onClick={() => document.getElementById('imageUpload').click()}>
+                이미지 첨부
+            </button>
+            <div className="ImageNames">
+                {selectedFiles.map((file, index) => (
+                    <p className="ImageName" key={index}>{file.name}</p>
+                ))}
+            </div>
         </div>
-    )
-}
+    );
+};
+
 export default ImageArea;
