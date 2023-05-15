@@ -4,6 +4,10 @@ import Header from '../components/Header/Header';
 import Footer from "../components/Footer/Footer";
 import image from "../assets/Footer/socoa-ver2.png"
 import good from "../assets/QnA/Good.png"
+<<<<<<< HEAD
+=======
+import Body from "../components/Body/Body";
+>>>>>>> 1d72bb82c808b9f9d8615e379d6b7953a99dd97c
 import nogood from "../assets/QnA/NoGood.png"
 import report from "../assets/QnA/Report.png"
 import axios from "axios";
@@ -93,10 +97,15 @@ function QnADetailPage({title, date, imageURL, content, chat}){
         setText(event.target.value);
     };
 
+<<<<<<< HEAD
 
     return (
         <div>
             <Header />
+=======
+    const QnADetailPageContent=()=> {
+        return(
+>>>>>>> 1d72bb82c808b9f9d8615e379d6b7953a99dd97c
             <div className="Detailframe">
                 <div className="DetailMain">
                     <div className="DetailHeader">

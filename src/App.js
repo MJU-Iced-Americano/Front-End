@@ -11,9 +11,9 @@ import Question from "./QnA/Question/Question";
 import ToLoginModal from "./Login/ToLoginModal";
 import CourseList from "./courselist-page/CourseListPage";
 import InfoTeacher from "./InfoTeacher/InfoTeacher";
+
 import InfoTeacherList from "./InfoTeacher/InfoTeacherList";
 import MyBasket from "./MyBasket/MyBasket";
-import QnADetailPage from "./QnA/QnADetailPage";
 import OperatorPage from "./Operator/OperatorMain";
 import CoOpManagePage from "./Operator/CoOpManage/OperatorCoOp";
 import CoOpAddPage from "./Operator/CoOpManage/OperatorCoOpAdd";
