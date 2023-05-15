@@ -12,62 +12,54 @@ const InfoTeacherList =()=> {
                 <h1>강사진 목록</h1>
                 <hr />
             <div className="TeacherScroll">
-                <div className="teacher-Tile-lists">
-                    <div className="lecture-Tile">
+                    <div className="teacher-Tile">
                         <a href='/InfoTeacher'><img src={EdwardKim} className="lectureImg" alt="lecture1"/></a>
                         <h5>에드워드 킴</h5>
                     </div>
-                    <div className="lecture-Tile">
+                    <div className="teacher-Tile">
                         <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                         <h5>에드워드 킴</h5>
                     </div>
-                    <div className="lecture-Tile">
+                    <div className="teacher-Tile">
                         <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                         <h5>에드워드 킴</h5>
                     </div>
-                </div>
-                <div className="teacher-Tile-lists">
-                    <div className="lecture-Tile">
+                    <div className="teacher-Tile">
                         <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                         <h5>에드워드 킴</h5>
                     </div>
-                    <div className="lecture-Tile">
+                    <div className="teacher-Tile">
                         <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                         <h5>에드워드 킴</h5>
                     </div>
-                    <div className="lecture-Tile">
+                    <div className="teacher-Tile">
                         <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                         <h5>에드워드 킴</h5>
                     </div>
-                </div>
-                <div className="teacher-Tile-lists">
-                    <div className="lecture-Tile">
+                    <div className="teacher-Tile">
                         <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                         <h5>에드워드 킴</h5>
                     </div>
-                    <div className="lecture-Tile">
+                    <div className="teacher-Tile">
                         <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                         <h5>에드워드 킴</h5>
                     </div>
-                    <div className="lecture-Tile">
+                    <div className="teacher-Tile">
                         <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                         <h5>에드워드 킴</h5>
                     </div>
-                </div>
-                <div className="teacher-Tile-lists">
-                    <div className="lecture-Tile">
+                    <div className="teacher-Tile">
                         <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                         <h5>에드워드 킴</h5>
                     </div>
-                    <div className="lecture-Tile">
+                    <div className="teacher-Tile">
                         <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                         <h5>에드워드 킴</h5>
                     </div>
-                    <div className="lecture-Tile">
+                    <div className="teacher-Tile">
                         <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                         <h5>에드워드 킴</h5>
                     </div>
-                </div>
             </div>
             </div>
         );

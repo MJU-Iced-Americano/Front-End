@@ -16,7 +16,7 @@ const InfoTeacher=() => {
                 <hr id="line" />
                 <div className="horizon">
                     <div className="profile">
-                        <div className="imgDiv">
+                        <div className="InfoTeacherImgDiv">
                             <img src={EdwardKim}/>
                             <h5>에드워드 킴</h5>
                             <div className="horizon">
@@ -47,9 +47,7 @@ const InfoTeacher=() => {
                                     <li>ORACLE</li>
                                 </ul>
                             </div>
-                            <div className="imgDiv">
-                                <img src={Class}/>
-                            </div>
+
                         </div>
                         <div className="notice">
                             <h3>공지사항</h3>
@@ -64,51 +62,47 @@ const InfoTeacher=() => {
                     <div className="lecture">
                         <h3>강의 목록</h3>
                         <div className="lectureScroll">
-                            <div className="lecture-Tile-lists">
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
+                            <div className="InfoLecture-Tile">
+                                <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                             </div>
-                            <div className="lecture-Tile-lists">
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
+                            <div className="InfoLecture-Tile">
+                                <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                             </div>
-                            <div className="lecture-Tile-lists">
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
+                            <div className="InfoLecture-Tile">
+                                <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                             </div>
-                            <div className="lecture-Tile-lists">
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
+                            <div className="InfoLecture-Tile">
+                                <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
                             </div>
+                            <div className="InfoLecture-Tile">
+                                <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
+                            </div>
+                            <div className="InfoLecture-Tile">
+                                <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
+                            </div>
+                            <div className="InfoLecture-Tile">
+                                <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
+                            </div>
+                            <div className="InfoLecture-Tile">
+                                <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
+                            </div>
+                            <div className="InfoLecture-Tile">
+                                <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
+                            </div>
+                            <div className="InfoLecture-Tile">
+                                <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
+                            </div>
+                            <div className="InfoLecture-Tile">
+                                <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
+                            </div>
+                            <div className="InfoLecture-Tile">
+                                <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
+                            </div>
+
+
                         </div>
+
+
                     </div>
                 </div>
             </div>

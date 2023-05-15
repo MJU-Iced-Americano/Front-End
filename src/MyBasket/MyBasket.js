@@ -1,86 +1,101 @@
-import './styles/MyBasket.css';
-import React, {useCallback} from "react";
+import React, { useState } from 'react';
 import Body from "../components/Body/Body";
-import lecture1 from "../assets/MyBasket/lecture01.png";
-import { useState } from 'react';
+import lecture01 from "../assets/Banner/lecture01.png";
+import "./styles/MyBasket.css";
+
+function MyBasket() {
+    const [items, setItems] = useState([
+        { id: 1, name: 'React 강의', teacher: '에드워드 킴', price: 20000, selected: false, imageUrl: 'lecture01' },
+        { id: 2, name: 'JavaScript 강의', teacher: '에드워드 킴', price: 15000, selected: false, imageUrl: 'lecture01' },
+        { id: 3, name: 'HTML/CSS 강의', teacher: '에드워드 킴', price: 10000, selected: false, imageUrl: 'lecture01' },
+    ]);
 
 
-const MyBasket =()=>{
-    const [checkedItems, setCheckedItems] = useState([]);
-    const [isChecked, setIsChecked] = useState(false);
-    const checkedItemHandler = (value, isChecked) => {
-        if (isChecked) {
-            checkedItems.add(value);
-            setCheckedItems(checkedItems);
-        } else if (!isChecked && checkedItems.has(value)) {
-            checkedItems.delete(value);
-            setCheckedItems(checkedItems);
-        }
+    const [selectAll, setSelectAll] = useState(false);
+
+    const handleCheckboxChange = (id) => {
+        const updatedItems = items.map((item) => {
+            if (item.id === id) {
+                return { ...item, selected: !item.selected };
+            }
+            return item;
+        });
+        setItems(updatedItems);
     };
 
-    const chceckHandelr = (e: React.ChangeEvent<HTMLInputElement>, value: string) => {
-        setIsChecked(!isChecked);
-        checkedItemHandler(value, e.target.checked);
+    const selectAllText = selectAll ? "전체 취소" : "전체 선택";
 
+    const handleSelectAll = () => {
+        const updatedItems = items.map((item) => {
+            return { ...item, selected: !selectAll };
+        });
+        setItems(updatedItems);
+        setSelectAll(!selectAll);
+    };
 
-        console.log(value, e.target.checked);
-    }
+    const handleDelete = () => {
+        const remainingItems = items.filter((item) => !item.selected);
+        setItems(remainingItems);
+        setSelectAll(false);
+    };
 
-    const BasketContent =()=>{
+    const total = items.reduce((acc, item) => {
+        if (item.selected) {
+            return acc + item.price;
+        }
+        return acc;
+    }, 0);
+
+    const MyBasketContent = () => {
         return(
-            <div className="whole">
-                <h1 id="head">장바구니</h1>
-                <table className="basketTable">
+            <div className={"whole"}>
+                <h1 id="basketHead">장바구니</h1>
+                <table className={"my-basket-table"}>
                     <thead>
                     <tr>
-                        <th colSpan="2">강의명</th>
+                        <th colSpan={2}>강의명</th>
                         <th>강사명</th>
                         <th>가격</th>
-                        <th>선택</th>
+                        <th>선택 여부</th>
                     </tr>
                     </thead>
-
                     <tbody>
-                    <tr>
-                        <td><div className="imgDiv"><img src={lecture1}/></div></td>
-                        <td>5일 안에 끝내는 파이썬 기초 문법</td>
-                        <td>에드워드 킴</td>
-                        <td>38,900 원</td>
-                        <td><input
-                            type={"checkbox"}
-                            value={"5일 안에 끝내는 파이썬 기초 문법"}
-                            checked={checkedItems.includes("5일 안에 끝내는 파이썬 기초 문법")}
-                            onChange={(e) => chceckHandelr(e, "5일 안에 끝내는 파이썬 기초 문법")}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><div className="imgDiv"><img src={lecture1}/></div></td>
-                        <td>5일 안에 끝내는 파이썬 기초 문법 </td>
-                        <td>에드워드 킴</td>
-                        <td>38,900 원</td>
-                        <td><input type={"checkbox"}/></td>
-                    </tr>
+                    {items.map((item) => (
+                        <tr key={item.id}>
+                            <td>
+                                <img src={lecture01} />
+                            </td>
+                            <td>{item.name}</td>
+                            <td>{item.teacher}</td>
+                            <td>{item.price}원</td>
+                            <td>
+                                <input
+                                    type="checkbox"
+                                    checked={item.selected}
+                                    onChange={() => handleCheckboxChange(item.id)}
+                                />
+                            </td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
-                <div id="selectItems">
-                    <div>상품 전체 선택</div>
-                    <div>상품 선택 해지</div>
-                    <div>선택 상품 삭제</div>
+                <div className={"select"}>
+                    <button className={"my-basket-button"} onClick={handleSelectAll}>{selectAllText}</button>
+                    <button className={"my-basket-button"} onClick={handleDelete}>선택한 항목 삭제</button>
                 </div>
-                <div id="payment">
-                    <div className="paymentBtn">결제하기</div>
+                <div className={"payment"}>
+                    <div><span>총 가격: {total}원</span></div>
+                    <button className={"my-basket-button"} > 결제하기</button>
                 </div>
             </div>
-        )
+        );
     }
 
-
-    return(
+    return (
         <Body>
-            <BasketContent />
+            <MyBasketContent />
         </Body>
     );
-
 }
 
 export default MyBasket;

@@ -1,69 +1,77 @@
-.whole{
-    padding-top: 4.2em;
-    margin-left : 80px;
-    margin-right : 80px;
-}
-#head{
-    margin: 10px;
-    text-align: left;
-}
-.imgDiv{
-    margin-left: 30px;
-    padding: 10px;
-    width: 150px;
-    display: block;
-    overflow: hidden;
+#basketHead{
+    padding-top: 30px;
 }
 
-table {
+.my-basket-table {
     width: 100%;
-    border-top: 1px solid black;
     border-collapse: collapse;
 }
-.basketTable tr {
-    border-bottom: 1px solid black ;
+
+.my-basket-table td,
+.my-basket-table th {
+    padding: 5px;
+    text-align: center;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
 }
-#payment{
-    height: 150px;
-    display: flex;
-    justify-content:right;
-    align-items: center;
+
+.my-basket-table td img{
+    width: 100px;
 }
 
-.paymentBtn{
-    margin-left: 10px;
-    background-color: #6667ab;
-    /*width: 6.25em;*/
-    /*height: 2.5em;*/
+.my-basket-table td:nth-child(2) {
+    text-align: left;
+    width: min-content;
+}
 
-    width: 150px;
-    height: 60px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.my-basket-table td input[type="checkbox"] {
+    transform: scale(1.5);
+}
 
-    font-family: Inter, sans-serif;
-    font-size: 1.25em;
+.my-basket-table th {
+    background-color: #f2f2f2;
+}
+
+.my-basket-checkbox {
+    margin-right: 10px;
+}
+
+.my-basket-total {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.my-basket-total-text {
+    margin-right: 10px;
     font-weight: bold;
-    color: #ffffff;
+    font-size: 16px;
 }
 
-.deleteBtn{
-    margin-left: 10px;
-    background-color: #6667ab;
-    /*width: 6.25em;*/
-    /*height: 2.5em;*/
-
-    width: 150px;
-    height: 60px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-family: Inter, sans-serif;
-    font-size: 1.25em;
+.my-basket-total-price {
     font-weight: bold;
-    color: #ffffff;
+    font-size: 16px;
+    color: #6667AB;
+}
+
+.my-basket-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #6667AB;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+.my-basket-button:hover {
+    opacity: 0.8;
+}
+.select {
+    text-align: left;
+    padding: 10px;
+}
+.payment{
+    text-align: right;
+    padding: 10px;
 }
