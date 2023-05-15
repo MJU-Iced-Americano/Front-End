@@ -19,6 +19,7 @@ import CoOpManagePage from "./Operator/CoOpManage/OperatorCoOp";
 import CoOpAddPage from "./Operator/CoOpManage/OperatorCoOpAdd";
 import CoOpModifyPage from "./Operator/CoOpManage/OperatorCoOpModify";
 import CoOpDeletePage from "./Operator/CoOpManage/OperatorCoOpDelete";
+import LecturePage from "./Lecture/LecturePage";
 import QnAManagePage from "./Operator/QnAManage/OperatorQnA";
 import QnADeletePage from "./Operator/QnAManage/OperatorQnADelete";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
@@ -44,7 +45,8 @@ function App() {
           <Route path="/InfoTeacher" element={<InfoTeacher/>}></Route>
           <Route path="/InfoTeacherList" element={<InfoTeacherList />}></Route>
           <Route path="/MyBasket" element={<MyBasket/>}></Route>
-          <Route path="/QnAPage/QnADetailPage" element={<QnADetailPage />}></Route>
+          <Route path="/QnAPage/QnADetailPage/:id" element={<QnADetailPage />}></Route>
+          <Route path="/LecturePage" element={<LecturePage />}></Route>
           <Route path="/OperatorPage" element={<OperatorPage />}></Route>
           <Route path="/OperatorPage/CoOpManage" element={<CoOpManagePage />}></Route>
           <Route path="/OperatorPage/CoOpManage/Add" element={<CoOpAddPage />}></Route>
@@ -52,6 +54,7 @@ function App() {
           <Route path="/OperatorPage/CoOpManage/Delete" element={<CoOpDeletePage />}></Route>
           <Route path="/OperatorPage/QnAManage" element={<QnAManagePage />}></Route>
           <Route path="/OperatorPage/QnAManage/Delete" element={<QnADeletePage />}></Route>
+
 
         </Routes>
       </BrowserRouter>

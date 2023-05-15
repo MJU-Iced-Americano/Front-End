@@ -4,17 +4,43 @@ import Button from "react-bootstrap/Button";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {useState} from "react";
 import {Modal} from "react-bootstrap";
+import axios from "axios";
 
-function ModalButton() {
+function ModalButton({index}) {
     const [show, setShow] = useState(false);
-    const [type, setType] = useState('');
+    const [type, setType] = useState('HATE_SPEECH');
     const [complaintContent, setComplaintContent] = useState('');
 
-    const handleClose = () => setShow(false);
+    const handleGoClose = () => {
+
+        console.log(type);
+        console.log(complaintContent);
+        console.log(index);
+
+        axios.post(`/board-service/question/qna/complaint/register/${index}`,{
+            complaintType : `${type}`,
+            complaintContent : `${complaintContent}`,
+            questionIndex : `${index}`
+        })
+            .then(response => {
+                // response.data는 가져온 데이터를 의미합니다.
+                console.log(response.data)
+
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        setShow(false);
+    }
+    const handleClose = () => {
+        setShow(false);
+    }
     const handleShow = () => setShow(true);
 
     const handleChangeType = (event) => {
         setType(event.target.value);
+        console.log(type);
     };
 
     const handleChange = (event) => {
@@ -51,7 +77,7 @@ function ModalButton() {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className="BtnModal" variant="secondary" onClick={handleClose}>
+                    <Button className="BtnModal" variant="secondary" onClick={handleGoClose}>
                         신고하기
                     </Button>
                     <Button className="BtnModal" variant="secondary" onClick={handleClose}>

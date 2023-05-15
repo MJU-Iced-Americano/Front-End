@@ -53,4 +53,11 @@ QuillEditor {
   background-color: #61dafb;
 }
 
+.CategoryOption{
+  border: 1px solid #6667ab;
+}
 
+.CategorySelect{
+  width: 20%;
+  border: 2px solid #6667ab;
+}

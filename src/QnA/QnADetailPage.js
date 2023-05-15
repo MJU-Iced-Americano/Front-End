@@ -9,30 +9,81 @@ import report from "../assets/QnA/Report.png"
 import axios from "axios";
 import ModalButton from "./components/ModalButton"
 import ModalChatButton from "./components/ModalChatButton";
-import {useParams} from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 function QnADetailPage({title, date, imageURL, content, chat}){
 
     //db연결/////////////////////////////////////
-    const {index} = useParams();
+    const location = useLocation();
+    console.log(location);
+    const index = location.pathname.split('/').slice(-1)[0];
+    console.log(index);
+
     const [data, setData] = useState([]);
+    const [img, setImg] = useState([]);
+    const [chatData, setChatData] = useState([]);
+    const[type,setType] = useState('');
+    const[day,setDay] = useState('');
+    const[time,setTime] = useState('');
 
     useEffect(() => {
-
         axios.get(`/board-service/question/show/${index}`)
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
                 console.log(response.data)
-                const data = response.data;
+                const dat = response.data;
+                setData(dat.data);
+                setCount(dat.data.likes);
+                setDay(dat.data.updatedAt.substring(0,10))
+                setTime(dat.data.updatedAt.substring(11))
+                const objects = [];
 
+                for (let i = 0; i < dat.data.questionImageList.length; i++) {
+                    const obj = {
+                        imageIndex: dat.data.questionImageList[i].imageIndex,
+                        imageUrl: dat.data.questionImageList[i].imageUrl
+                    };
+
+                    console.log(obj)
+                    objects.push(obj);
+                }
+                setImg(objects);
+
+                if (dat.data.type === "PAYMENT") {
+                    setType('결제');
+                    return;
+                }
+                setType('강의');
             })
             .catch(error => {
                 console.error(error);
             });
+
+
+        axios.get(`/board-service/question/show/commendList/${index}`)
+            .then(response => {
+                // response.data는 가져온 데이터를 의미합니다.
+                console.log(response.data)
+                const datchat = response.data;
+                const objects = [];
+
+                for (let i = 0; i < datchat.list.length; i++) {
+                    const obj = {
+                        commendIndex: datchat.list[i].commendIndex,
+                        commendContent: datchat.list[i].commendContent
+                    };
+                    console.log(obj)
+                    objects.push(obj);
+                }
+                setChatData(objects);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
     }, []);
 
     ////////////////////////////////////////////////////////
-    const [qna, setQnA] = useState(null);
     const [count, setCount] = useState(0);
     const [text, setText] = useState('');
     const [chats, setChats] = useState([]);
@@ -77,14 +128,42 @@ function QnADetailPage({title, date, imageURL, content, chat}){
             return;
         }
         setIsClicked(true);
-        setCount(count + 1);
+        ///////좋아요 add부분//////////////////////////////
+        axios.get(`/board-service/question/goodCheck/${index}`,{
+            questionIndex : `${index}`
+        })
+            .then(response => {
+                // response.data는 가져온 데이터를 의미합니다.
+                console.log(response.data)
+                setCount(count+1);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        /////////////////////////////////////////////////
         setGoods(true);
     };
+
+    function AddChatDB(index,text) {
+
+        axios.post(`/board-service/question/commend/register/${index}`,{
+            commendContent : `${text}`
+        })
+            .then(response => {
+                // response.data는 가져온 데이터를 의미합니다.
+                console.log(response.data)
+
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
 
     const ChatRegister = () => {
         if (text.trim() !== '') {
             setChats([...chats, text]);
             setGoodChats([...goodChats, false]);
+            AddChatDB(index,text);
             setText('');
         }
     };
@@ -100,17 +179,18 @@ function QnADetailPage({title, date, imageURL, content, chat}){
             <div className="Detailframe">
                 <div className="DetailMain">
                     <div className="DetailHeader">
-                        <h1 className="DetailName">[{data.question_type}]{data.question_title}제목</h1>
-                        <p className="DetailInfo">{data.created_at}관리자, 등록날, 조회수</p>
+                        <h1 className="DetailName">[{type}]&nbsp;{data.questionTitle}</h1>
+                        <p className="DetailInfo">{day}&nbsp;{time}</p>
                     </div>
                     <div className="DetailContent">
-                        {/*{imageURL && <img src={imageURL} alt="post"/>}*/}
-                        {/*{image && <img src={image} className="DetailImg" alt="post"/>}*/}
-                        <p className="Detailtext">{data.question_content}내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                        {img.map((item) => (
+                            <img src={item.imageUrl} className="DetailImg" alt="post"/>
+                        ))}
+                        <p className="Detailtext">{data.questionContent}</p>
                         <button className="GoodButton" onClick={Good} disabled={isClicked}>{goods===true?<img className="DetailGood" src={good}/>:<img className="DetailGood" src={nogood} />}</button>
                         {/*여기 좋아요 부분 바꿔야함*/}
-                        <p className="LikeCount">{data.likes} Likes</p>
-                        <ModalButton className="ReportModal"/>
+                        <p className="LikeCount">{count} Likes</p>
+                        <ModalButton className="ReportModal" index={index}/>
                     </div>
                 </div>
                 <div className="DetailChat">
@@ -124,8 +204,30 @@ function QnADetailPage({title, date, imageURL, content, chat}){
                         />
                         <button onClick={ChatRegister} className="RegisterChat">등록하기</button>
                     </div>
-                    {/*여기부터 다시 하기 => 채팅불러오고 등록하는 부분*/}
                     <div className="Chat">
+                        {/**/}
+                        {chatData.map((chat) => (
+                            <div key={chat.commendIndex} className="ChatContent">
+                                <div className="Chatpart">
+                                    <div className="ChatChat">
+                                        <h5>이름</h5>
+                                        <p>{chat.commendContent}</p>
+                                    </div>
+                                    <div className="ChatGood">
+                                        <button
+                                            className="GoodButton"
+                                            onClick={() => GoodChats(chat.commendIndex)}
+                                            disabled={goodChats[chat.commendIndex]}
+                                        >
+                                            {goodChats[chat.commendIndex] === true ? <img className="Chatgood" src={good}/> : <img className="Chatgood" src={nogood}/>}
+                                        </button>
+                                        <ModalChatButton index={chat.commendIndex}/>
+                                        {/*<button className="ReportButton"  onClick={() => ReportChats(index)}><img className="ChatReport"src={report}/></button>*/}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                        {/**/}
                         {chats.map((chat, index) => (
                             <div key={index} className="ChatContent">
                                 <div className="Chatpart">
@@ -146,7 +248,6 @@ function QnADetailPage({title, date, imageURL, content, chat}){
                                     </div>
                                 </div>
                             </div>
-
                         ))}
                     </div>
                 </div>

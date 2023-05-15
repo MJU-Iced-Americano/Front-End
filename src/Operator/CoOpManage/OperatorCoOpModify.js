@@ -41,6 +41,7 @@ const OperatorCoOpModify=()=>{
 
         const [companyIndex, setCompanyIndex] = useState('');
         const [companyName, setCompanyName] = useState('');
+        const [companyPhoto, setCompanyPhoto] = useState('');
         const [companyURL, setCompanyURL] = useState('');
         const [doEnroll, setDoEnroll] = useState(false);
 
@@ -52,6 +53,9 @@ const OperatorCoOpModify=()=>{
         }
         const onChangeURL =(e) => {
             setCompanyURL(e.target.value);
+        }
+        const onChangePhoto =(e) => {
+            setCompanyPhoto(e.target.value);
         }
 
         return (
@@ -86,11 +90,12 @@ const OperatorCoOpModify=()=>{
                 <div>
                     <input placeholder="협력사 index 번호를 적으시오" onChange={onChangeIndex} value={companyIndex} className="inputCoOpInfo" type='number'/>
                     <input placeholder="협력사 이름을 적으시오" onChange={onChangeName} value={companyName} className="inputCoOpInfo" type='text'/>
+                    <input name="coCompany_photo_url" accept='image/jpg, image/jpeg, image/png' placeholder="협력사 기업 사진을 넣으세요" onChange={onChangePhoto} value={companyPhoto} className="inputCoOpInfo" type="file"/>
                     <input placeholder="협력사 url을 적으시오" onChange={onChangeURL} value={companyURL} className="inputCoOpInfo" type='text'/>
                 </div>
                 <div>
                     <button className="inCoOpButton" onClick={()=> {setDoEnroll(!doEnroll);}}>수정하기</button>
-                    {doEnroll===true?<OperatorCoOpModifyService companyIndex={companyIndex} companyName={companyName} companyURL={companyURL}/>:<p></p>}
+                    {doEnroll===true?<OperatorCoOpModifyService companyIndex={companyIndex} companyName={companyName} companyPhoto={companyPhoto} companyURL={companyURL}/>:<p></p>}
                 </div>
             </div>
         );

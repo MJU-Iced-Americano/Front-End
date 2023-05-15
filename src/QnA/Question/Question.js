@@ -14,14 +14,15 @@ const Question=()=>{
             navigate("/QnAPage");
         };
 
-        const [category, setCategory] = useState("")
         const [titles, setTitles] = useState("")
         const [htmlContent, setHtmlContent] = useState("");
         const quillRef = useRef();
+        const [selectedOption, setSelectedOption] = useState('option1');
+        const options = [
+            { label: '결제', value: 'PAYMENT' },
+            { label: '강의', value: 'LECTURE' },
+        ];
 
-        const categoryClick =(e)=>{
-            setCategory(e.target.value);
-        }
         const modules = useMemo(
             () => ({
                 toolbar: { // 툴바에 넣을 기능들을 순서대로 나열하면 된다.
@@ -58,22 +59,19 @@ const Question=()=>{
 
         const editorStyles = useMemo(() => ({
             height: '600px', // QuillEditor 높이를 400px로 설정
-            marginLeft: '188px',
+            margin: 'auto',
             width:'80%',
         }), []);
 
-        const now = new Date();
-        const year = now.getFullYear();
 
         const changeTitle =(e)=>{
             setTitles(e.target.value);
         }
         const AddQuestion =()=> {
-            console.log(category);
+            console.log(selectedOption);
             console.log(titles);
             console.log(htmlContent);
-            console.log(year);
-            AddService(category,titles,htmlContent);
+            AddService(selectedOption,titles,htmlContent);
         };
 
         function AddService({category,titles,htmlContent}){
@@ -104,13 +102,21 @@ const Question=()=>{
             );
         }
 
+        const handleOptionChange = (event) => {
+            setSelectedOption(event.target.value);
+        };
+
         return (
             <div className={"Information"}>
                 <div className="QnACategory">
                     <h1>글 작성하기</h1>
-                    <button id="Category" className="Categorybutton" value="Title1" onClick={categoryClick}>Title 1</button>
-                    <button id="Category" className="Categorybutton" value="Title2" onClick={categoryClick}>Title 2</button>
-                    <button id="Category" className="Categorybutton" value="Title3" onClick={categoryClick}>Title 3</button>
+                    <select value={selectedOption} onChange={handleOptionChange} className="CategorySelect">
+                        {options.map((option) => (
+                            <option key={option.value} value={option.value} className="CategoryOption">
+                                {option.label}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className={"Text"}>
                     <input

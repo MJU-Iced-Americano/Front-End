@@ -59,7 +59,7 @@ const LectureSlider=(props)=> {
                     </div>
                 </div>
                 <div>
-                    <a href='/'><Image src={lecture02} className="lectureImg"/></a>
+                    <a href='/LecturePage'><Image src={lecture02} className="lectureImg"/></a>
                 </div>
                 <div>
                     <a href='/'><Image src={lecture03} className="lectureImg"/></a>

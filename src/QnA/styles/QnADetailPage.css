@@ -30,7 +30,10 @@
 
 .DetailImg{
     margin-bottom: 30px;
+    max-width: 80%;
+    object-fit: cover;
 }
+
 
 .GoodButton{
     background-color: white;
@@ -103,7 +106,11 @@
 
 .ChatChat{
     text-align: left;
-    width: 85%;
+    width: 90%;
+}
+
+.ChatChat p {
+    margin-left: 8px;
 }
 .ChatGood{
     text-align: right;

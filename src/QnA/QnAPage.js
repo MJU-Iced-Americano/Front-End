@@ -11,7 +11,7 @@ const QnAPage=()=>{
     const QnAPageContent =()=> {
         //db연결/////////////////////////////////////
         const [data, setData] = useState([]);
-        const [numberqna, setNumberQna] = useState('0');
+        const [numberqna, setNumberQna] = useState('1');
 
         useEffect(() => {
 
@@ -31,12 +31,14 @@ const QnAPage=()=>{
                             questionIndex: data.list[i].questionIndex,
                             questionTitle: data.list[i].questionTitle,
                             questionContent: data.list[i].questionContent,
-                            updatedAt: data.list[i].updatedAt,
+                            updatedDay: data.list[i].updatedAt.substring(0,10),
+                            updateTime : data.list[i].updatedAt.substring(11),
                             type: data.list[i].type,
                         }
                         console.log(obj);
                         objects.push(obj);
                     }
+                    setData(objects);
                 })
                 .catch(error => {
                     console.error(error);
@@ -78,20 +80,31 @@ const QnAPage=()=>{
             navigateToPage(currentPage - 1);
         };
 
-        const renderPageNumbers = () => {
+        const renderPageNumbers = (numberqna) => {
+            console.log(numberqna);
             const pageNumbers = [];
-            for (let i = 1; i <= 10; i++) {
-                pageNumbers.push(i);
+            if(numberqna == 1){
+                pageNumbers.push(1);
+            }
+            else if(numberqna<10){
+                for (let i = 1; i <= numberqna; i++) {
+                    pageNumbers.push(i);
+                }
+            }
+            else {
+                for (let i = 1; i <= 10; i++) {
+                    pageNumbers.push(i);
+                }
             }
 
             return pageNumbers.map((number) => (
-                <button
-                    key={number}
-                    onClick={() => navigateToPage(number)}
-                    className={currentPage === number ? "activePage" : "PageButton"}
-                >
-                    {number}
-                </button>
+                    <button
+                        key={number}
+                        onClick={() => navigateToPage(number)}
+                        className={currentPage === number ? "activePage" : "PageButton"}
+                    >
+                        {number}
+                    </button>
             ));
         };
 
@@ -106,20 +119,13 @@ const QnAPage=()=>{
                     </div>
                     <div className="QnAList">
                         {data.map((item) => (
-                            <QnAPreview  key={item.questionIndex} index={item.questionIndex} question_title={item.questionTitle}  question_content={item.questionContent} question_date={item.createdAt} question_type={item.question_type}/>
+                            <QnAPreview key={item.questionIndex} index={item.questionIndex} question_title={item.questionTitle}  question_content={item.questionContent} updateDate={item.updatedDay}  updateTime={item.updateTime} question_type={item.type}/>
                         ))}
-                        {/*<QnAPreview />*/}
-                        {/*<QnAPreview />*/}
-                        {/*<QnAPreview />*/}
-                        {/*<QnAPreview />*/}
-                        {/*<QnAPreview />*/}
-                        {/*<QnAPreview />*/}
-                        {/*<QnAPreview />*/}
                     </div>
                     <div className="PageNavigation">
-                        <button className="PageMove" disabled={currentPage === 1} onClick={handlePreviousPage}>이전 페이지</button>
-                        {renderPageNumbers()}
-                        <button className="PageMove" disabled={currentPage === 10} onClick={handleNextPage}>다음 페이지</button>
+                        {/*<button className="PageMove" disabled={currentPage === 1} onClick={handlePreviousPage}>이전 페이지</button>*/}
+                        {renderPageNumbers(numberqna)}
+                        {/*<button className="PageMove" disabled={currentPage === numberqna} onClick={handleNextPage}>다음 페이지</button>*/}
                     </div>
                     <button className="writebutton" onClick={navigateToWrite}>글쓰기</button>
                 </div>
