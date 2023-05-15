@@ -3,18 +3,38 @@
     margin-right : 80px;
 }
 
+
+.teacher-Tile{
+    width: 300px;
+    padding: 10px;
+}
+
 .teacher-Tile-lists{
     display: flex;
     justify-content: space-around;
     margin: 100px;
 }
 
-.TeacherScroll{
-
-    height:500px;
-    overflow-x: hidden;
-}
-
 h5{
     padding: 10px;
+}
+
+.TeacherScroll {
+    height: 500px;
+    overflow-x: hidden;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 16px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .TeacherScroll {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 790px) {
+    .TeacherScroll {
+        grid-template-columns: 1fr;
+    }
 }
