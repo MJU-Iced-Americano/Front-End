@@ -12,10 +12,23 @@
     font-weight: bold;
 }
 
+.inputCoOpDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .inputCoOpInfo{
     border-radius: 0;
     margin: 10px;
     border: 2px solid #6667ab;
+}
+
+.inputCoOpInfoFile{
+    border-radius: 0;
+    border: 2px solid #6667ab;
+    padding-top: 5px;
+    padding-left: 3px;
 }
 .inCoOpButton{
     background-color: #6667ab;
@@ -38,3 +51,11 @@
     margin: auto;
 }
 
+.CoOpShowTable tbody td {
+    text-align: center;
+}
+
+.CoOpShowTablein{
+    text-align: center;
+    width: 20%;
+}

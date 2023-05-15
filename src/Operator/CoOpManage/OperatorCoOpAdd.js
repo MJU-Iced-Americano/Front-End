@@ -48,9 +48,9 @@ const OperatorCoOpAdd=()=>{
         return (
             <div className="CoOpManage">
                 <h1>회사 협력사 추가 페이지입니다.</h1>
-                <div>
+                <div className="inputCoOpDiv">
                     <input name="co_company_name" placeholder="협력사 기업명을 적으시오" onChange={onChange} value={co_company_name} className="inputCoOpInfo" type='text'/>
-                    <input name="coCompany_photo_url" accept='image/jpg, image/jpeg, image/png' placeholder="협력사 기업 사진을 넣으세요" onChange={onChange} value={coCompany_photo_url} className="inputCoOpInfo" type="file"/>
+                    <input name="coCompany_photo_url" accept='image/jpg, image/jpeg, image/png' placeholder="협력사 기업 사진을 넣으세요" onChange={onChange} value={coCompany_photo_url} className="inputCoOpInfoFile" type="file"/>
                     <input name="co_company_url" placeholder="협력사 페이지 URL을 적으시오" onChange={onChange} value={co_company_url} className="inputCoOpInfo" type='text'/>
 
                 </div>

@@ -69,15 +69,15 @@ const OperatorCoOpModify=()=>{
                             <table className="CoOpShowTable">
                                 <tbody>
                                     <tr>
-                                        <td>협력사 index 번호</td>
+                                        <td className="CoOpShowTablein">협력사 index 번호</td>
                                         <td>{item.id}</td>
                                     </tr>
                                     <tr>
-                                        <td>협력사 이름</td>
+                                        <td className="CoOpShowTablein">협력사 이름</td>
                                         <td>{item.CoCompany_url}</td>
                                     </tr>
                                     <tr>
-                                        <td>협력사 url</td>
+                                        <td className="CoOpShowTablein">협력사 url</td>
                                         <td>{item.CoCompany_name}</td>
                                     </tr>
                                 </tbody>
@@ -87,10 +87,10 @@ const OperatorCoOpModify=()=>{
                 </div>
                 <br></br>
                 <h1>수정 협력사 정보를 입력하세요</h1>
-                <div>
+                <div className="inputCoOpDiv">
                     <input placeholder="협력사 index 번호를 적으시오" onChange={onChangeIndex} value={companyIndex} className="inputCoOpInfo" type='number'/>
                     <input placeholder="협력사 이름을 적으시오" onChange={onChangeName} value={companyName} className="inputCoOpInfo" type='text'/>
-                    <input name="coCompany_photo_url" accept='image/jpg, image/jpeg, image/png' placeholder="협력사 기업 사진을 넣으세요" onChange={onChangePhoto} value={companyPhoto} className="inputCoOpInfo" type="file"/>
+                    <input name="coCompany_photo_url" accept='image/jpg, image/jpeg, image/png' placeholder="협력사 기업 사진을 넣으세요" onChange={onChangePhoto} value={companyPhoto} className="inputCoOpInfoFile" type="file"/>
                     <input placeholder="협력사 url을 적으시오" onChange={onChangeURL} value={companyURL} className="inputCoOpInfo" type='text'/>
                 </div>
                 <div>

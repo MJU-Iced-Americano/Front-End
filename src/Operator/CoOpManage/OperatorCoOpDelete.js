@@ -63,15 +63,15 @@ const OperatorCoOpDelete=()=>{
                             <table className="CoOpShowTable">
                                 <tbody>
                                 <tr>
-                                    <td>협력사 index 번호</td>
+                                    <td className="CoOpShowTablein">협력사 index 번호</td>
                                     <td>{item.id}</td>
                                 </tr>
                                 <tr>
-                                    <td>협력사 이름</td>
+                                    <td className="CoOpShowTablein">협력사 이름</td>
                                     <td>{item.CoCompany_url}</td>
                                 </tr>
                                 <tr>
-                                    <td>협력사 url</td>
+                                    <td className="CoOpShowTablein">협력사 url</td>
                                     <td>{item.CoCompany_name}</td>
                                 </tr>
                                 </tbody>
