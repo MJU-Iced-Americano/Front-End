@@ -12,7 +12,7 @@ const OperatorMain=()=>{
         };
 
         const handleFAQPage = () => {
-            navigate("/OperatorPage/CoOpManage");
+            navigate("/OperatorPage/OperatorFAQList");
         };
 
         const handleQnAPage = () => {

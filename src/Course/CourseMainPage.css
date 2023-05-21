@@ -2,9 +2,158 @@
     margin-bottom: 80px;
 
 }
+.overview_top {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+.overview_1 {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+    text-align: left;
+    /*justify-content: left;*/
+    /*height: 100px;*/
+    /*border: 1px solid;*/
+}
+.course_category {
+    font-size: 15px;
+}
+
+.course_name {
+    font-size: 32px;
+    font-weight: bold;
+
+}
+.overview_2 {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-items: flex-end;
+    padding-top: 10px;
+    margin-right: 20px;
+}
+.course_like {
+    /*width: 20%;*/
+
+}
+.overview_bottom {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    /*flex-grow: 0;*/
+
+    /*flex-wrap: wrap;*/
+
+    /*flex-direction: row;*/
+    margin-top: 30px;
+    margin-bottom: 40px;
+    justify-content: space-around;
+}
+.overview_left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /*flex-grow: 1;*/
+    flex-basis: 50%;
+}
+
+.video_temp {
+    max-width: 540px;
+    min-width: 500px;
+    height: 250px;
+    border-radius: 10px;
+    background-color: #d9d9d9;
+
+}
+.course_regi {
+    border-radius: 20px;
+    width: 500px;
+    background-color: rgba(102,103,171,1);
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    margin-right: 25px;
+}
+.regi_button {
+    margin-top: 15px;
+    /*width: 80%;*/
+    display: flex;
+    flex-direction: row;
+}
+
+.overview_right {
+    /*flex-grow: 1;*/
+    flex-basis: 10%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 20px;
+}
+.overview_detail {
+    font-size: 20px;
+    text-align: left;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+}
+.details {
+    margin-bottom: 10px;
+}
+.cocoas {
+    height: 25px;
+}
+.tags {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 40px;
+}
+
+.search_tag_box {
+    background-color: rgba(102,103,171,0.4);
+    /*padding: 5px;*/
+    border-radius: 15px;
+    font-size: 19px;
+    margin : 5px;
+    padding: 2px 20px;
+    color: white;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.25);
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+}
+.search_tag_box:hover{
+    background-color: #6667ab;
+}
 .anchors {
     /*padding-top: 70px;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left : 11%;
+    padding-right : 11%;
 
+
+}
+.anchor {
+    font-size: 20px;
+    text-decoration: none;
+    margin: 10px;
+    color: black;
+}
+hr.ver_line {
+    border-left: 1px solid #000000;
+    height: 50px;
+    margin: 0;
 }
 .nav{
     /*padding-top: 70px;*/
@@ -16,13 +165,13 @@
     /*margin-top: -10px; !*고정메뉴 높이*!*/
     visibility: hidden;
 }
-.course_category {
+.section_title {
     text-align: left;
     font-size: 30px;
     font-weight: bold;
     font-family: 굴림체;
     padding: 20px;
-    margin-top: 80px;
+    margin-top: 30px;
 }
 
 
@@ -35,9 +184,14 @@
 
 }
 .description_detail {
-    width: 80%;
+    width: 100%;
     font-size: 20px;
     margin: auto;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(102, 103, 171, 0.8);
+
+
 
 
 }
@@ -69,7 +223,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 15px;
     height: 300px;
     padding: 20px;
     border: 1px solid;
@@ -89,13 +243,16 @@
 
 }
 .icon_main1 {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
 }
 
 
 .mainbox2 {
-    border-radius: 10px;
+    /*position: absolute;*/
+    /*width: 100%;*/
+
+    border-radius: 15px;
     /*height: 400px;*/
     padding: 20px;
     border: 1px solid;
@@ -105,7 +262,6 @@
     /*상하 여백은 없고 좌우 여백만 자동으로 같은 너비로 지정됨. */
     justify-content: center;
     align-items: center;
-    width: 60%;
 
 
 }
@@ -114,32 +270,40 @@
 .total_cocoa {
     justify-content: center;
     /*align-items: center;*/
-
+    width: 100%;
     display: flex;
     flex-direction: row;
+
 }
 .cocoa_review_num {
-    width: 100px;
+    /*width: 100px;*/
 }
 .icon_main2 {
-    width: 20px;
-    height: 20px;
+    /*width: 150px;*/
+    height: 30px;
 }
 
 
 
 .cocoa_length {
-    margin-left: 20px;
+    margin-left: 30px;
     margin-bottom: 10px;
     border: 1px solid;
-    width : 400px;
+    /*width : 300px;*/
+    width: 55%;
     height: 30px;
 }
 
-
+.filterBy {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    padding: 20px;
+    margin-right: 20px;
+}
 .review_list {
     font-size: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
     /*width: 1000px;*/
     width: 100%;
 
@@ -159,17 +323,23 @@
     display: flex;
     flex-direction: row;
     padding-left: 20px;
+    align-items: center;
 }
 .profile {
-    width: 35px;
-    height: 35px;
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 90px !important;
 }
 .user_name {
     /*padding-left: 30px;*/
     font-size: 17px;
 }
 
+/*.section1 {*/
+/*    width: 9%;*/
+/*}*/
 .section2 {
+
     width: 15%;
 }
 .review_detail {
@@ -178,6 +348,60 @@
 
 
 }
+.search-dropdown-filter{
+    /*box-shadow: 5px 5px 5px rgba(0,0,0,0.25);*/
+    justify-content: right;
+    position: relative;
+    /*right: 0px;*/
+    border-radius: 15px;
+    font-size: 22px !important;
+    /*text-decoration: underline ;*/
+    /*margin : 10px;*/
+    padding: 2px 20px 10px;
+    display: flex;
+}
+.search-dropdown-filter *:hover{
+    cursor: pointer;
+}
+.dropdown-label{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dropdown-content{
+    /*display: none;*/
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*top:50px;*/
+    width: 170px !important;
+    background-color: rgba(241,240,236,1) !important;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.25);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*padding: 10px;*/
+    /*z-index: 4;*/
+}
+
+.dropdown-content>ul{
+    list-style: none;
+    text-align: left;
+    margin: 0;
+
+}
+.dropdown-content>ul>li{
+    margin-top: 5px;
+}
+
+.additionalFunc {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: flex-end;
+    margin-right: 30px;
+}
 .review_listITem {
     /*height: 90px;*/
     margin-bottom: 30px;
@@ -185,8 +409,9 @@
     padding-left: 20px;
     border-bottom: 1px solid;
 
-
-
+}
+.date {
+    font-size: 12px;
 }
 /*curriculum*/
 .curriculum_wrapper {
@@ -204,22 +429,40 @@
 
 }
 
-.accordion {
 
-    border: 1px solid black;
-    border-radius: 10px;
+.accordion {
+    border: 1px solid rgba(102, 103, 171, 0.7);
+    border-radius: 15px;
     padding: 0px 30px 0px 30px !important;
+    --bs-accordion-active-bg: rgba(102, 103, 171, 0.3) !important;
+    --bs-accordion-active-color: black !important;
+    --bs-accordion-btn-focus-border-color : rgba(102, 103, 171, 0.8) !important;
+    --bs-accordion-btn-focus-box-shadow : rgba(102, 103, 171, 0.8) !important;
 }
 
 .accWhole .accordion-header button{
     font-size : 17px;
     font-weight: bold !important;
     /*background-color: rgba(102, 103, 171, 0.4);*/
-
+    border-radius: 30px !important;
 }
 .accordion-body {
     /*background-color: rgba(102, 103, 171, 0.4);*/
+    display: flex;
+    flex-direction: row;
+    /*justify-content: flex-end;*/
 
+
+}
+
+.lecture_title {
+    margin-left: 10px;
+    font-size: 19px;
+}
+.time {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
 }
 
 
@@ -227,7 +470,15 @@
     font-size : 17px;
     /*padding: 30px 20px 20px 10px;*/
 }
-
+.rating {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    padding: 10px;
+}
+.rating_cooca {
+    width: 35px;
+}
 .input_wrapper {
     display: flex;
     flex-direction: row;
@@ -237,17 +488,19 @@
 .input_css {
     width: 80%;
     font-size: 18px;
-    border-radius: 10px;
+    border-radius: 15px;
+    padding-left: 20px;
 }
 .create-button {
     width: 70px;
     height: 40px;
     margin-left: 1rem;
     background-color: rgba(102, 103, 171, 0.6);
-    border-radius: 10px;
+    border-radius: 15px;
     color: white;
     font-weight: 600;
     cursor: pointer;
+    margin-right: 10px;
 }
 .create-button:hover {
     background-color: rgba(102, 103, 171, 0.9);

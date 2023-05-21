@@ -21,6 +21,7 @@ import CoOpModifyPage from "./Operator/CoOpManage/OperatorCoOpModify";
 import CoOpDeletePage from "./Operator/CoOpManage/OperatorCoOpDelete";
 import QnAManagePage from "./Operator/QnAManage/OperatorQnA";
 import QnADeletePage from "./Operator/QnAManage/OperatorQnADelete";
+import OperatorFAQList from "./Operator/FAQManage/OperatorFAQList";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import React from "react";
 import axios from 'axios';
@@ -52,6 +53,7 @@ function App() {
           <Route path="/OperatorPage/CoOpManage/Delete" element={<CoOpDeletePage />}></Route>
           <Route path="/OperatorPage/QnAManage" element={<QnAManagePage />}></Route>
           <Route path="/OperatorPage/QnAManage/Delete" element={<QnADeletePage />}></Route>
+          <Route path="/OperatorPage/OperatorFAQList" element={<OperatorFAQList />}></Route>
 
           <Route path="/Course" element={<Course/>}></Route>
 

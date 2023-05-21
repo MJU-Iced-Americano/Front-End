@@ -44,12 +44,36 @@
     font-size : 22px;
 
 }
+.acc_wrapper {
+    border-color: rgba(102, 103, 171, 0.4) ;
+}
+.accWhole {
+    /*border-bottom-color: ;*/
+}
 .accWhole .accordion-header button{
+    margin-top: 15px;
+    margin-bottom: 5px;
+    padding-left: 40px;
     font-size : 20px;
-    font-weight: normal;
+    font-weight: normal !important;
+    border-radius: 20px !important;
 
 }
-
+.accWhole .accordion-body {
+    /*여기 중앙으로?*/
+}
+.blank {
+    display: block;
+    width: 10px; /*고정메뉴 높이*/
+    /*margin-top: -10px; !*고정메뉴 높이*!*/
+    visibility: hidden;
+}
+/*.accWhole .accordion-header button {*/
+/*    font-size: 17px;*/
+/*    font-weight: bold !important;*/
+/*    !*background-color: rgba(102, 103, 171, 0.4);*!*/
+/*    border-radius: 30px !important;*/
+/*}*/
 
 .item {
     font-size : 17px;
@@ -58,5 +82,7 @@
 .regularTitle {
     padding : 70px;
     background-color : rgba(102, 103, 171, 0.5);
+    border-radius: 15px;
+    margin-bottom: 30px;
 }
 
