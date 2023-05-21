@@ -1,0 +1,118 @@
+.ReportManage{
+    min-height: 550px;
+    padding: 50px;
+}
+
+.ReportManagebutton{
+    background-color: #6667ab;
+    color: white;
+    margin: 50px;
+    width: 150px;
+    height: 100px;
+    font-weight: bold;
+}
+
+.inputReportInfo{
+    border-radius: 0;
+    margin: 10px;
+    border: 2px solid #6667ab;
+}
+.inReportButton{
+    background-color: #6667ab;
+    color: white;
+    width: 100px;
+    height: 50px;
+    font-weight: bold;
+    border: 2px solid #6667ab;
+}
+
+.ReportShow{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.ReportShowTable{
+    border: 1px solid #6667ab;
+    width: 50%;
+    margin: auto;
+}
+
+/*여기서부터 ReportCommendManagePreview*/
+.CommendGoDetail{
+    height: 50px;
+    border-bottom: 1px solid #6667AB;
+    padding: 10px;
+    text-align: left;
+}
+.DetailcommendcontentPreview{
+    height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 80%;
+}
+/*여기서부터 ReportManagePreview*/
+.QnAReportGoDetail{
+    height: 110px;
+    border-bottom: 1px solid #6667AB;
+    padding: 10px;
+    text-align: left;
+}
+
+/*여기서부터 OperatorQnAReportOne*/
+.ReportQnAReport{
+    padding-top: 10px;
+    min-height: 550px;
+}
+
+.ReportQnAReportContent{
+    padding: 20px;
+    margin: 30px auto;
+    background-color: #e1e1e1;
+    width: 80%;
+}
+
+.ReportQnAReportContent h3{
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.ReportQnAList{
+    margin-bottom: 30px;
+}
+
+.ReportQnAListShow{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.ReportQnAListShowTable{
+    border: 1px solid #6667ab;
+    width: 80%;
+    margin: auto;
+}
+
+.ReportQnAListShowTable td{
+    word-break: break-word;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.ReportQnAListShowTableTD{
+    width: 20%;
+    margin: auto;
+}
+.ReportUserButtonDiv{
+    margin: 20px auto;
+}
+.ReportUserButton{
+    background-color: #6667ab;
+    color: white;
+    font-weight: bold;
+    height: 80px;
+    width: 120px;
+    margin: 10px;
+}

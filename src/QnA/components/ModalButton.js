@@ -17,10 +17,9 @@ function ModalButton({index}) {
         console.log(complaintContent);
         console.log(index);
 
-        axios.post(`/board-service/question/qna/complaint/register/${index}`,{
-            complaintType : `${type}`,
+        axios.post(`/complaint-service/question/register/${index}`,{
             complaintContent : `${complaintContent}`,
-            questionIndex : `${index}`
+            type : `${type}`
         })
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
@@ -28,6 +27,7 @@ function ModalButton({index}) {
 
             })
             .catch(error => {
+                console.log(error.response.data)
                 console.error(error);
             });
 

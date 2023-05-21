@@ -20,8 +20,14 @@ import CoOpAddPage from "./Operator/CoOpManage/OperatorCoOpAdd";
 import CoOpModifyPage from "./Operator/CoOpManage/OperatorCoOpModify";
 import CoOpDeletePage from "./Operator/CoOpManage/OperatorCoOpDelete";
 import LecturePage from "./Lecture/LecturePage";
+import LectureRegistPage from "./Lecture/LectureRegistPage";
 import QnAManagePage from "./Operator/QnAManage/OperatorQnA";
 import QnADeletePage from "./Operator/QnAManage/OperatorQnADelete";
+import ReportManagePage from "./Operator/ReportManage/OperatorReport";
+import ReportQnAPage from "./Operator/ReportManage/OperatorQnAReport";
+import ReportQnAOnePage from "./Operator/ReportManage/OperatorQnAReportOne";
+import ReportCommendPage from "./Operator/ReportManage/OperatorCommendReport";
+import ReportCommendOnePage from "./Operator/ReportManage/OperatorCommendReportOne";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import React from "react";
 
@@ -47,6 +53,7 @@ function App() {
           <Route path="/MyBasket" element={<MyBasket/>}></Route>
           <Route path="/QnAPage/QnADetailPage/:id" element={<QnADetailPage />}></Route>
           <Route path="/LecturePage" element={<LecturePage />}></Route>
+          <Route path="/LectureRegistPage" element={<LectureRegistPage />}></Route>
           <Route path="/OperatorPage" element={<OperatorPage />}></Route>
           <Route path="/OperatorPage/CoOpManage" element={<CoOpManagePage />}></Route>
           <Route path="/OperatorPage/CoOpManage/Add" element={<CoOpAddPage />}></Route>
@@ -54,6 +61,11 @@ function App() {
           <Route path="/OperatorPage/CoOpManage/Delete" element={<CoOpDeletePage />}></Route>
           <Route path="/OperatorPage/QnAManage" element={<QnAManagePage />}></Route>
           <Route path="/OperatorPage/QnAManage/Delete" element={<QnADeletePage />}></Route>
+          <Route path="/OperatorPage/ReportManage" element={<ReportManagePage />}></Route>
+          <Route path="/OperatorPage/ReportManage/ReportQnA" element={<ReportQnAPage />}></Route>
+          <Route path="/OperatorPage/ReportManage/ReportQnA/:id" element={<ReportQnAOnePage />}></Route>
+          <Route path="/OperatorPage/ReportManage/ReportCommend" element={<ReportCommendPage />}></Route>
+          <Route path="/OperatorPage/ReportManage/ReportCommend/:id" element={<ReportCommendOnePage />}></Route>
 
 
         </Routes>

@@ -43,6 +43,10 @@
     height: 1050px;
 }
 
+.QnASearchList{
+    padding-bottom: 10px;
+}
+
 .QnAGoDetail{
     height: 150px;
     border-bottom: 1px solid #6667AB;
@@ -98,4 +102,11 @@
     font-weight: bold;
     border: 0;
     width: 30px;
+}
+
+.qna-search-result-message {
+    border-bottom: 3px solid #6667ab;
+    font-size: 36px;
+    text-align: left;
+    padding-bottom: 20px;
 }
