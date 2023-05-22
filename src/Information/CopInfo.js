@@ -1,29 +1,30 @@
 import axios from 'axios';
 import {useState, useEffect, useRef} from "react";
 import partner from '../assets/information/partner.JPG'
-import partner2 from '../assets/information/partner2.JPG'
+import "./styles/Info.css"
 
 function CopInfo() {
-    const [isListHover, setIsListHover] = useState(false);
 
-    const [cop, setCop] = useState(null);
     const [data, setData] = useState([]);
 
     useEffect(() => {
 
-        axios.get(`http://localhost:8000/company-service/company/get`)
+        axios.get(`/company-service/company/get`)
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
+                console.log(response.data)
                 const data = response.data;
                 const objects = [];
 
                 // 데이터에서 객체를 추출하여 배열에 추가
-                for (let i = 0; i < data.length; i++) {
+                for (let i = 0; i < data.list.length; i++) {
                     const obj = {
-                        id: data[i].id,
-                        CoCompany_name: data[i].CoCompany_name,
-                        CoCompany_url: data[i].CoCompany_url
+                        id: data.list[i].id,
+                        CoCompany_name: data.list[i].coCompany_name,
+                        CoCompany_photo: data.list[i].coCompany_photo_url,
+                        CoCompany_url: data.list[i].coCompany_url
                     };
+                    console.log(obj)
                     objects.push(obj);
                 }
                 setData(objects);
@@ -36,16 +37,18 @@ function CopInfo() {
     }, []);
 
     return (
-        <div>
+        <div className="CoOpContent">
             {data.map((item) => (
-                <a key={item.id} href={item.CoCompany_url}>
-                    <img
-                        onMouseOver={() => setIsListHover(true)}
-                        onMouseOut={() => setIsListHover(false)}
-                        src={isListHover ? partner2 : partner}
-                        alt=""
-                    />
-                </a>
+                    <div className="CoOp">
+                        <a key={item.id} href={item.CoCompany_url}>
+                            <img
+                                src={item.CoCompany_photo}
+                                className="CoOpImg"
+                                alt=""
+                            />
+                            <h5>{item.CoCompany_name}</h5>
+                        </a>
+                    </div>
             ))}
         </div>
     );

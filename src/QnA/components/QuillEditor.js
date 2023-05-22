@@ -1,12 +1,9 @@
-import './TestArea.css';
-import React, {useMemo, useRef, useState} from "react";
-import QuillEditor from "../components/QuillEditor"
-import ReactQuill from "react-quill";
+import React, { useMemo, useCallback, memo } from 'react'
 
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-const TextArea = (setTitle, setContent, title, content) => {
-    const [htmlContent, setHtmlContent] = useState("");
-    const quillRef = useRef();
+const QuillEditor = memo(({ quillRef, htmlContent, setHtmlContent }) => {
 
     const modules = useMemo(
         () => ({
@@ -48,30 +45,20 @@ const TextArea = (setTitle, setContent, title, content) => {
         width:'80%',
     }), []);
 
-    const handleChange = (event) => {
-        setHtmlContent(event.target.value);
-    };
-
     return (
-        <div className={"Text"}>
-            <input
-                className="QuestionTitle"
-                placeholder="제목을 입력해주세요"
-                value={title}
+        <div style={editorStyles}>
+            <ReactQuill
+                ref={quillRef}
+                value={htmlContent}
+                onChange={setHtmlContent}
+                modules={modules}
+                formats={formats}
+                theme="snow"
+                placeholder="내용을 입력하세요"
+                style={{height:'550px', marginBottom:'0'}}
             />
-            <div style={editorStyles}>
-                <ReactQuill
-                    ref={quillRef}
-                    value={htmlContent}
-                    onChange={setHtmlContent}
-                    modules={modules}
-                    formats={formats}
-                    theme="snow"
-                    placeholder="내용을 입력하세요"
-                    style={{height:'550px', marginBottom:'0'}}
-                />
-            </div>
         </div>
     )
-}
-export default TextArea;
+})
+
+export default QuillEditor;

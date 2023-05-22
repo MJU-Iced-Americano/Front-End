@@ -1,5 +1,4 @@
 .whole {
-    padding-top: 4.2em;
     margin-left : 80px;
     margin-right : 80px;
 }
@@ -14,28 +13,30 @@
     background-color : black;
 }
 
-.imgDiv{
+.InfoTeacherImgDiv{
+    margin-left: 30px;
     padding: 10px;
-    width: 300px;
+    width: 150px;
+    display: block;
     overflow: hidden;
 }
 
-.imgDiv img{
+.InfoTeacherImgDiv img{
     padding: 5px;
     width: 100%;
 }
+
 
 .horizon{
     display: flex;
 }
 
 .profile{
-    width: 25%;
     flex-direction: column;
 }
 
 .careerAndNotice{
-    width: 40%;
+    width: 30%;
     flex-direction: column;
     text-align: left;
 }
@@ -53,14 +54,58 @@
     list-style-type : none
 }
 
-.lecture-Tile-lists{
-    display: flex;
-    justify-content: space-around;
-    margin-top: 50px;
+.lecture{
+    width: 50%;
 }
 
-.lectureScroll{
-    width:500px;
-    height:500px;
+.InfoLecture-Tile{
+    padding: 10px;
+}
+
+.lectureScroll {
+    height: 500px;
     overflow-x: hidden;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 16px;
+}
+
+@media only screen and (max-width: 1300px) {
+    .lectureScroll {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .lectureScroll {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.careerScroll{
+    height:300px;
+    overflow-x: hidden;
+}
+
+@media (max-width : 1000px) {
+    .horizon{
+        flex-direction: column;
+        align-items: center;
+    }
+    .profile{
+        width: 100%;
+        align-items: center;
+        justify-items: center;
+    }
+    .careerAndNotice{
+        width: 100%;
+    }
+    .lecture{
+        width: 100%;
+    }
+}
+
+@media (max-width: 850px) {
+
 }

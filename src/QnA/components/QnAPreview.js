@@ -1,20 +1,38 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import '../styles/QnAPage.css';
 
-function QnAPreview() {
+function QnAPreview({index,question_title,question_content,updateDate,updateTime,question_type}) {
+    const[type,setType] = useState('');
     const navigate = useNavigate();
+    console.log(index);
+    console.log(question_title);
+    console.log(question_content);
+    console.log(updateDate);
+    console.log(updateTime);
+    console.log(question_type);
+
+    useEffect(() => {
+            if (question_type === "PAYMENT") {
+                setType('결제');
+                return;
+            }
+            setType('강의');
+
+
+    }, []);
+
 
     const navigateToQnADetail = () => {
-        navigate("/QnAPage/QnADetailPage");
+        navigate(`/QnAPage/QnADetailPage/${index}`);
     };
 
     return(
         <div className="QnAGoDetail" onClick={navigateToQnADetail}>
-            <h3 className="DetailNamePreview">제목</h3>
-            <p className="DetailcontentPreview">안녕하세요 저는 전민근입니다. 어떻게 사용하는지 몰라 질문게시판 남깁니다. 어떻게 사용하는지 몰라 질문게시판 남깁니다. 어떻게 사용하는지 몰라 질문게시판 남깁니다. 어떻게 사용하는지 몰라 질문게시판 남깁니다.</p>
+            <h3 className="DetailNamePreview">[{type}]&nbsp;{question_title}</h3>
+            <p className="DetailcontentPreview">{question_content}</p>
             <div className="QnADetailDate">
-                <p>2022.11.11</p>
+                <p>{updateDate}&nbsp;{updateTime}</p>
             </div>
         </div>
     );

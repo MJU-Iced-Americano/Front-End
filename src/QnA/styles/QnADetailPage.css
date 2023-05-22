@@ -30,16 +30,46 @@
 
 .DetailImg{
     margin-bottom: 30px;
+    max-width: 80%;
+    object-fit: cover;
 }
+
 
 .GoodButton{
     background-color: white;
     border: none;
 }
 
+.GoodButton *:hover{
+    cursor: pointer;
+}
+.DetailGood{
+    width: 80px;
+}
+
+.ReportButton{
+    background-color: white;
+    border: 0;
+    outline: none;
+}
+
+.btn{
+    background-color: white;
+    border: 0;
+    outline: none;
+}
+
+.ReportImg{
+    width: 50px;
+}
+
 .LikeCount{
     color: #6667AB;
     font-weight: bold;
+}
+
+.ReportDiv{
+    text-align: right;
 }
 
 .DetailChat{
@@ -57,12 +87,122 @@
     color: white;
     font-weight: bold;
     height: 40px;
+    width: 10%;
+    font-size: 1vw;
 }
 .ChatMain{
     border-bottom: 2px solid #6667AB;
     padding-bottom: 30px;
 }
 
+.ChatContent{
+    border-bottom: 1px solid #6667AB;
+}
 .Chatpart{
-    border-bottom: 2px solid #6667AB;
+    border-bottom: 1px solid #6667AB;
+    display: flex;
+    padding: 5px;
+}
+
+.ChatChat{
+    text-align: left;
+    width: 90%;
+}
+
+.ChatChat p {
+    margin-left: 8px;
+}
+.ChatGood{
+    text-align: right;
+    align-items: center;
+    padding-left: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.Chatgood{
+    height: 30px;
+    align-items: center;
+    flex-direction: row;
+}
+.ChatReport{
+    height: 30px;
+}
+
+.ChatIconButton{
+    background-color: white;
+    border: 0;
+}
+.ChatIcon{
+    height: 30px;
+}
+
+.PlusChatDiv{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.ChatChatting{
+    width: 70%;
+    border-radius: 0;
+    height: 40px;
+    border: 1px solid black;
+}
+
+.ChatRegisterChat{
+    background-color: #6667AB;
+    color: white;
+    font-weight: bold;
+    height: 40px;
+    width: 5%;
+    font-size: 0.7vw;
+    border: 0;
+}
+
+.ComplaintContent{
+    min-height: 150px;
+    width: 80%;
+    border: 1px solid #6667ab;
+    border-radius: 0;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(102, 103, 171, 0.5);
+}
+
+.ReportModal{
+
+}
+
+.ReportContent{
+    display: flex;
+    text-align: left;
+    padding: 20px;
+}
+
+.TypeSelect{
+    width: 80%;
+}
+.ReportName{
+    width: 20%;
+    color: #6667ab;
+    font-weight: bold;
+}
+
+.ReportNameMain{
+    width: 40%;
+    color: #6667ab;
+    font-weight: bold;
+}
+
+.BtnModal{
+    background-color: #6667ab;
+    color: white;
+    font-weight: bold;
 }

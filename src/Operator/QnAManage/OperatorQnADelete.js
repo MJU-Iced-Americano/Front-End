@@ -21,10 +21,10 @@ const OperatorCoOpDelete=()=>{
             <div className="CoOpManage">
                 <h1>QnA 삭제 페이지입니다.</h1>
                 <div>
-                    <input placeholder="QnA faqindex를 적으시오" onChange={onChange} value={faqIndex} className="inputStyle" type='number'/>
+                    <input placeholder="QnA faqindex를 적으시오" onChange={onChange} value={faqIndex} className="inputQnAInfo" type='number'/>
                 </div>
                 <div>
-                    <button onClick={()=> {setDoEnroll(!doEnroll);}}>삭제하기</button>
+                    <button className= "inQnAButton" onClick={()=> {setDoEnroll(!doEnroll);}}>삭제하기</button>
                     {doEnroll===true?<OperatorQnADeleteService faqIndex={faqIndex} />:<p></p>}
                 </div>
             </div>

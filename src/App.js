@@ -12,6 +12,7 @@ import ToLoginModal from "./Login/ToLoginModal";
 import CourseList from "./courselist-page/CourseListPage";
 import Course from "./Course/CourseMainPage";
 import InfoTeacher from "./InfoTeacher/InfoTeacher";
+import InfoTeacherList from "./InfoTeacher/InfoTeacherList";
 import MyBasket from "./MyBasket/MyBasket";
 import QnADetailPage from "./QnA/QnADetailPage";
 import OperatorPage from "./Operator/OperatorMain";
@@ -19,6 +20,7 @@ import CoOpManagePage from "./Operator/CoOpManage/OperatorCoOp";
 import CoOpAddPage from "./Operator/CoOpManage/OperatorCoOpAdd";
 import CoOpModifyPage from "./Operator/CoOpManage/OperatorCoOpModify";
 import CoOpDeletePage from "./Operator/CoOpManage/OperatorCoOpDelete";
+import LecturePage from "./Lecture/LecturePage";
 import QnAManagePage from "./Operator/QnAManage/OperatorQnA";
 import QnADeletePage from "./Operator/QnAManage/OperatorQnADelete";
 import OperatorFAQList from "./Operator/FAQManage/OperatorFAQList";
@@ -46,8 +48,10 @@ function App() {
           <Route path="/FAQSearchResultPage" element={<FAQSearchResultPage />}></Route>
           <Route path="/courseList" element={<CourseList/>}></Route>
           <Route path="/InfoTeacher" element={<InfoTeacher/>}></Route>
+          <Route path="/InfoTeacherList" element={<InfoTeacherList />}></Route>
           <Route path="/MyBasket" element={<MyBasket/>}></Route>
-          <Route path="/QnAPage/QnADetailPage" element={<QnADetailPage />}></Route>
+          <Route path="/QnAPage/QnADetailPage/:id" element={<QnADetailPage />}></Route>
+          <Route path="/LecturePage" element={<LecturePage />}></Route>
           <Route path="/OperatorPage" element={<OperatorPage />}></Route>
           <Route path="/OperatorPage/CoOpManage" element={<CoOpManagePage />}></Route>
           <Route path="/OperatorPage/CoOpManage/Add" element={<CoOpAddPage />}></Route>

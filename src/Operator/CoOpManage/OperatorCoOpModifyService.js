@@ -2,24 +2,18 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
 
-function OperatorCoOpAddService({co_company_name,coCompany_photo_url,co_company_url}) {
+function OperatorCoOpModifyService({companyIndex, companyName, companyPhoto, companyURL}) {
 
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
 
-
     useEffect(()=>{
-        const formData = new FormData();  // formData 생성
+        const formData = new FormData();
 
-        console.log(co_company_name);
-        console.log(co_company_url);
-        formData.append('CoCompany_name', co_company_name);
-        formData.append('CoCompany_url', co_company_url);
-        formData.append('image', new Blob([JSON.stringify(coCompany_photo_url)], { type: "application/json" }));
-
-        for (let key of formData.keys()) {
-            console.log(key, ":", formData.get(key));
-        }
+        formData.append('CoCompany_Index', companyIndex);
+        formData.append('CoCompany_name', companyName);
+        formData.append('CoCompany_url', companyURL);
+        formData.append('image', new Blob([JSON.stringify(companyPhoto)], { type: "application/json" }));
 
         const postCoOp = async () => {
             try{
@@ -29,11 +23,12 @@ function OperatorCoOpAddService({co_company_name,coCompany_photo_url,co_company_
                         "content-type": "multipart/form-data"
                     }
                 };
-                const response = await axios.post('/company-service/company/register', formData, config);
+
+                const response = await axios.post(`/company-service/company/modify/${companyIndex}`,formData, config);
                 console.log(response);
                 setMessage(response.data.message);
-
             }catch(e){
+                setError(e);
                 console.log(e.response.data);
                 setMessage(e.response.data.message);
             }
@@ -41,6 +36,12 @@ function OperatorCoOpAddService({co_company_name,coCompany_photo_url,co_company_
         postCoOp();
     }, []);
 
+    if (error !== null && error.data !==null){
+        return ( <div>
+            <div>해당정보에 일치하는 협력사의 정보가 없습니다.</div>
+        </div>);
+        ;
+    }
 
     return(
         <div>
@@ -49,5 +50,5 @@ function OperatorCoOpAddService({co_company_name,coCompany_photo_url,co_company_
     );
 }
 
-export default OperatorCoOpAddService;
+export default OperatorCoOpModifyService;
 

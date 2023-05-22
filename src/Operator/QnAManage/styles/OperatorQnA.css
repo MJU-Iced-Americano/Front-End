@@ -1,0 +1,27 @@
+.QnAManage{
+    min-height: 550px;
+    padding: 50px;
+}
+
+.QnAManagebutton{
+    background-color: #6667ab;
+    color: white;
+    margin: 50px;
+    width: 150px;
+    height: 100px;
+    font-weight: bold;
+}
+
+.inputQnAInfo{
+    border-radius: 0;
+    margin: 10px;
+    border: 2px solid #6667ab;
+}
+.inQnAButton{
+    background-color: #6667ab;
+    color: white;
+    width: 100px;
+    height: 50px;
+    font-weight: bold;
+    border: 2px solid #6667ab;
+}
