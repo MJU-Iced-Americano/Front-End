@@ -47,7 +47,7 @@ const RegularFAQ = () => {
                         {data.map((item, i) => (
                             <Accordion.Item key={item.faqIndex} className="item" eventKey={i}>
                                 <Accordion.Header className="question"> Q{++i}.<div className="blank"></div>{item.faqTitle}</Accordion.Header>
-                                <Accordion.Body>
+                                <Accordion.Body>x
                                     {item.faqContent}
                                 </Accordion.Body>
                             </Accordion.Item>

@@ -1,11 +1,12 @@
 import './styles/CourseListPage.css';
 import SearchResultText from './CourseSearchResult';
 import ClickedBox from './CourseClickedBox';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {BsSliders} from "react-icons/bs";
 import { FaAngleDown } from "react-icons/fa";
 import lecture01 from "../assets/Banner/lecture01.png";
 import Body from "../components/Body/Body";
+import axios from "axios";
 
 const CourseListPage =()=> {
     // const[inputs, setInputs] = useState("");
@@ -14,6 +15,40 @@ const CourseListPage =()=> {
     const[searchStart, setSearchStart] = useState(false);
     const[tagCatClicked, isTagCatClicked] = useState(false);
     const[filterClicked, isFilterClicked] = useState(false);
+    const [data, setData] = useState([]);
+
+
+    useEffect(() => {
+        axios.get("http://54.180.213.187:8080/course-service/course?order=createdAt")
+
+            .then(response => {
+                // console.log(response.data + "?");
+                console.log(response);
+                console.log("들어왓졍?");
+
+                const content = response.data.data.content;
+                const objects = [];
+
+
+                for (let i = 0; i < content.length; i++) {
+                    const obj = {
+                        courseIndex : content[i].courseIndex,
+                        category : content[i].category,
+                        courseName : content[i].courseName,
+                        price : content[i].price,
+                        difficulty : content[i].difficulty,
+                        courseTitlePhotoUrl : content[i].courseTitlePhotoUrl,
+                    }
+                    objects.push(obj);
+
+                }
+                setData(objects);
+                console.log(data[2].courseTitlePhotoUrl);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
 
     const activeEnter =(e)=> {
         if(e.key === 'Enter'){
@@ -113,39 +148,20 @@ const CourseListPage =()=> {
                             </div>
                         </div>
                         <div className="course-lists-all">
-                            <div className="lecture-Tile-lists">
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
+                            <div className="course-Tile-lists">
+                                {data.map((item, i) =>(
+                                    <div className="course-Tile">
+                                        <a href='/'><img src={item.courseTitlePhotoUrl} className="lectureImg" alt="lecture1"/></a>
+                                        <div>
+                                            {item.courseName}
+                                        </div>
+
+                                    </div>
+                                ))}
+
+
                             </div>
-                            <div className="lecture-Tile-lists">
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                            </div>
-                            <div className="lecture-Tile-lists">
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                                <div className="lecture-Tile">
-                                    <a href='/'><img src={lecture01} className="lectureImg" alt="lecture1"/></a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>

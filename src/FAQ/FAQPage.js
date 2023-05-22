@@ -10,10 +10,9 @@ import axios from "axios";
 function FAQPage(){
     const navigate = useNavigate();
     const [word, setWord] =useState("");
+    const [userInput, setUserInput] = useState("");
+    const [data, setData] = useState([]);
 
-    const onSubmit = async () => {
-        window.location.href = "/search/"
-    }
 
     const navigateToRegular = () => {
         navigate("/RegularFAQ");
@@ -21,7 +20,31 @@ function FAQPage(){
     const navigateToEdu = () => {
         navigate("/EduFAQ");
   };
-    const [data, setData] = useState([]);
+    const navigateToResult = (userInput) => {
+        navigate("/FAQSearchResultPage", {state : {keyword : userInput} });
+    };
+    const handleChange = (e) => {
+        setUserInput(e.target.value);
+    }
+    const handleSubmit = (e) => {
+
+        console.log(userInput +"냠?");
+        navigateToResult(userInput);
+    //     검색 페이지로 이동...!
+
+
+
+    }
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            // 엔터 키를 누른 경우 처리할 작업 수행
+            handleSubmit();
+        }
+    };
+
+
+    console.log(userInput);
+
     useEffect(() => {
 
         axios.get(`/board-service/faq/show/Home`)
@@ -56,7 +79,8 @@ function FAQPage(){
         <Header />
         <div className="whole">
             <div className="search_wrapper">
-                 <input className="search_bar" type="text" placeholder = "무엇이 궁금하신가요?"></input>
+                 <input className="search_bar" type="text" name="search" id="search" placeholder = "무엇이 궁금하신가요?" onChange={handleChange} onKeyPress={handleKeyPress}
+                 ></input>
              </div>
              <div className="categories">
                  <div><button type="button" onClick={navigateToRegular} className="btn btn-outline-secondary"><div>일반회원 FAQ</div></button></div>
