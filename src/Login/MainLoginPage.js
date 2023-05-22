@@ -1,5 +1,7 @@
 //import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import React, {useEffect} from 'react';
+import axios from 'axios';
 //import ModalBasic from '../src/common/ModalBasic';
 
 export default function MainLoginPage() {
@@ -9,7 +11,7 @@ export default function MainLoginPage() {
     }
 
     function goToLoginModal(){
-        movePage('/user/ToLoginModal');
+        movePage('/user/login');
     }
     return (
 
