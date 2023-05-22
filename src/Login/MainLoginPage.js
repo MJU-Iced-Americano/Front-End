@@ -1,6 +1,8 @@
 //import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 //import ModalBasic from '../src/common/ModalBasic';
+import React, {useEffect} from 'react';
+import axios from 'axios';
 
 export default function MainLoginPage() {
     const movePage = useNavigate();
@@ -9,10 +11,10 @@ export default function MainLoginPage() {
     }
 
     function goToLoginModal(){
-        movePage('/user/ToLoginModal');
+        movePage('/user/login');
     }
-    return (
 
+    return (
         <div className="Main">
             홈 입니다.
             첫 페이지

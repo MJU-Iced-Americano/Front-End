@@ -33,7 +33,7 @@ const Header = ()=> {
                 </div>
             </div>
             <div className="loginSect">
-                <div className="loginBtn"> <a href="/user/ToLoginModal"> Login </a></div>
+                <div className="loginBtn"> <a href="http://localhost:80/user/login"> Login </a></div>
                 <a href="/OperatorPage"> <AiOutlineUser className="userBtn"/> </a>
                 <a href="/MyBasket"><RiShoppingCartLine className="cartBtn"/> </a>
             </div>
