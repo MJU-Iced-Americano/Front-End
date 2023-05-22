@@ -59,6 +59,7 @@ const OperatorQnAReportOne=()=>{
                     }
                     setData(objects);
                     setQuestionIndex(objects[1].questionIndex);
+                    console.log()
                     // 배열에 저장된 객체를 출력
                     console.log(objects);
                 })
