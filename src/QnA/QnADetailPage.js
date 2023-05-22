@@ -2,16 +2,14 @@ import React, {useEffect, useState} from 'react';
 import './styles/QnADetailPage.css';
 import Header from '../components/Header/Header';
 import Footer from "../components/Footer/Footer";
-import image from "../assets/Footer/socoa-ver2.png"
 import good from "../assets/QnA/Good.png"
 import nogood from "../assets/QnA/NoGood.png"
-import report from "../assets/QnA/Report.png"
 import axios from "axios";
 import ModalButton from "./components/ModalButton"
 import ModalChatButton from "./components/ModalChatButton";
 import { useLocation } from 'react-router-dom';
 
-function QnADetailPage({title, date, imageURL, content, chat}){
+function QnADetailPage(){
 
     //db연결/////////////////////////////////////
     const location = useLocation();
@@ -33,7 +31,7 @@ function QnADetailPage({title, date, imageURL, content, chat}){
                 console.log(response.data)
                 const dat = response.data;
                 setData(dat.data);
-                setCount(dat.data.likes);
+                setCount(dat.data.good_count);
                 setDay(dat.data.updatedAt.substring(0,10))
                 setTime(dat.data.updatedAt.substring(11))
                 const objects = [];
@@ -221,7 +219,7 @@ function QnADetailPage({title, date, imageURL, content, chat}){
                                         >
                                             {goodChats[chat.commendIndex] === true ? <img className="Chatgood" src={good}/> : <img className="Chatgood" src={nogood}/>}
                                         </button>
-                                        <ModalChatButton index={chat.commendIndex}/>
+                                        <ModalChatButton index={chat.commendIndex} />
                                         {/*<button className="ReportButton"  onClick={() => ReportChats(index)}><img className="ChatReport"src={report}/></button>*/}
                                     </div>
                                 </div>

@@ -19,6 +19,9 @@ const OperatorMain=()=>{
         const handleQnAPage = () => {
             navigate("/OperatorPage/QnAManage");
         };
+        const handleReportPage = () => {
+            navigate("/OperatorPage/ReportManage");
+        };
 
         return (
             <div className="Operatormain">
@@ -26,6 +29,7 @@ const OperatorMain=()=>{
                 <button className="Operatorbutton" onClick={handleCoOpPage}>회사 협력사</button>
                 <button className="Operatorbutton" onClick={handleFAQPage}>FAQ</button>
                 <button className="Operatorbutton" onClick={handleQnAPage}>QnA</button>
+                <button className="Operatorbutton" onClick={handleReportPage}>신고 관리</button>
             </div>
         );
     }

@@ -1,3 +1,17 @@
 .LectureContent{
-    min-height: 650px;
+    min-height: 800px;
+}
+
+.VideoDiv{
+    height: 1000px;
+    border-top: 1px solid #6667ab;
+    padding-top: 10px;
+}
+
+.VideoInfo{
+    text-align: left;
+}
+
+.VideoInfo h1{
+    font-weight: bold;
 }

@@ -4,9 +4,10 @@ import Header from '../components/Header/Header';
 import Footer from "../components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import QnAPreview from "./components/QnAPreview";
+import QnASearchPreview from"./components/QnASearchPreview"
 import Body from "../components/Body/Body";
-import partner from "../assets/information/partner.JPG";
 import axios from "axios";
+import SearchResultText from "../courselist-page/CourseSearchResult";
 
 const QnAPage=()=>{
 
@@ -64,6 +65,9 @@ const QnAPage=()=>{
 
         const navigate = useNavigate();
         const [currentPage, setCurrentPage] = useState(1);
+        const[inputs, setInputs] = useState("");
+        const[searchStart, setSearchStart] = useState(false);
+        const[clicked, isClicked] = useState(false);
 
         const navigateToWrite = () => {
             navigate("/QnAPage/Question");
@@ -72,14 +76,6 @@ const QnAPage=()=>{
         const navigateToPage = (page) => {
             navigate(`/QnAPage?page=${page}`);
             setCurrentPage(page);
-        };
-
-        const handleNextPage = () => {
-            navigateToPage(currentPage + 1);
-        };
-
-        const handlePreviousPage = () => {
-            navigateToPage(currentPage - 1);
         };
 
         const renderPageNumbers = (numberqna) => {
@@ -110,6 +106,17 @@ const QnAPage=()=>{
             ));
         };
 
+        const activeEnter =(e)=> {
+            if(e.key === 'Enter'){
+                setSearchStart(true);
+                isClicked(false);
+            }
+            if(e.key ==='Escape'){
+                isClicked(false);
+            }
+        }
+
+
         return (
             <div>
                 <div className="whole">
@@ -117,10 +124,31 @@ const QnAPage=()=>{
                         <h1>질문 & 답변</h1>
                     </div>
                     <div className="search_wrapperQnA">
-                        <input className="search_bar" type="text" placeholder = "게시물 제목을 검색해보세요"></input>
+                        <input
+                            className="search_bar"
+                            type="text" placeholder = "게시물 제목을 검색해보세요"
+                            value={inputs}
+                            onClick={()=> {
+                                isClicked(!clicked);
+                            }}
+                            onChange={(e) =>
+                                {setInputs(e.target.value)
+                                    setSearchStart(false)}
+                            }
+                            onKeyDown={(e)=>activeEnter(e)}
+                        />
                     </div>
+                    <div className="qna-search-result">
+                        <div className="qna-search-result-message">
+                            {searchStart&&<SearchResultText result={inputs}/>}
+                        </div>
+                    </div>
+                    <div className="QnASearchList">
+                        {searchStart && <QnASearchPreview inputs={inputs}/>}
+                    </div>
+
                     <div className="QnAList">
-                        {data.map((item) => (
+                        {!searchStart && data.map((item) => (
                             <QnAPreview key={item.questionIndex} index={item.questionIndex} question_title={item.questionTitle}  question_content={item.questionContent} updateDate={item.updatedDay}  updateTime={item.updateTime} question_type={item.type}/>
                         ))}
                     </div>
