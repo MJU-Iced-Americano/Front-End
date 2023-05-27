@@ -43,12 +43,11 @@ const CourseListPage =()=> {
 
                 }
                 setData(objects);
-                console.log(data[2].courseTitlePhotoUrl);
             })
             .catch(error => {
                 console.error(error);
             });
-    }, []);
+    }, [data]);
 
     const activeEnter =(e)=> {
         if(e.key === 'Enter'){

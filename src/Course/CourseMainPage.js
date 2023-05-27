@@ -1,4 +1,5 @@
 import React, {memo, useCallback, useEffect, useState} from "react";
+import { useParams } from 'react-router-dom';
 import './CourseMainPage.css';
 import Accordion from "react-bootstrap/Accordion";
 import defaultimage from '../assets/temp/image 14.png';
@@ -19,10 +20,11 @@ import axios from "axios";
 
 
 
-const CourseMainPage=()=> {
+const CourseMainPage=(props)=> {
 
     // let [like, setLike] = useState(0);
     const [data, setData] = useState([]);
+    const [detail, setDetail] = useState([]);
     const [likes, setLikes] = useState();
     const [liked, setLiked] = useState(false);
     const [newReview, setNewReview] = useState({user_photo : "", review_content : "", grade : 0, user_name : "김이박"});
@@ -32,10 +34,11 @@ const CourseMainPage=()=> {
     const [cHovered, setCHovered] = useState(null);
     const [cClicked, setCClicked] = useState(null);
     const [cModal, setCModal] = useState(false);
+    const { courseIndex} = useParams();
 
 
     useEffect(() => {
-
+        getDetails(courseIndex);
         getReviews("date");
     }, []);
 
@@ -82,14 +85,41 @@ const CourseMainPage=()=> {
 
     }
 
-    const TagBox=({keyword})=> {
-        return (
-            <a >
-                <div className="search_tag_box">
-                    #{keyword}
-                </div>
-            </a>
-        );
+    const getDetails = (courseIndex) => {
+        axios.get(`http://54.180.213.187:8080/course-service/course/${courseIndex}`)
+            .then(response => {
+                const data = response.data.data;
+                console.log(data);
+
+                // const details = {
+                //     courseIndex : data.courseIndex,
+                //     category : data.category,
+                //     courseName : data.courseName,
+                //     price : data.price,
+                //     courseDescription : data.courseDescription,
+                //     difficulty : data.difficulty,
+                //     courseTime : data.courseTime,
+                //     // hits : data.hits, //강의 누적 조회수
+                //     courseTitlePhotoUrl : data.courseTitlePhotoUrl,
+                //     curriculumSum : data.curriculumSum,
+                //     skillList : data.skillList, //배열..
+                // }
+                setDetail(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+    }
+
+        const TagBox=({keyword})=> {
+            return (
+                <a >
+                    <div className="search_tag_box">
+                        #{keyword}
+                    </div>
+                </a>
+            );
     }
 
     const ComplaintModal= () => {
@@ -107,7 +137,6 @@ const CourseMainPage=()=> {
             .then(response => {
                 console.log(response.data);
                 console.log(index + "이거야. ");
-                // console.log("눌렷어 !");
                 setLikes(likes+1);
             })
             .catch(error => {
@@ -115,6 +144,14 @@ const CourseMainPage=()=> {
             });
     }
     const handleLikeClicked = () => {
+        // axios.get(`http://54.180.213.187:8080/course-service/course/${courseIndex}`)
+        //     .then(response => {
+        //         const data = response.data.data;
+        //         console.log(data);
+        //     })
+        //     .catch(error => {
+        //         console.error(error);
+        //     });
         setLiked(!liked);
     };
 
@@ -129,7 +166,7 @@ const CourseMainPage=()=> {
     const handleInputChange = (event) => {
         console.log("실행이 되니???");
         const { name, value } = event.target;
-        setNewReview(prevState => ({...prevState, [name]: value}));
+        // setNewReview(prevState => ({...prevState, [name]: value}));
     };
     const handleAddReview = (event) => {
         event.preventDefault();
@@ -148,6 +185,23 @@ const CourseMainPage=()=> {
 
     };
 
+    const getImagePath = (difficulty) => {
+        switch (difficulty) {
+            case 1:
+                return cocoa_1;
+            case 2:
+                return cocoa_2;
+            case 3:
+                return cocoa_3;
+            case 4:
+                return cocoa_4;
+            case 5:
+                return cocoa_5;
+            default:
+                return null;
+        }
+    };
+
     const rating_cocoa = index => {
         let cocoa = [...rate];
         for(let i = 0; i<5; i++) {
@@ -159,6 +213,7 @@ const CourseMainPage=()=> {
     const ReviewInputForm = () => {
         return(
             <form className="input_wrapper">
+
                 <div className="rating">
                     {cocoaArray.map(element => (
                         //element 만큼 클릭하거나 element만큼 호버하면 이미지 변경
@@ -193,7 +248,6 @@ const CourseMainPage=()=> {
         axios.post(`http://localhost:8080/review-service/review/complaint/${index}`)
             .then(response => {
                 console.log(index + "이거야. ");
-                // console.log("눌렷어 !");
 
             })
             .catch(error => {
@@ -203,115 +257,120 @@ const CourseMainPage=()=> {
 
     const CourseMainPageContent = () => {
         return (
-                <div className="whole">
-                    <div className="overview_top">
-                        <div className="overview_1">
-                            <div className="course_category">개발/프로그래밍 > 백엔드</div>
-                            <div className="course_name">스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근기술</div>
+
+            <div className="whole">
+                <div className="overview_top">
+                    <div className="overview_1">
+                        <div className="course_category">{detail.category}</div>
+                        <div className="course_name">{detail.courseName}</div>
+                    </div>
+                    <div className="overview_2">
+                        <div className="course_like" onClick={handleLikeClicked}>
+                            {liked ? <RiHeart2Fill size={45}/> : <RiHeart2Line size={45}/>}
                         </div>
-                        <div className="overview_2">
-                            <div className="course_like" onClick={handleLikeClicked}>
-                                {liked ? <RiHeart2Fill size={45} /> : <RiHeart2Line size={45} />}
-                            </div>
-                            <div>6363</div>
+                        <div>6363</div>
+                    </div>
+                </div>
+                <hr/>
+                <div className="overview_bottom">
+                    <div className="overview_left">
+                        <div className="video_temp"></div>
+                        <div className="regi_button">
+                            <div className="course_regi">수강하러 가기</div>
+                            <div className="course_cart"><GrCart size={28}/></div>
+                            {/*cart 색깔 변경부터 다시 시작 */}
                         </div>
                     </div>
-                    <hr/>
-                    <div className="overview_bottom">
-                        <div className="overview_left">
-                            <div className="video_temp"></div>
-                            <div className="regi_button">
-                                <div className="course_regi">수강하러 가기</div>
-                                <div className="course_cart"><GrCart size={28} /></div>
-                                {/*cart 색깔 변경부터 다시 시작 */}
-                            </div>
-                        </div>
-                        <div className="overview_right">
+                    <div className="overview_right">
+                        <div className="tag_wrapper">
                             <div className="tags">
-                                <TagBox keyword="java"/>
-                                <TagBox keyword="k8s"/>
-                                <TagBox keyword="chatGPT"/>
-                                <TagBox keyword="spring"/>
+                                {detail.skillList && detail.skillList.map((skill, i) => (
+                                    <TagBox key={i} keyword={skill}/>
+                                ))}
                             </div>
-                            <div className="overview_detail">
-                                {/* 나중에 div로 쪼갤것*/}
-                                <div className="details">강사 : 에드워드킴<br/></div>
-                                <div className="details">누적 강의 조회수 : 18만회<br/></div>
-                                <div className="details">총 강의시간 : 5시간 21분<br/></div>
-                                <div className="d드etails">가격 : 380000원 <br/></div>
-                                <div className="details">난이도 : <img src={cocoa_4} alt="cocoa_4" className="cocoas"></img> </div>
-
+                        </div>
+                        <div className="overview_detail">
+                            {/* 나중에 div로 쪼갤것*/}
+                            <div className="details">강사 : 강사 !!!!!!! <br/></div>
+                            <div className="details">누적 강의 조회수 : {detail.hits}회<br/></div>
+                            <div className="details">총 강의시간 : {detail.courseTime}<br/></div>
+                            <div className="details">가격 : {detail.price} <br/></div>
+                            <div className="details">난이도 :
+                                <img src={getImagePath(detail.difficulty)} alt={`Cocoa ${detail.difficulty}`} className="cocoas" />
                             </div>
                         </div>
                     </div>
-                    <hr/>
+                </div>
+                <hr/>
 
-                    {/*anchor는 헤더랑 푸터 다시 받고 해보깅 ~!*/}
-                    <div className="anchors">
-                        <a className="anchor" href="#section1">강의설명</a>
-                        <hr className="ver_line"/>
+                {/*anchor는 헤더랑 푸터 다시 받고 해보깅 ~!*/}
+                <div className="anchors">
+                    <a className="anchor" href="#section1">강의설명</a>
+                    <hr className="ver_line"/>
 
-                        <a className="anchor" href="#section2">커리큘럼</a>
-                        <hr className="ver_line"/>
+                    <a className="anchor" href="#section2">커리큘럼</a>
+                    <hr className="ver_line"/>
 
-                        <a className="anchor" href="#section3">수강평</a>
+                    <a className="anchor" href="#section3">수강평</a>
+                </div>
+                <hr/>
+                <div className="description_wrapper" id="section1">
+                    <div className="for_anchor"></div>
+
+                    <div className="section_title">강의설명</div>
+                    <div className="description_detail">
+                        {detail.courseDescription}
                     </div>
-                    <hr/>
-                    <div className="description_wrapper" id="section1">
-                        <div className="for_anchor"></div>
-
-                        <div className="section_title">강의설명</div>
-                        <div className="description_detail"> 넓고 얕게 외워서 컴퓨터 공학 전공자가 되고 싶은 모든 비전공 초보자를 위한 강의입니다.
-                            컴퓨터 구조, 운영체제 등 컴퓨터 공학 전공 필수과목에서 어떤 것을 배울 수 있는지 빠른 시간에
-                            알 수 있습니다. 무엇보다 외워서라도 끝낼 수 있습니다!
-                        </div>
-                    </div>
-                    <div className="curriculum_wrapper" id="section2">
-                        <div className="for_anchor"></div>
-                        <div className="section_title">커리큘럼</div>
+                </div>
+                <div className="curriculum_wrapper" id="section2">
+                    <div className="for_anchor"></div>
+                    <div className="section_title">커리큘럼</div>
                         <Accordion className="accWhole" defaultActiveKey="0" flush>
-                            <Accordion.Item className="item">
-                                <Accordion.Header className="chapter"> Chapter 1. 스프링이란 </Accordion.Header>
-                                <Accordion.Body className="chapter_detail">
-                                    <div><BsPlayCircle/></div>
-                                    <div className = "lecture_title">스프링이란 무엇인가요?</div>
-                                    <div className="time">28:06</div>
-                                </Accordion.Body>
-                                <Accordion.Body>
-                                    <div><BsPlayCircle/></div>
-                                    <div className = "lecture_title">스프링이란 이런걸까요?</div>
-                                    <div className="time">28:06</div>
-                                </Accordion.Body>
-                            </Accordion.Item>
-                            <Accordion.Item className="item" eventKey="1">
-                                <Accordion.Header className="chapter"> Chapter 2. 스프링이란 </Accordion.Header>
-                                <Accordion.Body className="chapter_detail">
-                                    <div><BsPlayCircle/></div>
-                                    <div className = "lecture_title">스프링이란 무엇인가요?</div>
-                                    <div className="time">28:06</div>
-                                </Accordion.Body>
-                                <Accordion.Body>
-                                    <div><BsPlayCircle/></div>
-                                    <div className = "lecture_title">스프링이란 이런걸까요?</div>
-                                    <div className="time">28:06</div>
-                                </Accordion.Body>
-                            </Accordion.Item>
-                            <Accordion.Item className="item" eventKey="2">
-                                <Accordion.Header className="chapter"> Chapter 3. 스프링이란 </Accordion.Header>
-                                <Accordion.Body className="chapter_detail">
-                                    <div><BsPlayCircle/></div>
-                                    <div className = "lecture_title">스프링이란 무엇인가요?</div>
-                                    <div className="time">28:06</div>
-                                </Accordion.Body>
-                                <Accordion.Body>
-                                    <div><BsPlayCircle/></div>
-                                    <div className = "lecture_title">스프링이란 이런걸까요?</div>
-                                    <div className="time">28:06</div>
-                                </Accordion.Body>
-                            </Accordion.Item>
+                            {detail.curriculumReadDtoList && detail.curriculumReadDtoList.map((cur, i) => (
 
-                        </Accordion>
-                    </div>
+                            <Accordion.Item className="item" eventKey={i}>
+                                <Accordion.Header className="chapter" >Chapter {i+1}. {cur.curriculumTitle}</Accordion.Header>
+                                {cur.lectureReadDtos && cur.lectureReadDtos.map((lec, i) => (
+                                    <Accordion.Body className="chapter_detail" key={i}>
+                                        <div><BsPlayCircle/></div>
+                                        <div className="lecture_title">{lec.lectureTitle}</div>
+                                        <div className="time">{lec.lectureTime}</div>
+                                    </Accordion.Body>
+                                ))}
+
+                            </Accordion.Item>
+                    ))}
+
+                        {/*<Accordion.Item className="item" eventKey="1">*/}
+                        {/*    <Accordion.Header className="chapter">Chapter 2. 스프링이란</Accordion.Header>*/}
+                        {/*    <Accordion.Body className="chapter_detail">*/}
+                        {/*        <div><BsPlayCircle/></div>*/}
+                        {/*        <div className="lecture_title">스프링이란 무엇인가요?</div>*/}
+                        {/*        <div className="time">28:06</div>*/}
+                        {/*    </Accordion.Body>*/}
+                        {/*    <Accordion.Body>*/}
+                        {/*        <div><BsPlayCircle/></div>*/}
+                        {/*        <div className="lecture_title">스프링이란 이런걸까요?</div>*/}
+                        {/*        <div className="time">28:06</div>*/}
+                        {/*    </Accordion.Body>*/}
+                        {/*</Accordion.Item>*/}
+                        {/*<Accordion.Item className="item" eventKey="2">*/}
+                        {/*    <Accordion.Header className="chapter">Chapter 3. 스프링이란</Accordion.Header>*/}
+                        {/*    <Accordion.Body className="chapter_detail">*/}
+                        {/*        <div><BsPlayCircle/></div>*/}
+                        {/*        <div className="lecture_title">스프링이란 무엇인가요?</div>*/}
+                        {/*        <div className="time">28:06</div>*/}
+                        {/*    </Accordion.Body>*/}
+                        {/*    <Accordion.Body>*/}
+                        {/*        <div><BsPlayCircle/></div>*/}
+                        {/*        <div className="lecture_title">스프링이란 이런걸까요?</div>*/}
+                        {/*        <div className="time">28:06</div>*/}
+                        {/*    </Accordion.Body>*/}
+                        {/*</Accordion.Item>*/}
+                    </Accordion>
+                </div>
+
+
                     <div className="review_wrapper" id="section3">
                         <div className="for_anchor"></div>
                         <div className="section_title">수강평</div>
@@ -369,6 +428,7 @@ const CourseMainPage=()=> {
                                 </div>
                             </div>
                         </div>
+                        {/*dksdkjsnkfjskj*/}
                         <div className="review_list">
 
                             <div className="search-dropdown-filter">

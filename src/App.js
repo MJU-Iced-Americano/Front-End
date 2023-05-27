@@ -69,6 +69,8 @@ function App() {
           <Route path="/OperatorPage/OperatorFAQList" element={<OperatorFAQList />}></Route>
 
           <Route path="/Course" element={<Course/>}></Route>
+          <Route path="/Course/:courseIndex" element={<Course/>}></Route>
+
 
         </Routes>
       </BrowserRouter>
