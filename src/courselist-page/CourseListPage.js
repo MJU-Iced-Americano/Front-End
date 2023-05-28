@@ -1,7 +1,7 @@
 import './styles/CourseListPage.css';
 import SearchResultText from './CourseSearchResult';
 import ClickedBox from './CourseClickedBox';
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {BsSliders} from "react-icons/bs";
 import { FaAngleDown } from "react-icons/fa";
 import lecture01 from "../assets/Banner/lecture01.png";
@@ -19,6 +19,11 @@ const CourseListPage =()=> {
 
 
     useEffect(() => {
+        getCourses();
+    },[]);
+
+
+    const getCourses=()=> {
         axios.get("http://54.180.213.187:8080/course-service/course?order=createdAt")
 
             .then(response => {
@@ -47,18 +52,7 @@ const CourseListPage =()=> {
             .catch(error => {
                 console.error(error);
             });
-    }, [data]);
-
-    const activeEnter =(e)=> {
-        if(e.key === 'Enter'){
-            setSearchStart(true);
-            isClicked(false);
-        }
-        if(e.key ==='Escape'){
-            isClicked(false);
-        }
     }
-
     const TagBox=({keyword})=> {
         return (
             <a href='/courseList'>
@@ -68,30 +62,49 @@ const CourseListPage =()=> {
             </a>
         );
     }
+    const activeEnter = useCallback(
+        (e) => {
+        if(e.key === 'Enter'){
+            setSearchStart(true);
+            isClicked(false);
+        }
+        if(e.key ==='Escape'){
+            isClicked(false);
+        }
+    }, [isClicked, setSearchStart]
+    );
 
     const CourseListPageContent=()=> {
         return(
             <div className="course-content">
                 <div className="search-course-bar">
-                    <input className="course_search_bar" type="text" placeholder = "듣고 싶은 강의가 무엇인가요?"
+                    <label htmlFor="search">
+                    <input className="course_search_bar"
+                           type="text"
+                           name="search"
+                           placeholder = "듣고 싶은 강의가 무엇인가요?"
+                           id="search"
                            onClick={()=> {
                                isClicked(!clicked);
                            }}
                            value={inputs}
-                           onChange={(e) =>
-                           {setInputs(e.target.value)
+                           onChange={(e) =>{
+                               setInputs(e.target.value)
                                setSearchStart(false)}
                            }
                            onKeyDown={(e)=>activeEnter(e)}
+                           // onKeyDown={activeEnter}
+
                     />
+                    </label>
                     {clicked && <ClickedBox/>}
                 </div>
                 <div className="course-content-whole">
                     <div className="course-side-nav-bar">
                         <div className="course-side-nav-bar-item"><a href="/">전체 강의</a></div>
                         <div className="course-side-nav-bar-item"><a href="/">개발·프로그래밍</a></div>
-                        <div className="course-side-nav-bar-item"><a href="/">게임 개발</a></div>
                         <div className="course-side-nav-bar-item"><a href="/">보안·네트워크</a></div>
+                        <div className="course-side-nav-bar-item"><a href="/">게임 개발</a></div>
                     </div>
                     <div className="course-content-lists">
                         <div className="course-search-result">
@@ -149,7 +162,7 @@ const CourseListPage =()=> {
                         <div className="course-lists-all">
                             <div className="course-Tile-lists">
                                 {data.map((item, i) =>(
-                                    <div className="course-Tile">
+                                    <div className="course-Tile" key={i}>
                                         <a href='/'><img src={item.courseTitlePhotoUrl} className="lectureImg" alt="lecture1"/></a>
                                         <div>
                                             {item.courseName}

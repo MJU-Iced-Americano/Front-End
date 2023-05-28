@@ -32,6 +32,8 @@ import ReportCommendOnePage from "./Operator/ReportManage/OperatorCommendReportO
 import OperatorFAQList from "./Operator/FAQManage/OperatorFAQList";
 import FAQSearchResultPage from "./FAQ/FAQSearchResultPage";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import ComplaintModal from "./Course/components/ComplaintModal";
+import CourseRegisterPage from "./Teacher/CourseRegisterPage";
 import React from "react";
 import axios from 'axios';
 
@@ -70,6 +72,8 @@ function App() {
 
           <Route path="/Course" element={<Course/>}></Route>
           <Route path="/Course/:courseIndex" element={<Course/>}></Route>
+          {/*<Route path="/ComplaintModal" element={<ComplaintModal/>}></Route>*/}
+          <Route path="/Teacher/CourseRegisterPage" element={<CourseRegisterPage/>}></Route>
 
 
         </Routes>

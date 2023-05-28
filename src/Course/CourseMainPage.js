@@ -17,6 +17,8 @@ import full_cocoa from "../assets/icons/socoa-icon 1.png";
 import dummy_cocoa from "../assets/icons/socoa-icon-dummy.png";
 import Body from "../components/Body/Body";
 import axios from "axios";
+import ComplaintModal from './components/ComplaintModal';
+
 
 
 
@@ -35,6 +37,8 @@ const CourseMainPage=(props)=> {
     const [cClicked, setCClicked] = useState(null);
     const [cModal, setCModal] = useState(false);
     const { courseIndex} = useParams();
+    const [complaintId, setComplaintId] = useState(-1);
+
 
 
     useEffect(() => {
@@ -45,13 +49,13 @@ const CourseMainPage=(props)=> {
     const getReviews = (order) => {
         let url = "";
         if (order === "date") {
-            url = "http://localhost:8080/review-service/review/getDate";
+            url = `http://localhost:8083/review-service/review/getDate`;
         } else if (order === "like") {
-            url = "http://localhost:8080/review-service/review/getLiked";
+            url = `http://localhost:8083/review-service/review/getLiked`;
         } else if (order === "dGrade") {
-            url = "http://localhost:8080/review-service/review/getDgrade";
+            url = `http://localhost:8083/review-service/review/getDgrade`;
         } else if (order === "aGrade") {
-            url = "http://localhost:8080/review-service/review/getAgrade";
+            url = `http://localhost:8083/review-service/review/getAgrade`;
         }
         axios.get(url)
 
@@ -64,13 +68,13 @@ const CourseMainPage=(props)=> {
                 // 데이터에서 객체를 추출하여 배열에 추가
                 for (let i = 0; i < data.list.length; i++) {
                     const obj = {
-                        id: data.list[i].id,
+                        reviewIndex: data.list[i].reviewIndex,
                         grade: data.list[i].grade,
                         user_photo: data.list[i].user_photo,
                         user_name: data.list[i].user_name,
                         date: data.list[i].date,
                         review_content: data.list[i].review_content,
-                        good_count: data.list[i].good_count
+                        likes: data.list[i].likes,
                     };
                     console.log(obj);
                     objects.push(obj);
@@ -122,18 +126,18 @@ const CourseMainPage=(props)=> {
             );
     }
 
-    const ComplaintModal= () => {
-        return(
-            <div className='modal'>
-                <h4>제목</h4>
-                <p>날짜</p>
-                <p>상세내용</p>
-            </div>
-        )
-    }
+    // const ComplaintModal= () => {
+    //     return(
+    //         <div className='modal'>
+    //             <h4>제목</h4>
+    //             <p>날짜</p>
+    //             <p>상세내용</p>
+    //         </div>
+    //     )
+    // }
 
     const handleLike = (index) => {
-        axios.get(`http://localhost:8080/review-service/review/inlike/${index}`)
+        axios.get(`http://localhost:8083/review-service/review/inlike/${index}`)
             .then(response => {
                 console.log(response.data);
                 console.log(index + "이거야. ");
@@ -166,16 +170,17 @@ const CourseMainPage=(props)=> {
     const handleInputChange = (event) => {
         console.log("실행이 되니???");
         const { name, value } = event.target;
-        // setNewReview(prevState => ({...prevState, [name]: value}));
+        //name이랑 value가 이용되지 않고잇음!이
+        setNewReview(prevState => ({...prevState, [name]: value}));
     };
     const handleAddReview = (event) => {
         event.preventDefault();
         const reviewData = { ...newReview };
-        axios.post("http://localhost:8080/review-service/review/register",reviewData)
+        axios.post(`http://localhost:8083/review-service/review/register`,reviewData)
             .then(response => {
                 console.log(response);
                 setNewReview({review_content : "", grade :0, user_name : "default", user_photo: ""});
-                setData([...data, reviewData]);
+                setData((prevData) => [...prevData, reviewData]);
                 console.log(data + "는????");
 
             })
@@ -201,14 +206,6 @@ const CourseMainPage=(props)=> {
                 return null;
         }
     };
-
-    const rating_cocoa = index => {
-        let cocoa = [...rate];
-        for(let i = 0; i<5; i++) {
-            cocoa[i] = i <= index ? true : false;
-        }
-        setRate(cocoa);
-    }
 
     const ReviewInputForm = () => {
         return(
@@ -242,17 +239,8 @@ const CourseMainPage=(props)=> {
             </form>
         )
     };
-
-
-    const handleComplaint = (index) => {
-        axios.post(`http://localhost:8080/review-service/review/complaint/${index}`)
-            .then(response => {
-                console.log(index + "이거야. ");
-
-            })
-            .catch(error => {
-                console.error(error);
-            });
+    const handleComlaint = (index) => {
+        setComplaintId(index);
     }
 
     const CourseMainPageContent = () => {
@@ -340,33 +328,6 @@ const CourseMainPage=(props)=> {
 
                             </Accordion.Item>
                     ))}
-
-                        {/*<Accordion.Item className="item" eventKey="1">*/}
-                        {/*    <Accordion.Header className="chapter">Chapter 2. 스프링이란</Accordion.Header>*/}
-                        {/*    <Accordion.Body className="chapter_detail">*/}
-                        {/*        <div><BsPlayCircle/></div>*/}
-                        {/*        <div className="lecture_title">스프링이란 무엇인가요?</div>*/}
-                        {/*        <div className="time">28:06</div>*/}
-                        {/*    </Accordion.Body>*/}
-                        {/*    <Accordion.Body>*/}
-                        {/*        <div><BsPlayCircle/></div>*/}
-                        {/*        <div className="lecture_title">스프링이란 이런걸까요?</div>*/}
-                        {/*        <div className="time">28:06</div>*/}
-                        {/*    </Accordion.Body>*/}
-                        {/*</Accordion.Item>*/}
-                        {/*<Accordion.Item className="item" eventKey="2">*/}
-                        {/*    <Accordion.Header className="chapter">Chapter 3. 스프링이란</Accordion.Header>*/}
-                        {/*    <Accordion.Body className="chapter_detail">*/}
-                        {/*        <div><BsPlayCircle/></div>*/}
-                        {/*        <div className="lecture_title">스프링이란 무엇인가요?</div>*/}
-                        {/*        <div className="time">28:06</div>*/}
-                        {/*    </Accordion.Body>*/}
-                        {/*    <Accordion.Body>*/}
-                        {/*        <div><BsPlayCircle/></div>*/}
-                        {/*        <div className="lecture_title">스프링이란 이런걸까요?</div>*/}
-                        {/*        <div className="time">28:06</div>*/}
-                        {/*    </Accordion.Body>*/}
-                        {/*</Accordion.Item>*/}
                     </Accordion>
                 </div>
 
@@ -452,7 +413,7 @@ const CourseMainPage=(props)=> {
                             {/*default가  최신순이야.  =>  필터값 적용해준 걸 data로 다시 선언해주기 ?*/}
                             {data.map((item, i) => (
 
-                                <div className="review_listITem" key={item.id}>
+                                <div className="review_listITem" key={item.reviewIndex}>
                                     {/* 아. date어떻게 해야할지 모르겟음. 내가 다시 해봐야됨.  */}
                                     <div className="sections">
                                         <div className="section1"><img src={defaultimage} alt="defaultimage" className="profile"/></div>
@@ -465,15 +426,19 @@ const CourseMainPage=(props)=> {
                                         <div className="additionalFunc">
 
                                             <div className="date">{item.date}</div>
-                                            <div onClick={() => {handleComplaint(item.id); setCModal(true)}}><AiFillAlert /></div>
-                                            {cModal === true ? <ComplaintModal /> : null}
-                                            {/*complaint아직 백엔드 로직 분리중*/}
                                             <div>
-                                                <button onClick={() => handleLike(item.id) }>
-                                                    <FaRegThumbsUp />{item.good_count}
+                                                <AiFillAlert onClick={() => handleComlaint(item.reviewIndex) }/>
+                                                {/*{cModal === true ? <ComplaintModal index={item.reviewIndex} closeModal={() => setCModal(false)}/> : null}*/}
+                                            </div>
+                                            <div>
+                                                <button onClick={() => handleLike(item.reviewIndex) }>
+                                                    <FaRegThumbsUp />{item.likes}
                                                 </button>
                                             </div>
                                         </div>
+                                        {complaintId === item.reviewIndex && (
+                                            <ComplaintModal index={complaintId} onClose={() => setComplaintId(null)} />
+                                        )}
                                     </div>
                                 </div>
                             ))}

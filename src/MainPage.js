@@ -3,6 +3,7 @@ import LectureSlider from "./components/Banner/LectureSlider";
 import './MainPage.css';
 import Body from "./components/Body/Body";
 import React from "react";
+import {Link} from "react-router-dom";
 
 const MainPage=() => {
     const MainPageContent=()=>{
@@ -26,6 +27,11 @@ const MainPage=() => {
                     <LectureSlider name = "likeSum">Best 강의 👍</LectureSlider>
                     <LectureSlider name = "createdAt">New 강의 🎉</LectureSlider>
                     <LectureSlider name = "hits" >Trending 강의 🔥</LectureSlider>
+                </div>
+                <div>
+                    <button><Link to={`/Teacher/CourseRegisterPage`}>
+                        강사 - 강좌 등록
+                    </Link></button>
                 </div>
             </div>
         );
