@@ -6,12 +6,30 @@
     height: 1000px;
     border-top: 1px solid #6667ab;
     padding-top: 10px;
+    display: inline-block;
 }
 
 .VideoInfo{
-    text-align: left;
+    justify-content: center;
+    align-items: center;
 }
 
+.VideoInfoChild1{
+    display: inline-block;
+    width: 10%;
+}
+.VideoInfoChild2{
+    display: inline-block;
+    width: 80%;
+}
+.VideoInfoChild3{
+    display: inline-block;
+    width: 10%;
+}
+
+.VideoButton{
+
+}
 .VideoInfo h1{
     font-weight: bold;
 }

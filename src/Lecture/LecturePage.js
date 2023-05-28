@@ -2,14 +2,24 @@ import React, {useEffect, useRef, useState} from 'react';
 import Body from "../components/Body/Body";
 import "./styles/LecturePage.css"
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import ReactPlayer from 'react-player/lazy';
+import {Offcanvas} from "react-bootstrap";
+import OffCanvasCurriculam from "./components/OffCanvasCurriculam";
+import OffCanvasQnA from "./components/OffCanvasQnA";
 
 const LecturePage=()=>{
+    const location = useLocation();
+    console.log(location);
+    const params = location.pathname.split('/'); // 경로를 '/'로 분할하여 배열로 만듦
+    const value = params[2];
+    console.log(value);
+    const index = params[3];
+    console.log(index);
 
-    const LecturePageContent =()=> {
-        const videoRef = useRef(null);
-        const playerRef = useRef(null);
+    const LecturePageContent =({courseIndex, lectIndex})=> {
+
+        console.log(lectIndex);
         const navigate = useNavigate();
         const [lectureTitles, setLectureTitles] = useState(null);
         const [lectureDescriptions, setLectureDescriptions] = useState(null);
@@ -18,7 +28,7 @@ const LecturePage=()=>{
 
         useEffect(() => {
 
-            axios.get(`http://54.180.213.187:8080/lecture-service/lecture/6?tab=basic`)
+            axios.get(`http://54.180.213.187:8080/lecture-service/lecture/${lectIndex}?tab=basic`)
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data);
@@ -37,12 +47,26 @@ const LecturePage=()=>{
             navigate("/LectureRegistPage");
         };
 
+        ///////////////////////////////////////
+
         return (
             <div className="LectureContent">
                 <button onClick={navigateRegist}>dd</button>
                 <div className="VideoInfo">
-                    <h1>{lectureTitles}</h1>
-                    <h3>{lectureDescriptions}</h3>
+                    <div  className="VideoInfoChild1">
+                        {['start'].map((placement, idx) => (
+                            <OffCanvasCurriculam courseIndex={courseIndex} lectIndex={lectIndex} key={idx} placement={placement} name={placement} />
+                        ))}
+                    </div>
+                    <div  className="VideoInfoChild2">
+                        <h1>{lectureTitles}</h1>
+                        <h3>{lectureDescriptions}</h3>
+                    </div>
+                    <div  className="VideoInfoChild3">
+                        {['end'].map((placement, idx) => (
+                            <OffCanvasQnA courseIndex={courseIndex} lectIndex={lectIndex} key={idx} placement={placement} name={placement} />
+                        ))}
+                    </div>
                 </div>
                 <div className="VideoDiv">
                     <div>
@@ -58,7 +82,8 @@ const LecturePage=()=>{
                             url={lectureURLs}
                         />
                     </div>
-
+                    <div>
+                    </div>
                 </div>
             </div>
 
@@ -67,7 +92,7 @@ const LecturePage=()=>{
 
     return(
         <Body>
-            <LecturePageContent />
+            <LecturePageContent courseIndex={value} lectIndex={index}/>
         </Body>
     );
 }

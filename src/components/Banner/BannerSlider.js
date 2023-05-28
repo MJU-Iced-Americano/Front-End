@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -7,6 +7,7 @@ import Banner2 from '../../assets/Banner/banner2.png';
 import Banner3 from '../../assets/Banner/banner3.png';
 import Banner4 from '../../assets/Banner/banner4.png';
 import './styles/BannerSlider.css';
+import axios from "axios";
 
 const BannerSlider =()=>{
     const settings = {
@@ -28,15 +29,41 @@ const BannerSlider =()=>{
         )
     };
 
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+
+        axios.get(`/board-service/banner/show/listBanner`)
+            .then(response => {
+                // response.data는 가져온 데이터를 의미합니다.
+                console.log(response.data)
+                const data = response.data;
+                console.log(data.list.length);
+                const objects = [];
+
+                // 데이터에서 객체를 추출하여 배열에 추가
+                for (let i = 0; i < data.list.length; i++) {
+                    const obj= {
+                        imageUrl: data.list[i].imageUrl
+                    }
+                    console.log(obj);
+                    objects.push(obj);
+                }
+                setData(objects);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
+
 
     return(
         <div className="bannerPart">
             {/*<h2>Swipe To Slide</h2>*/}
             <Slider {...settings}>
-                <a href='/'><img src={Banner1} alt='promote' className="bannerImg"/></a>
-                <a href='/'><img src={Banner2} alt='promote' className="bannerImg"/></a>
-                <a href='/'><img src={Banner3} alt='promote' className="bannerImg"/></a>
-                <a href='/'><img src={Banner4} alt='promote' className="bannerImg"/></a>
+                {data.map((item) => (
+                    <a href='/'><img src={item.imageUrl} alt='promote' className="bannerImg"/></a>
+                ))}
             </Slider>
         </div>
     );
