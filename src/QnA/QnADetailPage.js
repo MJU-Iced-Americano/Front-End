@@ -25,7 +25,7 @@ function QnADetailPage(){
     const[time,setTime] = useState('');
 
     useEffect(() => {
-        axios.get(`/board-service/question/show/${index}`)
+        axios.get(`http://3.34.240.33:8080/board-service/question/show/${index}`)
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
                 console.log(response.data)
@@ -58,7 +58,7 @@ function QnADetailPage(){
             });
 
 
-        axios.get(`/board-service/question/show/commendList/${index}`)
+        axios.get(`http://3.34.240.33:8080/board-service/question/show/commendList/${index}`)
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
                 console.log(response.data)
@@ -127,7 +127,7 @@ function QnADetailPage(){
         }
         setIsClicked(true);
         ///////좋아요 add부분//////////////////////////////
-        axios.get(`/board-service/question/goodCheck/${index}`,{
+        axios.get(`http://3.34.240.33:8080/board-service/question/goodCheck/${index}`,{
             questionIndex : `${index}`
         })
             .then(response => {
@@ -144,7 +144,7 @@ function QnADetailPage(){
 
     function AddChatDB(index,text) {
 
-        axios.post(`/board-service/question/commend/register/${index}`,{
+        axios.post(`http://3.34.240.33:8080/board-service/question/commend/register/${index}`,{
             commendContent : `${text}`
         })
             .then(response => {

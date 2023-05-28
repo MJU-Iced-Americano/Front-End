@@ -9,7 +9,6 @@ import axios from "axios";
 
 function FAQPage(){
     const navigate = useNavigate();
-    const [word, setWord] =useState("");
     const [userInput, setUserInput] = useState("");
     const [data, setData] = useState([]);
 
@@ -19,7 +18,7 @@ function FAQPage(){
   };
     const navigateToEdu = () => {
         navigate("/EduFAQ");
-  };
+    };
     const navigateToResult = (userInput) => {
         navigate("/FAQSearchResultPage", {state : {keyword : userInput} });
     };
@@ -30,9 +29,7 @@ function FAQPage(){
 
         console.log(userInput +"냠?");
         navigateToResult(userInput);
-    //     검색 페이지로 이동...!
-
-
+    //    input 통해 입력 받은 keyword parameter 넘겨서 검색 페이지로 이동..
 
     }
     const handleKeyPress = (e) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Slider from "react-slick";
 import './styles/slick.css';
 import './styles/slick-theme.css';
@@ -11,11 +11,56 @@ import lecture05 from '../../assets/Banner/lecture05.png';
 import styled from "styled-components";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { AiOutlineDoubleLeft } from "react-icons/ai";
+import axios from "axios";
+import {Link} from "react-router-dom";
+
 
 const LectureSlider=(props)=> {
+    const [data, setData] = useState([]);
+    useEffect( () => {
+        if(props.name === "likeSum") {
+            getCourses("likeSum");
+        } else if(props.name === "createdAt") {
+            getCourses("createdAt");
+        } else if(props.name === "hits") {
+            getCourses("hits");
+        }
+        }, [props.name]);
+
+    const getCourses = (orderby) => {
+        axios.get("http://54.180.213.187:8080/course-service/course?order=" + orderby)
+
+            .then(response => {
+                // response.data는 가져온 데이터를 의미합니다.
+                console.log(response.data);
+                const content = response.data.data.content;
+
+                const objects = [];
+                // 데이터에서 객체를 추출하여 배열에 추가
+                for (let i = 0; i < content.length; i++) {
+                    const obj = {
+                        courseIndex : content[i].courseIndex,
+                        category : content[i].category,
+                        courseName : content[i].courseName,
+                        price : content[i].price,
+                        difficulty : content[i].difficulty,
+                        courseTitlePhotoUrl : content[i].courseTitlePhotoUrl,
+                    }
+                    objects.push(obj);
+                }
+                setData(objects);
+                // 배열에 저장된 객체를 출력
+                // console.log(objects  + "먕");
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+
+    };
     const Image = styled.img`
       width: inherit;
-      height: inherit;
+      height: 220px;
     `;
 
     const settings = {
@@ -36,40 +81,24 @@ const LectureSlider=(props)=> {
                 <AiOutlineDoubleLeft/>
             </button>
         )
-        // prevArrow: (
-        //     <Prev>
-        //         <AiOutlineDoubleRight className="arrowLogo"/>
-        //     </Prev>
-        // )
     };
 
     return(
         <div className="lecturePart">
-            <h2>{props.name}</h2>
+            <h2>{props.children}</h2>
             <Slider {...settings}>
-                {/*<a href='/'><img src={lecture01} alt='promote' className="lectureImg"/></a>*/}
-                {/*<a href='/'><img src={lecture02} alt='promote' className="lectureImg"/></a>*/}
-                {/*<a href='/'><img src={lecture03} alt='promote' className="lectureImg"/></a>*/}
-                {/*<a href='/'><img src={lecture04} alt='promote' className="lectureImg"/></a>*/}
-                {/*<a href='/'><img src={lecture05} alt='promote' className="lectureImg"/></a>*/}
-                <div className="lecture-Tile">
-                    <a href='/'><Image src={lecture01} className="lectureImg"/></a>
-                    <div className="lecture-hovered">
-                        <h1>5일안에 Python 부수기</h1>
+                {data.map((item, i) => (
+                    <div className="lecture-TileWrapper" key={i}>
+                        <div className="lecture-Tile">
+                            <Link to={`/Course/${item.courseIndex}`}>
+                                <Image src={item.courseTitlePhotoUrl} className="lectureImg" />
+                            </Link>
+                            <div className="lecture-hovered">
+                                <h1>{item.courseName}</h1>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <a href='/LecturePage'><Image src={lecture02} className="lectureImg"/></a>
-                </div>
-                <div>
-                    <a href='/'><Image src={lecture03} className="lectureImg"/></a>
-                </div>
-                <div>
-                    <a href='/'><Image src={lecture04} className="lectureImg"/></a>
-                </div>
-                <div>
-                    <a href='/'><Image src={lecture05} className="lectureImg"/></a>
-                </div>
+                ))}
             </Slider>
         </div>
     )
