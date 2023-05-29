@@ -1,13 +1,13 @@
 import React, {memo, useCallback, useEffect, useState} from "react";
-import { useParams } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import './CourseMainPage.css';
 import Accordion from "react-bootstrap/Accordion";
 import defaultimage from '../assets/temp/image 14.png';
-import { BsPlayCircle } from "react-icons/bs";
-import { AiFillAlert } from "react-icons/ai";
+import {BsPlayCircle} from "react-icons/bs";
+import {AiFillAlert} from "react-icons/ai";
 import {FaAngleDown, FaRegThumbsUp} from "react-icons/fa";
-import { RiHeart2Line, RiHeart2Fill } from "react-icons/ri";
-import { GrCart } from "react-icons/gr";
+import {RiHeart2Line, RiHeart2Fill} from "react-icons/ri";
+import {GrCart} from "react-icons/gr";
 import cocoa_1 from '../assets/icon_group/cocoa_1.png'
 import cocoa_2 from '../assets/icon_group/cocoa_2.png'
 import cocoa_3 from '../assets/icon_group/cocoa_3.png'
@@ -20,25 +20,22 @@ import axios from "axios";
 import ComplaintModal from './components/ComplaintModal';
 
 
-
-
-const CourseMainPage=(props)=> {
+const CourseMainPage = (props) => {
 
     // let [like, setLike] = useState(0);
     const [data, setData] = useState([]);
     const [detail, setDetail] = useState([]);
     const [likes, setLikes] = useState();
     const [liked, setLiked] = useState(false);
-    const [newReview, setNewReview] = useState({user_photo : "", review_content : "", grade : 0, user_name : "김이박"});
+    const [newReview, setNewReview] = useState({user_photo: "", review_content: "", grade: 0, user_name: "김이박"});
     const [filterClicked, isFilterClicked] = useState(false);
     const cocoaArray = [0, 1, 2, 3, 4];
     const [rate, setRate] = useState([false, false, false, false, false]);
     const [cHovered, setCHovered] = useState(null);
     const [cClicked, setCClicked] = useState(null);
     const [cModal, setCModal] = useState(false);
-    const { courseIndex} = useParams();
+    const {courseIndex} = useParams();
     const [complaintId, setComplaintId] = useState(-1);
-
 
 
     useEffect(() => {
@@ -115,14 +112,14 @@ const CourseMainPage=(props)=> {
 
     }
 
-        const TagBox=({keyword})=> {
-            return (
-                <a >
-                    <div className="search_tag_box">
-                        #{keyword}
-                    </div>
-                </a>
-            );
+    const TagBox = ({keyword}) => {
+        return (
+            <a>
+                <div className="search_tag_box">
+                    #{keyword}
+                </div>
+            </a>
+        );
     }
 
     // const ComplaintModal= () => {
@@ -140,7 +137,7 @@ const CourseMainPage=(props)=> {
             .then(response => {
                 console.log(response.data);
                 console.log(index + "이거야. ");
-                setLikes(likes+1);
+                setLikes(likes + 1);
             })
             .catch(error => {
                 console.error(error);
@@ -158,7 +155,7 @@ const CourseMainPage=(props)=> {
         setLiked(!liked);
     };
 
-    const formatDate = (dateString)=> {
+    const formatDate = (dateString) => {
         const date = new Date(dateString);
         const year = date.getFullYear();
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -168,24 +165,24 @@ const CourseMainPage=(props)=> {
 
     const handleInputChange = (event) => {
         console.log("실행이 되니???");
-        const { name, value } = event.target;
+        const {name, value} = event.target;
         //name이랑 value가 이용되지 않고잇음!이
         setNewReview(prevState => ({...prevState, [name]: value}));
     };
     const handleAddReview = (event) => {
         event.preventDefault();
-        const reviewData = { ...newReview };
-        axios.post(`http://43.200.124.135:8000/review-service/review/register`,reviewData)
+        const reviewData = {...newReview};
+        axios.post("http://13.209.194.108:8080/review-service/review/register", reviewData)
             .then(response => {
                 console.log(response);
-                setNewReview({review_content : "", grade :0, user_name : "default", user_photo: ""});
+                setNewReview({review_content: "", grade: 0, user_name: "default", user_photo: ""});
                 setData((prevData) => [...prevData, reviewData]);
                 console.log(data + "는????");
 
             })
-      .catch((error) => {
-          console.error(error);
-      });
+            .catch((error) => {
+                console.error(error);
+            });
 
     };
 
@@ -206,38 +203,7 @@ const CourseMainPage=(props)=> {
         }
     };
 
-    const ReviewInputForm = () => {
-        return(
-            <form className="input_wrapper">
 
-                <div className="rating">
-                    {cocoaArray.map(element => (
-                        //element 만큼 클릭하거나 element만큼 호버하면 이미지 변경
-                        <img src={ cHovered >= element || cClicked >= element ? full_cocoa : dummy_cocoa}
-                             className="rating_cooca"
-                             key={element}
-                             id={element}
-                             onMouseEnter={() => setCHovered(element)}
-                             onMouseLeave={() => setCHovered(null)}
-                             onClick={() => {setCClicked(element); handleInputChange({
-                                 target: {
-                                 name: "grade",
-                                 value: element+1
-                             }
-                             });}
-                            }
-                             name = "grade"
-                             value = {newReview.grade}
-
-                        ></img>
-                    ))}
-                </div>
-
-                <input className="input_css" type="text" name="review_content" value={newReview.review_content} onChange={handleInputChange} placeholder="후기를 입력하세요. "></input>
-                <div className="create-button" onClick={handleAddReview}> 추가</div>
-            </form>
-        )
-    };
     const handleComlaint = (index) => {
         setComplaintId(index);
     }
@@ -285,7 +251,8 @@ const CourseMainPage=(props)=> {
                             <div className="details">총 강의시간 : {detail.courseTime}<br/></div>
                             <div className="details">가격 : {detail.price} <br/></div>
                             <div className="details">난이도 :
-                                <img src={getImagePath(detail.difficulty)} alt={`Cocoa ${detail.difficulty}`} className="cocoas" />
+                                <img src={getImagePath(detail.difficulty)} alt={`Cocoa ${detail.difficulty}`}
+                                     className="cocoas"/>
                             </div>
                         </div>
                     </div>
@@ -314,11 +281,12 @@ const CourseMainPage=(props)=> {
                 <div className="curriculum_wrapper" id="section2">
                     <div className="for_anchor"></div>
                     <div className="section_title">커리큘럼</div>
-                        <Accordion className="accWhole" defaultActiveKey="0" flush>
-                            {detail.curriculumReadDtoList && detail.curriculumReadDtoList.map((cur, i) => (
+                    <Accordion className="accWhole" defaultActiveKey="0" flush>
+                        {detail.curriculumReadDtoList && detail.curriculumReadDtoList.map((cur, i) => (
 
                             <Accordion.Item className="item" eventKey={i}>
-                                <Accordion.Header className="chapter" >Chapter {i+1}. {cur.curriculumTitle}</Accordion.Header>
+                                <Accordion.Header
+                                    className="chapter">Chapter {i + 1}. {cur.curriculumTitle}</Accordion.Header>
                                 {cur.lectureReadDtos && cur.lectureReadDtos.map((lec, i) => (
                                     <Accordion.Body className="chapter_detail" key={i}>
                                         <div><BsPlayCircle/></div>
@@ -328,134 +296,172 @@ const CourseMainPage=(props)=> {
                                 ))}
 
                             </Accordion.Item>
-                    ))}
+                        ))}
                     </Accordion>
                 </div>
 
 
-                    <div className="review_wrapper" id="section3">
-                        <div className="for_anchor"></div>
-                        <div className="section_title">수강평</div>
-                        <div className="box_wrapper">
-                            <div className="mainbox1">
-                                <h2>4.6</h2>
-                                <div className="cocoa_whole">
-                                    {/*실제로 리뷰 값 받을 때에는 5개, 4개, 4개 반 등으로 만들어놓은 아이콘 묶음을 선택적으로 적용하게끔. */}
-                                    <img className="icon_main1" src={full_cocoa}/>
-                                    <img className="icon_main1" src={full_cocoa}/>
-                                    <img className="icon_main1" src={full_cocoa}/>
-                                    <img className="icon_main1" src={full_cocoa}/>
-                                    <img className="icon_main1" src={full_cocoa}/>
-                                </div>
-                                <div className="sub">(24개의 수강평)</div>
-                            </div>
-                            <div className="mainbox2">
-                                <div className="total_cocoa">
-                                    <div className="cocoa_review_num">
-                                        <img className="icon_main2" src={cocoa_5}/>
-                                    </div>
-                                    <div className="cocoa_length">
-                                    </div>
-                                </div>
-                                <div className="total_cocoa">
-                                    <div className="cocoa_review_num">
-                                        <img className="icon_main2" src={cocoa_4}/>
-                                    </div>
-                                    <div className="cocoa_length">
-                                    </div>
-                                </div>
-                                <div className="total_cocoa">
-                                    <div className="cocoa_review_num">
-                                        <img className="icon_main2" src={cocoa_3}/>
-                                    </div>
-                                    <div className="cocoa_length">
-                                    </div>
-                                </div>
-                                <div className="total_cocoa">
-                                    <div className="cocoa_review_num">
-                                        <img className="icon_main2" src={cocoa_2}/>
-                                    </div>
-                                    <div className="cocoa_length">
-                                    </div>
-                                </div>
-                                <div className="total_cocoa">
-                                    <div className="cocoa_review_num">
+            </div>
 
-                                        {/*cocoa1 크기 다시 맞춰서 export 하기 !*/}
-
-                                        <img className="icon_main2" src={cocoa_1}/>
-                                    </div>
-                                    <div className="cocoa_length">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {/*dksdkjsnkfjskj*/}
-                        <div className="review_list">
-
-                            <div className="search-dropdown-filter">
-                                <label className="dropdown-label" onClick={()=>{
-                                    isFilterClicked(!filterClicked)
-                                }}>
-                                    <div>필터</div>
-                                    <FaAngleDown className="dropdown-icon"/>
-                                </label>
-                                {filterClicked&&
-                                    <div className="dropdown-content">
-                                        <ul>
-                                            <li onClick={() => getReviews('date')}>최신순</li>
-                                            <li onClick={() => getReviews('like')}>좋아요순</li>
-                                            <li onClick={() => getReviews('dGrade')}>높은 별점순</li>
-                                            <li onClick={() => getReviews('aGrade')}>낮은 별점순</li>
-                                        </ul>
-                                    </div>
-                                }
-                            </div>
-                            {/*default가  최신순이야.  =>  필터값 적용해준 걸 data로 다시 선언해주기 ?*/}
-                            {data.map((item, i) => (
-
-                                <div className="review_listITem" key={item.reviewIndex}>
-                                    {/* 아. date어떻게 해야할지 모르겟음. 내가 다시 해봐야됨.  */}
-                                    <div className="sections">
-                                        <div className="section1"><img src={defaultimage} alt="defaultimage" className="profile"/></div>
-                                        <div className="section2">
-                                            <div className="cocoa_num2">{item.grade}</div>
-                                            <div className="user_name">{item.user_name}</div>
-                                        </div>
-                                        <div className="review_detail">{item.review_content}
-                                        </div>
-                                        <div className="additionalFunc">
-
-                                            <div className="date">{item.date}</div>
-                                            <div>
-                                                <AiFillAlert onClick={() => handleComlaint(item.reviewIndex) }/>
-                                                {/*{cModal === true ? <ComplaintModal index={item.reviewIndex} closeModal={() => setCModal(false)}/> : null}*/}
-                                            </div>
-                                            <div>
-                                                <button onClick={() => handleLike(item.reviewIndex) }>
-                                                    <FaRegThumbsUp />{item.likes}
-                                                </button>
-                                            </div>
-                                        </div>
-                                        {complaintId === item.reviewIndex && (
-                                            <ComplaintModal index={complaintId} onClose={() => setComplaintId(null)} />
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-
-                            <ReviewInputForm/>
-
-                        </div>
-                    </div>
-
-                </div>
 
         );
     }
+// return 부분 수정 예정
     return (
         <Body>
             <CourseMainPageContent/>
+            <div className="whole">
+                <div className="review_wrapper" id="section3">
+                    <div className="for_anchor"></div>
+                    <div className="section_title">수강평</div>
+                    <div className="box_wrapper">
+                        <div className="mainbox1">
+                            <h2>4.6</h2>
+                            <div className="cocoa_whole">
+                                {/*실제로 리뷰 값 받을 때에는 5개, 4개, 4개 반 등으로 만들어놓은 아이콘 묶음을 선택적으로 적용하게끔. */}
+                                <img className="icon_main1" src={full_cocoa}/>
+                                <img className="icon_main1" src={full_cocoa}/>
+                                <img className="icon_main1" src={full_cocoa}/>
+                                <img className="icon_main1" src={full_cocoa}/>
+                                <img className="icon_main1" src={full_cocoa}/>
+                            </div>
+                            <div className="sub">(24개의 수강평)</div>
+                        </div>
+                        <div className="mainbox2">
+                            <div className="total_cocoa">
+                                <div className="cocoa_review_num">
+                                    <img className="icon_main2" src={cocoa_5}/>
+                                </div>
+                                <div className="cocoa_length">
+                                </div>
+                            </div>
+                            <div className="total_cocoa">
+                                <div className="cocoa_review_num">
+                                    <img className="icon_main2" src={cocoa_4}/>
+                                </div>
+                                <div className="cocoa_length">
+                                </div>
+                            </div>
+                            <div className="total_cocoa">
+                                <div className="cocoa_review_num">
+                                    <img className="icon_main2" src={cocoa_3}/>
+                                </div>
+                                <div className="cocoa_length">
+                                </div>
+                            </div>
+                            <div className="total_cocoa">
+                                <div className="cocoa_review_num">
+                                    <img className="icon_main2" src={cocoa_2}/>
+                                </div>
+                                <div className="cocoa_length">
+                                </div>
+                            </div>
+                            <div className="total_cocoa">
+                                <div className="cocoa_review_num">
+
+                                    {/*cocoa1 크기 다시 맞춰서 export 하기 !*/}
+
+                                    <img className="icon_main2" src={cocoa_1}/>
+                                </div>
+                                <div className="cocoa_length">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/*dksdkjsnkfjskj*/}
+                    <div className="review_list">
+
+                        <div className="search-dropdown-filter">
+                            <label className="dropdown-label" onClick={() => {
+                                isFilterClicked(!filterClicked)
+                            }}>
+                                <div>필터</div>
+                                <FaAngleDown className="dropdown-icon"/>
+                            </label>
+                            {filterClicked &&
+                                <div className="dropdown-content">
+                                    <ul>
+                                        <li onClick={() => getReviews('date')}>최신순</li>
+                                        <li onClick={() => getReviews('like')}>좋아요순</li>
+                                        <li onClick={() => getReviews('dGrade')}>높은 별점순</li>
+                                        <li onClick={() => getReviews('aGrade')}>낮은 별점순</li>
+                                    </ul>
+                                </div>
+                            }
+                        </div>
+                        {/*default가  최신순이야.  =>  필터값 적용해준 걸 data로 다시 선언해주기 ?*/}
+                        {data.map((item, i) => (
+
+                            <div className="review_listITem" key={item.reviewIndex}>
+                                {/* 아. date어떻게 해야할지 모르겟음. 내가 다시 해봐야됨.  */}
+                                <div className="sections">
+                                    <div className="section1"><img src={defaultimage} alt="defaultimage"
+                                                                   className="profile"/></div>
+                                    <div className="section2">
+                                        <div className="cocoa_num2">{item.grade}</div>
+                                        <div className="user_name">{item.user_name}</div>
+                                    </div>
+                                    <div className="review_detail">{item.review_content}
+                                    </div>
+                                    <div className="additionalFunc">
+
+                                        <div className="date">{item.date}</div>
+                                        <div>
+                                            <AiFillAlert onClick={() => handleComlaint(item.reviewIndex)}/>
+                                            {/*{cModal === true ? <ComplaintModal index={item.reviewIndex} closeModal={() => setCModal(false)}/> : null}*/}
+                                        </div>
+                                        <div>
+                                            <button onClick={() => handleLike(item.reviewIndex)}>
+                                                <FaRegThumbsUp/>{item.likes}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {complaintId === item.reviewIndex && (
+                                        <ComplaintModal index={complaintId} onClose={() => setComplaintId(null)}/>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+
+                        <div>
+                            <form className="input_wrapper">
+
+                                <div className="rating">
+                                    {cocoaArray.map(element => (
+                                        //element 만큼 클릭하거나 element만큼 호버하면 이미지 변경
+                                        <img src={cHovered >= element || cClicked >= element ? full_cocoa : dummy_cocoa}
+                                             className="rating_cooca"
+                                             key={element}
+                                             id={element}
+                                             onMouseEnter={() => setCHovered(element)}
+                                             onMouseLeave={() => setCHovered(null)}
+                                             onClick={() => {
+                                                 setCClicked(element);
+                                                 handleInputChange({
+                                                     target: {
+                                                         name: "grade",
+                                                         value: element + 1
+                                                     }
+                                                 });
+                                             }
+                                             }
+                                             name="grade"
+                                             value={newReview.grade}
+
+                                        ></img>
+                                    ))}
+                                </div>
+
+                                <input className="input_css" type="text" name="review_content" value={newReview.review_content}
+                                       onChange={handleInputChange} placeholder="후기를 입력하세요. "></input>
+                                <div className="create-button" onClick={handleAddReview}> 추가</div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </Body>
     )
 }
