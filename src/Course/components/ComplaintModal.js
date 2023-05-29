@@ -31,7 +31,7 @@ const ComplaintModal = ({index, onClose}) => {
             type: type,
         };
 
-        axios.post(`http://localhost:8082/complaint-service/review/register/${index}`, complaintData)
+        axios.post(`http://3.35.237.123:8080/complaint-service/review/register/${index}`, complaintData)
             .then((response) => {
                 console.log("들어갓댕. " + index);
                 console.log(response.data);
