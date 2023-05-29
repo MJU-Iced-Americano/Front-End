@@ -63,11 +63,21 @@
 }
 
 .video_temp {
-    max-width: 540px;
+    max-width: 550px;
     min-width: 500px;
-    height: 250px;
+    /*max-height: 300px;*/
+    /*min-height: 250px;*/
+    /*border-radius: 10px;*/
+    /*background-color: #d9d9d9;*/
+
+}
+.lectureThumbnail {
+    max-width: 550px;
+    min-width: 500px;
+
+    max-height: 405px;
+    min-height: 375px;
     border-radius: 10px;
-    background-color: #d9d9d9;
 
 }
 .course_regi {

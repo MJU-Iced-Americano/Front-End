@@ -7,6 +7,7 @@ import { FaAngleDown } from "react-icons/fa";
 import lecture01 from "../assets/Banner/lecture01.png";
 import Body from "../components/Body/Body";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 const CourseListPage =()=> {
     // const[inputs, setInputs] = useState("");
@@ -19,12 +20,27 @@ const CourseListPage =()=> {
 
 
     useEffect(() => {
-        getCourses();
+        getCoursesByCategory("all");
     },[]);
 
 
-    const getCourses=()=> {
-        axios.get("http://54.180.213.187:8080/course-service/course?order=createdAt")
+    const getCoursesByCategory=(category)=> {
+        let url = "";
+
+        if(category === "all") {
+            url = "http://54.180.213.187:8080/course-service/course?order=createdAt";
+        } else if (category === "dev"){
+            url = "http://54.180.213.187:8080/course-service/course?category=%EA%B0%9C%EB%B0%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&order=createdAt&page=0"
+        } else if (category === "security"){
+            url = "http://54.180.213.187:8080/course-service/course?category=%EB%B3%B4%EC%95%88-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC&order=createdAt&page=0"
+        } else if (category === "game"){
+            url = "http://54.180.213.187:8080/course-service/course?category=%EA%B2%8C%EC%9E%84%20%EA%B0%9C%EB%B0%9C&order=createdAt&page=0"
+        } else if (category === "data"){
+            url = "http://54.180.213.187:8080/course-service/course?category=%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%82%AC%EC%9D%B4%EC%96%B8%EC%8A%A4&order=createdAt&page=0\n"
+        } else {
+            url = `http://54.180.213.187:8080/course-service/course?order=createdAt&search=${category}`
+        }
+        axios.get(url)
 
             .then(response => {
                 // console.log(response.data + "?");
@@ -77,40 +93,23 @@ const CourseListPage =()=> {
     const CourseListPageContent=()=> {
         return(
             <div className="course-content">
-                <div className="search-course-bar">
-                    <label htmlFor="search">
-                    <input className="course_search_bar"
-                           type="text"
-                           name="search"
-                           placeholder = "듣고 싶은 강의가 무엇인가요?"
-                           id="search"
-                           onClick={()=> {
-                               isClicked(!clicked);
-                           }}
-                           value={inputs}
-                           onChange={(e) =>{
-                               setInputs(e.target.value)
-                               setSearchStart(false)}
-                           }
-                           onKeyDown={(e)=>activeEnter(e)}
-                           // onKeyDown={activeEnter}
-
-                    />
-                    </label>
-                    {clicked && <ClickedBox/>}
-                </div>
                 <div className="course-content-whole">
                     <div className="course-side-nav-bar">
-                        <div className="course-side-nav-bar-item"><a href="/">전체 강의</a></div>
-                        <div className="course-side-nav-bar-item"><a href="/">개발·프로그래밍</a></div>
-                        <div className="course-side-nav-bar-item"><a href="/">보안·네트워크</a></div>
-                        <div className="course-side-nav-bar-item"><a href="/">게임 개발</a></div>
+                        <div className="course-side-nav-bar-item"><a onClick={() => getCoursesByCategory("all")}>전체 강의</a></div>
+                        <div className="course-side-nav-bar-item"><a onClick={() => getCoursesByCategory("dev")}>개발·프로그래밍</a></div>
+                        <div className="course-side-nav-bar-item"><a onClick={() => getCoursesByCategory("security")}>보안·네트워크</a></div>
+                        <div className="course-side-nav-bar-item"><a onClick={() => getCoursesByCategory("game")}>게임 개발</a></div>
+                        <div className="course-side-nav-bar-item"><a onClick={() => getCoursesByCategory("data")}>데이터 사이언스</a></div>
                     </div>
                     <div className="course-content-lists">
                         <div className="course-search-result">
                             <div className="course-search-result-message">
-                                {searchStart&&<SearchResultText result={inputs}/>}
-                            </div>
+                                {searchStart && (
+                                    <>
+                                        <SearchResultText result={inputs} />
+                                        {getCoursesByCategory(inputs)}
+                                    </>
+                                )}                            </div>
                             <div className="course-search-main-tag">
                                 <div className="course-search-result-tag">
                                     <BsSliders id="iconTag" onClick={()=>{
@@ -163,7 +162,9 @@ const CourseListPage =()=> {
                             <div className="course-Tile-lists">
                                 {data.map((item, i) =>(
                                     <div className="course-Tile" key={i}>
-                                        <a href='/'><img src={item.courseTitlePhotoUrl} className="lectureImg" alt="lecture1"/></a>
+                                        <Link to={`/Course/${item.courseIndex}`}>
+                                            <img src={item.courseTitlePhotoUrl} className="lectureImg" alt="lecture1"/>
+                                        </Link>
                                         <div>
                                             {item.courseName}
                                         </div>
@@ -183,6 +184,30 @@ const CourseListPage =()=> {
 
     return(
         <Body>
+            <div className="course-content">
+                <div className="search-course-bar">
+                    <label htmlFor="search">
+                        <input className="course_search_bar"
+                               type="text"
+                               name="search"
+                               placeholder = "듣고 싶은 강의가 무엇인가요?"
+                               id="search"
+                               onClick={()=> {
+                                   isClicked(!clicked);
+                               }}
+                               value={inputs}
+                               onChange={(e) =>{
+                                   setInputs(e.target.value)
+                                   setSearchStart(false)}
+                               }
+                               onKeyDown={(e)=>activeEnter(e)}
+                            // onKeyDown={activeEnter}
+
+                        />
+                    </label>
+                    {clicked && <ClickedBox/>}
+                </div>
+            </div>
             <CourseListPageContent/>
         </Body>
     )
