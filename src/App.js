@@ -21,6 +21,8 @@ import CoOpAddPage from "./Operator/CoOpManage/OperatorCoOpAdd";
 import CoOpModifyPage from "./Operator/CoOpManage/OperatorCoOpModify";
 import CoOpDeletePage from "./Operator/CoOpManage/OperatorCoOpDelete";
 import LecturePage from "./Lecture/LecturePage";
+import LectureQuestionPage from "./Lecture/LectureQuestionPage";
+import LectureQuestionDetailPage from "./Lecture/LectureQnADetailPage";
 import LectureRegistPage from "./Lecture/LectureRegistPage";
 import QnAManagePage from "./Operator/QnAManage/OperatorQnA";
 import QnADeletePage from "./Operator/QnAManage/OperatorQnADelete";
@@ -32,7 +34,9 @@ import ReportCommendOnePage from "./Operator/ReportManage/OperatorCommendReportO
 import OperatorFAQList from "./Operator/FAQManage/OperatorFAQList";
 import BannerManagePage from "./Operator/BannerManage/OperatorBanner";
 import BannerAddPage from "./Operator/BannerManage/OperatorBannerAdd";
+import BannerDeletePage from "./Operator/BannerManage/OperatorBannerDelete";
 import FAQSearchResultPage from "./FAQ/FAQSearchResultPage";
+import MyPage from "./MyPage/MyPage";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ComplaintModal from "./Course/components/ComplaintModal";
 import CourseRegisterPage from "./Teacher/CourseRegisterPage";
@@ -62,6 +66,8 @@ function App() {
           <Route path="/MyBasket" element={<MyBasket/>}></Route>
           <Route path="/QnAPage/QnADetailPage/:id" element={<QnADetailPage />}></Route>
           <Route path="/LecturePage/:cid/:id" element={<LecturePage />}></Route>
+          <Route path="/LecturePage/:cid/:id/question" element={<LectureQuestionPage />}></Route>
+          <Route path="/LecturePage/:cid/:id/question/detailpage/:qid" element={<LectureQuestionDetailPage />}></Route>
           <Route path="/LectureRegistPage" element={<LectureRegistPage />}></Route>
           <Route path="/OperatorPage" element={<OperatorPage />}></Route>
           <Route path="/OperatorPage/CoOpManage" element={<CoOpManagePage />}></Route>
@@ -79,6 +85,7 @@ function App() {
 
           <Route path="/OperatorPage/BannerManage" element={<BannerManagePage />}></Route>
           <Route path="/OperatorPage/BannerManage/Add" element={<BannerAddPage />}></Route>
+          <Route path="/OperatorPage/BannerManage/Delete" element={<BannerDeletePage />}></Route>
 
           <Route path="/OperatorPage/OperatorFAQList" element={<OperatorFAQList />}></Route>
 
@@ -88,6 +95,7 @@ function App() {
           {/*<Route path="/ComplaintModal" element={<ComplaintModal/>}></Route>*/}
           <Route path="/Teacher/CourseRegisterPage" element={<CourseRegisterPage/>}></Route>
 
+          <Route path="/MyPage" element={<MyPage />}></Route>
 
         </Routes>
       </BrowserRouter>

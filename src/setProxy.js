@@ -34,4 +34,18 @@ module.exports = function(app) {
             changeOrigin: true,
         })
     );
+
+    app.use(
+        createProxyMiddleware( "/OperatorPage/ReportManage",{
+            target: " http://3.35.237.123:8080/",
+            changeOrigin: true,
+        })
+    );
+
+    app.use(
+        createProxyMiddleware( "/OperatorPage/CoOpManage",{
+            target: " http://15.165.249.107:8080/",
+            changeOrigin: true,
+        })
+    );
 };

@@ -2,26 +2,32 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
 
-function OperatorCoOpAddService({lectIndex, QuestionTitle,Question}) {
+function OperatorCoOpAddService({course_index, chapter, lecture_sequence, lectIndex, QuestionTitle,Question}) {
 
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
 
-    const [lectureQuestionDto, setLectureQuestionDto] = useState({
+    const lectureQuestionDto = {
+        userId : '1',
         lectureQuestionTitle : QuestionTitle,
         lectureQuestion:Question
-    });
+    };
 
-    const {lectureQuestionTitle, lectureQuestion} = lectureQuestionDto;
 
 
     useEffect(()=>{
 
+        console.log(lectureQuestionDto);
         const formData = new FormData();  // formData 생성
 
-        // formData.append('lectureQuestionDto', co_company_name);
+        // formData.append('images', new Blob([JSON.stringify('')], { type: "application/json" }));
+        formData.append('lectureQuestionDto', new Blob([JSON.stringify(lectureQuestionDto)], { type: "application/json" }));
 
-        const postCoOp = async () => {
+        for (let key of formData.keys()) {
+            console.log(key, ":", formData.get(key));
+        }
+
+        const postCQ = async () => {
             try{
                 setError(null);
                 const config = {
@@ -29,7 +35,7 @@ function OperatorCoOpAddService({lectIndex, QuestionTitle,Question}) {
                         "content-type": "multipart/form-data"
                     }
                 };
-                const response = await axios.post(`http://54.180.213.187:8080/lecture-service/lecture/${lectIndex}`, formData, config);
+                const response = await axios.post(`http://54.180.213.187:8080/lecture-service/lecture/${lectIndex}/question`, formData, config);
                 console.log(response);
                 setMessage(response.data.message);
 
@@ -38,7 +44,7 @@ function OperatorCoOpAddService({lectIndex, QuestionTitle,Question}) {
                 setMessage(e.response.data.message);
             }
         };
-        postCoOp();
+        postCQ();
     }, []);
 
 

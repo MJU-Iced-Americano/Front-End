@@ -14,7 +14,7 @@ const OperatorBanner=()=>{
             navigate("/OperatorPage/CoOpManage/Modify");
         };
         const deleteBannerPage = () => {
-            navigate("/OperatorPage/CoOpManage/Delete");
+            navigate("/OperatorPage/BannerManage/Delete");
         };
 
         return (

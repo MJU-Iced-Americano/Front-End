@@ -3,6 +3,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {Offcanvas} from "react-bootstrap";
 import AddCourseQuestion from "./AddCourseQuestion";
+import "../styles/OffCanvasQnA.css"
 
 function OffCanvasQnA({ courseIndex, lectIndex, name, ...props }) {
     const navigate = useNavigate();
@@ -23,7 +24,7 @@ function OffCanvasQnA({ courseIndex, lectIndex, name, ...props }) {
     };
 
     const navigateQuestion = () => {
-        // navigate(`/QnAPage/QnADetailPage/${index}`);
+        navigate(`/LecturePage/${courseIndex}/${lectIndex}/question`);
     };
     function btnTextChanger(){
         if (doEnroll) {
@@ -34,32 +35,38 @@ function OffCanvasQnA({ courseIndex, lectIndex, name, ...props }) {
 
     return (
         <>
-            <button variant="primary" onClick={handleShow} className="me-2">
-                질문과 답변
+            <button variant="primary" onClick={handleShow} className="LQuestionButton">
+                질문&답변
             </button>
             <Offcanvas show={show} onHide={handleClose} {...props}>
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>질문과 답변</Offcanvas.Title>
+                    <Offcanvas.Title >질문&답변</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <div>
-                        <input
-                            onChange={handleTChange}
-                            className="Chatting"
-                            placeholder="질문제목을 입력해주세요"
-                            value={lectureQuestionTitle}
-                        />
-                        <textarea
-                            onChange={handleChange}
-                            className="Chatting"
-                            placeholder="질문내용을 입력해주세요"
-                            value={lectureQuestion}
-                        />
-                        <button onClick={()=> setDoEnroll(!doEnroll)}>{btnTextChanger()}</button>
-                        {doEnroll===true?<AddCourseQuestion lectIndex={lectIndex} QuestionTitle={lectureQuestionTitle} Question={lectureQuestion}/>:<p></p>}
-                        <div>
-                            <button onClieck={navigateQuestion}>질문 확인하기</button>
+                        <div >
+                            <h4 className="LQuestion_title">질문제목</h4>
+                            <input
+                                onChange={handleTChange}
+                                className="LQuestionTitle"
+                                placeholder="질문제목을 입력해주세요"
+                                value={lectureQuestionTitle}
+                            />
                         </div>
+                        <div>
+                            <h4 className="LQuestion_title">질문내용</h4>
+                            <textarea
+                                onChange={handleChange}
+                                className="LQuestion"
+                                placeholder="질문내용을 입력해주세요"
+                                value={lectureQuestion}
+                            />
+                        </div>
+                        <div>
+                            <button className="LQuestionButton" onClick={()=> setDoEnroll(!doEnroll)}>{btnTextChanger()}</button>
+                            <button className="LQuestionButton" onClick={navigateQuestion}>질문 보기</button>
+                        </div>
+                        {doEnroll===true?<AddCourseQuestion lectIndex={lectIndex} QuestionTitle={lectureQuestionTitle} Question={lectureQuestion}/>:<p></p>}
                     </div>
                 </Offcanvas.Body>
             </Offcanvas>

@@ -33,7 +33,7 @@ const BannerSlider =()=>{
 
     useEffect(() => {
 
-        axios.get(`/board-service/banner/show/listBanner`)
+        axios.get(`http://3.34.240.33:8080/board-service/banner/show/listBanner`)
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
                 console.log(response.data)

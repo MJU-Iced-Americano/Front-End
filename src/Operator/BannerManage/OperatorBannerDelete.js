@@ -3,16 +3,18 @@ import { useNavigate } from "react-router-dom";
 import Body from "../../components/Body/Body";
 import OperatorCoOpDeleteService from "../CoOpManage/OperatorCoOpDeleteService";
 import axios from "axios";
+import "./styles/OperatorBanner.css"
+import OperatorBannerDeleteService from "./OperatorBannerDeleteService";
 
-const OperatorCoOpDelete=()=>{
+const OperatorBannerDelete=()=>{
 
-    const OperatorCoOpDeleteContent =()=>{
+    const OperatorBannerDeleteContent =()=>{
 
         const [data, setData] = useState([]);
 
         useEffect(() => {
 
-            axios.get(`http://15.165.249.107:8080/company-service/company/get`)
+            axios.get(`http://3.34.240.33:8080/board-service/banner/show/listBanner`)
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data)
@@ -22,9 +24,8 @@ const OperatorCoOpDelete=()=>{
                     // 데이터에서 객체를 추출하여 배열에 추가
                     for (let i = 0; i < data.list.length; i++) {
                         const obj = {
-                            id: data.list[i].id,
-                            CoCompany_name: data.list[i].coCompany_name,
-                            CoCompany_url: data.list[i].coCompany_url
+                            homeBannerIndex: data.list[i].homeBannerIndex,
+                            imageUrl: data.list[i].imageUrl
                         };
                         console.log(obj)
                         objects.push(obj);
@@ -38,11 +39,11 @@ const OperatorCoOpDelete=()=>{
                 });
         }, []);
 
-        const [companyIndex, setCompanyIndex] = useState('');
+        const [bannerIndex, setBannerIndex] = useState('');
         const [doEnroll, setDoEnroll] = useState(false);
 
         const onChange =(e) => {
-            setCompanyIndex(e.target.value);
+            setBannerIndex(e.target.value);
         }
 
         function btnTextChanger(){
@@ -54,25 +55,21 @@ const OperatorCoOpDelete=()=>{
 
         return (
             <div className="CoOpManage">
-                <h1>회사 협력사 삭제 페이지입니다.</h1>
+                <h1>배너 삭제 페이지입니다.</h1>
                 <br></br>
                 <div>
-                    <h1>협력사 정보</h1>
+                    <h1>배너 정보</h1>
                     {data.map((item) => (
-                        <div className="CoOpShow">
-                            <table className="CoOpShowTable">
+                        <div className="BannerShow">
+                            <table className="BannerTable">
                                 <tbody>
                                 <tr>
-                                    <td>협력사 index 번호</td>
-                                    <td>{item.id}</td>
+                                    <td>이미지 index 번호</td>
+                                    <td>{item.homeBannerIndex}</td>
                                 </tr>
                                 <tr>
-                                    <td>협력사 이름</td>
-                                    <td>{item.CoCompany_url}</td>
-                                </tr>
-                                <tr>
-                                    <td>협력사 url</td>
-                                    <td>{item.CoCompany_name}</td>
+                                    <td>이미지</td>
+                                    <td><img className="bannerShow" src={item.imageUrl}/></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -80,13 +77,13 @@ const OperatorCoOpDelete=()=>{
                     ))}
                 </div>
                 <br></br>
-                <h1>삭제 협력사 정보를 입력하세요</h1>
+                <h1>삭제 배너 정보를 입력하세요</h1>
                 <div>
-                    <input placeholder="Company index를 적으시오" onChange={onChange} value={companyIndex} className="inputCoOpInfo" type='number'/>
+                    <input placeholder="Banner index를 적으시오" onChange={onChange} value={bannerIndex} className="inputCoOpInfo" type='number'/>
                 </div>
                 <div>
                     <button className="inCoOpButton" onClick={()=> {setDoEnroll(!doEnroll);}}>{btnTextChanger()}</button>
-                    {doEnroll===true?<OperatorCoOpDeleteService companyIndex={companyIndex} />:<p></p>}
+                    {doEnroll===true?<OperatorBannerDeleteService bannerIndex={bannerIndex} />:<p></p>}
                 </div>
             </div>
         );
@@ -94,10 +91,10 @@ const OperatorCoOpDelete=()=>{
 
     return(
         <Body>
-            <OperatorCoOpDeleteContent/>
+            <OperatorBannerDeleteContent/>
         </Body>
     );
 }
 
-export default OperatorCoOpDelete;
+export default OperatorBannerDelete;
 

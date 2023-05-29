@@ -5,6 +5,7 @@ import ReactPlayer from 'react-player/lazy';
 import {Offcanvas} from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import {BsPlayCircle} from "react-icons/bs";
+import "../styles/OffCanvasCurriculam.css"
 
 function OffCanvasCurriculam({courseIndex, lectIndex, name, ...props}) {
     const [show, setShow] = useState(false);
@@ -43,10 +44,10 @@ function OffCanvasCurriculam({courseIndex, lectIndex, name, ...props}) {
 
     return (
         <>
-            <button variant="primary" onClick={handleShow} className="me-2">
+            <button variant="primary" onClick={handleShow} className="LCurriButton">
                 커리큘럼
             </button>
-            <Offcanvas show={show} onHide={handleClose} {...props}>
+            <Offcanvas show={show} onHide={handleClose} {...props} style={{width:'800px'}}>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>커리큘럼 선택</Offcanvas.Title>
                 </Offcanvas.Header>
