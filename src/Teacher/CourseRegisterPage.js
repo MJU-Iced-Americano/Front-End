@@ -1,110 +1,275 @@
 
 import Body from "../components/Body/Body";
-import React from "react";
-import '../Course/CourseMainPage.css';
-
+import React, {useCallback, useEffect, useState} from "react";
+import '../Teacher/styles/CourseRegisterPage.css';
 import {Link} from "react-router-dom";
 import {RiHeart2Fill, RiHeart2Line} from "react-icons/ri";
 import {GrCart} from "react-icons/gr";
-import Accordion from "react-bootstrap/Accordion";
-import {BsPlayCircle} from "react-icons/bs";
-import full_cocoa from "../assets/icons/socoa-icon 1.png";
-import cocoa_5 from "../assets/icon_group/cocoa_5.png";
-import cocoa_4 from "../assets/icon_group/cocoa_4.png";
-import cocoa_3 from "../assets/icon_group/cocoa_3.png";
-import cocoa_2 from "../assets/icon_group/cocoa_2.png";
-import cocoa_1 from "../assets/icon_group/cocoa_1.png";
-import {FaAngleDown, FaRegThumbsUp} from "react-icons/fa";
-import defaultimage from "../assets/temp/image 14.png";
-import {AiFillAlert} from "react-icons/ai";
-import ComplaintModal from "../Course/components/ComplaintModal";
+import axios from "axios";
 
-const CourseRegisterPage=() => {
-    const CourseRegisterContent=()=>{
-        return (
+const CourseRegisterPage = () => {
+    const [skillInput, setSkillInput] = useState("");
+    const [form, setForm] = useState({
+        category: "",
+        courseName: "",
+        price: 0,
+        courseDescription: "",
+        difficulty: 0,
+        skillList: [],
+        curriculumCreateDtos: [
+            {
+                chapter: 0,
+                curriculumTitle: "",
+                lectureSum: 0
+            }
+        ],
+        titlePhoto: ""
+    });
 
-            <div className="whole">
-                <div className="overview_top">
-                    <div className="overview_1">
-                        <div className="course_category">ㅋㅋ</div>
-                        <div className="course_name">ㅋㅋ</div>
-                    </div>
-                    <div className="overview_2">
-                        <div className="course_like">
-                            <RiHeart2Fill size={45}/>
-                        </div>
-                        <div>6363</div>
-                    </div>
-                </div>
-                <hr/>
-                <div className="overview_bottom">
-                    <div className="overview_left">
-                        <div className="video_temp"></div>
-                        <div className="regi_button">
-                            <div className="course_regi">수강하러 가기</div>
-                            <div className="course_cart"><GrCart size={28}/></div>
-                            {/*cart 색깔 변경부터 다시 시작 */}
-                        </div>
-                    </div>
-                    <div className="overview_right">
-                        <div className="tag_wrapper">
-                            <div className="tags">
-                                tags
-                            </div>
-                        </div>
-                        <div className="overview_detail">
-                            {/* 나중에 div로 쪼갤것*/}
-                            <div className="details">강사<br/></div>
-                            <div className="details">누적 강의 조회수 <br/></div>
-                            <div className="details">총 강의시간 <br/></div>
-                            <div className="details">가격 <br/></div>
-                            <div className="details">난이도 :
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr/>
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        console.log(name, value);
+        setForm((prevForm) => ({
+            ...prevForm,
+            [name]: value
+        }));
+    };
+    // const handleInputChange = (e) => {
+    //     const { name, value } = e.target;
+    //     console.log(name, value);
+    //     const [fieldName, index, fieldProperty] = name.match(/\[(.*?)\]/g).map((match) => match.replace(/[\[\]']+/g, '').split('.'));
+    //     setForm((prevForm) => {
+    //         const curriculumCreateDtos = [...prevForm.curriculumCreateDtos];
+    //         curriculumCreateDtos[index] = {
+    //             ...curriculumCreateDtos[index],
+    //             [fieldProperty]: value
+    //         };
+    //         return {
+    //             ...prevForm,
+    //             curriculumCreateDtos
+    //         };
+    //     });
+    // };
 
-                <div className="description_wrapper" id="section1">
-                    <div className="for_anchor"></div>
+    const addSkill = () => {
+        setForm((prevForm) => ({
+            ...prevForm,
+            skillList: [...prevForm.skillList, skillInput]
+        }));
+        console.log(skillInput);
+        console.log(form.skillList + "!");
+        setSkillInput(""); // Reset the skill input value after adding it to the skillList
 
-                    <div className="section_title">강의설명</div>
-                    <div className="description_detail">
-                        이러쿵~저러쿵~
-                    </div>
-                </div>
-                <div className="curriculum_wrapper" id="section2">
-                    <div className="for_anchor"></div>
-                    <div className="section_title">커리큘럼</div>
+    };
 
-                    {/*<Accordion className="accWhole" defaultActiveKey="0" flush>*/}
-                    {/*    {detail.curriculumReadDtoList && detail.curriculumReadDtoList.map((cur, i) => (*/}
-
-                    {/*        <Accordion.Item className="item" eventKey={i}>*/}
-                    {/*            <Accordion.Header className="chapter" >Chapter {i+1}. {cur.curriculumTitle}</Accordion.Header>*/}
-                    {/*            {cur.lectureReadDtos && cur.lectureReadDtos.map((lec, i) => (*/}
-                    {/*                <Accordion.Body className="chapter_detail" key={i}>*/}
-                    {/*                    <div><BsPlayCircle/></div>*/}
-                    {/*                    <div className="lecture_title">{lec.lectureTitle}</div>*/}
-                    {/*                    <div className="time">{lec.lectureTime}</div>*/}
-                    {/*                </Accordion.Body>*/}
-                    {/*            ))}*/}
-
-                    {/*        </Accordion.Item>*/}
-                    {/*    ))}*/}
-                    {/*</Accordion>*/}
-                </div>
-            </div>
-
-        );
+    const handleCurriculumChange = (index, e) => {
+        const { name, value } = e.target;
+        console.log("핫");
+        setForm((prevForm) => {
+            const curriculumCreateDtos = [...prevForm.curriculumCreateDtos];
+            curriculumCreateDtos[index] = {
+                ...curriculumCreateDtos[index],
+                [name]: value
+            };
+            return {
+                ...prevForm,
+                curriculumCreateDtos
+            };
+        });
+    };
+    const handleChapterCountChange = (e) => {
+        const count = parseInt(e.target.value);
+        setForm((prevForm) => {
+            const curriculumCreateDtos = Array.from({length: count}, (_, index) => ({
+                chapter: index + 1,
+                curriculumTitle: "",
+                lectureSum: 0
+            }));
+            return {
+                ...prevForm,
+                curriculumCreateDtos
+            };
+        });
     }
 
-    return(
+    const addCurriculum = () => {
+        setForm((prevForm) => {
+            const curriculumCreateDtos = [...prevForm.curriculumCreateDtos];
+            curriculumCreateDtos.push({
+                chapter: 0,
+                curriculumTitle: "",
+                lectureSum: 0
+            });
+            return {
+                ...prevForm,
+                curriculumCreateDtos
+            };
+        });
+    };
+    // const addSkill = () => {
+    //     setForm((prevForm) => ({
+    //         ...prevForm,
+    //         skillList: [...prevForm.skillList, ""]
+    //     }));
+    // };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(form.courseName);
+        const formData = new FormData();
+        formData.append("courseCreateDto", JSON.stringify(form));
+
+        axios
+            .post("http://54.180.213.187:8080/course-service/course/manage/new-course", formData)
+            .then((response) => {
+                // POST 요청 성공 처리
+                console.log(response.data);
+            })
+            .catch((error) => {
+                // POST 요청 실패 처리
+                console.error(error);
+            });
+    };
+
+    const CourseRegisterContent = () => {
+        return (
+            <form onSubmit={handleSubmit}>
+                {/* Category and other input fields */}
+                {/*<label>*/}
+                {/*    Course Name:*/}
+                {/*    <input*/}
+                {/*        type="text"*/}
+                {/*        name="courseName"*/}
+                {/*        value={form.courseName}*/}
+                {/*        onChange={handleInputChange}*/}
+                {/*    />*/}
+                {/*</label>*/}
+                <br />
+
+                <br />
+                {/* Title Photo and other input fields */}
+                <button type="submit">Submit</button>
+            </form>
+        );
+    };
+
+    return (
         <Body>
-            <CourseRegisterContent/>
+            <div>
+                <label htmlFor="category">카테고리 선택:</label>
+                <select id="category" name="category" value={form.category} onChange={handleInputChange}>
+                    <option value="">선택하세요</option>
+                    <option value="개발-프로그래밍">개발-프로그래밍</option>
+                    <option value="보안-네트워크">보안-네트워크</option>
+                    <option value="게임 개발">게임 개발</option>
+                    <option value="데이터 사이언스">데이터 사이언스</option>
+                </select>
+                <label>
+                    코스 이름 :
+                    <input
+                        type="text"
+                        name="courseName"
+                        value={form.courseName}
+                        onChange={handleInputChange}
+                    />
+                </label>
+                <label>
+                    코스 가격 :
+                    <input
+                        type="number"
+                        name="price"
+                        value={form.price}
+                        onChange={handleInputChange}
+                        className="inputNumber"
+                    />
+                </label>
+                <label>
+                    코스 설명 :
+                    <textarea
+                        name="courseDescription"
+                        value={form.courseDescription}
+                        onChange={handleInputChange}
+                    />
+                </label>
+                <label htmlFor="difficulty">난이도 : </label>
+                <select id="difficulty" name="difficulty" value={form.difficulty} onChange={handleInputChange}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <label>
+                    Skill List:
+                    <input
+                        type="text"
+                        name="skillList"
+                        value={skillInput}
+                        onChange={(e) => setSkillInput(e.target.value)}
+                    />
+                </label>
+                <button type="button" onClick={addSkill}>Add Skill</button>
+                {form.skillList.map((skill, index) => (
+                    <div key={index}>
+                        <label>
+                            Skill {index + 1}:
+                            <input
+                                type="text"
+                                name="skillList"
+                                value={skill}
+                                onChange={(e) => {
+                                    const updatedSkillList = [...form.skillList];
+                                    updatedSkillList[index] = e.target.value;
+                                    setForm((prevForm) => ({
+                                        ...prevForm,
+                                        skillList: updatedSkillList
+                                    }));
+                                }}
+                            />
+                        </label>
+                    </div>
+                ))}
+                <label htmlFor="chapterCount">챕터 개수 선택:</label>
+                <select id="chapterCount" name="chapterCount" value={form.curriculumCreateDtos.length} onChange={handleChapterCountChange}>
+                    <option value="0">선택하세요</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    {/* Add more options as needed */}
+                </select>
+
+                {form.curriculumCreateDtos.map((curriculum, index) => (
+                    <div key={index}>
+                        <div>Chapter {curriculum.chapter}</div>
+                        <label>
+                            챕터 제목 :
+                            <input
+                                type="text"
+                                name={`curriculumCreateDtos[${index}].curriculumTitle`}
+                                value={curriculum.curriculumTitle}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            강의 개수 :
+                            <input
+                                type="number"
+                                name={`curriculumCreateDtos[${index}].lectureSum`}
+                                value={curriculum.lectureSum}
+                                onChange={handleInputChange}
+                                className="inputNumber"
+                            />
+                        </label>
+                        <br />
+                    </div>
+                ))}
+
+            </div>
+            <CourseRegisterContent />
         </Body>
-    )
-}
+    );
+};
 
 export default CourseRegisterPage;

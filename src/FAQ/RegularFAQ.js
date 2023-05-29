@@ -11,7 +11,7 @@ const RegularFAQ = () => {
         const [data, setData] = useState([]);
         useEffect(() => {
 
-            axios.get(`/board-service/faq/show/listFaqGeneral`)
+            axios.get(`http://3.34.240.33:8080/board-service/faq/show/listFaqGeneral`)
 
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.

@@ -16,7 +16,7 @@ const OperatorFAQList = () => {
 
     useEffect(() => {
 
-        axios.get(`/board-service/faq/show/listFaqGeneral`)
+        axios.get(`http://3.34.240.33:8080/board-service/faq/show/listFaqGeneral`)
 
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
@@ -45,7 +45,7 @@ const OperatorFAQList = () => {
                 console.error(error);
             });
 
-        axios.get(`/board-service/faq/show/listFaqAdu`)
+        axios.get(`http://3.34.240.33:8080/board-service/faq/show/listFaqAdu`)
 
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
@@ -76,7 +76,7 @@ const OperatorFAQList = () => {
 
     const handleAddFormSubmit = (event) => {
         event.preventDefault();
-        axios.post(`/board-service/faq/register`, newFaq)
+        axios.post(`http://3.34.240.33:8080/board-service/faq/register`, newFaq)
             .then(response => {
                 console.log(response);
                 setNewFaq({type : "", faqTitle: "", faqContent: "" });
@@ -120,7 +120,7 @@ const OperatorFAQList = () => {
             type : setType,
         };
 
-        axios.put(`/board-service/faq/update/${setId}`, updatedFaq)
+        axios.put(`http://3.34.240.33:8080/board-service/faq/update/${setId}`, updatedFaq)
             .then(response => {
                 // 성공적으로 수정되었을 때의 처리
                 console.log("FAQ 업데이트 성공:", response.data);
@@ -136,7 +136,7 @@ const OperatorFAQList = () => {
 
     const handleDelete = (faqIndex)=> {
         //delete는 body값으로 보내줘야됨.
-        axios.delete(`/board-service/faq/delete/${faqIndex}`, {
+        axios.delete(`http://3.34.240.33:8080/board-service/faq/delete/${faqIndex}`, {
             data : {
                 faqIndex : {faqIndex}
             }

@@ -49,13 +49,13 @@ const CourseMainPage=(props)=> {
     const getReviews = (order) => {
         let url = "";
         if (order === "date") {
-            url = `http://localhost:8083/review-service/review/getDate`;
+            url = `http://43.200.124.135:8000/review-service/review/getDate`;
         } else if (order === "like") {
-            url = `http://localhost:8083/review-service/review/getLiked`;
+            url = `http://43.200.124.135:8000/review-service/review/getLiked`;
         } else if (order === "dGrade") {
-            url = `http://localhost:8083/review-service/review/getDgrade`;
+            url = `http://43.200.124.135:8000/review-service/review/getDgrade`;
         } else if (order === "aGrade") {
-            url = `http://localhost:8083/review-service/review/getAgrade`;
+            url = `http://43.200.124.135:8000/review-service/review/getAgrade`;
         }
         axios.get(url)
 
@@ -88,7 +88,6 @@ const CourseMainPage=(props)=> {
             });
 
     }
-
     const getDetails = (courseIndex) => {
         axios.get(`http://54.180.213.187:8080/course-service/course/${courseIndex}`)
             .then(response => {
@@ -137,7 +136,7 @@ const CourseMainPage=(props)=> {
     // }
 
     const handleLike = (index) => {
-        axios.get(`http://localhost:8083/review-service/review/inlike/${index}`)
+        axios.get(`http://43.200.124.135:8000/review-service/review/inlike/${index}`)
             .then(response => {
                 console.log(response.data);
                 console.log(index + "이거야. ");
@@ -176,7 +175,7 @@ const CourseMainPage=(props)=> {
     const handleAddReview = (event) => {
         event.preventDefault();
         const reviewData = { ...newReview };
-        axios.post(`http://localhost:8083/review-service/review/register`,reviewData)
+        axios.post(`http://43.200.124.135:8000/review-service/review/register`,reviewData)
             .then(response => {
                 console.log(response);
                 setNewReview({review_content : "", grade :0, user_name : "default", user_photo: ""});
@@ -262,7 +261,9 @@ const CourseMainPage=(props)=> {
                 <hr/>
                 <div className="overview_bottom">
                     <div className="overview_left">
-                        <div className="video_temp"></div>
+                        <div className="video_temp">
+                            <img src={detail.courseTitlePhotoUrl} className="lectureThumbnail" alt="lecture"/>
+                        </div>
                         <div className="regi_button">
                             <div className="course_regi">수강하러 가기</div>
                             <div className="course_cart"><GrCart size={28}/></div>

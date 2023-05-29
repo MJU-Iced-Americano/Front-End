@@ -59,6 +59,7 @@
     border : 2px #6667ab solid;
     border-radius: 45px;
     padding: 15px 0;
+    cursor : pointer;
 }
 
 .course-side-nav-bar-item:first-child {
