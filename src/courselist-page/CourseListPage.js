@@ -163,7 +163,7 @@ const CourseListPage =()=> {
                                 {data.map((item, i) =>(
                                     <div className="course-Tile" key={i}>
                                         <Link to={`/Course/${item.courseIndex}`}>
-                                            <img src={item.courseTitlePhotoUrl} className="lectureImg" alt="lecture1"/>
+                                            <img src={item.courseTitlePhotoUrl} className="lectureThumbnail_2" alt="lecture1"/>
                                         </Link>
                                         <div>
                                             {item.courseName}
