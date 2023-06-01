@@ -46,13 +46,13 @@ const CourseMainPage = (props) => {
     const getReviews = (order) => {
         let url = "";
         if (order === "date") {
-            url = `http://43.200.124.135:8000/review-service/review/getDate`;
+            url = `http://gateway.socoa.online:8000/review-service/review/getDate`;
         } else if (order === "like") {
-            url = `http://43.200.124.135:8000/review-service/review/getLiked`;
+            url = `http://gateway.socoa.online:8000/review-service/review/getLiked`;
         } else if (order === "dGrade") {
-            url = `http://43.200.124.135:8000/review-service/review/getDgrade`;
+            url = `http://gateway.socoa.online:8000/review-service/review/getDgrade`;
         } else if (order === "aGrade") {
-            url = `http://43.200.124.135:8000/review-service/review/getAgrade`;
+            url = `http://gateway.socoa.online:8000/review-service/review/getAgrade`;
         }
         axios.get(url)
 
@@ -86,7 +86,7 @@ const CourseMainPage = (props) => {
 
     }
     const getDetails = (courseIndex) => {
-        axios.get(`http://54.180.213.187:8080/course-service/course/${courseIndex}`)
+        axios.get(`http://gateway.socoa.online:8000/course-service/course/${courseIndex}`)
             .then(response => {
                 const data = response.data.data;
                 console.log(data);
@@ -133,7 +133,7 @@ const CourseMainPage = (props) => {
     // }
 
     const handleLike = (index) => {
-        axios.get(`http://43.200.124.135:8000/review-service/review/inlike/${index}`)
+        axios.get(`http://gateway.socoa.online:8000/review-service/review/inlike/${index}`)
             .then(response => {
                 console.log(response.data);
                 console.log(index + "이거야. ");
@@ -144,14 +144,6 @@ const CourseMainPage = (props) => {
             });
     }
     const handleLikeClicked = () => {
-        // axios.get(`http://54.180.213.187:8080/course-service/course/${courseIndex}`)
-        //     .then(response => {
-        //         const data = response.data.data;
-        //         console.log(data);
-        //     })
-        //     .catch(error => {
-        //         console.error(error);
-        //     });
         setLiked(!liked);
     };
 
@@ -172,7 +164,7 @@ const CourseMainPage = (props) => {
     const handleAddReview = (event) => {
         event.preventDefault();
         const reviewData = {...newReview};
-        axios.post("http://13.209.194.108:8080/review-service/review/register", reviewData)
+        axios.post("http://gateway.socoa.online:8000/review-service/review/register", reviewData)
             .then(response => {
                 console.log(response);
                 setNewReview({review_content: "", grade: 0, user_name: "default", user_photo: ""});
