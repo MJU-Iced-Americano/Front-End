@@ -41,6 +41,7 @@
           <option value="http://tiles.apache.org/" />
           <option value="http://openapi.map.naver.com" />
           <option value="http://backend1.cdtkhh7bqkna.ap-northeast-2.rds.amazonaws.com" />
+          <option value="http://gateway.socoa.online" />
         </list>
       </option>
     </inspection_tool>

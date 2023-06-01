@@ -71,8 +71,10 @@ const LectureQnADetailPage =() => {
                         placeholder="답변을 입력해주세요"
                         value={answer}
                     />
+                    <div>
                     <button className="LQuestionButton" onClick={()=> setDoEnroll(!doEnroll)}>{btnTextChanger()}</button>
                     {doEnroll===true?<AddAnswer qIndex={qIndex} Answer={answer}/>:<p></p>}
+                    </div>
                 </div>
             </div>
         );

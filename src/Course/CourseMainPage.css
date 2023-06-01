@@ -463,7 +463,10 @@ hr.ver_line {
 
 
 }
-
+.Canvasa{
+    text-decoration: none;
+    color: black;
+}
 .lecture_title {
     margin-left: 10px;
     font-size: 19px;

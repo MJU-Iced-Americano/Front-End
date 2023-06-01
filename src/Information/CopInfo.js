@@ -9,7 +9,7 @@ function CopInfo() {
 
     useEffect(() => {
 
-        axios.get(`http://15.165.249.107:8080/company-service/company/get`)
+        axios.get(`http://gateway.socoa.online:8000/company-service/company/get`)
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
                 console.log(response.data)
