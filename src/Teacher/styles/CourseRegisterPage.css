@@ -11,3 +11,10 @@
     border-right-width: 0;
     border-bottom-width: 1px;
 }
+
+.course_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

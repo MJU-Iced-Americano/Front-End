@@ -290,7 +290,7 @@ const CourseMainPage = (props) => {
                                 {cur.lectureReadDtos && cur.lectureReadDtos.map((lec, i) => (
                                     <Accordion.Body className="chapter_detail" key={i}>
                                         <div><BsPlayCircle/></div>
-                                        <div className="lecture_title"><a href={`/LecturePage/${courseIndex}/${lec.lectureIndex}`}>{lec.lectureTitle}</a></div>
+                                        <div className="lecture_title"><a className="Canvasa" href={`/LecturePage/${courseIndex}/${lec.lectureIndex}`}>{lec.lectureTitle}</a></div>
                                         <div className="time">{lec.lectureTime}</div>
                                     </Accordion.Body>
                                 ))}

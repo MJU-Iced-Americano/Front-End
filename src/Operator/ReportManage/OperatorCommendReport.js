@@ -11,7 +11,7 @@ const OperatorCommendReport=()=>{
 
         useEffect(() => {
 
-            axios.get(`/complaint-service/commend/show/listQnA`)
+            axios.get(`http://3.35.237.123:8080/complaint-service/commend/show/listQnA`)
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data)

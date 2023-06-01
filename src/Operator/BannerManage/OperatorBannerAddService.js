@@ -11,7 +11,7 @@ function OperatorBannerAddService({imageUrl}) {
     useEffect(()=>{
         const formData = new FormData();  // formData 생성
 
-        formData.append('imageUrl', imageUrl);
+        formData.append('image',  new Blob([JSON.stringify(imageUrl)], { type: "application/json" }));
 
         for (let key of formData.keys()) {
             console.log(key, ":", formData.get(key));
@@ -22,10 +22,10 @@ function OperatorBannerAddService({imageUrl}) {
                 setError(null);
                 const config = {
                     headers: {
-                        "content-type": "multipart/form-data"
+                        "Content-type": "multipart/form-data"
                     }
                 };
-                const response = await axios.post('http://3.34.240.33:8080//board-service/banner/register', formData, config);
+                const response = await axios.post('http://3.34.240.33:8080/board-service/banner/register', formData, config);
                 console.log(response);
                 setMessage(response.data.message);
 

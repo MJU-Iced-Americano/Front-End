@@ -2,26 +2,31 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
 
-function OperatorCoOpAddService({co_company_name,coCompany_photo_url,co_company_url}) {
+function OperatorCoOpAddService({qIndex, Answer}) {
 
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
 
+    const answerCreateDto = {
+        userId : 1,
+        answer : Answer
+    };
+
+
 
     useEffect(()=>{
+
+        console.log(answerCreateDto);
         const formData = new FormData();  // formData 생성
 
-        console.log(co_company_name);
-        console.log(co_company_url);
-        formData.append('CoCompany_name', co_company_name);
-        formData.append('CoCompany_url', co_company_url);
-        formData.append('image', new Blob([JSON.stringify(coCompany_photo_url)], { type: "application/json" }));
+        // formData.append('images', '');
+        formData.append('answerCreateDto', new Blob([JSON.stringify(answerCreateDto)], { type: "application/json" }));
 
         for (let key of formData.keys()) {
             console.log(key, ":", formData.get(key));
         }
 
-        const postCoOp = async () => {
+        const postAnswer = async () => {
             try{
                 setError(null);
                 const config = {
@@ -29,7 +34,7 @@ function OperatorCoOpAddService({co_company_name,coCompany_photo_url,co_company_
                         "content-type": "multipart/form-data"
                     }
                 };
-                const response = await axios.post('http://15.165.249.107:8080//company-service/company/register', formData, config);
+                const response = await axios.post(`http://54.180.213.187:8080/lecture-service/lecture/${qIndex}/answer`, formData, config);
                 console.log(response);
                 setMessage(response.data.message);
 
@@ -38,7 +43,7 @@ function OperatorCoOpAddService({co_company_name,coCompany_photo_url,co_company_
                 setMessage(e.response.data.message);
             }
         };
-        postCoOp();
+        postAnswer();
     }, []);
 
 

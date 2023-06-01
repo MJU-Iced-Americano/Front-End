@@ -13,7 +13,7 @@ function OperatorCoOpDeleteService({companyIndex}) {
         const fetchCoOp = async () => {
             try{
                 setError(null);
-                const response = await axios.delete(`/company-service/company/delete/${companyIndex}`);
+                const response = await axios.delete(`http://15.165.249.107:8080/company-service/company/delete/${companyIndex}`);
                 console.log(response);
             }catch(e){
                 setError(e);

@@ -24,7 +24,7 @@ const OperatorQnAReportOne=()=>{
 ////////////////////////////////////신고 게시물 불러오기///////////////////////////////////
         useEffect(() => {
 
-            axios.get(`/complaint-service/question/content/show/${index}`)
+            axios.get(`http://3.35.237.123:8080/complaint-service/question/content/show/${index}`)
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data)
@@ -57,7 +57,7 @@ const OperatorQnAReportOne=()=>{
         ////////////////////////////////////신고정보 불러오기///////////////////////////////////
         useEffect(() => {
 
-            axios.get(`/complaint-service/question/complaint/show/${index}`)
+            axios.get(`http://3.35.237.123:8080/complaint-service/question/complaint/show/${index}`)
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data)

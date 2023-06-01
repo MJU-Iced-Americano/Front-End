@@ -4,9 +4,9 @@ import "./styles/LectureRegistPage.css"
 import axios from "axios";
 import LectureRegistService from "./LectureRegistService";
 
-const LectureRegistPage=()=>{
+const LectureRegistPage=({course_index, chapter, lecture_sequence})=>{
 
-    const LectureRegistPageContent =(course_index, chapter, lecture_sequence)=> {
+    const LectureRegistPageContent =({course_index, chapter, lecture_sequence})=> {
         const [doEnroll, setDoEnroll] = useState(false);
         const inputRef = useRef(null);
         const [inputs, setInputs] = useState({
@@ -47,14 +47,14 @@ const LectureRegistPage=()=>{
                 {/*<button onClick={handleButtonClick}>비디오 선택</button>*/}
                 <input name="videoURL" ref={inputRef} type="file" accept="video/*" value={videoURL} onChange={onChange} className="inputLectureInfo"/>
                 <button  className="inLectureButton" onClick={()=> setDoEnroll(!doEnroll)}>{btnTextChanger()}</button>
-                {doEnroll===true?<LectureRegistService lectureTitle={lectureTitle} lectureDescription={lectureDescription} videoURL={videoURL}/>:<p></p>}
+                {doEnroll===true?<LectureRegistService course_index={course_index} chapter={chapter} lecture_sequence={lecture_sequence} lectureTitle={lectureTitle} lectureDescription={lectureDescription} videoURL={videoURL}/>:<p></p>}
             </div>
         );
     }
 
     return(
         <Body>
-            <LectureRegistPageContent />
+            <LectureRegistPageContent course_index={course_index} chapter={chapter} lecture_sequence={lecture_sequence}/>
         </Body>
     );
 }

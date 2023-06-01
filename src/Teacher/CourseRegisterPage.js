@@ -1,10 +1,7 @@
-
 import Body from "../components/Body/Body";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useState} from "react";
 import '../Teacher/styles/CourseRegisterPage.css';
 import {Link} from "react-router-dom";
-import {RiHeart2Fill, RiHeart2Line} from "react-icons/ri";
-import {GrCart} from "react-icons/gr";
 import axios from "axios";
 
 const CourseRegisterPage = () => {
@@ -28,7 +25,7 @@ const CourseRegisterPage = () => {
 
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         console.log(name, value);
         setForm((prevForm) => ({
             ...prevForm,
@@ -58,28 +55,25 @@ const CourseRegisterPage = () => {
             skillList: [...prevForm.skillList, skillInput]
         }));
         console.log(skillInput);
-        console.log(form.skillList + "!");
+        console.log(form.skillList.join(", ") + "!");
         setSkillInput(""); // Reset the skill input value after adding it to the skillList
 
     };
 
-    const handleCurriculumChange = (index, e) => {
-        const { name, value } = e.target;
-        console.log("핫");
-        setForm((prevForm) => {
-            const curriculumCreateDtos = [...prevForm.curriculumCreateDtos];
-            curriculumCreateDtos[index] = {
-                ...curriculumCreateDtos[index],
-                [name]: value
-            };
-            return {
-                ...prevForm,
-                curriculumCreateDtos
-            };
-        });
+    const handleCurriculumChange = (e, index) => {
+        console.log("유휴~");
+        const {name, value} = e.target;
+        const updatedCurriculum = [...form.curriculumCreateDtos];
+        updatedCurriculum[index][name] = value;
+
+        setForm(prevForm => ({
+            ...prevForm,
+            curriculumCreateDtos: updatedCurriculum
+        }));
     };
     const handleChapterCountChange = (e) => {
         const count = parseInt(e.target.value);
+        //아마 안될 걸?
         setForm((prevForm) => {
             const curriculumCreateDtos = Array.from({length: count}, (_, index) => ({
                 chapter: index + 1,
@@ -93,44 +87,38 @@ const CourseRegisterPage = () => {
         });
     }
 
-    const addCurriculum = () => {
-        setForm((prevForm) => {
-            const curriculumCreateDtos = [...prevForm.curriculumCreateDtos];
-            curriculumCreateDtos.push({
-                chapter: 0,
-                curriculumTitle: "",
-                lectureSum: 0
-            });
-            return {
-                ...prevForm,
-                curriculumCreateDtos
-            };
-        });
-    };
-    // const addSkill = () => {
-    //     setForm((prevForm) => ({
-    //         ...prevForm,
-    //         skillList: [...prevForm.skillList, ""]
-    //     }));
-    // };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(form.courseName);
-        const formData = new FormData();
-        formData.append("courseCreateDto", JSON.stringify(form));
 
-        axios
-            .post("http://54.180.213.187:8080/course-service/course/manage/new-course", formData)
-            .then((response) => {
-                // POST 요청 성공 처리
-                console.log(response.data);
-            })
-            .catch((error) => {
-                // POST 요청 실패 처리
-                console.error(error);
-            });
-    };
+        // form 데이터를 formData로 변환
+        const formData = new FormData();
+        formData.append("category", form.category);
+        formData.append("courseName", form.courseName);
+        formData.append("price", form.price);
+        formData.append("courseDescription", form.courseDescription);
+        formData.append("difficulty", form.difficulty);
+        formData.append("skillList", JSON.stringify(form.skillList));
+        form.curriculumCreateDtos.forEach((curriculum, index) => {
+            formData.append(`curriculumCreateDtos[${index}].chapter`, curriculum.chapter);
+            formData.append(`curriculumCreateDtos[${index}].curriculumTitle`, curriculum.curriculumTitle);
+            formData.append(`curriculumCreateDtos[${index}].lectureSum`, curriculum.lectureSum);
+        });
+        formData.append("titlePhoto", form.titlePhoto);
+
+        // POST 요청 보내기
+        await axios({
+            method: 'post',
+            url: "http://54.180.213.187:8080/course-service/course/manage/new-course",
+            data: formData,
+        }).then(response => {
+            console.log("등록 완료:", response.data)
+        }).catch(error => {
+            console.error(error);
+        });
+
+
+    }
 
     const CourseRegisterContent = () => {
         return (
@@ -145,9 +133,9 @@ const CourseRegisterPage = () => {
                 {/*        onChange={handleInputChange}*/}
                 {/*    />*/}
                 {/*</label>*/}
-                <br />
+                <br/>
 
-                <br />
+                <br/>
                 {/* Title Photo and other input fields */}
                 <button type="submit">Submit</button>
             </form>
@@ -156,7 +144,7 @@ const CourseRegisterPage = () => {
 
     return (
         <Body>
-            <div>
+            <div className="course_form">
                 <label htmlFor="category">카테고리 선택:</label>
                 <select id="category" name="category" value={form.category} onChange={handleInputChange}>
                     <option value="">선택하세요</option>
@@ -231,43 +219,47 @@ const CourseRegisterPage = () => {
                     </div>
                 ))}
                 <label htmlFor="chapterCount">챕터 개수 선택:</label>
-                <select id="chapterCount" name="chapterCount" value={form.curriculumCreateDtos.length} onChange={handleChapterCountChange}>
+                <select id="chapterCount" name="chapterCount" value={form.curriculumCreateDtos.length}
+                        onChange={handleChapterCountChange}>
                     <option value="0">선택하세요</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
-                    {/* Add more options as needed */}
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                 </select>
 
                 {form.curriculumCreateDtos.map((curriculum, index) => (
                     <div key={index}>
                         <div>Chapter {curriculum.chapter}</div>
-                        <label>
-                            챕터 제목 :
-                            <input
-                                type="text"
-                                name={`curriculumCreateDtos[${index}].curriculumTitle`}
-                                value={curriculum.curriculumTitle}
-                                onChange={handleInputChange}
-                            />
-                        </label>
-                        <br />
-                        <label>
-                            강의 개수 :
-                            <input
-                                type="number"
-                                name={`curriculumCreateDtos[${index}].lectureSum`}
-                                value={curriculum.lectureSum}
-                                onChange={handleInputChange}
-                                className="inputNumber"
-                            />
-                        </label>
-                        <br />
+                        <label htmlFor={`curriculumTitle-${index}`}>챕터 제목:</label>
+                        <input
+                            type="text"
+                            id={`curriculumTitle-${index}`}
+                            name="curriculumTitle"
+                            value={curriculum.curriculumTitle}
+                            // onChange={handleInputChange}
+                            onChange={e => handleCurriculumChange(e, index)}
+                            //커리큘럼 부분 어떻게 해야할지 모르겠네......흠 ㅎ,ㅁ...
+                        />
+                        <br/>
+                        <label htmlFor={`lectureSum-${index}`}>강좌 개수</label>
+                        강의 개수 :
+                        <input
+                            type="number"
+                            id={`lectureSum-${index}`}
+                            name="lectureSum"
+                            value={curriculum.lectureSum}
+                            // onChange={handleInputChange}
+                            onChange={e => handleCurriculumChange(e, index)}
+                            className="inputNumber"
+                        />
+                        <br/>
                     </div>
                 ))}
 
             </div>
-            <CourseRegisterContent />
+            <CourseRegisterContent/>
         </Body>
     );
 };

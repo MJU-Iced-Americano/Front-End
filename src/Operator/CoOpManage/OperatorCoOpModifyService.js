@@ -24,7 +24,7 @@ function OperatorCoOpModifyService({companyIndex, companyName, companyPhoto, com
                     }
                 };
 
-                const response = await axios.post(`/company-service/company/modify/${companyIndex}`,formData, config);
+                const response = await axios.post(`http://15.165.249.107:8080/company-service/company/modify/${companyIndex}`,formData, config);
                 console.log(response);
                 setMessage(response.data.message);
             }catch(e){

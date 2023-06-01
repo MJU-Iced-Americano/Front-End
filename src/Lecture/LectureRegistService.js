@@ -4,31 +4,36 @@ import "./styles/LectureRegistPage.css"
 import axios from "axios";
 import OperatorcoOpAddService from "../Operator/CoOpManage/OperatorCoOpAddService";
 
-function LectureRegistService({lectureTitle, lectureDescription, videoURL}){
+function LectureRegistService({course_index, chapter, lecture_sequence, lectureTitle, lectureDescription, videoURL}){
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
 
-    console.log(lectureTitle)
-    console.log(lectureDescription)
-    console.log(videoURL)
-
-    const [postLectureDto, setPostLectureDto] = useState({
-        lectureTitle : `${lectureTitle}`,
-        lectureDescription:`${lectureDescription}`
-    });
+    const postLectureDto = {
+        lectureTitle, lectureDescription
+    };
+    console.log(postLectureDto)
 
     useEffect(() => {
-        console.log(postLectureDto)
-        console.log(videoURL)
+        console.log(lectureTitle)
+        console.log(lectureDescription)
+        const formData = new FormData();  // formData 생성
+
+        formData.append('postLectureDto',new Blob([JSON.stringify(postLectureDto)], { type: "application/json" }));
+        formData.append('video', new Blob([JSON.stringify(videoURL)], { type: "application/json" }));
+
+        for (let key of formData.keys()) {
+            console.log(key, ":", formData.get(key));
+        }
 
         const postLecture = async () => {
             try{
                 setError(null);
-
-                const response = await  axios.post(`http://54.180.213.187:8080/lecture-service/lecture/manage/new-lecture/1/1/2`,{
-                    postLectureDto: `${postLectureDto}`,
-                    video: `${videoURL}`
-                });
+                const config = {
+                    headers: {
+                        "content-type": "multipart/form-data"
+                    }
+                };
+                const response = await  axios.post(`http://54.180.213.187:8080/lecture-service/lecture/manage/new-lecture/1/3/1`, formData, config);
                 setMessage(response.data.message);
                 console.log(response);
 
