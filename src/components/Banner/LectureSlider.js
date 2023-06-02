@@ -28,7 +28,7 @@ const LectureSlider=(props)=> {
         }, [props.name]);
 
     const getCourses = (orderby) => {
-        axios.get("http://54.180.213.187:8080/course-service/course?order=" + orderby)
+        axios.get("http://gateway.socoa.online:8000/course-service/course?order=" + orderby)
 
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.

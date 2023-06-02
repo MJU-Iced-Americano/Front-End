@@ -28,17 +28,17 @@ const CourseListPage =()=> {
         let url = "";
 
         if(category === "all") {
-            url = "http://54.180.213.187:8080/course-service/course?order=createdAt";
+            url = "http://gateway.socoa.online:8000/course-service/course?order=createdAt";
         } else if (category === "dev"){
-            url = "http://54.180.213.187:8080/course-service/course?category=%EA%B0%9C%EB%B0%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&order=createdAt&page=0"
+            url = "http://gateway.socoa.online:8000/course-service/course?category=%EA%B0%9C%EB%B0%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&order=createdAt&page=0"
         } else if (category === "security"){
-            url = "http://54.180.213.187:8080/course-service/course?category=%EB%B3%B4%EC%95%88-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC&order=createdAt&page=0"
+            url = "http://gateway.socoa.online:8000/course-service/course?category=%EB%B3%B4%EC%95%88-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC&order=createdAt&page=0"
         } else if (category === "game"){
-            url = "http://54.180.213.187:8080/course-service/course?category=%EA%B2%8C%EC%9E%84%20%EA%B0%9C%EB%B0%9C&order=createdAt&page=0"
+            url = "http://gateway.socoa.online:8000/course-service/course?category=%EA%B2%8C%EC%9E%84%20%EA%B0%9C%EB%B0%9C&order=createdAt&page=0"
         } else if (category === "data"){
-            url = "http://54.180.213.187:8080/course-service/course?category=%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%82%AC%EC%9D%B4%EC%96%B8%EC%8A%A4&order=createdAt&page=0\n"
+            url = "http://gateway.socoa.online:8000/course-service/course?category=%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%82%AC%EC%9D%B4%EC%96%B8%EC%8A%A4&order=createdAt&page=0\n"
         } else {
-            url = `http://54.180.213.187:8080/course-service/course?order=createdAt&search=${category}`
+            url = `http://gateway.socoa.online:8000/course-service/course?order=createdAt&search=${category}`
         }
         axios.get(url)
 

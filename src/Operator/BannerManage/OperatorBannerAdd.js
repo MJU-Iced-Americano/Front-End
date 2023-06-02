@@ -8,21 +8,7 @@ const OperatorAddBanner=()=>{
     const OperatorAddBannerContent =()=>{
         const [doEnroll, setDoEnroll] = useState(false);
 
-        const [inputs, setInputs] = useState({
-            imageUrl : '',
-        });
-
-        const {imageUrl} = inputs;
-
-
-
-        const onChange =(e) => {
-            const{value, name} = e.target;
-            setInputs({
-                ...inputs,
-                [name] : value
-            })
-        }
+        const [photo, setPhoto] = useState();
 
         function btnTextChanger(){
             if (doEnroll) {
@@ -31,14 +17,19 @@ const OperatorAddBanner=()=>{
             else return "등록하기";
         }
 
+        const onImageHandler = (event) => {
+            setPhoto(()=>event.target.files[0]);
+
+        };
+
         return (
             <div className="CoOpManage">
                 <h1>배너 추가 페이지입니다.</h1>
                 <h4>배너 Size: 1920 * 400</h4>
-                <input name="imageUrl" accept='image/jpg, image/jpeg, image/png' placeholder="배너 사진을 넣으세요" onChange={onChange} value={imageUrl} className="inputCoOpInfo" type="file"/>
+                <input name="imageUrl" accept='image/*' placeholder="배너 사진을 넣으세요" onChange={onImageHandler} className="inputCoOpInfo" type="file"/>
                 <div>
                     <button className="inCoOpButton"onClick={()=> setDoEnroll(!doEnroll)} >{btnTextChanger()}</button>
-                    {doEnroll===true?<OperatorBannerAddService imageUrl={imageUrl} />:<p></p>}
+                    {doEnroll===true?<OperatorBannerAddService photo={photo} />:<p></p>}
                 </div>
             </div>
 
