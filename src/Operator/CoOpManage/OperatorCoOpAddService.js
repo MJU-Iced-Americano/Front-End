@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
 
-function OperatorCoOpAddService({co_company_name,coCompany_photo_url,co_company_url}) {
+function OperatorCoOpAddService({CoCompany_name,image,CoCompany_url}) {
 
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
@@ -11,11 +11,12 @@ function OperatorCoOpAddService({co_company_name,coCompany_photo_url,co_company_
     useEffect(()=>{
         const formData = new FormData();  // formData 생성
 
-        console.log(co_company_name);
-        console.log(co_company_url);
-        formData.append('CoCompany_name', co_company_name);
-        formData.append('CoCompany_url', co_company_url);
-        formData.append('image', new Blob([JSON.stringify(coCompany_photo_url)], { type: "application/json" }));
+        console.log(CoCompany_name);
+        console.log(image);
+        console.log(CoCompany_url);
+        formData.append('CoCompany_name', CoCompany_name);
+        formData.append('CoCompany_url', CoCompany_url);
+        formData.append('image', image);
 
         for (let key of formData.keys()) {
             console.log(key, ":", formData.get(key));
@@ -29,7 +30,7 @@ function OperatorCoOpAddService({co_company_name,coCompany_photo_url,co_company_
                         "content-type": "multipart/form-data"
                     }
                 };
-                const response = await axios.post('http://15.165.249.107:8080//company-service/company/register', formData, config);
+                const response = await axios.post('http://15.165.249.107:8080/company-service/company/register', formData, config);
                 console.log(response);
                 setMessage(response.data.message);
 

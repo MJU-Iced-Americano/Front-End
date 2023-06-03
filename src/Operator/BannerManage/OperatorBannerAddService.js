@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
 
-function OperatorBannerAddService({imageUrl}) {
+function OperatorBannerAddService({photo}) {
 
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
@@ -11,7 +11,7 @@ function OperatorBannerAddService({imageUrl}) {
     useEffect(()=>{
         const formData = new FormData();  // formData 생성
 
-        formData.append('image',  new Blob([JSON.stringify(imageUrl)], { type: "application/json" }));
+        formData.append('image', photo );
 
         for (let key of formData.keys()) {
             console.log(key, ":", formData.get(key));

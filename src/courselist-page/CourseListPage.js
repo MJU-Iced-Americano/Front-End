@@ -38,7 +38,7 @@ const CourseListPage =()=> {
         } else if (category === "data"){
             url = "http://gateway.socoa.online:8000/course-service/course?category=%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%82%AC%EC%9D%B4%EC%96%B8%EC%8A%A4&order=createdAt&page=0\n"
         } else {
-            url = "http://gateway.socoa.online:8000/course-service/course?order=createdAt&search=${category}"
+            url = `http://gateway.socoa.online:8000/course-service/course?order=createdAt&search=${category}`
         }
         axios.get(url)
 

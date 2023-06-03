@@ -1,15 +1,26 @@
 import axios from 'axios';
 import {useState, useEffect, useRef} from "react";
 import partner from '../assets/information/partner.JPG'
+import { useCookies } from 'react-cookie';
 import "./styles/Info.css"
 
 function CopInfo() {
 
+    const [cookies, setCookie, removeCookie] = useCookies(['rememberNumber']);
+    const [text, setText] = useState('');
     const [data, setData] = useState([]);
+
+    const getCookieFunc = (param) => {
+        let result = "getCookie : "+cookies.rememberNumber;
+        setText(result);
+        console.log(text)
+    }
 
     useEffect(() => {
 
-        axios.get(`http://gateway.socoa.online:8000/company-service/company/get`)
+        getCookieFunc();
+
+        axios.get(`http://15.165.249.107:8000/company-service/company/get`)
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
                 console.log(response.data)

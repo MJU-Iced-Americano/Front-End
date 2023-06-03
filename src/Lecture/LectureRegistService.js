@@ -4,7 +4,7 @@ import "./styles/LectureRegistPage.css"
 import axios from "axios";
 import OperatorcoOpAddService from "../Operator/CoOpManage/OperatorCoOpAddService";
 
-function LectureRegistService({course_index, chapter, lecture_sequence, lectureTitle, lectureDescription, videoURL}){
+function LectureRegistService({course_index, chapter, lecture_sequence, lectureTitle, lectureDescription, video}){
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
 
@@ -19,7 +19,7 @@ function LectureRegistService({course_index, chapter, lecture_sequence, lectureT
         const formData = new FormData();  // formData 생성
 
         formData.append('postLectureDto',new Blob([JSON.stringify(postLectureDto)], { type: "application/json" }));
-        formData.append('video', new Blob([JSON.stringify(videoURL)], { type: "application/json" }));
+        formData.append('video', video);
 
         for (let key of formData.keys()) {
             console.log(key, ":", formData.get(key));

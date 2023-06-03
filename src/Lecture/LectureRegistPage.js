@@ -8,14 +8,14 @@ const LectureRegistPage=({course_index, chapter, lecture_sequence})=>{
 
     const LectureRegistPageContent =({course_index, chapter, lecture_sequence})=> {
         const [doEnroll, setDoEnroll] = useState(false);
+        const [video, setVideo] = useState();
         const inputRef = useRef(null);
         const [inputs, setInputs] = useState({
             lectureTitle : '',
             lectureDescription:'',
-            videoURL : ''
         });
 
-        const {lectureTitle, lectureDescription, videoURL} = inputs;
+        const {lectureTitle, lectureDescription} = inputs;
 
 
 
@@ -39,15 +39,20 @@ const LectureRegistPage=({course_index, chapter, lecture_sequence})=>{
             else return "등록하기";
         }
 
+        const onImageHandler = (event) => {
+            setVideo(()=>event.target.files[0]);
+
+        };
+
         return (
             <div className="LectureRegistContent">
                 <h1>강의등록페이지</h1>
                 <input name="lectureTitle" placeholder="강의 제목을 적으시오" onChange={onChange} value={lectureTitle} className="inputLectureInfo" type='text'/>
                 <input name="lectureDescription" placeholder="강의 설명을 적으시오" onChange={onChange} value={lectureDescription} className="inputLectureInfo" type='text'/>
                 {/*<button onClick={handleButtonClick}>비디오 선택</button>*/}
-                <input name="videoURL" ref={inputRef} type="file" accept="video/*" value={videoURL} onChange={onChange} className="inputLectureInfo"/>
+                <input name="videoURL" ref={inputRef} type="file" accept="video/*" onChange={onImageHandler} className="inputLectureInfo"/>
                 <button  className="inLectureButton" onClick={()=> setDoEnroll(!doEnroll)}>{btnTextChanger()}</button>
-                {doEnroll===true?<LectureRegistService course_index={course_index} chapter={chapter} lecture_sequence={lecture_sequence} lectureTitle={lectureTitle} lectureDescription={lectureDescription} videoURL={videoURL}/>:<p></p>}
+                {doEnroll===true?<LectureRegistService course_index={course_index} chapter={chapter} lecture_sequence={lecture_sequence} lectureTitle={lectureTitle} lectureDescription={lectureDescription} video={video}/>:<p></p>}
             </div>
         );
     }
