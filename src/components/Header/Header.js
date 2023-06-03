@@ -3,9 +3,69 @@ import {IoMdMenu} from 'react-icons/io';
 import {AiOutlineUser} from 'react-icons/ai';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import Socoa from '../../assets/Footer/socoa-ver2.png';
-
+import {useEffect, useState} from "react";
+import axios from "axios";
+import jwtDecode from 'jwt-decode'; // JWT 토큰을 해독하는 라이브러리
 
 const Header = ()=> {
+        const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 나타내는 state
+        const [userId, setUserId] = useState(''); // 사용자 ID을 저장하는 state
+
+    useEffect(() => {
+        // 페이지가 로드될 때 쿠키를 확인하고 로그인 상태를 업데이트
+        const checkLoginStatus = () => {
+            const ssoClientCookie = document.cookie.includes('SOCOA-SSO-TOKEN');
+            setIsLoggedIn(ssoClientCookie);
+
+            if (ssoClientCookie) {
+                const jwtToken = getJwtTokenFromCookie(); // 쿠키에서 JWT 토큰 가져오기
+                if (jwtToken) {
+                    const decodedToken = jwtDecode(jwtToken); // JWT 토큰 해독
+                    setUserId(decodedToken.sub); // 사용자 닉네임 설정
+                    console.log("jwt token sub(userId): "+decodedToken.sub);
+                    // http://login.socoa.online/user/response_user/"+decodedToken.sub
+                    axios.get("http://localhost/user/response_user/"+decodedToken.sub)
+                        .then(response => {
+                            const user = response.data.userInformationType;
+                            console.log("userInformationType: "+user);
+                        }) .catch(error=> {
+                            console.error(error);
+                    });
+                }
+            }
+        };
+
+        checkLoginStatus();
+    }, []);
+
+    const getJwtTokenFromCookie = () => {
+        // 쿠키에서 JWT 토큰 값을 추출하는 함수
+        const name = 'SOCOA-SSO-TOKEN=';
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArray = decodedCookie.split(';');
+        for (let i = 0; i < cookieArray.length; i++) {
+            let cookie = cookieArray[i];
+            while (cookie.charAt(0) === ' ') {
+                cookie = cookie.substring(1);
+            }
+            if (cookie.indexOf(name) === 0) {
+                return cookie.substring(name.length, cookie.length);
+            }
+        }
+        return '';
+    };
+    const handleLogout = () => {
+        // 쿠키 삭제
+        document.cookie = 'SOCOA-SSO-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        // http://login.socoa.online/user/logout
+        axios.get("http://localhost/user/logout")
+            .then(response => {
+                console.log("로그아웃");
+            }) .catch(error=> {
+            console.error(error);
+        });
+    };
+
     return (
         <header className="header">
             <div className="iconSect">
@@ -33,7 +93,22 @@ const Header = ()=> {
                 </div>
             </div>
             <div className="loginSect">
-                <div className="loginBtn"> <a href="http://login.socoa.online/user/login"> Login </a></div>
+                {isLoggedIn ? (
+                    <div className="loginBtn" onClick={handleLogout}>
+                        {/*http://login.socoa.online/user/logout*/}
+                        <a href="http://localhost:3000">Logout</a>
+                    </div>
+                ) : (
+                    <div className="loginBtn">
+                        {/*http://login.socoa.online/user/login*/}
+                        <a href="http://localhost/user/login">Login</a>
+                    </div>
+                )}
+
+                {/*{userId && (*/}
+                {/*    <div className="id">{userId}</div>*/}
+                {/*)}*/}
+
                 <a href="/OperatorPage"> <AiOutlineUser className="userBtn"/> </a>
                 <a href="/MyBasket"><RiShoppingCartLine className="cartBtn"/> </a>
             </div>

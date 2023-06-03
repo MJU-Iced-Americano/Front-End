@@ -238,7 +238,7 @@
     /*margin-bottom: 15px;*/
     position: relative;
 }
-.lectureImg{
+.lectureThumbnail_2{
     width: 100%;
     height: 190px;
 }
@@ -246,7 +246,3 @@
     width: 50%;
     position: absolute;
 }
-/*@keyframes menu-spin {*/
-/*    from{transform: rotate(0deg)}*/
-/*    to{transform: rotate(180deg)}*/
-/*}*/
