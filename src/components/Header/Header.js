@@ -7,11 +7,14 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import jwtDecode from 'jwt-decode'; // JWT 토큰을 해독하는 라이브러리
 
+
 const Header = ()=> {
         const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 나타내는 state
         const [userId, setUserId] = useState(''); // 사용자 ID을 저장하는 state
+        const [userInformationType, setuserInformationType]  = useState('');
 
     useEffect(() => {
+
         // 페이지가 로드될 때 쿠키를 확인하고 로그인 상태를 업데이트
         const checkLoginStatus = () => {
             const ssoClientCookie = document.cookie.includes('SOCOA-SSO-TOKEN');
@@ -22,10 +25,11 @@ const Header = ()=> {
                 if (jwtToken) {
                     const decodedToken = jwtDecode(jwtToken); // JWT 토큰 해독
                     setUserId(decodedToken.sub); // 사용자 닉네임 설정
-                    console.log("jwt token sub(userId): "+decodedToken.sub);
+                    console.log("jwt token sub(userId):"+decodedToken.sub);
                     // http://login.socoa.online/user/response_user/"+decodedToken.sub
                     axios.get("http://localhost/user/response_user/"+decodedToken.sub)
                         .then(response => {
+                            setuserInformationType(response.data.userInformationType);
                             const user = response.data.userInformationType;
                             console.log("userInformationType: "+user);
                         }) .catch(error=> {
@@ -57,13 +61,7 @@ const Header = ()=> {
     const handleLogout = () => {
         // 쿠키 삭제
         document.cookie = 'SOCOA-SSO-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        // http://login.socoa.online/user/logout
-        axios.get("http://localhost/user/logout")
-            .then(response => {
-                console.log("로그아웃");
-            }) .catch(error=> {
-            console.error(error);
-        });
+
     };
 
     return (
@@ -96,7 +94,7 @@ const Header = ()=> {
                 {isLoggedIn ? (
                     <div className="loginBtn" onClick={handleLogout}>
                         {/*http://login.socoa.online/user/logout*/}
-                        <a href="http://localhost:3000">Logout</a>
+                        <a href="http://localhost/user/logout">Logout</a>
                     </div>
                 ) : (
                     <div className="loginBtn">
@@ -109,7 +107,18 @@ const Header = ()=> {
                 {/*    <div className="id">{userId}</div>*/}
                 {/*)}*/}
 
-                <a href="/OperatorPage"> <AiOutlineUser className="userBtn"/> </a>
+                {userInformationType === 'STUDENT' && (
+                        <a href="/MyPage" className="btnMainItem">
+                            <AiOutlineUser className="userBtn"/>
+                        </a>
+                )}
+
+                {userInformationType === 'MANAGER' && (
+                        <a href="/OperatorPage" className="btnMainItem">
+                            <AiOutlineUser className="userBtn"/>
+                        </a>
+                )}
+                {/*<a href="/OperatorPage"> <AiOutlineUser className="userBtn"/> </a>*/}
                 <a href="/MyBasket"><RiShoppingCartLine className="cartBtn"/> </a>
             </div>
         </header>
