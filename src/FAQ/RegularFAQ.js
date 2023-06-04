@@ -7,11 +7,18 @@ import axios from "axios";
 
 
 const RegularFAQ = () => {
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer " + document.cookie.substring(name.length, document.cookie.length);
     const RegularFAQContent=()=> {
         const [data, setData] = useState([]);
         useEffect(() => {
 
-            axios.get(`http://3.34.240.33:8080/board-service/faq/show/listFaqGeneral`)
+            axios.get(`http://gateway.socoa.online:8000/board-service/faq/show/listFaqGeneral`, {
+                headers : {
+                    "Authorization" : ssoToken
+
+                }
+            })
 
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
