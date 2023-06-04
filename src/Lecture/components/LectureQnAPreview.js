@@ -11,7 +11,7 @@ function QnAPreview({courseIndex,lectIndex,index,question_title,question_content
 
     useEffect(() => {
 
-        axios.get(`http://54.180.213.187:8080/lecture-service/lecture/question/${index}`)
+        axios.get(`http://gateway.socoa.online:8000/lecture-service/lecture/question/${index}`)
             .then(response => {
                 const dat = response.data.data;
                 console.log(dat)

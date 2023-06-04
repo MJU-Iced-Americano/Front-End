@@ -33,7 +33,7 @@ function LectureRegistService({course_index, chapter, lecture_sequence, lectureT
                         "content-type": "multipart/form-data"
                     }
                 };
-                const response = await  axios.post(`http://54.180.213.187:8080/lecture-service/lecture/manage/new-lecture/1/3/1`, formData, config);
+                const response = await  axios.post(`http://gateway.socoa.online:8000/lecture-service/lecture/manage/new-lecture/1/3/1`, formData, config);
                 setMessage(response.data.message);
                 console.log(response);
 

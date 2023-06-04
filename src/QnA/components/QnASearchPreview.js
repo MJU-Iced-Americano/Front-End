@@ -18,8 +18,7 @@ function QnASearchPreview({inputs}) {
 //////////////////////////////////////////////////////////////////////////////////
     useEffect(() => {
 
-
-        axios.post(`/board-service/question/search`,{
+        axios.post(`http://gateway.socoa.online:8000/board-service/question/search`,{
             keyword : `${inputs}`
         })
             .then(response => {

@@ -21,7 +21,7 @@ const LectureQuestionPage=()=>{
         ///////////////////////////////////////
         useEffect(() => {
 
-            axios.get(`http://54.180.213.187:8080/lecture-service/lecture/${lectIndex}/question`)
+            axios.get(`http://gateway.socoa.online:8000/lecture-service/lecture/${lectIndex}/question`)
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data);

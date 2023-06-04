@@ -42,10 +42,10 @@ module.exports = function(app) {
     //     })
     // );
     //
-    app.use(
-        createProxyMiddleware( "/OperatorPage/CoOpManage",{
-            target: " http://15.165.249.107:8080/",
-            changeOrigin: true,
-        })
-    );
+    // app.use(
+    //     createProxyMiddleware( "/OperatorPage/CoOpManage",{
+    //         target: " http://15.165.249.107:8080/",
+    //         changeOrigin: true,
+    //     })
+    // );
 };

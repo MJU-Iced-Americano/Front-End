@@ -23,9 +23,21 @@ function QnADetailPage(){
     const[type,setType] = useState('');
     const[day,setDay] = useState('');
     const[time,setTime] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 나타내는 state
+    const [token, setToken] = useState('');
 
     useEffect(() => {
-        axios.get(`http://3.34.240.33:8080/board-service/question/show/${index}`)
+        const checkLoginStatus = () => {
+            const ssoClientCookie = document.cookie.includes('SOCOA-SSO-TOKEN');
+            const ssoToken = document.cookie.match('SOCOA-SSO-TOKEN')
+            setIsLoggedIn(ssoClientCookie);
+            console.log(ssoToken);
+            console.log(ssoToken.input);
+            setToken(ssoToken.input);
+        };
+        checkLoginStatus();
+
+        axios.get(`http://gateway.socoa.online:8000/board-service/question/show/${index}`)
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
                 console.log(response.data)
@@ -58,7 +70,7 @@ function QnADetailPage(){
             });
 
 
-        axios.get(`http://3.34.240.33:8080/board-service/question/show/commendList/${index}`)
+        axios.get(`http://gateway.socoa.online:8000/board-service/question/show/commendList/${index}`)
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
                 console.log(response.data)
@@ -127,8 +139,11 @@ function QnADetailPage(){
         }
         setIsClicked(true);
         ///////좋아요 add부분//////////////////////////////
-        axios.get(`http://3.34.240.33:8080/board-service/question/goodCheck/${index}`,{
-            questionIndex : `${index}`
+        axios.get(`http://gateway.socoa.online:8000/board-service/question/goodCheck/${index}`,{
+            questionIndex : `${index}`,
+            headers: {
+                Authorization: "Bearer yJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJYWnR3dm1QelNOd0pqYVZuZzFDbklWd3l6MWRnQ2lpampDdkdvT1Ztb29rIn0.eyJleHAiOjE2ODU4MzM3MjcsImlhdCI6MTY4NTgzMzY2NywiYXV0aF90aW1lIjoxNjg1ODMzNTUzLCJqdGkiOiIxYTk0MjI1ZS04NTM2LTQ1MzUtYjFkYi0yOTJhNDE4YTc0ZWIiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFkbWluLWNsaWVudCIsInN1YiI6IjUxMzYyZWU3LTE0MzYtNGQ1YS1iOGQ0LWFjMzE0NzdhMDk2NyIsInR5cCI6IklEIiwiYXpwIjoiYWRtaW4tY2xpZW50Iiwibm9uY2UiOiJhc2IzIiwic2Vzc2lvbl9zdGF0ZSI6ImM1Y2Y2OWExLTliMzktNDJlNy05ZGY4LTg2Yjg5Yzg3Y2I3MyIsImF0X2hhc2giOiJOeDZhb1pPay1uSjRNS3VkdFR2Ykl3IiwiYWNyIjoiMCIsInNpZCI6ImM1Y2Y2OWExLTliMzktNDJlNy05ZGY4LTg2Yjg5Yzg3Y2I3MyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW4ifQ.ac1EzJpd7LAJpZlr8VBKSMXg9ULh87gjWYQezCC3BdYPHnZ4dlceSdDvnCSnfYtZzfnNG17G80--e7yjKB5dHUelpDXwRyX-N3ymNL_X4I5mZD7cRjfRBhf7nTOK1IH-gGdFJRtRrLwrlJIIoLdK8wudS0jA5N0PpW7fPvrIbnfLeLCBrZZLRVnf7Xq8GgDBnr8fHdf3h8oYMoyR5tz5kvgJGHaiGI4oTVANTCpy1RNi-JZw9L-FSFoymD1rQuASviPrFrF3EZ8JO_3U4aBXq2uNMCVHhDHVqPt7FzmBJC3C2hmPCZzdglKaYxteGh9iBslTtwK3tSohYni0BCbDtw"
+            }
         })
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
@@ -144,7 +159,7 @@ function QnADetailPage(){
 
     function AddChatDB(index,text) {
 
-        axios.post(`http://3.34.240.33:8080/board-service/question/commend/register/${index}`,{
+        axios.post(`http://gateway.socoa.online:8000/board-service/question/commend/register/${index}`,{
             commendContent : `${text}`
         })
             .then(response => {

@@ -17,7 +17,7 @@ function OffCanvasCurriculam({courseIndex, lectIndex, name, ...props}) {
 
     useEffect(() => {
 
-        axios.get(`http://54.180.213.187:8080/course-service/course/${courseIndex}`)
+        axios.get(`http://gateway.socoa.online:8000/course-service/course/${courseIndex}`)
             .then(response => {
                 const data = response.data.data;
                 console.log(data);

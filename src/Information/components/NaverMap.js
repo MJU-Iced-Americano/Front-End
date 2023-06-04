@@ -14,6 +14,7 @@ function NaverMap() {
         },
     };
 
+
     useEffect(() => {
         const { naver } = window;
         if (!mapElement.current || !naver) return;

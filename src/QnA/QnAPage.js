@@ -18,7 +18,7 @@ const QnAPage=()=>{
 
         useEffect(() => {
 
-            axios.get(`http://3.34.240.33:8080/board-service/question/show/listQnA`)
+            axios.get(`http://gateway.socoa.online:8000/board-service/question/show/listQnA`)
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data)

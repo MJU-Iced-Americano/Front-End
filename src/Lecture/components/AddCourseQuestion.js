@@ -35,7 +35,7 @@ function OperatorCoOpAddService({course_index, chapter, lecture_sequence, lectIn
                         "content-type": "multipart/form-data"
                     }
                 };
-                const response = await axios.post(`http://54.180.213.187:8080/lecture-service/lecture/${lectIndex}/question`, formData, config);
+                const response = await axios.post(`http://gateway.socoa.online:8000/lecture-service/lecture/${lectIndex}/question`, formData, config);
                 console.log(response);
                 setMessage(response.data.message);
 

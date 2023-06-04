@@ -57,3 +57,17 @@ section {
   visibility: visible;
   opacity: 1;
 }
+
+.HistoryYear{
+  margin-bottom: 10px;
+  padding: 20px;
+}
+.CompanyYear{
+  width: 20%;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: initial;
+}
+.CompanyMonth{
+  font-weight: bold;
+}

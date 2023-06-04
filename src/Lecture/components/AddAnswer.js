@@ -34,7 +34,7 @@ function OperatorCoOpAddService({qIndex, Answer}) {
                         "content-type": "multipart/form-data"
                     }
                 };
-                const response = await axios.post(`http://54.180.213.187:8080/lecture-service/lecture/${qIndex}/answer`, formData, config);
+                const response = await axios.post(`http://gateway.socoa.online:8000/lecture-service/lecture/${qIndex}/answer`, formData, config);
                 console.log(response);
                 setMessage(response.data.message);
 
