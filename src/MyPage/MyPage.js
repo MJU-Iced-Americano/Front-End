@@ -5,38 +5,10 @@ import Body from "../components/Body/Body";
 import "./styles/MyPage.css"
 import LectureSlider from "../components/Banner/LectureSlider";
 import LectureSliderMyPage from "./components/LectureSliderMyPage";
-import axios from "axios";
-import jwtDecode from 'jwt-decode'; // JWT 토큰을 해독하는 라이브러리
 
 const MyPage = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 나타내는 state
 
-    useEffect(() => {
-
-        // 페이지가 로드될 때 쿠키를 확인하고 로그인 상태를 업데이트
-        const checkLoginStatus = () => {
-            const ssoClientCookie = document.cookie.includes('SOCOA-SSO-TOKEN');
-            setIsLoggedIn(ssoClientCookie);
-
-            if (ssoClientCookie) {
-                const jwtToken = getJwtTokenFromCookie(); // 쿠키에서 JWT 토큰 가져오기
-                if (jwtToken) {
-                    const decodedToken = jwtDecode(jwtToken); // JWT 토큰 해독
-                    console.log("jwt token sub(userId): "+decodedToken.sub);
-                    // http://login.socoa.online/user/response_user/"+decodedToken.sub
-                    axios.get("http://localhost/user/response_user/"+decodedToken.sub)
-                        .then(response => {
-                            const user = response.data.userInformationType;
-                            console.log("userInformationType: "+user);
-                        }) .catch(error=> {
-                        console.error(error);
-                    });
-                }
-            }
-        };
-
-        checkLoginStatus();
-    }, []);
 
     const getJwtTokenFromCookie = () => {
         // 쿠키에서 JWT 토큰 값을 추출하는 함수
