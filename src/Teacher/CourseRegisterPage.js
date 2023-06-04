@@ -5,6 +5,8 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 
 const CourseRegisterPage = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 나타내는 state
+    const [token, setToken] = useState('');
     const [skillInput, setSkillInput] = useState("");
     const [form, setForm] = useState({
         category: "",
@@ -89,6 +91,7 @@ const CourseRegisterPage = () => {
 
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
 
         // form 데이터를 formData로 변환
@@ -105,12 +108,24 @@ const CourseRegisterPage = () => {
             formData.append(`curriculumCreateDtos[${index}].lectureSum`, curriculum.lectureSum);
         });
         formData.append("titlePhoto", form.titlePhoto);
+        const checkLoginStatus = () => {
+            const ssoClientCookie = document.cookie.includes('SOCOA-SSO-TOKEN');
+            const ssoToken = document.cookie.match('SOCOA-SSO-TOKEN')
+            setIsLoggedIn(ssoClientCookie);
+            console.log(ssoToken);
+            console.log(ssoToken.input);
+            setToken(ssoToken.input);
+        };
+        checkLoginStatus();
 
         // POST 요청 보내기
         await axios({
             method: 'post',
             url: "http://54.180.213.187:8080/course-service/course/manage/new-course",
             data: formData,
+            headers: {
+                Cookie: token
+            }
         }).then(response => {
             console.log("등록 완료:", response.data)
         }).catch(error => {

@@ -4,10 +4,10 @@ import ClickedBox from './CourseClickedBox';
 import React, {useCallback, useEffect, useState} from "react";
 import {BsSliders} from "react-icons/bs";
 import { FaAngleDown } from "react-icons/fa";
-import lecture01 from "../assets/Banner/lecture01.png";
 import Body from "../components/Body/Body";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {getCookie} from "../components/Cookie";
 
 const CourseListPage =()=> {
     // const[inputs, setInputs] = useState("");
@@ -17,6 +17,9 @@ const CourseListPage =()=> {
     const[tagCatClicked, isTagCatClicked] = useState(false);
     const[filterClicked, isFilterClicked] = useState(false);
     const [data, setData] = useState([]);
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken = "Bearer " + document.cookie.substring(name.length, document.cookie.length);
+
 
 
     useEffect(() => {
@@ -24,9 +27,8 @@ const CourseListPage =()=> {
     },[]);
 
 
-    const getCoursesByCategory=(category)=> {
+    const getCoursesByCategory=  (category)=> {
         let url = "";
-
         if(category === "all") {
             url = "http://gateway.socoa.online:8000/course-service/course?order=createdAt";
         } else if (category === "dev"){
@@ -40,8 +42,23 @@ const CourseListPage =()=> {
         } else {
             url = `http://gateway.socoa.online:8000/course-service/course?order=createdAt&search=${category}`
         }
-        axios.get(url)
+        // const ssoClientCookie = document.cookie.match('SOCOA-SSO-TOKEN');
+        // console.log(ssoClientCookie);
+        // const accessToken = getCookie('accessToken');
+        // const headers = {
+        //     accessToken: accessToken,
+        //
+        // };
+        // console.log("accessToken:", accessToken, "입니다.."); // 쿠키 값 확인
+    // , { withCredentials: true }
+        // ,{ withCredentials : true, headers:headers }
 
+        axios.get(url, {
+            headers : {
+                "Authorization" : ssoToken
+
+            }
+        })
             .then(response => {
                 // console.log(response.data + "?");
                 console.log(response);

@@ -1,7 +1,63 @@
-.FAQList {
-    flex: 4;
+.OF_whole {
+    margin: 2px;
 }
-.whole {
-    margin-bottom: 80px;
 
+.FAQ_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-header, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-header {
+    background-color: #f2f2f2;
+}
+
+.FAQ_form {
+    margin-bottom: 20px;
+}
+.td button_dp {
+    width: 30px !important;
+}
+.text-input[type="text"], .text-area {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.faq_button {
+    padding: 5px 10px;
+    background-color: rgba(102,103,171,0.4);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.faq_button[type="submit"] {
+    margin-right: 10px;
+}
+
+.faq_button[type="button"] {
+    background-color: rgba(102,103,171,0.6);
+}
+
+.faq_button[type="button"]:hover, .faq_button[type="submit"]:hover {
+    background-color: rgba(102,103,171,0.8);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+label input[type="radio"] {
+    margin-right: 5px;
+}
+.FAQ_type {
+    font-size: 35px;
 }

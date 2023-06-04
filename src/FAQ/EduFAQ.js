@@ -7,11 +7,17 @@ import axios from "axios";
 
 
 const EduFAQ = () => {
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(name.length, document.cookie.length);
     const EduFAQContent=()=> {
         const [data, setData] = useState([]);
         useEffect(() => {
+            axios.get(`http://gateway.socoa.online:8000/board-service/faq/show/listFaqAdu`, {
+                headers : {
+                    "Authorization" : ssoToken
 
-            axios.get(`http://3.34.240.33:8080/board-service/faq/show/listFaqAdu`)
+                }
+            })
 
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.

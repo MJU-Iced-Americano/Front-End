@@ -18,15 +18,16 @@ import dummy_cocoa from "../assets/icons/socoa-icon-dummy.png";
 import Body from "../components/Body/Body";
 import axios from "axios";
 import ComplaintModal from './components/ComplaintModal';
+import {getCookie} from '../components/Cookie';
 
 
 const CourseMainPage = (props) => {
-
-    // let [like, setLike] = useState(0);
     const [data, setData] = useState([]);
     const [detail, setDetail] = useState([]);
     const [likes, setLikes] = useState();
+    const [clikes, setCLikes] = useState();
     const [liked, setLiked] = useState(false);
+    const [cliked, setCLiked] = useState(false);
     const [newReview, setNewReview] = useState({user_photo: "", review_content: "", grade: 0, user_name: "김이박"});
     const [filterClicked, isFilterClicked] = useState(false);
     const cocoaArray = [0, 1, 2, 3, 4];
@@ -36,25 +37,34 @@ const CourseMainPage = (props) => {
     const [cModal, setCModal] = useState(false);
     const {courseIndex} = useParams();
     const [complaintId, setComplaintId] = useState(-1);
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(name.length, document.cookie.length);
 
 
     useEffect(() => {
         getDetails(courseIndex);
-        getReviews("date");
+        getReviews("date", courseIndex);
+        console.log(detail);
     }, []);
 
-    const getReviews = (order) => {
+    const getReviews = (order, courseIndex) => {
         let url = "";
         if (order === "date") {
-            url = `http://gateway.socoa.online:8000/review-service/review/getDate`;
+            url = `http://gateway.socoa.online:8000/review-service/review/get/${courseIndex}`;
         } else if (order === "like") {
-            url = `http://gateway.socoa.online:8000/review-service/review/getLiked`;
+            url = `http://gateway.socoa.online:8000/review-service/review/${courseIndex}/getLiked`;
         } else if (order === "dGrade") {
-            url = `http://gateway.socoa.online:8000/review-service/review/getDgrade`;
+            url = `http://gateway.socoa.online:8000/review-service/review/${courseIndex}/getDgrade`;
         } else if (order === "aGrade") {
-            url = `http://gateway.socoa.online:8000/review-service/review/getAgrade`;
+            url = `http://gateway.socoa.online:8000/review-service/review/${courseIndex}/getAgrade`;
         }
-        axios.get(url)
+        //관리자
+        axios.get(url, {
+            headers: {
+                "Authorization": ssoToken
+
+            }
+        })
 
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
@@ -86,24 +96,15 @@ const CourseMainPage = (props) => {
 
     }
     const getDetails = (courseIndex) => {
-        axios.get(`http://gateway.socoa.online:8000/course-service/course/${courseIndex}`)
+        axios.get(`http://gateway.socoa.online:8000/course-service/course/${courseIndex}`, {
+            headers: {
+                "Authorization": ssoToken
+            }
+        })
             .then(response => {
                 const data = response.data.data;
-                console.log(data);
-
-                // const details = {
-                //     courseIndex : data.courseIndex,
-                //     category : data.category,
-                //     courseName : data.courseName,
-                //     price : data.price,
-                //     courseDescription : data.courseDescription,
-                //     difficulty : data.difficulty,
-                //     courseTime : data.courseTime,
-                //     // hits : data.hits, //강의 누적 조회수
-                //     courseTitlePhotoUrl : data.courseTitlePhotoUrl,
-                //     curriculumSum : data.curriculumSum,
-                //     skillList : data.skillList, //배열..
-                // }
+                console.log(JSON.stringify(data, null, 2));
+                console.log(data.lecturerInfoDto.lecturerName);
                 setDetail(data);
             })
             .catch(error => {
@@ -121,30 +122,45 @@ const CourseMainPage = (props) => {
             </a>
         );
     }
-
-    // const ComplaintModal= () => {
-    //     return(
-    //         <div className='modal'>
-    //             <h4>제목</h4>
-    //             <p>날짜</p>
-    //             <p>상세내용</p>
-    //         </div>
-    //     )
-    // }
-
     const handleLike = (index) => {
-        axios.get(`http://gateway.socoa.online:8000/review-service/review/inlike/${index}`)
+        axios.get(`http://gateway.socoa.online:8000/review-service/review/inlike/${index}`, {
+            headers: {
+                "Authorization": ssoToken
+            }
+        } )
             .then(response => {
                 console.log(response.data);
-                console.log(index + "이거야. ");
                 setLikes(likes + 1);
             })
             .catch(error => {
                 console.error(error);
             });
     }
+    const handleLikeCourse = (index) => {
+
+        axios.get(`http://gateway.socoa.online:8000/course-service/course/${index}/like`, {
+            headers: {
+                "Authorization": ssoToken
+
+            }
+        })
+            .then(response => {
+                console.log(response.data);
+                console.log(detail.courseLikeSum)
+                console.log(index + "이거야. ");
+                setDetail({ ...detail, courseLikeSum: detail.courseLikeSum + 1 });
+
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
     const handleLikeClicked = () => {
         setLiked(!liked);
+    };
+    const handleCLikeClicked = () => {
+        setCLiked(!cliked);
     };
 
     const formatDate = (dateString) => {
@@ -164,7 +180,11 @@ const CourseMainPage = (props) => {
     const handleAddReview = (event) => {
         event.preventDefault();
         const reviewData = {...newReview};
-        axios.post("http://gateway.socoa.online:8000/review-service/review/register", reviewData)
+        axios.post("http://gateway.socoa.online:8000/review-service/review/register", reviewData, {
+            headers: {
+                "Authorization": ssoToken
+            }
+        })
             .then(response => {
                 console.log(response);
                 setNewReview({review_content: "", grade: 0, user_name: "default", user_photo: ""});
@@ -210,10 +230,13 @@ const CourseMainPage = (props) => {
                         <div className="course_name">{detail.courseName}</div>
                     </div>
                     <div className="overview_2">
-                        <div className="course_like" onClick={handleLikeClicked}>
-                            {liked ? <RiHeart2Fill size={45}/> : <RiHeart2Line size={45}/>}
+                        <div className="course_like" onClick={() => {
+                            handleLikeCourse(detail.courseIndex)
+                            handleCLikeClicked()}}>
+
+                            {cliked ? <RiHeart2Fill size={45}/> : <RiHeart2Line size={45}/>}
                         </div>
-                        <div>6363</div>
+                        <div>{detail.courseLikeSum}</div>
                     </div>
                 </div>
                 <hr/>
@@ -238,19 +261,19 @@ const CourseMainPage = (props) => {
                         </div>
                         <div className="overview_detail">
                             {/* 나중에 div로 쪼갤것*/}
-                            <div className="details">강사 : 강사 !!!!!!! <br/></div>
+                            <div className="details">강사 : {detail && detail.lecturerInfoDto && detail.lecturerInfoDto.lecturerName} 님 <br/></div>
                             <div className="details">누적 강의 조회수 : {detail.hits}회<br/></div>
                             <div className="details">총 강의시간 : {detail.courseTime}<br/></div>
                             <div className="details">가격 : {detail.price} <br/></div>
                             <div className="details">난이도 :
-                                <img src={getImagePath(detail.difficulty)} alt={`Cocoa ${detail.difficulty}`}
-                                     className="cocoas"/>
+                                <img src={getImagePath(detail.difficulty)} alt={`Cocoa 사${detail.difficulty}`}
+                                     className="cocoas"/>사
                             </div>
                         </div>
                     </div>
                 </div>
                 <hr/>
-
+{/*/////////////////////////////////////////////////*/}
                 {/*anchor는 헤더랑 푸터 다시 받고 해보깅 ~!*/}
                 <div className="anchors">
                     <a className="anchor" href="#section1">강의설명</a>
@@ -282,7 +305,9 @@ const CourseMainPage = (props) => {
                                 {cur.lectureReadDtos && cur.lectureReadDtos.map((lec, i) => (
                                     <Accordion.Body className="chapter_detail" key={i}>
                                         <div><BsPlayCircle/></div>
-                                        <div className="lecture_title"><a className="Canvasa" href={`/LecturePage/${courseIndex}/${lec.lectureIndex}`}>{lec.lectureTitle}</a></div>
+                                        <div className="lecture_title"><a className="Canvasa"
+                                                                          href={`/LecturePage/${courseIndex}/${lec.lectureIndex}`}>{lec.lectureTitle}</a>
+                                        </div>
                                         <div className="time">{lec.lectureTime}</div>
                                     </Accordion.Body>
                                 ))}
@@ -298,6 +323,7 @@ const CourseMainPage = (props) => {
 
         );
     }
+    ///////////////////////////////////
 // return 부분 수정 예정
     return (
         <Body>
@@ -329,21 +355,21 @@ const CourseMainPage = (props) => {
                             </div>
                             <div className="total_cocoa">
                                 <div className="cocoa_review_num">
-                                    <img className="icon_main2" src={cocoa_4}/>
+                                    <img className="icon_main2" alt="icon2" src={cocoa_4}/>
                                 </div>
                                 <div className="cocoa_length">
                                 </div>
                             </div>
                             <div className="total_cocoa">
                                 <div className="cocoa_review_num">
-                                    <img className="icon_main2" src={cocoa_3}/>
+                                    <img className="icon_main2" alt="icon2" src={cocoa_3}/>
                                 </div>
                                 <div className="cocoa_length">
                                 </div>
                             </div>
                             <div className="total_cocoa">
                                 <div className="cocoa_review_num">
-                                    <img className="icon_main2" src={cocoa_2}/>
+                                    <img className="icon_main2" alt="icon2" src={cocoa_2}/>
                                 </div>
                                 <div className="cocoa_length">
                                 </div>
@@ -353,7 +379,7 @@ const CourseMainPage = (props) => {
 
                                     {/*cocoa1 크기 다시 맞춰서 export 하기 !*/}
 
-                                    <img className="icon_main2" src={cocoa_1}/>
+                                    <img className="icon_main2" alt="icon2" src={cocoa_1}/>
                                 </div>
                                 <div className="cocoa_length">
                                 </div>
@@ -403,7 +429,10 @@ const CourseMainPage = (props) => {
                                             {/*{cModal === true ? <ComplaintModal index={item.reviewIndex} closeModal={() => setCModal(false)}/> : null}*/}
                                         </div>
                                         <div>
-                                            <button onClick={() => handleLike(item.reviewIndex)}>
+                                            <button onClick={() =>{
+                                                handleLike(item.reviewIndex)
+                                                handleLikeClicked()
+                                            }}>
                                                 <FaRegThumbsUp/>{item.likes}
                                             </button>
                                         </div>
@@ -444,7 +473,8 @@ const CourseMainPage = (props) => {
                                     ))}
                                 </div>
 
-                                <input className="input_css" type="text" name="review_content" value={newReview.review_content}
+                                <input className="input_css" type="text" name="review_content"
+                                       value={newReview.review_content}
                                        onChange={handleInputChange} placeholder="후기를 입력하세요. "></input>
                                 <div className="create-button" onClick={handleAddReview}> 추가</div>
                             </form>

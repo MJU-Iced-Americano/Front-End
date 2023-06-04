@@ -11,6 +11,8 @@ function FAQPage(){
     const navigate = useNavigate();
     const [userInput, setUserInput] = useState("");
     const [data, setData] = useState([]);
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(name.length, document.cookie.length);
 
 
     const navigateToRegular = () => {
@@ -44,7 +46,12 @@ function FAQPage(){
 
     useEffect(() => {
 
-        axios.get(`http://3.34.240.33:8080/board-service/faq/show/Home`)
+        axios.get(`http://gateway.socoa.online:8000/board-service/faq/show/Home`, {
+            headers : {
+                "Authorization" : ssoToken
+
+            }
+        })
 
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
