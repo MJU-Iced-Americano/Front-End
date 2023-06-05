@@ -27,8 +27,8 @@
 .searchTag{
     margin-top: 15px;
 }
-.searchTagSmall{
-
+.searchTagSmall>a:hover{
+    color: #6667AB;
 }
 .searchTagSmall>a{
     font-size: 1.6em;
@@ -47,5 +47,5 @@
 }
 .lectureRecommendBox{
     margin-top: 20px;
-    border: 1px dashed green;
+    /*border: 1px dashed green;*/
 }

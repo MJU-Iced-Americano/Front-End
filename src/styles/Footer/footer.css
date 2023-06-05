@@ -1,5 +1,5 @@
 .footer{
-    height: 232px;
+    height: 200px;
     margin-top: auto;
     background-color: #6667ab;
     align-items: center;
@@ -17,10 +17,19 @@
     justify-content: center;
     display: flex;
 }
+.logoUnder{
+    color: #f1f0ec;
+    text-align: left;
+    font-weight: bold;
+}
 .textField{
     color: #f1f0ec;
-    padding-top: 2%;
+    /*padding-top: 2%;*/
     text-align: left;
+    font-size: small;
+}
+.uphere{
+    padding-top: 5%;
 }
 .socoaLogoF{
     width:80px;
