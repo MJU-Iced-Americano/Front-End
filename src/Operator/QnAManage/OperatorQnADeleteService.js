@@ -4,6 +4,8 @@ import axios from "axios";
 
 function OperatorQnADeleteService({faqIndex}) {
 
+    const names = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(names.length, document.cookie.length);
     const [error, setError] = useState(null);
     console.log(faqIndex);
 
