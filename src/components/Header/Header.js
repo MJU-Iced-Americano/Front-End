@@ -93,13 +93,11 @@ const Header = ()=> {
             <div className="loginSect">
                 {isLoggedIn ? (
                     <div className="loginBtn" onClick={handleLogout}>
-                        {/*http://login.socoa.online/user/logout*/}
-                        <a href="http://localhost/user/logout">Logout</a>
+                        <a href="http://login.socoa.online/user/logout">Logout</a>
                     </div>
                 ) : (
                     <div className="loginBtn">
-                        {/*http://login.socoa.online/user/login*/}
-                        <a href="http://localhost/user/login">Login</a>
+                        <a href="http://login.socoa.online/user/login">Login</a>
                     </div>
                 )}
 

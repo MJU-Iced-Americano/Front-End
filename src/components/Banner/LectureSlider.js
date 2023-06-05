@@ -28,7 +28,16 @@ const LectureSlider=(props)=> {
         }, [props.name]);
 
     const getCourses = (orderby) => {
-        axios.get("http://gateway.socoa.online:8000/course-service/course?order=" + orderby)
+
+        const name = 'SOCOA-SSO-TOKEN=';
+        const ssoToken = "Bearer" + document.cookie.substring(name.length, document.cookie.length);
+        console.log(ssoToken);
+
+        axios.get("http://gateway.socoa.online:8000/course-service/course?order=" + orderby, {
+            headers: {
+                "Authorization" : ssoToken
+            }
+        })
 
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
