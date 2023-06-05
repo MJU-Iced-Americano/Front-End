@@ -17,6 +17,9 @@ import {Link} from "react-router-dom";
 
 const LectureSlider=(props)=> {
     const [data, setData] = useState([]);
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer " + document.cookie.substring(name.length, document.cookie.length);
+
     useEffect( () => {
         if(props.name === "likeSum") {
             getCourses("likeSum");
@@ -24,20 +27,18 @@ const LectureSlider=(props)=> {
             getCourses("createdAt");
         } else if(props.name === "hits") {
             getCourses("hits");
+            getCourses("hits");
         }
-        }, [props.name]);
+    }, [props.name]);
 
     const getCourses = (orderby) => {
 
-        const name = 'SOCOA-SSO-TOKEN=';
-        const ssoToken = "Bearer" + document.cookie.substring(name.length, document.cookie.length);
-        console.log(ssoToken);
-
         axios.get("http://gateway.socoa.online:8000/course-service/course?order=" + orderby, {
-            headers: {
+            // withCredentials:true,
+            headers : {
                 "Authorization" : ssoToken
-            }
-        })
+            }}
+        )
 
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.

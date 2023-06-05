@@ -3,7 +3,9 @@ import {IoMdMenu} from 'react-icons/io';
 import {AiOutlineUser} from 'react-icons/ai';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import Socoa from '../../assets/Footer/socoa-ver2.png';
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import jwtDecode from "jwt-decode";
+import axios from "axios";
 
 
 
@@ -26,7 +28,7 @@ const Header = ()=> {
                     setUserId(decodedToken.sub); // 사용자 닉네임 설정
                     console.log("jwt token sub(userId):"+decodedToken.sub);
                     // http://login.socoa.online/user/response_user/"+decodedToken.sub
-                    axios.get("http://localhost/user/response_user/"+decodedToken.sub)
+                    axios.get("http://login.socoa.online/user/response_user/"+decodedToken.sub)
                         .then(response => {
                             setuserInformationType(response.data.userInformationType);
                             const user = response.data.userInformationType;
