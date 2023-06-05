@@ -8,6 +8,8 @@ import {AiFillAlert} from "react-icons/ai";
 import {FaAngleDown, FaRegThumbsUp} from "react-icons/fa";
 import {RiHeart2Line, RiHeart2Fill} from "react-icons/ri";
 import {GrCart} from "react-icons/gr";
+import {IoPerson, IoPersonCircleSharp, IoPersonCircleOutline} from "react-icons/io5";
+
 import cocoa_1 from '../assets/icon_group/cocoa_1.png'
 import cocoa_2 from '../assets/icon_group/cocoa_2.png'
 import cocoa_3 from '../assets/icon_group/cocoa_3.png'
@@ -18,17 +20,15 @@ import dummy_cocoa from "../assets/icons/socoa-icon-dummy.png";
 import Body from "../components/Body/Body";
 import axios from "axios";
 import ComplaintModal from './components/ComplaintModal';
-import {getCookie} from '../components/Cookie';
 
 
 const CourseMainPage = (props) => {
     const [data, setData] = useState([]);
     const [detail, setDetail] = useState([]);
     const [likes, setLikes] = useState();
-    const [clikes, setCLikes] = useState();
     const [liked, setLiked] = useState(false);
     const [cliked, setCLiked] = useState(false);
-    const [newReview, setNewReview] = useState({user_photo: "", review_content: "", grade: 0, user_name: "김이박"});
+    const [newReview, setNewReview] = useState({user_photo: "", review_content: "", grade: 0, userName: ""});
     const [filterClicked, isFilterClicked] = useState(false);
     const cocoaArray = [0, 1, 2, 3, 4];
     const [rate, setRate] = useState([false, false, false, false, false]);
@@ -52,11 +52,11 @@ const CourseMainPage = (props) => {
         if (order === "date") {
             url = `http://gateway.socoa.online:8000/review-service/review/get/${courseIndex}`;
         } else if (order === "like") {
-            url = `http://gateway.socoa.online:8000/review-service/review/${courseIndex}/getLiked`;
+            url = `http://gateway.socoa.online:8000/review-service/review/getLiked/${courseIndex}`;
         } else if (order === "dGrade") {
-            url = `http://gateway.socoa.online:8000/review-service/review/${courseIndex}/getDgrade`;
+            url = `http://gateway.socoa.online:8000/review-service/review/getDgrade/${courseIndex}`;
         } else if (order === "aGrade") {
-            url = `http://gateway.socoa.online:8000/review-service/review/${courseIndex}/getAgrade`;
+            url = `http://gateway.socoa.online:8000/review-service/review/getAgrade/${courseIndex}`;
         }
         //관리자
         axios.get(url, {
@@ -78,8 +78,7 @@ const CourseMainPage = (props) => {
                     const obj = {
                         reviewIndex: data.list[i].reviewIndex,
                         grade: data.list[i].grade,
-                        user_photo: data.list[i].user_photo,
-                        user_name: data.list[i].user_name,
+                        userName: data.list[i].userName,
                         date: data.list[i].date,
                         review_content: data.list[i].review_content,
                         likes: data.list[i].likes,
@@ -110,7 +109,6 @@ const CourseMainPage = (props) => {
             .then(response => {
                 const data = response.data.data;
                 console.log(JSON.stringify(data, null, 2));
-                console.log(data.lecturerInfoDto.lecturerName);
                 setDetail(data);
             })
             .catch(error => {
@@ -128,8 +126,9 @@ const CourseMainPage = (props) => {
             </a>
         );
     }
+    ///review
     const handleLike = (index) => {
-        axios.get(`http://gateway.socoa.online:8000/review-service/review/inlike/${index}`, {
+        axios.get(`http://gateway.socoa.online:8000/review-service/review/like/${index}`, {
             headers: {
                 "Authorization" : "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SFdqMnVlM283X2FOVDUzSE5yUjVnTW9NZUJwUjZLeGRwdWtPRk5DZXYwIn0.eyJleHAiOjE2ODU5NDEzNjUsImlhdCI6MTY4NTk0MTMwNSwiYXV0aF90aW1lIjoxNjg1OTQxMzA1LCJqdGkiOiI1MjhlOTk3ZS0wODhlLTRjMDEtOTY3ZS0wNjJkOTU0ODkyNDkiLCJpc3MiOiJodHRwOi8vbG9naW4uc29jb2Eub25saW5lOjgwODAvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFkbWluLWNsaWVudCIsInN1YiI6ImY6MzU2ODNkYjUtOGE4ZC00M2M0LThkNmYtN2I5ZWE1YTZiNWM1OjFkMjk2YWU4LWJmZWItNDljMS05NjU2LWI2YTc5NDY2ZmZiNiIsInR5cCI6IklEIiwiYXpwIjoiYWRtaW4tY2xpZW50Iiwibm9uY2UiOiJhc2IzIiwic2Vzc2lvbl9zdGF0ZSI6ImFmZDc4MzI5LWRlOWYtNDM0Zi05NjFlLTllZjA5NzYzN2EyZSIsImF0X2hhc2giOiJENWZ5ZnNoQkFPV0x1dkxwakdDeHBRIiwiYWNyIjoiMSIsInNpZCI6ImFmZDc4MzI5LWRlOWYtNDM0Zi05NjFlLTllZjA5NzYzN2EyZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZ2VuZGVyIjoiRkVNQUxFIiwibmlja25hbWUiOiJHTeuztOuTnCIsInByZWZlcnJlZF91c2VybmFtZSI6ImR1ZWtkbXMiLCJlbWFpbCI6Im1hbmFnZXJAbmF2ZXIuY29tIn0.iJSPIWXV0MTWfWg5R20STIfCrQAzc4AXMLbRpSr3zcISnlEuMEj7XjRugPSlzXo1MXdFP-a5CHMnJCJCyembGLTKFSqVpMwO4qDFM-eVDFWpFmq7pieW_VqQBIw7vOpz9zPd6XkwHkqSHWo7PDn5fGJzR97y-L_4M-oTqR6iysStE67YjLEuw9m7aIRftawebTwyoMZBOHz4miuokZaR0YKsBdzrZDUgBTZNZyWDz-8aAJRXpWTKTUW9o8lx-2ZEOFQ6WpkYum27pNKQmsq-dDM6g7tvEi9_M9PBa6DaM872vj1iYVFWs6tq_6lgS5riGgwiBlMuad4oX9crGK07-w"
 
@@ -143,6 +142,8 @@ const CourseMainPage = (props) => {
                 console.error(error);
             });
     }
+
+    //course
     const handleLikeCourse = (index) => {
 
         axios.get(`http://gateway.socoa.online:8000/course-service/course/${index}/like`, {
@@ -154,9 +155,14 @@ const CourseMainPage = (props) => {
         })
             .then(response => {
                 console.log(response.data);
-                console.log(detail.courseLikeSum)
-                console.log(index + "이거야. ");
-                setDetail({ ...detail, courseLikeSum: detail.courseLikeSum + 1 });
+
+                if(cliked) {
+                    setDetail({ ...detail, courseLikeSum: detail.courseLikeSum - 1});
+                } else if(!cliked) {
+                    setDetail({ ...detail, courseLikeSum: detail.courseLikeSum + 1});
+
+                }
+
 
             })
             .catch(error => {
@@ -188,7 +194,7 @@ const CourseMainPage = (props) => {
     const handleAddReview = (event) => {
         event.preventDefault();
         const reviewData = {...newReview};
-        axios.post("http://gateway.socoa.online:8000/review-service/review/register", reviewData, {
+        axios.post(`http://gateway.socoa.online:8000/review-service/review/register/${courseIndex}`, reviewData, {
             headers: {
                 "Authorization" : "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SFdqMnVlM283X2FOVDUzSE5yUjVnTW9NZUJwUjZLeGRwdWtPRk5DZXYwIn0.eyJleHAiOjE2ODU5NDEzNjUsImlhdCI6MTY4NTk0MTMwNSwiYXV0aF90aW1lIjoxNjg1OTQxMzA1LCJqdGkiOiI1MjhlOTk3ZS0wODhlLTRjMDEtOTY3ZS0wNjJkOTU0ODkyNDkiLCJpc3MiOiJodHRwOi8vbG9naW4uc29jb2Eub25saW5lOjgwODAvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFkbWluLWNsaWVudCIsInN1YiI6ImY6MzU2ODNkYjUtOGE4ZC00M2M0LThkNmYtN2I5ZWE1YTZiNWM1OjFkMjk2YWU4LWJmZWItNDljMS05NjU2LWI2YTc5NDY2ZmZiNiIsInR5cCI6IklEIiwiYXpwIjoiYWRtaW4tY2xpZW50Iiwibm9uY2UiOiJhc2IzIiwic2Vzc2lvbl9zdGF0ZSI6ImFmZDc4MzI5LWRlOWYtNDM0Zi05NjFlLTllZjA5NzYzN2EyZSIsImF0X2hhc2giOiJENWZ5ZnNoQkFPV0x1dkxwakdDeHBRIiwiYWNyIjoiMSIsInNpZCI6ImFmZDc4MzI5LWRlOWYtNDM0Zi05NjFlLTllZjA5NzYzN2EyZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZ2VuZGVyIjoiRkVNQUxFIiwibmlja25hbWUiOiJHTeuztOuTnCIsInByZWZlcnJlZF91c2VybmFtZSI6ImR1ZWtkbXMiLCJlbWFpbCI6Im1hbmFnZXJAbmF2ZXIuY29tIn0.iJSPIWXV0MTWfWg5R20STIfCrQAzc4AXMLbRpSr3zcISnlEuMEj7XjRugPSlzXo1MXdFP-a5CHMnJCJCyembGLTKFSqVpMwO4qDFM-eVDFWpFmq7pieW_VqQBIw7vOpz9zPd6XkwHkqSHWo7PDn5fGJzR97y-L_4M-oTqR6iysStE67YjLEuw9m7aIRftawebTwyoMZBOHz4miuokZaR0YKsBdzrZDUgBTZNZyWDz-8aAJRXpWTKTUW9o8lx-2ZEOFQ6WpkYum27pNKQmsq-dDM6g7tvEi9_M9PBa6DaM872vj1iYVFWs6tq_6lgS5riGgwiBlMuad4oX9crGK07-w"
 
@@ -196,7 +202,7 @@ const CourseMainPage = (props) => {
         })
             .then(response => {
                 console.log(response);
-                setNewReview({review_content: "", grade: 0, user_name: "default", user_photo: ""});
+                setNewReview({review_content: "", grade: 0, userName: "default", user_photo: ""});
                 setData((prevData) => [...prevData, reviewData]);
                 console.log(data + "는????");
 
@@ -240,8 +246,13 @@ const CourseMainPage = (props) => {
                     </div>
                     <div className="overview_2">
                         <div className="course_like" onClick={() => {
-                            handleLikeCourse(detail.courseIndex)
-                            handleCLikeClicked()}}>
+                            handleLikeCourse(detail.courseIndex);
+                            handleCLikeClicked();
+                            // setDetail(prevDetail => ({
+                            //     ...prevDetail,
+                            //     courseLikeSum: prevDetail.courseLikeSum - 2
+                            // }))
+                        }}>
 
                             {cliked ? <RiHeart2Fill size={45}/> : <RiHeart2Line size={45}/>}
                         </div>
@@ -276,7 +287,7 @@ const CourseMainPage = (props) => {
                             <div className="details">가격 : {detail.price} <br/></div>
                             <div className="details">난이도 :
                                 <img src={getImagePath(detail.difficulty)} alt={`Cocoa 사${detail.difficulty}`}
-                                     className="cocoas"/>사
+                                     className="cocoas"/>
                             </div>
                         </div>
                     </div>
@@ -422,11 +433,10 @@ const CourseMainPage = (props) => {
                             <div className="review_listITem" key={item.reviewIndex}>
                                 {/* 아. date어떻게 해야할지 모르겟음. 내가 다시 해봐야됨.  */}
                                 <div className="sections">
-                                    <div className="section1"><img src={defaultimage} alt="defaultimage"
-                                                                   className="profile"/></div>
+                                    <div className="section1"><IoPersonCircleOutline size={60}/></div>
                                     <div className="section2">
                                         <div className="cocoa_num2">{item.grade}</div>
-                                        <div className="user_name">{item.user_name}</div>
+                                        <div className="userName">{item.userName}</div>
                                     </div>
                                     <div className="review_detail">{item.review_content}
                                     </div>

@@ -5,9 +5,11 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 
 const CourseRegisterPage = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 나타내는 state
-    const [token, setToken] = useState('');
     const [skillInput, setSkillInput] = useState("");
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(name.length, document.cookie.length);
+    const [titlePhoto, setPhoto] = useState();
+
     const [form, setForm] = useState({
         category: "",
         courseName: "",
@@ -25,6 +27,19 @@ const CourseRegisterPage = () => {
         titlePhoto: ""
     });
 
+    const onImageHandler = (e) => {
+        const photo = e.target.files[0];
+        setPhoto(photo);
+        const {name} = e.target;
+        console.log(name, photo , "입니다용?");
+        ///
+        // setForm((prevForm) => ({
+        //     ...prevForm,
+        //     [name]: titlePhoto
+        // }));
+
+
+    };
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -34,22 +49,6 @@ const CourseRegisterPage = () => {
             [name]: value
         }));
     };
-    // const handleInputChange = (e) => {
-    //     const { name, value } = e.target;
-    //     console.log(name, value);
-    //     const [fieldName, index, fieldProperty] = name.match(/\[(.*?)\]/g).map((match) => match.replace(/[\[\]']+/g, '').split('.'));
-    //     setForm((prevForm) => {
-    //         const curriculumCreateDtos = [...prevForm.curriculumCreateDtos];
-    //         curriculumCreateDtos[index] = {
-    //             ...curriculumCreateDtos[index],
-    //             [fieldProperty]: value
-    //         };
-    //         return {
-    //             ...prevForm,
-    //             curriculumCreateDtos
-    //         };
-    //     });
-    // };
 
     const addSkill = () => {
         setForm((prevForm) => ({
@@ -93,38 +92,47 @@ const CourseRegisterPage = () => {
     const handleSubmit = async (e) => {
 
         e.preventDefault();
+        console.log(titlePhoto, "들어왔을가요 혹시??");
 
         // form 데이터를 formData로 변환
         const formData = new FormData();
-        formData.append("category", form.category);
-        formData.append("courseName", form.courseName);
-        formData.append("price", form.price);
-        formData.append("courseDescription", form.courseDescription);
-        formData.append("difficulty", form.difficulty);
-        formData.append("skillList", JSON.stringify(form.skillList));
+        // formData.append("category", form.category);
+        // formData.append("courseName", form.courseName);
+        // formData.append("price", form.price);
+        // formData.append("courseDescription", form.courseDescription);
+        // formData.append("difficulty", form.difficulty);
+        // formData.append("skillList", JSON.stringify(form.skillList));
+
+        // formData.append("titlePhoto", new Blob(JSON.stringify(form.titlePhoto)), { type: "application/json" });
+
+        const courseCreateDto = {
+            "category": form.category,
+            "courseName": form.courseName,
+            "price": form.price,
+            "courseDescription": form.courseDescription,
+            "difficulty": form.difficulty,
+            "skillList": JSON.stringify(form.skillList)
+        };
+        formData.append("courseCreateDto", JSON.stringify(courseCreateDto));
         form.curriculumCreateDtos.forEach((curriculum, index) => {
             formData.append(`curriculumCreateDtos[${index}].chapter`, curriculum.chapter);
             formData.append(`curriculumCreateDtos[${index}].curriculumTitle`, curriculum.curriculumTitle);
             formData.append(`curriculumCreateDtos[${index}].lectureSum`, curriculum.lectureSum);
         });
-        formData.append("titlePhoto", form.titlePhoto);
-        const checkLoginStatus = () => {
-            const ssoClientCookie = document.cookie.includes('SOCOA-SSO-TOKEN');
-            const ssoToken = document.cookie.match('SOCOA-SSO-TOKEN')
-            setIsLoggedIn(ssoClientCookie);
-            console.log(ssoToken);
-            console.log(ssoToken.input);
-            setToken(ssoToken.input);
-        };
-        checkLoginStatus();
+        formData.append("titlePhoto", titlePhoto);
+
+        for (let key of formData.keys()) {
+            console.log(key, ":", formData.get(key));
+        }
 
         // POST 요청 보내기
         await axios({
             method: 'post',
-            url: "http://54.180.213.187:8080/course-service/course/manage/new-course",
+            url: "http://gateway.socoa.online:8000/course-service/course/manage/new-course",
             data: formData,
             headers: {
-                Cookie: token
+                "Authorization" : ssoToken,
+                "Content-Type": "multipart/form-data"
             }
         }).then(response => {
             console.log("등록 완료:", response.data)
@@ -204,6 +212,10 @@ const CourseRegisterPage = () => {
                     <option value="5">5</option>
                 </select>
                 <label>
+                    썸네일 사진 등록 :
+                    <input accept='image/*' placeholder="코스 썸네일 사진을 첨부해주세요. " name="titlePhoto" onChange={onImageHandler} className="" type="file"/>
+                </label>
+                <label>
                     Skill List:
                     <input
                         type="text"
@@ -212,7 +224,10 @@ const CourseRegisterPage = () => {
                         onChange={(e) => setSkillInput(e.target.value)}
                     />
                 </label>
-                <button type="button" onClick={addSkill}>Add Skill</button>
+
+                <label>
+                    <button type="button" onClick={addSkill}>Add Skill</button>
+                </label>
                 {form.skillList.map((skill, index) => (
                     <div key={index}>
                         <label>
@@ -231,7 +246,9 @@ const CourseRegisterPage = () => {
                                 }}
                             />
                         </label>
+
                     </div>
+
                 ))}
                 <label htmlFor="chapterCount">챕터 개수 선택:</label>
                 <select id="chapterCount" name="chapterCount" value={form.curriculumCreateDtos.length}
@@ -255,7 +272,6 @@ const CourseRegisterPage = () => {
                             value={curriculum.curriculumTitle}
                             // onChange={handleInputChange}
                             onChange={e => handleCurriculumChange(e, index)}
-                            //커리큘럼 부분 어떻게 해야할지 모르겠네......흠 ㅎ,ㅁ...
                         />
                         <br/>
                         <label htmlFor={`lectureSum-${index}`}>강좌 개수</label>
