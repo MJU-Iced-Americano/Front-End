@@ -7,11 +7,18 @@ import ReportCommendManagePreview from "./components/ReportCommendManagePreview"
 
 const OperatorCommendReport=()=>{
     const OperatorCommendReportContent =()=>{
+        const name = 'SOCOA-SSO-TOKEN=';
+        const ssoToken =  "Bearer "+document.cookie.substring(name.length, document.cookie.length);
+
         const [data, setData] = useState([]);
 
         useEffect(() => {
 
-            axios.get(`http://3.35.237.123:8080/complaint-service/commend/show/listQnA`)
+            axios.get(`http://gateway.socoa.online:8000/complaint-service/commend/show/listQnA`, {
+                headers : {
+                    "Authorization" : ssoToken
+                }
+            })
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data)

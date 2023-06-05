@@ -6,7 +6,8 @@ function OperatorCoOpAddService({CoCompany_name,image,CoCompany_url}) {
 
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
-
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(name.length, document.cookie.length);
 
     useEffect(()=>{
         const formData = new FormData();  // formData 생성
@@ -27,10 +28,11 @@ function OperatorCoOpAddService({CoCompany_name,image,CoCompany_url}) {
                 setError(null);
                 const config = {
                     headers: {
-                        "content-type": "multipart/form-data"
+                        "content-type": "multipart/form-data",
+                        "Authorization": ssoToken
                     }
                 };
-                const response = await axios.post('http://15.165.249.107:8080/company-service/company/register', formData, config);
+                const response = await axios.post('http://gateway.socoa.online:8080/company-service/company/register', formData, config);
                 console.log(response);
                 setMessage(response.data.message);
 

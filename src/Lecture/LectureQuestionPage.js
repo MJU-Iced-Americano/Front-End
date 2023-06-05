@@ -6,6 +6,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import LectureQnAPreview from "./components/LectureQnAPreview";
 
 const LectureQuestionPage=()=>{
+
     const location = useLocation();
     console.log(location);
     const params = location.pathname.split('/'); // 경로를 '/'로 분할하여 배열로 만듦
@@ -15,13 +16,19 @@ const LectureQuestionPage=()=>{
     console.log(index);
 
     const LectureQuestionPageContent =({courseIndex, lectIndex})=> {
-
+        const names = 'SOCOA-SSO-TOKEN=';
+        const ssoToken =  "Bearer "+document.cookie.substring(names.length, document.cookie.length);
         const [data, setData] = useState([]);
 
         ///////////////////////////////////////
         useEffect(() => {
 
-            axios.get(`http://gateway.socoa.online:8000/lecture-service/lecture/${lectIndex}/question`)
+            axios.get(`http://gateway.socoa.online:8000/lecture-service/lecture/${lectIndex}/question`,{
+                // withCredentials:true,
+                headers : {
+                    "Authorization" : ssoToken
+                }
+            })
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data);

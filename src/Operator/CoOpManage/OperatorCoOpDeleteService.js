@@ -3,6 +3,8 @@ import axios from "axios";
 
 
 function OperatorCoOpDeleteService({companyIndex}) {
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(name.length, document.cookie.length);
 
     const [error, setError] = useState(null);
     console.log(companyIndex);
@@ -13,7 +15,11 @@ function OperatorCoOpDeleteService({companyIndex}) {
         const fetchCoOp = async () => {
             try{
                 setError(null);
-                const response = await axios.delete(`http://15.165.249.107:8080/company-service/company/delete/${companyIndex}`);
+                const response = await axios.delete(`http://gateway.socoa.online:8080/company-service/company/delete/${companyIndex}`,{
+                    headers: {
+                        "Authorization": ssoToken
+                    }
+                });
                 console.log(response);
             }catch(e){
                 setError(e);

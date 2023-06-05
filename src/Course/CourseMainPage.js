@@ -61,7 +61,8 @@ const CourseMainPage = (props) => {
         //관리자
         axios.get(url, {
             headers: {
-                "Authorization": ssoToken
+                "Authorization" : "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SFdqMnVlM283X2FOVDUzSE5yUjVnTW9NZUJwUjZLeGRwdWtPRk5DZXYwIn0.eyJleHAiOjE2ODU5NDEzNjUsImlhdCI6MTY4NTk0MTMwNSwiYXV0aF90aW1lIjoxNjg1OTQxMzA1LCJqdGkiOiI1MjhlOTk3ZS0wODhlLTRjMDEtOTY3ZS0wNjJkOTU0ODkyNDkiLCJpc3MiOiJodHRwOi8vbG9naW4uc29jb2Eub25saW5lOjgwODAvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFkbWluLWNsaWVudCIsInN1YiI6ImY6MzU2ODNkYjUtOGE4ZC00M2M0LThkNmYtN2I5ZWE1YTZiNWM1OjFkMjk2YWU4LWJmZWItNDljMS05NjU2LWI2YTc5NDY2ZmZiNiIsInR5cCI6IklEIiwiYXpwIjoiYWRtaW4tY2xpZW50Iiwibm9uY2UiOiJhc2IzIiwic2Vzc2lvbl9zdGF0ZSI6ImFmZDc4MzI5LWRlOWYtNDM0Zi05NjFlLTllZjA5NzYzN2EyZSIsImF0X2hhc2giOiJENWZ5ZnNoQkFPV0x1dkxwakdDeHBRIiwiYWNyIjoiMSIsInNpZCI6ImFmZDc4MzI5LWRlOWYtNDM0Zi05NjFlLTllZjA5NzYzN2EyZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZ2VuZGVyIjoiRkVNQUxFIiwibmlja25hbWUiOiJHTeuztOuTnCIsInByZWZlcnJlZF91c2VybmFtZSI6ImR1ZWtkbXMiLCJlbWFpbCI6Im1hbmFnZXJAbmF2ZXIuY29tIn0.iJSPIWXV0MTWfWg5R20STIfCrQAzc4AXMLbRpSr3zcISnlEuMEj7XjRugPSlzXo1MXdFP-a5CHMnJCJCyembGLTKFSqVpMwO4qDFM-eVDFWpFmq7pieW_VqQBIw7vOpz9zPd6XkwHkqSHWo7PDn5fGJzR97y-L_4M-oTqR6iysStE67YjLEuw9m7aIRftawebTwyoMZBOHz4miuokZaR0YKsBdzrZDUgBTZNZyWDz-8aAJRXpWTKTUW9o8lx-2ZEOFQ6WpkYum27pNKQmsq-dDM6g7tvEi9_M9PBa6DaM872vj1iYVFWs6tq_6lgS5riGgwiBlMuad4oX9crGK07-w"
+
 
             }
         })
@@ -96,11 +97,7 @@ const CourseMainPage = (props) => {
 
     }
     const getDetails = (courseIndex) => {
-        axios.get(`http://gateway.socoa.online:8000/course-service/course/${courseIndex}`, {
-            headers: {
-                "Authorization": ssoToken
-            }
-        })
+        axios.get(`http://gateway.socoa.online:8000/course-service/course/${courseIndex}`)
             .then(response => {
                 const data = response.data.data;
                 console.log(JSON.stringify(data, null, 2));
@@ -125,7 +122,8 @@ const CourseMainPage = (props) => {
     const handleLike = (index) => {
         axios.get(`http://gateway.socoa.online:8000/review-service/review/inlike/${index}`, {
             headers: {
-                "Authorization": ssoToken
+                "Authorization" : "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SFdqMnVlM283X2FOVDUzSE5yUjVnTW9NZUJwUjZLeGRwdWtPRk5DZXYwIn0.eyJleHAiOjE2ODU5NDEzNjUsImlhdCI6MTY4NTk0MTMwNSwiYXV0aF90aW1lIjoxNjg1OTQxMzA1LCJqdGkiOiI1MjhlOTk3ZS0wODhlLTRjMDEtOTY3ZS0wNjJkOTU0ODkyNDkiLCJpc3MiOiJodHRwOi8vbG9naW4uc29jb2Eub25saW5lOjgwODAvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFkbWluLWNsaWVudCIsInN1YiI6ImY6MzU2ODNkYjUtOGE4ZC00M2M0LThkNmYtN2I5ZWE1YTZiNWM1OjFkMjk2YWU4LWJmZWItNDljMS05NjU2LWI2YTc5NDY2ZmZiNiIsInR5cCI6IklEIiwiYXpwIjoiYWRtaW4tY2xpZW50Iiwibm9uY2UiOiJhc2IzIiwic2Vzc2lvbl9zdGF0ZSI6ImFmZDc4MzI5LWRlOWYtNDM0Zi05NjFlLTllZjA5NzYzN2EyZSIsImF0X2hhc2giOiJENWZ5ZnNoQkFPV0x1dkxwakdDeHBRIiwiYWNyIjoiMSIsInNpZCI6ImFmZDc4MzI5LWRlOWYtNDM0Zi05NjFlLTllZjA5NzYzN2EyZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZ2VuZGVyIjoiRkVNQUxFIiwibmlja25hbWUiOiJHTeuztOuTnCIsInByZWZlcnJlZF91c2VybmFtZSI6ImR1ZWtkbXMiLCJlbWFpbCI6Im1hbmFnZXJAbmF2ZXIuY29tIn0.iJSPIWXV0MTWfWg5R20STIfCrQAzc4AXMLbRpSr3zcISnlEuMEj7XjRugPSlzXo1MXdFP-a5CHMnJCJCyembGLTKFSqVpMwO4qDFM-eVDFWpFmq7pieW_VqQBIw7vOpz9zPd6XkwHkqSHWo7PDn5fGJzR97y-L_4M-oTqR6iysStE67YjLEuw9m7aIRftawebTwyoMZBOHz4miuokZaR0YKsBdzrZDUgBTZNZyWDz-8aAJRXpWTKTUW9o8lx-2ZEOFQ6WpkYum27pNKQmsq-dDM6g7tvEi9_M9PBa6DaM872vj1iYVFWs6tq_6lgS5riGgwiBlMuad4oX9crGK07-w"
+
             }
         } )
             .then(response => {
@@ -140,7 +138,8 @@ const CourseMainPage = (props) => {
 
         axios.get(`http://gateway.socoa.online:8000/course-service/course/${index}/like`, {
             headers: {
-                "Authorization": ssoToken
+                "Authorization" : "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SFdqMnVlM283X2FOVDUzSE5yUjVnTW9NZUJwUjZLeGRwdWtPRk5DZXYwIn0.eyJleHAiOjE2ODU5NDEzNjUsImlhdCI6MTY4NTk0MTMwNSwiYXV0aF90aW1lIjoxNjg1OTQxMzA1LCJqdGkiOiI1MjhlOTk3ZS0wODhlLTRjMDEtOTY3ZS0wNjJkOTU0ODkyNDkiLCJpc3MiOiJodHRwOi8vbG9naW4uc29jb2Eub25saW5lOjgwODAvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFkbWluLWNsaWVudCIsInN1YiI6ImY6MzU2ODNkYjUtOGE4ZC00M2M0LThkNmYtN2I5ZWE1YTZiNWM1OjFkMjk2YWU4LWJmZWItNDljMS05NjU2LWI2YTc5NDY2ZmZiNiIsInR5cCI6IklEIiwiYXpwIjoiYWRtaW4tY2xpZW50Iiwibm9uY2UiOiJhc2IzIiwic2Vzc2lvbl9zdGF0ZSI6ImFmZDc4MzI5LWRlOWYtNDM0Zi05NjFlLTllZjA5NzYzN2EyZSIsImF0X2hhc2giOiJENWZ5ZnNoQkFPV0x1dkxwakdDeHBRIiwiYWNyIjoiMSIsInNpZCI6ImFmZDc4MzI5LWRlOWYtNDM0Zi05NjFlLTllZjA5NzYzN2EyZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZ2VuZGVyIjoiRkVNQUxFIiwibmlja25hbWUiOiJHTeuztOuTnCIsInByZWZlcnJlZF91c2VybmFtZSI6ImR1ZWtkbXMiLCJlbWFpbCI6Im1hbmFnZXJAbmF2ZXIuY29tIn0.iJSPIWXV0MTWfWg5R20STIfCrQAzc4AXMLbRpSr3zcISnlEuMEj7XjRugPSlzXo1MXdFP-a5CHMnJCJCyembGLTKFSqVpMwO4qDFM-eVDFWpFmq7pieW_VqQBIw7vOpz9zPd6XkwHkqSHWo7PDn5fGJzR97y-L_4M-oTqR6iysStE67YjLEuw9m7aIRftawebTwyoMZBOHz4miuokZaR0YKsBdzrZDUgBTZNZyWDz-8aAJRXpWTKTUW9o8lx-2ZEOFQ6WpkYum27pNKQmsq-dDM6g7tvEi9_M9PBa6DaM872vj1iYVFWs6tq_6lgS5riGgwiBlMuad4oX9crGK07-w"
+
 
             }
         })
@@ -182,7 +181,8 @@ const CourseMainPage = (props) => {
         const reviewData = {...newReview};
         axios.post("http://gateway.socoa.online:8000/review-service/review/register", reviewData, {
             headers: {
-                "Authorization": ssoToken
+                "Authorization" : "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SFdqMnVlM283X2FOVDUzSE5yUjVnTW9NZUJwUjZLeGRwdWtPRk5DZXYwIn0.eyJleHAiOjE2ODU5NDEzNjUsImlhdCI6MTY4NTk0MTMwNSwiYXV0aF90aW1lIjoxNjg1OTQxMzA1LCJqdGkiOiI1MjhlOTk3ZS0wODhlLTRjMDEtOTY3ZS0wNjJkOTU0ODkyNDkiLCJpc3MiOiJodHRwOi8vbG9naW4uc29jb2Eub25saW5lOjgwODAvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFkbWluLWNsaWVudCIsInN1YiI6ImY6MzU2ODNkYjUtOGE4ZC00M2M0LThkNmYtN2I5ZWE1YTZiNWM1OjFkMjk2YWU4LWJmZWItNDljMS05NjU2LWI2YTc5NDY2ZmZiNiIsInR5cCI6IklEIiwiYXpwIjoiYWRtaW4tY2xpZW50Iiwibm9uY2UiOiJhc2IzIiwic2Vzc2lvbl9zdGF0ZSI6ImFmZDc4MzI5LWRlOWYtNDM0Zi05NjFlLTllZjA5NzYzN2EyZSIsImF0X2hhc2giOiJENWZ5ZnNoQkFPV0x1dkxwakdDeHBRIiwiYWNyIjoiMSIsInNpZCI6ImFmZDc4MzI5LWRlOWYtNDM0Zi05NjFlLTllZjA5NzYzN2EyZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZ2VuZGVyIjoiRkVNQUxFIiwibmlja25hbWUiOiJHTeuztOuTnCIsInByZWZlcnJlZF91c2VybmFtZSI6ImR1ZWtkbXMiLCJlbWFpbCI6Im1hbmFnZXJAbmF2ZXIuY29tIn0.iJSPIWXV0MTWfWg5R20STIfCrQAzc4AXMLbRpSr3zcISnlEuMEj7XjRugPSlzXo1MXdFP-a5CHMnJCJCyembGLTKFSqVpMwO4qDFM-eVDFWpFmq7pieW_VqQBIw7vOpz9zPd6XkwHkqSHWo7PDn5fGJzR97y-L_4M-oTqR6iysStE67YjLEuw9m7aIRftawebTwyoMZBOHz4miuokZaR0YKsBdzrZDUgBTZNZyWDz-8aAJRXpWTKTUW9o8lx-2ZEOFQ6WpkYum27pNKQmsq-dDM6g7tvEi9_M9PBa6DaM872vj1iYVFWs6tq_6lgS5riGgwiBlMuad4oX9crGK07-w"
+
             }
         })
             .then(response => {

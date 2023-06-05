@@ -11,6 +11,9 @@ import { useLocation } from 'react-router-dom';
 
 function QnADetailPage(){
 
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken = "Bearer " + document.cookie.substring(name.length, document.cookie.length);
+
     //db연결/////////////////////////////////////
     const location = useLocation();
     console.log(location);
@@ -27,23 +30,19 @@ function QnADetailPage(){
     const [token, setToken] = useState('');
 
     useEffect(() => {
-        const checkLoginStatus = () => {
-            const ssoClientCookie = document.cookie.includes('SOCOA-SSO-TOKEN');
-            const ssoToken = document.cookie.match('SOCOA-SSO-TOKEN')
-            setIsLoggedIn(ssoClientCookie);
-            console.log(ssoToken);
-            console.log(ssoToken.input);
-            setToken(ssoToken.input);
-        };
-        checkLoginStatus();
 
-        axios.get(`http://gateway.socoa.online:8000/board-service/question/show/${index}`)
+        axios.get(`http://gateway.socoa.online:8000/board-service/question/show/${index}`, {
+        // withCredentials:true,
+            headers : {
+                "Authorization" : ssoToken
+            }
+        })
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
                 console.log(response.data)
                 const dat = response.data;
                 setData(dat.data);
-                setCount(dat.data.good_count);
+                setCount(dat.data.goodCount);
                 setDay(dat.data.updatedAt.substring(0,10))
                 setTime(dat.data.updatedAt.substring(11))
                 const objects = [];
@@ -70,7 +69,11 @@ function QnADetailPage(){
             });
 
 
-        axios.get(`http://gateway.socoa.online:8000/board-service/question/show/commendList/${index}`)
+        axios.get(`http://gateway.socoa.online:8000/board-service/question/show/commendList/${index}`, {
+            headers : {
+                "Authorization" : ssoToken
+            }
+        })
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
                 console.log(response.data)
@@ -142,7 +145,7 @@ function QnADetailPage(){
         axios.get(`http://gateway.socoa.online:8000/board-service/question/goodCheck/${index}`,{
             questionIndex : `${index}`,
             headers: {
-                Authorization: "Bearer yJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJYWnR3dm1QelNOd0pqYVZuZzFDbklWd3l6MWRnQ2lpampDdkdvT1Ztb29rIn0.eyJleHAiOjE2ODU4MzM3MjcsImlhdCI6MTY4NTgzMzY2NywiYXV0aF90aW1lIjoxNjg1ODMzNTUzLCJqdGkiOiIxYTk0MjI1ZS04NTM2LTQ1MzUtYjFkYi0yOTJhNDE4YTc0ZWIiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFkbWluLWNsaWVudCIsInN1YiI6IjUxMzYyZWU3LTE0MzYtNGQ1YS1iOGQ0LWFjMzE0NzdhMDk2NyIsInR5cCI6IklEIiwiYXpwIjoiYWRtaW4tY2xpZW50Iiwibm9uY2UiOiJhc2IzIiwic2Vzc2lvbl9zdGF0ZSI6ImM1Y2Y2OWExLTliMzktNDJlNy05ZGY4LTg2Yjg5Yzg3Y2I3MyIsImF0X2hhc2giOiJOeDZhb1pPay1uSjRNS3VkdFR2Ykl3IiwiYWNyIjoiMCIsInNpZCI6ImM1Y2Y2OWExLTliMzktNDJlNy05ZGY4LTg2Yjg5Yzg3Y2I3MyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW4ifQ.ac1EzJpd7LAJpZlr8VBKSMXg9ULh87gjWYQezCC3BdYPHnZ4dlceSdDvnCSnfYtZzfnNG17G80--e7yjKB5dHUelpDXwRyX-N3ymNL_X4I5mZD7cRjfRBhf7nTOK1IH-gGdFJRtRrLwrlJIIoLdK8wudS0jA5N0PpW7fPvrIbnfLeLCBrZZLRVnf7Xq8GgDBnr8fHdf3h8oYMoyR5tz5kvgJGHaiGI4oTVANTCpy1RNi-JZw9L-FSFoymD1rQuASviPrFrF3EZ8JO_3U4aBXq2uNMCVHhDHVqPt7FzmBJC3C2hmPCZzdglKaYxteGh9iBslTtwK3tSohYni0BCbDtw"
+                "Authorization" : ssoToken
             }
         })
             .then(response => {
@@ -161,6 +164,10 @@ function QnADetailPage(){
 
         axios.post(`http://gateway.socoa.online:8000/board-service/question/commend/register/${index}`,{
             commendContent : `${text}`
+        }, {
+            headers: {
+                "Authorization" : ssoToken
+            }
         })
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
@@ -196,10 +203,11 @@ function QnADetailPage(){
                         <p className="DetailInfo">{day}&nbsp;{time}</p>
                     </div>
                     <div className="DetailContent">
+                        {/*data.questionContent*/}
                         {img.map((item) => (
                             <img src={item.imageUrl} className="DetailImg" alt="post"/>
                         ))}
-                        <p className="Detailtext">{data.questionContent}</p>
+                        <div className="Detailtext" dangerouslySetInnerHTML={{__html: data.questionContent}}></div>
                         <button className="GoodButton" onClick={Good} disabled={isClicked}>{goods===true?<img className="DetailGood" src={good}/>:<img className="DetailGood" src={nogood} />}</button>
                         {/*여기 좋아요 부분 바꿔야함*/}
                         <p className="LikeCount">{count} Likes</p>

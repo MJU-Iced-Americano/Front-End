@@ -9,12 +9,17 @@ import OperatorBannerDeleteService from "./OperatorBannerDeleteService";
 const OperatorBannerDelete=()=>{
 
     const OperatorBannerDeleteContent =()=>{
-
+        const name = 'SOCOA-SSO-TOKEN=';
+        const ssoToken =  "Bearer "+document.cookie.substring(name.length, document.cookie.length);
         const [data, setData] = useState([]);
 
         useEffect(() => {
 
-            axios.get(`http://3.34.240.33:8080/board-service/banner/show/listBanner`)
+            axios.get(`http://gateway.socoa.online:8080/board-service/banner/show/listBanner`, {
+                headers: {
+                    "Authorization": ssoToken
+                }
+            })
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data)

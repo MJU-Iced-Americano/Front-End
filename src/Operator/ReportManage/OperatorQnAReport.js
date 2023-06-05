@@ -8,9 +8,16 @@ import axios from "axios";
 const OperatorQnAReport=()=>{
     const [data, setData] = useState([]);
 
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(name.length, document.cookie.length);
     useEffect(() => {
 
-        axios.get(`http://gateway.socoa.online:8000/complaint-service/question/show/listQnA`)
+        axios.get(`http://gateway.socoa.online:8000/complaint-service/question/show/listQnA`, {
+            // withCredentials:true,
+            headers: {
+                "Authorization": ssoToken
+            }
+        })
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
                 console.log(response.data)

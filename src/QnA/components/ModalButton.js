@@ -7,6 +7,8 @@ import {Modal} from "react-bootstrap";
 import axios from "axios";
 
 function ModalButton({index}) {
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer " + document.cookie.substring(name.length, document.cookie.length);
     const [show, setShow] = useState(false);
     const [type, setType] = useState('HATE_SPEECH');
     const [complaintContent, setComplaintContent] = useState('');
@@ -17,9 +19,13 @@ function ModalButton({index}) {
         console.log(complaintContent);
         console.log(index);
 
-        axios.post(`/complaint-service/question/register/${index}`,{
+        axios.post(`http://gateway.socoa.online:8000/complaint-service/question/register/${index}`,{
             complaintContent : `${complaintContent}`,
             type : `${type}`
+        }, {
+            headers: {
+                "Authorization" : ssoToken
+            }
         })
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.

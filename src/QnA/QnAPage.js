@@ -12,13 +12,20 @@ import SearchResultText from "../courselist-page/CourseSearchResult";
 const QnAPage=()=>{
 
     const QnAPageContent =()=> {
+        const name = 'SOCOA-SSO-TOKEN=';
+        const ssoToken = "Bearer " + document.cookie.substring(name.length, document.cookie.length);
+
         //db연결/////////////////////////////////////
         const [data, setData] = useState([]);
         const [numberqna, setNumberQna] = useState('1');
 
         useEffect(() => {
 
-            axios.get(`http://gateway.socoa.online:8000/board-service/question/show/listQnA`)
+            axios.get(`http://gateway.socoa.online:8000/board-service/question/show/listQnA`, {
+                headers: {
+                    "Authorization" : ssoToken
+                }
+            })
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data)

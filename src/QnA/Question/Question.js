@@ -5,19 +5,22 @@ import {useNavigate} from "react-router-dom";
 import Body from "../../components/Body/Body";
 import ReactQuill from "react-quill";
 import axios from "axios";
+import ImageArea from "./ImageArea";
 
 const Question=()=>{
     const QuestionContent =()=> {
+        const name = 'SOCOA-SSO-TOKEN=';
+        const ssoToken =  "Bearer " + document.cookie.substring(name.length, document.cookie.length);
         const navigate = useNavigate();
 
         const navigateToMain = () => {
             navigate("/QnAPage");
         };
 
-        const [titles, setTitles] = useState("")
-        const [htmlContent, setHtmlContent] = useState("");
+        const [questionTitle, setTitles] = useState("")
+        const [questionContent, setHtmlContent] = useState("");
         const quillRef = useRef();
-        const [selectedOption, setSelectedOption] = useState('option1');
+        const [type, setSelectedOption] = useState('PAYMENT');
         const options = [
             { label: '결제', value: 'PAYMENT' },
             { label: '강의', value: 'LECTURE' },
@@ -36,7 +39,6 @@ const Question=()=>{
                             { indent: "+1" },
                             { align: [] },
                         ],
-                        ["image"],
                     ],
 
                 },
@@ -53,8 +55,7 @@ const Question=()=>{
             "list",
             "bullet",
             "indent",
-            "align",
-            "image"
+            "align"
         ], []);
 
         const editorStyles = useMemo(() => ({
@@ -63,54 +64,66 @@ const Question=()=>{
             width:'80%',
         }), []);
 
-
         const changeTitle =(e)=>{
             setTitles(e.target.value);
         }
-        const AddQuestion =()=> {
-            console.log(selectedOption);
-            console.log(titles);
-            console.log(htmlContent);
-            AddService(selectedOption,titles,htmlContent);
-        };
 
-        function AddService({category,titles,htmlContent}){
-            const [error, setError] = useState(null);
 
-            useEffect(()=>{
+        const AddService =  () => {
+            console.log(questionTitle)
+            console.log(questionContent)
+            console.log(type)
+            console.log(selectedFiles)
 
-                const postQna = async () => {
-                    try{
-                        setError(null);
-                        const response = await axios.post('/board-service/qna/register', {
-                            CoCompany_name: category,
-                            CoCompany_url: titles,
-                            htmlContent: htmlContent
-                        });
-                        console.log(response);
-                    }catch(e){
-                        console.log(e.response.data);
-                    }
-                };
-                postQna();
-            }, []);
+            const qnARegisterDto = {
+                questionTitle, questionContent, type
+            };
+            console.log(qnARegisterDto)
 
-            return(
-                <div>
-                    <p>등록이 완료되었습니다</p>
-                </div>
-            );
+            const formData = new FormData();
+
+            formData.append('qnARegisterDto',new Blob([JSON.stringify(qnARegisterDto)], { type: "application/json" }));
+
+            for (let i = 0; i < selectedFiles.length; i++) {
+                formData.append('image', selectedFiles[i]);
+            }
+
+            for (let key of formData.keys()) {
+                console.log(key, ":", formData.get(key));
+            }
+
+            const config = {
+                headers: {
+                    "content-type": "multipart/form-data",
+                    "Authorization" : ssoToken
+                }
+            };
+            axios.post(`http://gateway.socoa.online:8000/board-service/question/register`, formData, config)
+                .then(response => {
+                    // response.data는 가져온 데이터를 의미합니다.
+                    console.log(response.data)
+
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
 
         const handleOptionChange = (event) => {
             setSelectedOption(event.target.value);
         };
 
+        const [selectedFiles, setSelectedFiles] = useState([]);
+
+        const handleFileSelect = (files) => {
+            setSelectedFiles(files);
+        };
+
         return (
             <div className={"Information"}>
                 <div className="QnACategory">
                     <h1>글 작성하기</h1>
-                    <select value={selectedOption} onChange={handleOptionChange} className="CategorySelect">
+                    <select value={type} onChange={handleOptionChange} className="CategorySelect">
                         {options.map((option) => (
                             <option key={option.value} value={option.value} className="CategoryOption">
                                 {option.label}
@@ -122,13 +135,13 @@ const Question=()=>{
                     <input
                         className="QuestionTitle"
                         placeholder="제목을 입력해주세요"
-                        value={titles}
+                        value={questionTitle}
                         onChange={changeTitle}
                     />
                     <div style={editorStyles}>
                         <ReactQuill
                             ref={quillRef}
-                            value={htmlContent}
+                            value={questionContent}
                             onChange={setHtmlContent}
                             modules={modules}
                             formats={formats}
@@ -138,8 +151,11 @@ const Question=()=>{
                         />
                     </div>
                 </div>
+                <div>
+                    <ImageArea onFileSelect={handleFileSelect} />
+                </div>
                     <button className="maincancelbutton" onClick={navigateToMain}>취소</button>
-                    <button className="mainbutton" onClick={AddQuestion}>등록하기</button>
+                    <button className="mainbutton" onClick={AddService}>등록하기</button>
             </div>
         );
     }

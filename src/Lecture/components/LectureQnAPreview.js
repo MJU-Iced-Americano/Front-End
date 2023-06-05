@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function QnAPreview({courseIndex,lectIndex,index,question_title,question_content}) {
+    const names = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(names.length, document.cookie.length);
     const navigate = useNavigate();
     console.log(index);
     console.log(question_title);
@@ -11,7 +13,12 @@ function QnAPreview({courseIndex,lectIndex,index,question_title,question_content
 
     useEffect(() => {
 
-        axios.get(`http://gateway.socoa.online:8000/lecture-service/lecture/question/${index}`)
+        axios.get(`http://gateway.socoa.online:8000/lecture-service/lecture/question/${index}`,{
+            // withCredentials:true,
+            headers : {
+                "Authorization" : ssoToken
+            }
+        })
             .then(response => {
                 const dat = response.data.data;
                 console.log(dat)

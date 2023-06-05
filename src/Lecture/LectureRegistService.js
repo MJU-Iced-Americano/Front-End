@@ -5,6 +5,8 @@ import axios from "axios";
 import OperatorcoOpAddService from "../Operator/CoOpManage/OperatorCoOpAddService";
 
 function LectureRegistService({course_index, chapter, lecture_sequence, lectureTitle, lectureDescription, video}){
+    const names = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(names.length, document.cookie.length);
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
 
@@ -30,7 +32,8 @@ function LectureRegistService({course_index, chapter, lecture_sequence, lectureT
                 setError(null);
                 const config = {
                     headers: {
-                        "content-type": "multipart/form-data"
+                        "content-type": "multipart/form-data",
+                        "Authorization" : ssoToken
                     }
                 };
                 const response = await  axios.post(`http://gateway.socoa.online:8000/lecture-service/lecture/manage/new-lecture/1/3/1`, formData, config);

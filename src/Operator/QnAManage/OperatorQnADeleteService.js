@@ -12,7 +12,11 @@ function OperatorQnADeleteService({faqIndex}) {
         const fetchQnA = async () => {
             try{
                 setError(null);
-                const response = await axios.delete(`/board-service/qna/delete/${faqIndex}`);
+                const response = await axios.delete(`http://gateway.socoa.online:8000/board-service/qna/delete/${faqIndex}`, {
+                    headers: {
+                        "Authorization" : ssoToken
+                    }
+                });
                 console.log(response);
             }catch(e){
                 setError(e);

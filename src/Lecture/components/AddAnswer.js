@@ -3,7 +3,8 @@ import axios from "axios";
 
 
 function OperatorCoOpAddService({qIndex, Answer}) {
-
+    const names = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(names.length, document.cookie.length);
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
 
@@ -31,7 +32,8 @@ function OperatorCoOpAddService({qIndex, Answer}) {
                 setError(null);
                 const config = {
                     headers: {
-                        "content-type": "multipart/form-data"
+                        "content-type": "multipart/form-data",
+                        "Authorization" : ssoToken
                     }
                 };
                 const response = await axios.post(`http://gateway.socoa.online:8000/lecture-service/lecture/${qIndex}/answer`, formData, config);

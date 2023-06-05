@@ -3,7 +3,8 @@ import axios from "axios";
 
 
 function OperatorBannerDeleteService({bannerIndex}) {
-
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(name.length, document.cookie.length);
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
     console.log(bannerIndex);
@@ -14,7 +15,11 @@ function OperatorBannerDeleteService({bannerIndex}) {
         const fetchBanner = async () => {
             try{
                 setError(null);
-                const response = await axios.delete(`http://3.34.240.33:8080/board-service/banner/delete/${bannerIndex}`);
+                const response = await axios.delete(`http://gateway.socoa.online:8080/board-service/banner/delete/${bannerIndex}`, {
+                    headers: {
+                        "Authorization": ssoToken
+                    }
+                });
                 console.log(response);
                 setMessage(response.data.message);
             }catch(e){

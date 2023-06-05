@@ -3,7 +3,8 @@ import axios from "axios";
 
 
 function OperatorBannerAddService({photo}) {
-
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(name.length, document.cookie.length);
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
 
@@ -22,10 +23,11 @@ function OperatorBannerAddService({photo}) {
                 setError(null);
                 const config = {
                     headers: {
-                        "Content-type": "multipart/form-data"
+                        "Content-type": "multipart/form-data",
+                        "Authorization": ssoToken
                     }
                 };
-                const response = await axios.post('http://3.34.240.33:8080/board-service/banner/register', formData, config);
+                const response = await axios.post('http://gateway.socoa.online:8080/board-service/banner/register', formData, config);
                 console.log(response);
                 setMessage(response.data.message);
 

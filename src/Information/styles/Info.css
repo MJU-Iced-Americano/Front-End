@@ -59,10 +59,10 @@ section {
 }
 
 .HistoryYear{
-  margin-bottom: 10px;
   padding: 20px;
 }
-.CompanyYear{
+
+.CompanyYears{
   width: 20%;
   font-weight: bold;
   font-size: 20px;

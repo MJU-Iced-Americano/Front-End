@@ -5,6 +5,8 @@ import axios from "axios";
 
 function QnASearchPreview({inputs}) {
     const [data, setData] = useState([]);
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken = "Bearer " + document.cookie.substring(name.length, document.cookie.length);
 
     const navigate = useNavigate();
     // console.log(index);
@@ -20,6 +22,10 @@ function QnASearchPreview({inputs}) {
 
         axios.post(`http://gateway.socoa.online:8000/board-service/question/search`,{
             keyword : `${inputs}`
+        }, {
+            headers: {
+                "Authorization" : ssoToken
+            }
         })
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.

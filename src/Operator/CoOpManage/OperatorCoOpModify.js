@@ -7,12 +7,18 @@ import "./styles/OperatorCoOp.css"
 const OperatorCoOpModify=()=>{
 
     const OperatorCoOpModifyContent =()=>{
+        const name = 'SOCOA-SSO-TOKEN=';
+        const ssoToken =  "Bearer "+document.cookie.substring(name.length, document.cookie.length);
 
         const [data, setData] = useState([]);
 
         useEffect(() => {
 
-            axios.get(`http://15.165.249.107:8080/company-service/company/get`)
+            axios.get(`http://gateway.socoa.online:8080/company-service/company/get`,{
+                headers: {
+                    "Authorization": ssoToken
+                }
+            })
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data)

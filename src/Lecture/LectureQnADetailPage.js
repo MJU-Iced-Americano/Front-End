@@ -20,13 +20,20 @@ const LectureQnADetailPage =() => {
 
     const LectureQnADetailPageContent =({courseIndex,lectIndex,qIndex}) => {
 
+        const names = 'SOCOA-SSO-TOKEN=';
+        const ssoToken =  "Bearer "+document.cookie.substring(names.length, document.cookie.length);
         console.log(qIndex)
         const[lectureQuestionTitle,setLectureQuestionTitle] = useState('');
         const[lectureQuestion,setLectureQuestion] = useState('');
         const[time,setTime] = useState('');
 
         useEffect(() => {
-            axios.get(`http://gateway.socoa.online:8000/lecture-service/lecture/question/${qIndex}`)
+            axios.get(`http://gateway.socoa.online:8000/lecture-service/lecture/question/${qIndex}`,{
+                // withCredentials:true,
+                headers : {
+                    "Authorization" : ssoToken
+                }
+            })
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     const dat = response.data.data;

@@ -30,7 +30,7 @@ function QnAPreview({index,question_title,question_content,updateDate,updateTime
     return(
         <div className="QnAGoDetail" onClick={navigateToQnADetail}>
             <h3 className="DetailNamePreview">[{type}]&nbsp;{question_title}</h3>
-            <p className="DetailcontentPreview">{question_content}</p>
+            <div className="DetailcontentPreview" dangerouslySetInnerHTML={{__html: question_content}}></div>
             <div className="QnADetailDate">
                 <p>{updateDate}&nbsp;{updateTime}</p>
             </div>

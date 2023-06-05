@@ -12,6 +12,8 @@ function ModalButton({index}) {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const name = 'SOCOA-SSO-TOKEN=';
+    const ssoToken = "Bearer " + document.cookie.substring(name.length, document.cookie.length);
 
     const handleChangeType = (event) => {
         setType(event.target.value);
@@ -24,9 +26,13 @@ function ModalButton({index}) {
         console.log(complaintContent);
         console.log(index);
 
-        axios.post(`/complaint-service/commend/register/${index}`,{
+        axios.post(`http://gateway.socoa.online:8000/complaint-service/commend/register/${index}`,{
             type : `${type}`,
             complaintContent : `${complaintContent}`
+        }, {
+            headers: {
+                "Authorization" : ssoToken
+            }
         })
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.

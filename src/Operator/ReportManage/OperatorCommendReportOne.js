@@ -17,11 +17,17 @@ const OperatorQnAReportOne=()=>{
 
         const[content,setContent] = useState('');
         const[questionIndex, setQuestionIndex] = useState('');
-
+        const name = 'SOCOA-SSO-TOKEN=';
+        const ssoToken =  "Bearer "+document.cookie.substring(name.length, document.cookie.length);
 ////////////////////////////////////신고 게시물 불러오기///////////////////////////////////
         useEffect(() => {
 
-            axios.get(`http://gateway.socoa.online:8000/complaint-service/commend/content/show/${index}`)
+            axios.get(`http://gateway.socoa.online:8000/complaint-service/commend/content/show/${index}`, {
+                // withCredentials:true,
+                headers: {
+                    "Authorization": ssoToken
+                }
+            })
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data)
@@ -37,7 +43,12 @@ const OperatorQnAReportOne=()=>{
         ////////////////////////////////////신고정보 불러오기///////////////////////////////////
         useEffect(() => {
 
-            axios.get(`http://gateway.socoa.online:8080/complaint-service/commend/complaint/show/${index}`)
+            axios.get(`http://3.35.237.123:8080/complaint-service/commend/complaint/show/${index}`, {
+                // withCredentials:true,
+                headers: {
+                    "Authorization": ssoToken
+                }
+            })
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data)

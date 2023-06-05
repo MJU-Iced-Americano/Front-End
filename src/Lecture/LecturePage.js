@@ -17,7 +17,10 @@ const LecturePage=()=>{
     const index = params[3];
     console.log(index);
 
+
     const LecturePageContent =({courseIndex, lectIndex})=> {
+        const name = 'SOCOA-SSO-TOKEN=';
+        const ssoToken =  "Bearer " + document.cookie.substring(name.length, document.cookie.length);
 
         console.log(lectIndex);
         const navigate = useNavigate();
@@ -28,7 +31,12 @@ const LecturePage=()=>{
 
         useEffect(() => {
 
-            axios.get(`http://gateway.socoa.online:8000/lecture-service/lecture/${lectIndex}?tab=basic`)
+            axios.get(`http://gateway.socoa.online:8000/lecture-service/lecture/${lectIndex}?tab=basic`,{
+                // withCredentials:true,
+                headers : {
+                    "Authorization" : ssoToken
+                }
+            })
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data);
