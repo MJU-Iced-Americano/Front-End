@@ -111,6 +111,12 @@ const Header = ()=> {
                         </a>
                 )}
 
+                {userInformationType === 'TEACHER' && (
+                    <a href="/MyPage" className="btnMainItem">
+                        <AiOutlineUser className="userBtn"/>
+                    </a>
+                )}
+
                 {userInformationType === 'MANAGER' && (
                         <a href="/OperatorPage" className="btnMainItem">
                             <AiOutlineUser className="userBtn"/>
