@@ -7,7 +7,6 @@ import { FaAngleDown } from "react-icons/fa";
 import Body from "../components/Body/Body";
 import axios from "axios";
 import {Link} from "react-router-dom";
-import {getCookie} from "../components/Cookie";
 
 const CourseListPage =()=> {
     // const[inputs, setInputs] = useState("");
@@ -20,13 +19,10 @@ const CourseListPage =()=> {
     const name = 'SOCOA-SSO-TOKEN=';
     const ssoToken = "Bearer " + document.cookie.substring(name.length, document.cookie.length);
 
-
-
     useEffect(() => {
         getCoursesByCategory("all");
     },[]);
-
-
+    //category와 skill을 동시에 정렬하기를 원한다는 말씀?
     const getCoursesByCategory=  (category)=> {
         let url = "";
         if(category === "all") {
@@ -62,11 +58,9 @@ const CourseListPage =()=> {
             .then(response => {
                 // console.log(response.data + "?");
                 console.log(response);
-                console.log("들어왓졍?");
 
                 const content = response.data.data.content;
                 const objects = [];
-
 
                 for (let i = 0; i < content.length; i++) {
                     const obj = {
@@ -88,7 +82,7 @@ const CourseListPage =()=> {
     }
     const TagBox=({keyword})=> {
         return (
-            <a href='/courseList'>
+            <a onClick={() => getCoursesByCategory({keyword})}>
                 <div className="search-tag-box">
                     #{keyword}
                 </div>
@@ -159,14 +153,6 @@ const CourseListPage =()=> {
                                 </div>
                                 {tagCatClicked&&
                                     <div className="course-search-result-tag-under">
-                                        <TagBox keyword="java"/>
-                                        <TagBox keyword="k8s"/>
-                                        <TagBox keyword="chatGPT"/>
-                                        <TagBox keyword="spring"/>
-                                        <TagBox keyword="java"/>
-                                        <TagBox keyword="k8s"/>
-                                        <TagBox keyword="chatGPT"/>
-                                        <TagBox keyword="spring"/>
                                         <TagBox keyword="java"/>
                                         <TagBox keyword="k8s"/>
                                         <TagBox keyword="chatGPT"/>
