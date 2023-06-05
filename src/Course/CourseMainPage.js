@@ -97,7 +97,16 @@ const CourseMainPage = (props) => {
 
     }
     const getDetails = (courseIndex) => {
-        axios.get(`http://gateway.socoa.online:8000/course-service/course/${courseIndex}`)
+
+        const name = 'SOCOA-SSO-TOKEN=';
+        const ssoToken = "Bearer "+ document.cookie.substring(name.length, document.cookie.length);
+        console.log(ssoToken);
+
+        axios.get(`http://gateway.socoa.online:8000/course-service/course/${courseIndex}`, {
+            headers: {
+                "Authorization": ssoToken
+            }
+        })
             .then(response => {
                 const data = response.data.data;
                 console.log(JSON.stringify(data, null, 2));

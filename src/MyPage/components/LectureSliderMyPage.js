@@ -23,8 +23,15 @@ const LectureSlider=(props)=> {
         }, [props.name]);
 
     const getCourses = () => {
-        axios.get (`http://54.180.213.187:8080/request/user/course-list`, {
-            userId : 1
+
+        const name = 'SOCOA-SSO-TOKEN=';
+        const ssoToken = "Bearer "+ document.cookie.substring(name.length, document.cookie.length);
+        console.log(ssoToken);
+
+        axios.get (`http://gateway.socoa.online:8000/mypage/user/course-list`, {
+            headers: {
+                "Authorization" : ssoToken
+            }
         })
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.

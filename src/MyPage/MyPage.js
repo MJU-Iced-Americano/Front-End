@@ -1,12 +1,34 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from '../components/Header/Header';
 import Footer from "../components/Footer/Footer";
 import Body from "../components/Body/Body";
 import "./styles/MyPage.css"
 import LectureSlider from "../components/Banner/LectureSlider";
 import LectureSliderMyPage from "./components/LectureSliderMyPage";
+import axios from "axios";
 
 const MyPage = () => {
+    const [nickname, setNickname] = useState(''); // 로그인 상태를 나타내는 state
+    const [phoneNumber, setPhoneNumber] = useState(''); // 로그인 상태를 나타내는 state
+    const [userInformationType, setUserInformationType] = useState(''); // 로그인 상태를 나타내는 state
+    useEffect(() => {
+
+        const name = 'SOCOA-SSO-TOKEN=';
+        const ssoToken = "Bearer "+ document.cookie.substring(name.length, document.cookie.length);
+
+        axios.get('http://gateway.socoa.online:8000/board-service/question/myPage/show/myInfo', {
+            headers: {
+                "Authorization" : ssoToken
+            }
+        }).then(
+            response => {
+                setNickname(response.data.data.nickname)
+                setPhoneNumber(response.data.data.phoneNumber)
+                setUserInformationType(response.data.data.userInformationType)
+
+            }
+        )
+    }, [])
 
     const TagBox=({keyword})=> {
         return (
@@ -30,9 +52,9 @@ const MyPage = () => {
 
                                 </div>
                                 <div className="UserInfos">
-                                    <h2>유저 이름</h2>
-                                    <p>010-xxxx-xxxx</p>
-                                    <p>Parkcoa@gmail.com</p>
+                                    <h2>{nickname}</h2>
+                                    <p>{phoneNumber}</p>
+                                    <p>{userInformationType}</p>
                                 </div>
                             </div>
                             <div className="UserTagDiv">
