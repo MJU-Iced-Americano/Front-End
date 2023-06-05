@@ -354,9 +354,10 @@ hr.ver_line {
     font-size: 17px;
 }
 
-/*.section1 {*/
-/*    width: 9%;*/
-/*}*/
+.section1 {
+    margin-left: 50px;
+    margin-right: 10px;
+}
 .section2 {
 
     width: 15%;
@@ -419,7 +420,7 @@ hr.ver_line {
     flex-direction: column;
     flex: 1;
     justify-content: flex-end;
-    margin-right: 30px;
+    margin-right: 50px;
 }
 .review_listITem {
     /*height: 90px;*/
