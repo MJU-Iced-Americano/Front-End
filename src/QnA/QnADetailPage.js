@@ -29,8 +29,6 @@ function QnADetailPage(){
     const[type,setType] = useState('');
     const[day,setDay] = useState('');
     const[time,setTime] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 나타내는 state
-    const [token, setToken] = useState('');
 
     useEffect(() => {
 
@@ -211,7 +209,7 @@ function QnADetailPage(){
                 <div className="DetailMain">
                     <div className="DetailHeader">
                         <h1 className="DetailName">[{type}]&nbsp;{data.questionTitle}</h1>
-                        <p className="DetailInfo">{day}&nbsp;{time}</p>
+                        <p className="DetailInfo">작성자:{data.userName}&nbsp;&nbsp;{day}&nbsp;{time}</p>
                     </div>
                     <div className="DetailContent">
                         {/*data.questionContent*/}
