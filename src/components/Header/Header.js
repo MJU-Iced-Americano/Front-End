@@ -101,9 +101,6 @@ const Header = ()=> {
                     </div>
                 )}
                 {/*<div className="loginBtn"> <a href="http://localhost/user/login"> LoginTest </a></div>*/}
-                <div><a href="/OperatorPage" className="btnMainItem">
-                    <AiOutlineUser className="userBtn"/>
-                </a></div>
                 {/*{userId && (*/}
                 {/*    <div className="id">{userId}</div>*/}
                 {/*)}*/}
