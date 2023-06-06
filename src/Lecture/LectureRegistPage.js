@@ -13,9 +13,10 @@ const LectureRegistPage=({course_index, chapter, lecture_sequence})=>{
         const [inputs, setInputs] = useState({
             lectureTitle : '',
             lectureDescription:'',
+            lectureTime: 0
         });
 
-        const {lectureTitle, lectureDescription} = inputs;
+        const {lectureTitle, lectureDescription,lectureTime} = inputs;
 
 
 
@@ -49,10 +50,11 @@ const LectureRegistPage=({course_index, chapter, lecture_sequence})=>{
                 <h1>강의등록페이지</h1>
                 <input name="lectureTitle" placeholder="강의 제목을 적으시오" onChange={onChange} value={lectureTitle} className="inputLectureInfo" type='text'/>
                 <input name="lectureDescription" placeholder="강의 설명을 적으시오" onChange={onChange} value={lectureDescription} className="inputLectureInfo" type='text'/>
+                <input name="lectureTime" placeholder="강의 시간을 적으시오" onChange={onChange} value={lectureTime} className="inputLectureInfo" type='number'/>
                 {/*<button onClick={handleButtonClick}>비디오 선택</button>*/}
                 <input name="videoURL" ref={inputRef} type="file" accept="video/*" onChange={onImageHandler} className="inputLectureInfo"/>
                 <button  className="inLectureButton" onClick={()=> setDoEnroll(!doEnroll)}>{btnTextChanger()}</button>
-                {doEnroll===true?<LectureRegistService course_index={course_index} chapter={chapter} lecture_sequence={lecture_sequence} lectureTitle={lectureTitle} lectureDescription={lectureDescription} video={video}/>:<p></p>}
+                {doEnroll===true?<LectureRegistService course_index={course_index} chapter={chapter} lecture_sequence={lecture_sequence} lectureTitle={lectureTitle} lectureDescription={lectureDescription} lectureTime={lectureTime} video={video}/>:<p></p>}
             </div>
         );
     }
