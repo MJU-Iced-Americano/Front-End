@@ -4,7 +4,8 @@ import Body from "../../components/Body/Body";
 import OperatorQnADeleteService from "../QnAManage/OperatorQnADeleteService";
 
 const OperatorCoOpDelete=()=>{
-
+    const names = 'SOCOA-SSO-TOKEN=';
+    const ssoToken =  "Bearer "+document.cookie.substring(names.length, document.cookie.length);
     const OperatorCoOpDeleteContent =()=>{
         const [faqIndex, setFaqIndex] = useState('');
         const [doEnroll, setDoEnroll] = useState(false);

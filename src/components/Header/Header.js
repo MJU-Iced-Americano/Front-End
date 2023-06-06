@@ -28,7 +28,7 @@ const Header = ()=> {
                     setUserId(decodedToken.sub); // 사용자 닉네임 설정
                     console.log("jwt token sub(userId):"+decodedToken.sub);
                     // http://login.socoa.online/user/response_user/"+decodedToken.sub
-                    axios.get("http://localhost/user/response_user/"+decodedToken.sub)
+                    axios.get("http://login.socoa.online/user/response_user/"+decodedToken.sub)
                         .then(response => {
                             setuserInformationType(response.data.userInformationType);
                             const user = response.data.userInformationType;
@@ -61,7 +61,7 @@ const Header = ()=> {
     };
     const handleLogout = () => {
         // 쿠키 삭제
-        document.cookie = 'SOCOA-SSO-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'SOCOA-SSO-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=socoa.online; path=/;';
 
     };
 
@@ -112,6 +112,12 @@ const Header = ()=> {
                         <a href="/MyPage" className="btnMainItem">
                             <AiOutlineUser className="userBtn"/>
                         </a>
+                )}
+
+                {userInformationType === 'TEACHER' && (
+                    <a href="/MyPage" className="btnMainItem">
+                        <AiOutlineUser className="userBtn"/>
+                    </a>
                 )}
 
                 {userInformationType === 'MANAGER' && (
