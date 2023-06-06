@@ -25,7 +25,8 @@ const LectureQnADetailPage =() => {
         console.log(qIndex)
         const[lectureQuestionTitle,setLectureQuestionTitle] = useState('');
         const[lectureQuestion,setLectureQuestion] = useState('');
-        const[time,setTime] = useState('');
+        const[lectureAnswer,setLectureAnswer] = useState([]);
+
 
         useEffect(() => {
             axios.get(`http://gateway.socoa.online:8000/lecture-service/lecture/question/${qIndex}`,{
@@ -42,7 +43,21 @@ const LectureQnADetailPage =() => {
                     console.log(dat.lectureQuestionReadDto.lectureQuestion)
                     setLectureQuestionTitle(dat.lectureQuestionReadDto.lectureQuestionTitle);
                     setLectureQuestion(dat.lectureQuestionReadDto.lectureQuestion);
+                    const objects = [];
 
+                    if(dat.lectureAnswerReadDtos.length !=0){
+
+
+                        for (let i = 0; i < dat.lectureAnswerReadDtos.length; i++) {
+                            const obj = {
+                                lectureAnswer: dat.lectureAnswerReadDtos[i].lectureAnswer,
+                                username: dat.lectureAnswerReadDtos[i].username
+                            };
+                            console.log(obj)
+                            objects.push(obj);
+                        }
+                        setLectureAnswer(objects);
+                    }
                 })
                 .catch(error => {
                     console.error(error);
@@ -67,11 +82,21 @@ const LectureQnADetailPage =() => {
         return(
             <div>
                 <div className="QuestionDetailCheck">
-                    <h2>{lectureQuestionTitle}</h2>
+                    <h2>게시글</h2>
+                    <h3>{lectureQuestionTitle}</h3>
                     <h4>{lectureQuestion}</h4>
                 </div>
+                <div className="AnswerDiv">
+                    <h2>답변내용</h2>
+                    {lectureAnswer.map((answer) => (
+                        <div className="QuestionDetailAnswerDiv">
+                            <p className="QuestionDetailAnswer">{answer.lectureAnswer}</p>
+                            <p className="QuestionDetailname">-{answer.username}-</p>
+                        </div>
+                    ))}
+                </div>
                 <div>
-                    <h4>답변달기</h4>
+                    <h2>답변달기</h2>
                     <textarea
                         onChange={handleChange}
                         className="QQuestion"

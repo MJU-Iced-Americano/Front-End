@@ -59,7 +59,6 @@ const LecturePage=()=>{
 
         return (
             <div className="LectureContent">
-                <button onClick={navigateRegist}>dd</button>
                 <div className="VideoInfo">
                     <div  className="VideoInfoChild1">
                         {['start'].map((placement, idx) => (

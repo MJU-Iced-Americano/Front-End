@@ -9,7 +9,7 @@ function QnAPreview({courseIndex,lectIndex,index,question_title,question_content
     console.log(index);
     console.log(question_title);
     console.log(question_content);
-    const[lectureAnswer,setLectureAnswer] = useState('');
+
 
     useEffect(() => {
 
@@ -22,9 +22,8 @@ function QnAPreview({courseIndex,lectIndex,index,question_title,question_content
             .then(response => {
                 const dat = response.data.data;
                 console.log(dat)
-                if(dat.lectureQuestionReadDto.length !=0){
-                    setLectureAnswer(dat.lectureQuestionReadDto.answer);
-                }
+
+
             })
             .catch(error => {
                 console.error(error);
@@ -41,9 +40,6 @@ function QnAPreview({courseIndex,lectIndex,index,question_title,question_content
         <div className="QnAGoDetail" onClick={navigateToQnADetail}>
             <h3 className="DetailNamePreview">{question_title}</h3>
             <p className="DetailcontentPreview">{question_content}</p>
-            <div>
-                <p>{lectureAnswer}</p>
-            </div>
         </div>
     );
 }

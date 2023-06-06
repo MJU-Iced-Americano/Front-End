@@ -13,8 +13,6 @@ function OperatorCoOpAddService({qIndex, Answer}) {
         answer : Answer
     };
 
-
-
     useEffect(()=>{
 
         console.log(answerCreateDto);

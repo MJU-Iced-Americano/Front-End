@@ -38,7 +38,7 @@ function LectureRegistService({course_index, chapter, lecture_sequence, lectureT
                 };
 
                 //코스인덱스,챕터,강의번호
-                const response = await  axios.post(`http://gateway.socoa.online:8000/lecture-service/lecture/manage/new-lecture/10/2/1`, formData, config);
+                const response = await  axios.post(`http://gateway.socoa.online:8000/lecture-service/lecture/manage/new-lecture/10/5/1`, formData, config);
                 setMessage(response.data.message);
                 console.log(response);
 
