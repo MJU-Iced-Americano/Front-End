@@ -16,7 +16,6 @@ const MainPage=() => {
                             name="search"
                             id="search"
                            onClick={()=> {
-                               console.log("확인쓰~")
                                movePage('/courseList')
                            }
                            }

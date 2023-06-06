@@ -37,6 +37,7 @@ import BannerAddPage from "./Operator/BannerManage/OperatorBannerAdd";
 import BannerDeletePage from "./Operator/BannerManage/OperatorBannerDelete";
 import FAQSearchResultPage from "./FAQ/FAQSearchResultPage";
 import MyPage from "./MyPage/MyPage";
+import WhoWeAre from "./WhoWeAre";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ComplaintModal from "./Course/components/ComplaintModal";
 import CourseRegisterPage from "./Teacher/CourseRegisterPage";
@@ -96,7 +97,7 @@ function App() {
           <Route path="/Teacher/CourseRegisterPage" element={<CourseRegisterPage/>}></Route>
 
           <Route path="/MyPage" element={<MyPage />}></Route>
-
+          <Route path="/WhoWeAre" element={<WhoWeAre/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
