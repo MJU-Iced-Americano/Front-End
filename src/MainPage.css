@@ -13,6 +13,7 @@
     width: 780px;
     border: 4px solid #6667ab;
     border-radius: 60px;
+    box-shadow: 5px 5px 5px grey;
 }
 .searchInput{
     height: 70px;
@@ -20,6 +21,7 @@
     border-color: transparent;
     background-color: transparent;
     font-size: 2em;
+
 }
 .searchInput:focus{
     outline: none;

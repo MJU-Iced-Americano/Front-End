@@ -71,7 +71,7 @@ const BannerSlider =()=>{
             {/*<h2>Swipe To Slide</h2>*/}
             <Slider {...settings}>
                 {data.map((item) => (
-                    <a href='/'><img src={item.imageUrl} alt='promote' className="bannerImg"/></a>
+                    <a href='/WhoWeAre'><img src={item.imageUrl} alt='promote' className="bannerImg"/></a>
                 ))}
             </Slider>
         </div>
