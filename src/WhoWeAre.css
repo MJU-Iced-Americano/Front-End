@@ -1,0 +1,20 @@
+.NameLabelArea{
+    margin: 10%;
+    background-color: #f1f0ec;
+    height: 500px;
+    align-items: flex-start;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.NamePart{
+    color: #6667AB;
+    font-weight: bolder;
+}
+.NameLabel{
+    font-size: x-large;
+    text-align: left;
+    margin-left: 10%;
+    flex-direction: row;
+    display: flex;
+}
