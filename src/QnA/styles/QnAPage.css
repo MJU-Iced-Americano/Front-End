@@ -54,6 +54,10 @@
     text-align: left;
 }
 
+.QnAGoDetail *:hover{
+    cursor: pointer;
+}
+
 .DetailNamePreview{
     font-weight: bold;
     margin-bottom: 10px;

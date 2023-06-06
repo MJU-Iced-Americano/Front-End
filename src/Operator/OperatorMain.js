@@ -8,32 +8,71 @@ const OperatorMain=()=>{
 
     const OperatorMainContent =()=>{
 
-        const handleCoOpPage = () => {
-            navigate("/OperatorPage/CoOpManage");
+        const addCoOpPage = () => {
+            navigate("/OperatorPage/CoOpManage/Add");
+        };
+        const modifyCoOpPage = () => {
+            navigate("/OperatorPage/CoOpManage/Modify");
+        };
+        const deleteCoOpPage = () => {
+            navigate("/OperatorPage/CoOpManage/Delete");
+        };
+
+        const addBannerPage = () => {
+            navigate("/OperatorPage/BannerManage/Add");
+        };
+        const deleteBannerPage = () => {
+            navigate("/OperatorPage/BannerManage/Delete");
         };
 
         const handleFAQPage = () => {
             navigate("/OperatorPage/OperatorFAQList");
         };
 
-        const handleQnAPage = () => {
-            navigate("/OperatorPage/QnAManage");
+        const deleteQnAPage = () => {
+            navigate("/OperatorPage/QnAManage/Delete");
         };
-        const handleReportPage = () => {
-            navigate("/OperatorPage/ReportManage");
+
+        const ReportQnAPage = () => {
+            navigate("/OperatorPage/ReportManage/ReportQnA");
         };
-        const handleBannerPage = () => {
-            navigate("/OperatorPage/BannerManage");
+        const ReportCommendPage = () => {
+            navigate("/OperatorPage/ReportManage/ReportCommend");
         };
 
         return (
             <div className="Operatormain">
-                <h1>운영자 페이지입니다.</h1>
-                <button className="Operatorbutton" onClick={handleCoOpPage}>회사 협력사</button>
-                <button className="Operatorbutton" onClick={handleFAQPage}>FAQ</button>
-                <button className="Operatorbutton" onClick={handleQnAPage}>QnA</button>
-                <button className="Operatorbutton" onClick={handleReportPage}>신고 관리</button>
-                <button className="Operatorbutton" onClick={handleBannerPage}>배너 관리</button>
+                <div className="OperatorMainDiv">Socoa 운영자 페이지입니다.</div>
+                <div className="OperatorMenuDiv">
+                    <div className="ElseMenuDiv">
+                        <div className="CompanyServiceMenuDiv">
+                            <div className="CoOpMenuDiv">
+                                <div className="CoOpNavigateDiv" onClick={addCoOpPage}>회사 협력사 추가하기</div>
+                                <div className="CoOpNavigateDiv" onClick={modifyCoOpPage}>회사 협력사 수정하기</div>
+                                <div className="CoOpNavigateDiv" onClick={deleteCoOpPage}>회사 협력사 삭제하기</div>
+                            </div>
+                            <div className="BannerMenuDiv">
+                                <div className="BannerNavigateDiv" onClick={addBannerPage}>배너 추가하기</div>
+                                <div className="BannerNavigateDiv" onClick={deleteBannerPage}>배너 삭제하기</div>
+                            </div>
+                        </div>
+                        <div className="CommunityMenuDiv">
+                            <div className="FAQMenuDiv" onClick={handleFAQPage}>
+                                FAQ 관리하기
+                            </div>
+                            <div className="QnAMenuDiv" onClick={deleteQnAPage}>
+                                QnA 삭제하기
+                            </div>
+                        </div>
+                    </div>
+                    <div className="ReportMenuDiv">
+                        <div>
+                            <div className="ReportNavigateDiv" onClick={ReportQnAPage}>게시물 신고 관리하기</div>
+                            <div className="ReportNavigateDiv" onClick={ReportCommendPage}>댓글 신고 관리하기</div>
+                            <div className="ReportNavigateDiv" onClick={ReportCommendPage}>강의리뷰 신고 관리하기</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

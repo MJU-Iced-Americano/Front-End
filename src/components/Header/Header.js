@@ -3,7 +3,9 @@ import {IoMdMenu} from 'react-icons/io';
 import {AiOutlineUser} from 'react-icons/ai';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import Socoa from '../../assets/Footer/socoa-ver2.png';
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import jwtDecode from "jwt-decode";
+import axios from "axios";
 
 
 
@@ -98,7 +100,10 @@ const Header = ()=> {
                         <a href="http://login.socoa.online/user/login">Login</a>
                     </div>
                 )}
-
+                {/*<div className="loginBtn"> <a href="http://localhost/user/login"> LoginTest </a></div>*/}
+                <div><a href="/OperatorPage" className="btnMainItem">
+                    <AiOutlineUser className="userBtn"/>
+                </a></div>
                 {/*{userId && (*/}
                 {/*    <div className="id">{userId}</div>*/}
                 {/*)}*/}

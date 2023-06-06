@@ -7,6 +7,7 @@ import nogood from "../assets/QnA/NoGood.png"
 import axios from "axios";
 import ModalButton from "./components/ModalButton"
 import ModalChatButton from "./components/ModalChatButton";
+import {useNavigate} from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 
 function QnADetailPage(){
@@ -20,6 +21,8 @@ function QnADetailPage(){
     const index = location.pathname.split('/').slice(-1)[0];
     console.log(index);
 
+    ////등록성공시 화면넘어갈수 있는지 판단
+    const [addSuccess, setAddSuccess] = useState('false');
     const [data, setData] = useState([]);
     const [img, setImg] = useState([]);
     const [chatData, setChatData] = useState([]);
@@ -83,7 +86,8 @@ function QnADetailPage(){
                 for (let i = 0; i < datchat.list.length; i++) {
                     const obj = {
                         commendIndex: datchat.list[i].commendIndex,
-                        commendContent: datchat.list[i].commendContent
+                        commendContent: datchat.list[i].commendContent,
+                        userName: datchat.list[i].userName
                     };
                     console.log(obj)
                     objects.push(obj);
@@ -105,10 +109,12 @@ function QnADetailPage(){
     const [goodChats, setGoodChats] = useState([]);
     const [reportChats, setReportChats] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const navigate = useNavigate();
 
-    const handleClose = () => {
-        setShowModal(false);
-    }
+    const RedirectPage = () => {
+        console.log("리다이렉트")
+        window.location.reload();
+    };
 
     const GoodChats = (chatIndex) => {
         GoodChat(chatIndex);
@@ -161,6 +167,7 @@ function QnADetailPage(){
     };
 
     function AddChatDB(index,text) {
+        setAddSuccess(false);
 
         axios.post(`http://gateway.socoa.online:8000/board-service/question/commend/register/${index}`,{
             commendContent : `${text}`
@@ -172,11 +179,15 @@ function QnADetailPage(){
             .then(response => {
                 // response.data는 가져온 데이터를 의미합니다.
                 console.log(response.data)
-
+                setAddSuccess(true);
             })
             .catch(error => {
                 console.error(error);
             });
+        if(addSuccess){
+            console.log("여기 되어야해")
+            RedirectPage();
+        }
     }
 
     const ChatRegister = () => {
@@ -231,7 +242,7 @@ function QnADetailPage(){
                             <div key={chat.commendIndex} className="ChatContent">
                                 <div className="Chatpart">
                                     <div className="ChatChat">
-                                        <h5>이름</h5>
+                                        <h5>{chat.userName}</h5>
                                         <p>{chat.commendContent}</p>
                                     </div>
                                     <div className="ChatGood">
@@ -249,27 +260,27 @@ function QnADetailPage(){
                             </div>
                         ))}
                         {/**/}
-                        {chats.map((chat, index) => (
-                            <div key={index} className="ChatContent">
-                                <div className="Chatpart">
-                                    <div className="ChatChat">
-                                        <h5>이름</h5>
-                                        <p>{chat}</p>
-                                    </div>
-                                    <div className="ChatGood">
-                                        <button
-                                            className="GoodButton"
-                                            onClick={() => GoodChats(index)}
-                                            disabled={goodChats[index]}
-                                        >
-                                            {goodChats[index] === true ? <img className="Chatgood" src={good}/> : <img className="Chatgood" src={nogood}/>}
-                                        </button>
-                                        <ModalChatButton index={index}/>
-                                        {/*<button className="ReportButton"  onClick={() => ReportChats(index)}><img className="ChatReport"src={report}/></button>*/}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                        {/*{chats.map((chat, index) => (*/}
+                        {/*    <div key={index} className="ChatContent">*/}
+                        {/*        <div className="Chatpart">*/}
+                        {/*            <div className="ChatChat">*/}
+                        {/*                <h5>이름</h5>*/}
+                        {/*                <p>{chat}</p>*/}
+                        {/*            </div>*/}
+                        {/*            <div className="ChatGood">*/}
+                        {/*                <button*/}
+                        {/*                    className="GoodButton"*/}
+                        {/*                    onClick={() => GoodChats(index)}*/}
+                        {/*                    disabled={goodChats[index]}*/}
+                        {/*                >*/}
+                        {/*                    {goodChats[index] === true ? <img className="Chatgood" src={good}/> : <img className="Chatgood" src={nogood}/>}*/}
+                        {/*                </button>*/}
+                        {/*                <ModalChatButton index={index}/>*/}
+                        {/*                /!*<button className="ReportButton"  onClick={() => ReportChats(index)}><img className="ChatReport"src={report}/></button>*!/*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*))}*/}
                     </div>
                 </div>
             </div>

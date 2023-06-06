@@ -64,7 +64,7 @@ function QnASearchPreview({inputs}) {
         {data.map((item) => (
             <div className="QnAGoDetail" onClick={() => navigateToSearchQnADetail(item.questionIndex)}>
                 <h3 className="DetailNamePreview">[{item.type}]&nbsp;{item.questionTitle}</h3>
-                <p className="DetailcontentPreview">{item.questionContent}</p>
+                <div className="DetailcontentPreview" dangerouslySetInnerHTML={{__html: item.questionContent}}></div>
                 <div className="QnADetailDate">
                     <p>{item.updatedDay}&nbsp;{item.updateTime}</p>
                 </div>
