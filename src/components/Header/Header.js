@@ -67,7 +67,7 @@ const Header = ()=> {
     };
     const handleLogout = () => {
         // 쿠키 삭제
-        document.cookie = 'SOCOA-SSO-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'SOCOA-SSO-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=socoa.online; path=/;';
 
     };
 
@@ -108,7 +108,7 @@ const Header = ()=> {
 
                     </div>
                 )}
-
+                {/*<div className="loginBtn"> <a href="http://localhost/user/login"> LoginTest </a></div>*/}
                 {/*{userId && (*/}
                 {/*    <div className="id">{userId}</div>*/}
                 {/*)}*/}

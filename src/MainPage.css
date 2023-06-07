@@ -14,6 +14,7 @@
     width: 780px;
     border: 4px solid #6667ab;
     border-radius: 60px;
+    box-shadow: 5px 5px 5px grey;
 }
 .searchInput{
     height: 70px;
@@ -21,6 +22,7 @@
     border-color: transparent;
     background-color: transparent;
     font-size: 2em;
+
 }
 .searchInput:focus{
     outline: none;
@@ -28,8 +30,8 @@
 .searchTag{
     margin-top: 15px;
 }
-.searchTagSmall{
-
+.searchTagSmall>a:hover{
+    color: #6667AB;
 }
 .searchTagSmall>a{
     font-size: 1.6em;
@@ -48,5 +50,5 @@
 }
 .lectureRecommendBox{
     margin-top: 20px;
-    border: 1px dashed green;
+    /*border: 1px dashed green;*/
 }

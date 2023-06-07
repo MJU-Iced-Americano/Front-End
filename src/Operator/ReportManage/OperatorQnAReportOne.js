@@ -109,10 +109,11 @@ const OperatorQnAReportOne=()=>{
                 <div className="ReportQnAReportContent">
                     <h3>신고게시물 내용</h3>
                     <h4>{contentTitle}</h4>
-                    <h5>{content}</h5>
-                    {img.map((item) => (
-                        <img src={item.imageUrl} className="DetailImg" alt="post"/>
-                    ))}
+                    <div dangerouslySetInnerHTML={{__html: content}}></div>
+                    {/*<h5>{content}</h5>*/}
+                        {img.map((item) => (
+                            <img src={item.imageUrl} className="DetailImg" alt="post"/>
+                        ))}
                 </div>
                 <div className="ReportQnAList">
                     <h1>신고내용</h1>

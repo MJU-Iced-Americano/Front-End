@@ -90,6 +90,15 @@
     width: 10%;
     font-size: 1vw;
 }
+.RegisterNoLoginChat{
+    background-color: rgba(102, 103, 171, 0.31);
+    color: white;
+    font-weight: bold;
+    height: 40px;
+    width: 10%;
+    font-size: 1vw;
+}
+
 .ChatMain{
     border-bottom: 2px solid #6667AB;
     padding-bottom: 30px;

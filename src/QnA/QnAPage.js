@@ -14,6 +14,8 @@ const QnAPage=()=>{
     const QnAPageContent =()=> {
         const name = 'SOCOA-SSO-TOKEN=';
         const ssoToken = "Bearer " + document.cookie.substring(name.length, document.cookie.length);
+        const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 나타내는 state
+        const ssoClientCookie = document.cookie.includes('SOCOA-SSO-TOKEN');
 
         //db연결/////////////////////////////////////
         const [data, setData] = useState([]);
@@ -21,6 +23,7 @@ const QnAPage=()=>{
 
         useEffect(() => {
 
+            setIsLoggedIn(ssoClientCookie);
             axios.get(`http://gateway.socoa.online:8000/board-service/question/show/listQnA`, {
                 headers: {
                     "Authorization" : ssoToken
@@ -164,7 +167,12 @@ const QnAPage=()=>{
                         {renderPageNumbers(numberqna)}
                         {/*<button className="PageMove" disabled={currentPage === numberqna} onClick={handleNextPage}>다음 페이지</button>*/}
                     </div>
-                    <button className="writebutton" onClick={navigateToWrite}>글쓰기</button>
+                    {isLoggedIn ? (
+                        <button className="writebutton" onClick={navigateToWrite}>글쓰기</button>
+                    ) : (
+                        <button className="writeNoLoginbutton">글쓰기</button>
+                    )}
+
                 </div>
             </div>
         );

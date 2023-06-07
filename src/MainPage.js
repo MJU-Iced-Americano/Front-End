@@ -2,16 +2,24 @@ import BannerSlider from "./components/Banner/BannerSlider";
 import LectureSlider from "./components/Banner/LectureSlider";
 import './MainPage.css';
 import Body from "./components/Body/Body";
-import React from "react";
-import {Link} from "react-router-dom";
-
+import React, {useCallback, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 const MainPage=() => {
     const MainPageContent=()=>{
+        const movePage = useNavigate();
         return(
             <div className="contentBox">
                 <div className="searchArea">
                     <div className="searchField">
-                        <input className="searchInput"/>
+                        <input className="searchInput"
+                            type="text"
+                            name="search"
+                            id="search"
+                           onClick={()=> {
+                               movePage('/courseList')
+                           }
+                           }
+                        />
                     </div>
                     <div className="searchTag">
                         <div className="searchTagSmall">

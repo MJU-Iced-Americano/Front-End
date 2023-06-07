@@ -4,14 +4,14 @@ import "./styles/LectureRegistPage.css"
 import axios from "axios";
 import OperatorcoOpAddService from "../Operator/CoOpManage/OperatorCoOpAddService";
 
-function LectureRegistService({course_index, chapter, lecture_sequence, lectureTitle, lectureDescription, video}){
+function LectureRegistService({course_index, chapter, lecture_sequence, lectureTitle, lectureDescription, lectureTime, video}){
     const names = 'SOCOA-SSO-TOKEN=';
     const ssoToken =  "Bearer "+document.cookie.substring(names.length, document.cookie.length);
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
 
     const postLectureDto = {
-        lectureTitle, lectureDescription
+        lectureTitle, lectureDescription, lectureTime
     };
     console.log(postLectureDto)
 
@@ -36,7 +36,9 @@ function LectureRegistService({course_index, chapter, lecture_sequence, lectureT
                         "Authorization" : ssoToken
                     }
                 };
-                const response = await  axios.post(`http://gateway.socoa.online:8000/lecture-service/lecture/manage/new-lecture/1/3/1`, formData, config);
+
+                //코스인덱스,챕터,강의번호
+                const response = await  axios.post(`http://gateway.socoa.online:8000/lecture-service/lecture/manage/new-lecture/10/5/1`, formData, config);
                 setMessage(response.data.message);
                 console.log(response);
 

@@ -6,6 +6,8 @@ import {Modal} from "react-bootstrap";
 import axios from "axios";
 
 function ModalButton({index}) {
+
+
     const [show, setShow] = useState(false);
     const [type, setType] = useState('HATE_SPEECH');
     const [complaintContent, setComplaintContent] = useState('');

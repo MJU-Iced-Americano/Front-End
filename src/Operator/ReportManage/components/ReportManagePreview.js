@@ -16,7 +16,8 @@ function ReportManagePreview({questionIndex,questionTitle,questionContent}) {
     return(
         <div className="QnAReportGoDetail" onClick={navigateToQnADetail}>
             <h3 className="DetailNamePreview">{questionTitle}</h3>
-            <p className="DetailcontentPreview">{questionContent}</p>
+            <div className="DetailcontentPreview" dangerouslySetInnerHTML={{__html: questionContent}}></div>
+            {/*<p className="DetailcontentPreview">{questionContent}</p>*/}
         </div>
     );
 }

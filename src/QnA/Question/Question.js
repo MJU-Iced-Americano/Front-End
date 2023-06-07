@@ -17,6 +17,8 @@ const Question=()=>{
             navigate("/QnAPage");
         };
 
+        ////등록성공시 화면넘어갈수 있는지 판단
+        const [addSuccess, setAddSuccess] = useState('false');
         const [questionTitle, setTitles] = useState("")
         const [questionContent, setHtmlContent] = useState("");
         const quillRef = useRef();
@@ -70,6 +72,7 @@ const Question=()=>{
 
 
         const AddService =  () => {
+            setAddSuccess(false);
             console.log(questionTitle)
             console.log(questionContent)
             console.log(type)
@@ -102,11 +105,16 @@ const Question=()=>{
                 .then(response => {
                     // response.data는 가져온 데이터를 의미합니다.
                     console.log(response.data)
-
+                    setAddSuccess(true);
                 })
                 .catch(error => {
                     console.error(error);
                 });
+
+            //저장성공시 화면 돌아가기
+            if(addSuccess){
+                navigateToMain();
+            }
         }
 
         const handleOptionChange = (event) => {
