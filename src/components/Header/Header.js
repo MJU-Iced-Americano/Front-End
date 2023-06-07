@@ -29,7 +29,7 @@ const Header = ()=> {
                     setUserId(decodedToken.sub); // 사용자 닉네임 설정
                     console.log("jwt token sub(userId):"+decodedToken.sub);
                     // http://login.socoa.online/user/response_user/"+decodedToken.sub
-                    axios.get("http://localhost/user/response_user/"+decodedToken.sub)
+                    axios.get("http://login.socoa.online/user/response_user/"+decodedToken.sub)
                         .then(response => {
                             console.log(response.data);
                             setuserInformationType(response.data.userInformationType);
