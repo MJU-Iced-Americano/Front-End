@@ -11,6 +11,7 @@ const MyPage = () => {
     const [nickname, setNickname] = useState(''); // 로그인 상태를 나타내는 state
     const [phoneNumber, setPhoneNumber] = useState(''); // 로그인 상태를 나타내는 state
     const [userInformationType, setUserInformationType] = useState(''); // 로그인 상태를 나타내는 state
+
     useEffect(() => {
 
         const name = 'SOCOA-SSO-TOKEN=';

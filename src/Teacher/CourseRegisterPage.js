@@ -15,7 +15,7 @@ const CourseRegisterPage = () => {
         courseName: "",
         price: 0,
         courseDescription: "",
-        difficulty: 0,
+        difficulty: 1,
         skillList: [],
         curriculumCreateDtos: [
             {
@@ -32,11 +32,11 @@ const CourseRegisterPage = () => {
         setPhoto(photo);
         const {name} = e.target;
         console.log(name, photo , "입니다용?");
-        ///
-        // setForm((prevForm) => ({
-        //     ...prevForm,
-        //     [name]: titlePhoto
-        // }));
+
+        setForm((prevForm) => ({
+            ...prevForm,
+            [name]: titlePhoto
+        }));
 
 
     };
@@ -111,14 +111,18 @@ const CourseRegisterPage = () => {
             "price": form.price,
             "courseDescription": form.courseDescription,
             "difficulty": form.difficulty,
-            "skillList": JSON.stringify(form.skillList)
+            "skillList": JSON.stringify(form.skillList),
+            "curriculumCreateDtos": form.curriculumCreateDtos
+
         };
-        formData.append("courseCreateDto", JSON.stringify(courseCreateDto));
-        form.curriculumCreateDtos.forEach((curriculum, index) => {
-            formData.append(`curriculumCreateDtos[${index}].chapter`, curriculum.chapter);
-            formData.append(`curriculumCreateDtos[${index}].curriculumTitle`, curriculum.curriculumTitle);
-            formData.append(`curriculumCreateDtos[${index}].lectureSum`, curriculum.lectureSum);
-        });
+        console.log(courseCreateDto , "!");
+        formData.append("courseCreateDto", new Blob([JSON.stringify(courseCreateDto)], { type: "application/json" }));
+        // form.curriculumCreateDtos.forEach((curriculum, index) => {
+        //     formData.append(`curriculumCreateDtos[${index}].chapter`, curriculum.chapter);
+        //     formData.append(`curriculumCreateDtos[${index}].curriculumTitle`, curriculum.curriculumTitle);
+        //     formData.append(`curriculumCreateDtos[${index}].lectureSum`, curriculum.lectureSum);
+        // });
+
         formData.append("titlePhoto", titlePhoto);
 
         for (let key of formData.keys()) {
@@ -135,8 +139,10 @@ const CourseRegisterPage = () => {
                 "Content-Type": "multipart/form-data"
             }
         }).then(response => {
+            console.log("djd..");
             console.log("등록 완료:", response.data)
         }).catch(error => {
+            console.log("d엑..");
             console.error(error);
         });
 
@@ -213,7 +219,7 @@ const CourseRegisterPage = () => {
                 </select>
                 <label>
                     썸네일 사진 등록 :
-                    <input accept='image/*' placeholder="코스 썸네일 사진을 첨부해주세요. " name="titlePhoto" onChange={onImageHandler} className="" type="file"/>
+                    <input accept='image/*' placeholder="코스 썸네일 사진을 첨부해주세요. " onChange={onImageHandler} className="" type="file"/>
                 </label>
                 <label>
                     Skill List:

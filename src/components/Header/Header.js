@@ -3,17 +3,18 @@ import {IoMdMenu} from 'react-icons/io';
 import {AiOutlineUser} from 'react-icons/ai';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import Socoa from '../../assets/Footer/socoa-ver2.png';
-import {useEffect, useState} from "react";
-import jwtDecode from "jwt-decode";
+import {Component, useEffect, useState} from "react";
 import axios from "axios";
+import jwtDecode from "jwt-decode";
+
 
 
 
 const Header = ()=> {
         const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 나타내는 state
         const [userId, setUserId] = useState(''); // 사용자 ID을 저장하는 state
+        const [nickname, setNickName] = useState(''); // 사용자 닉네임을 저장하는 state
         const [userInformationType, setuserInformationType]  = useState('');
-
     useEffect(() => {
 
         // 페이지가 로드될 때 쿠키를 확인하고 로그인 상태를 업데이트
@@ -28,11 +29,15 @@ const Header = ()=> {
                     setUserId(decodedToken.sub); // 사용자 닉네임 설정
                     console.log("jwt token sub(userId):"+decodedToken.sub);
                     // http://login.socoa.online/user/response_user/"+decodedToken.sub
-                    axios.get("http://login.socoa.online/user/response_user/"+decodedToken.sub)
+                    axios.get("http://localhost/user/response_user/"+decodedToken.sub)
                         .then(response => {
+                            console.log(response.data);
                             setuserInformationType(response.data.userInformationType);
+                            setNickName(response.data.nickname);
                             const user = response.data.userInformationType;
+                            const nickname = response.data.nickname;
                             console.log("userInformationType: "+user);
+                            console.log("nickname: "+nickname);
                         }) .catch(error=> {
                             console.error(error);
                     });
@@ -43,7 +48,8 @@ const Header = ()=> {
         checkLoginStatus();
     }, []);
 
-    const getJwtTokenFromCookie = () => {
+
+                        const getJwtTokenFromCookie = () => {
         // 쿠키에서 JWT 토큰 값을 추출하는 함수
         const name = 'SOCOA-SSO-TOKEN=';
         const decodedCookie = decodeURIComponent(document.cookie);
@@ -98,6 +104,8 @@ const Header = ()=> {
                 ) : (
                     <div className="loginBtn">
                         <a href="http://login.socoa.online/user/login">Login</a>
+                        <div className="loginBtn"> <a href="http://localhost/user/login"> LoginTest </a></div>
+
                     </div>
                 )}
 
@@ -124,8 +132,11 @@ const Header = ()=> {
                 )}
                 {/*<a href="/OperatorPage"> <AiOutlineUser className="userBtn"/> </a>*/}
                 <a href="/MyBasket"><RiShoppingCartLine className="cartBtn"/> </a>
+
+
             </div>
         </header>
+
     )
 }
 
