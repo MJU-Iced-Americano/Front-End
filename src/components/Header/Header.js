@@ -104,7 +104,7 @@ const Header = ()=> {
                 ) : (
                     <div className="loginBtn">
                         <a href="http://login.socoa.online/user/login">Login</a>
-                        <div className="loginBtn"> <a href="http://localhost/user/login"> LoginTest </a></div>
+                        {/*<div className="loginBtn"> <a href="http://localhost/user/login"> LoginTest </a></div>*/}
 
                     </div>
                 )}

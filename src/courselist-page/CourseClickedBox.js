@@ -16,9 +16,9 @@ const CourseClickedBox=()=> {
         <div className="course-search-bar-under">
             <div className="course-search-bar-under-resent-history">최근 검색 기록</div>
             <div className="course-search-bar-under-resent-history-lists">
-                <HistoryList keyword= "java"/>
-                <HistoryList keyword= "java"/>
-                <HistoryList keyword= "java"/>
+                {/*<HistoryList keyword= "java"/>*/}
+                {/*<HistoryList keyword= "java"/>*/}
+                {/*<HistoryList keyword= "java"/>*/}
             </div>
             <div className="course-search-bar-under-resent-history-clear"><a href="javacsript:void(0)">전체 삭제</a></div>
         </div>
