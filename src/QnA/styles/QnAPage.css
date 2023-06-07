@@ -38,6 +38,20 @@
     box-shadow: 5px 5px 5px grey;
 }
 
+
+.writeNoLoginbutton{
+    width: 20%;
+    height: 60px;
+    border-radius: 30px;
+    background-color: rgba(102, 103, 171, 0.31);
+    color: white;
+    font-size: 20px;
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 5px grey;
+}
+
 .QnAList{
     padding-bottom: 10px;
     height: 1050px;

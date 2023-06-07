@@ -29,9 +29,15 @@ function QnADetailPage(){
     const[type,setType] = useState('');
     const[day,setDay] = useState('');
     const[time,setTime] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 나타내는 state
+    const [token, setToken] = useState('');
+
+    const ssoClientCookie = document.cookie.includes('SOCOA-SSO-TOKEN');
+
 
     useEffect(() => {
 
+        setIsLoggedIn(ssoClientCookie);
         axios.get(`http://gateway.socoa.online:8000/board-service/question/show/${index}`, {
         // withCredentials:true,
             headers : {
@@ -226,13 +232,27 @@ function QnADetailPage(){
                 <div className="DetailChat">
                     <div className="ChatMain">
                         <h3>답변</h3>
-                        <input
-                            onChange={handleChange}
-                            className="Chatting"
-                            placeholder="내용을 입력해주세요"
-                            value={text}
-                        />
-                        <button onClick={ChatRegister} className="RegisterChat">등록하기</button>
+                        {isLoggedIn ? (
+                            <input
+                                onChange={handleChange}
+                                className="Chatting"
+                                placeholder="내용을 입력해주세요"
+                                value={text}
+                            />
+                        ) : (
+                            <input
+                                onChange={handleChange}
+                                className="Chatting"
+                                placeholder="로그인 후 입력해주세요"
+                                value={text}
+                            />
+                        )}
+
+                        {isLoggedIn ? (
+                            <button onClick={ChatRegister} className="RegisterChat">등록하기</button>
+                        ) : (
+                            <button className="RegisterNoLoginChat">등록하기</button>
+                        )}
                     </div>
                     <div className="Chat">
                         {/**/}
